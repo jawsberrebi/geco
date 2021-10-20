@@ -1,3 +1,9 @@
+<?php  require_once "config.php"; 
+
+
+?>
+
+
 <html>
     <head>
         <meta charset="utf-8" />
@@ -10,12 +16,12 @@
 
         <div id="box">
 
-            
+
 
             <form action="verification.php" method="POST">
                 <h1 id="title_form">Connexion</h1>
 
-                <input type="text" placeholder="Email ou nom d'utilisateur" name="username" required />
+                <input type="text" placeholder="Email ou nom d'utilisateur" name="email" required />
 
                 <input type="password" placeholder="Mot de passe" name="password" required />
 
