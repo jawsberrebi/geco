@@ -11,5 +11,8 @@
         <h1><?php echo 'Bonjour, ' . $_SESSION['user']['Email'] . ' vous êtes connecté'; ?></h1>
 
     </div>
+
+
+
 </body>
 </html>

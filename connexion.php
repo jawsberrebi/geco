@@ -18,7 +18,7 @@
 
 
 
-            <form action="verification.php" method="POST">
+            <form action="verification.php" method="post">
                 <h1 id="title_form">Connexion</h1>
 
                 <input type="text" placeholder="Email ou nom d'utilisateur" name="email" required />
