@@ -1,0 +1,28 @@
+h1 {
+    font-family: Urbanist, sans-serif;
+    color: #3BC393;
+    font-size: 2em;
+}
+
+th {
+    font-family: Urbanist, sans-serif;
+    font-weight: normal;
+    text-align: left;
+}
+
+.contenu_table {
+
+    padding: 1%;
+    margin-bottom: 2%;
+    border: 0.05px solid;
+    border-color: white;
+    border-radius: 10px;
+    box-shadow: 0.05px 0.05px 5px grey;
+    font-family: Urbanist, sans-serif;
+
+    
+}
+
+table {
+    border-spacing: 10px;
+}

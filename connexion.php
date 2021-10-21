@@ -7,8 +7,8 @@
 <html>
     <head>
         <meta charset="utf-8" />
-        <link rel="stylesheet" href="css/style.css"/>
-        <title>Authentification</title>
+        <link rel="stylesheet" href="css/style_connexion.css"/>
+        <title>Connexion</title>
     </head>
     <body>
 
@@ -16,12 +16,10 @@
 
         <div id="box">
 
-
-
             <form action="verification.php" method="post">
                 <h1 id="title_form">Connexion</h1>
 
-                <input type="text" placeholder="Email ou nom d'utilisateur" name="email" required />
+                <input type="text" placeholder="Email ou nom d'utilisateur" name="email" class="input_mail" required />
 
                 <input type="password" placeholder="Mot de passe" name="password" required />
 

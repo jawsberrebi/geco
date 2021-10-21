@@ -64,10 +64,10 @@ input[type=submit] {
     width: 100%;
 }
 
-    input[type=submit]:hover {
+input[type=submit]:hover {
         background-color: #55EBB6;
         color: white;
-    }
+}
 
 #password_lost 
 {

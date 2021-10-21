@@ -7,7 +7,7 @@ $user = current($pre->fetchAll(PDO::FETCH_ASSOC));//current prend la première li
 $_SESSION['user'] = $user; //on enregistre que l'utilisateur est connecté (on peut modif)
 
 if ($_SESSION['user'] != 0) {
-    header('Location:principale.php');
+    header('Location:tableau_de_bord_personnel.php');
 }
 else {
     header('Location:connexion.php'); //A COMPLETER
