@@ -1,4 +1,4 @@
-#error_message {
+p {
     font-family: Urbanist, sans-serif;
     color: red;
 }
@@ -30,4 +30,15 @@ th {
 
 table {
     border-spacing: 10px;
+}
+
+#deconnexion {
+    font-family: Urbanist, sans-serif;
+    text-decoration: none;
+    color: red;
+}
+
+a:visited
+{
+    color: none;
 }
