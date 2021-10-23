@@ -26,7 +26,8 @@
               $pre->execute();
               $data = $pre->fetchAll(PDO::FETCH_ASSOC);
     ?>
-        <a href="connexion.php" id="deconnexion">Déconnexion</a>
+
+    <a href="deconnexion.php" id="deconnexion">Déconnexion</a>
    
     <table>
         <tr>

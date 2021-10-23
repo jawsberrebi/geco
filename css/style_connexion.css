@@ -6,8 +6,6 @@
 #image_connexion {
     width: 50%;
     height: 100%;
-    margin: 0;
-    padding: 0;
     
 }
 
@@ -39,6 +37,11 @@ form {
     background: #fff;
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
+
+input:focus {
+    outline: none;
+}
+
 
 input[type=text], input[type=password] {
     font-family: Urbanist, sans-serif;
@@ -78,9 +81,9 @@ input[type=submit]:hover {
 
 }
 
-    #password_lost:hover {
+#password_lost:hover {
         color: #681284;
-    }
+}
 
 #indication {
     margin-top: 15%;
