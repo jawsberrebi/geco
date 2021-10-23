@@ -8,8 +8,13 @@ $_SESSION['user'] = $user; //on enregistre que l'utilisateur est connecté (on pe
 
 if ($_SESSION['user'] != 0) {
     header('Location:tableau_de_bord_personnel.php');
+    exit();
+
+
 }
+
 else {
-    header('Location:connexion.php'); //A COMPLETER
+    header('Location:connexion_incorrecte.php');
+    exit();
 }
 ?>

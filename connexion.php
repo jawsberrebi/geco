@@ -1,9 +1,7 @@
-<?php  require_once "config.php"; 
-
-
+<?php  require_once "config.php";
 ?>
 
-
+<!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8" />
@@ -29,6 +27,7 @@
 
                 <p id="indication">Si vous n'avez pas de compte, veuillez contacter votre médecin.</p>
 
+                <!--
                 <?php
                     if(isset($_GET['erreur'])){
                         $err = $_GET['erreur'];
@@ -36,6 +35,8 @@
                             echo "<p style='color:red'>Utilisateur ou mot de passe incorrect</p>";
                     }
                 ?>
+                 -->
+
 
             </form>
         </div>

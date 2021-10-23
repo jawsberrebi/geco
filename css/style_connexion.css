@@ -8,6 +8,7 @@
     height: 100%;
     margin: 0;
     padding: 0;
+    
 }
 
 #title_form {
@@ -87,4 +88,9 @@ input[type=submit]:hover {
     font-family: Urbanist, sans-serif;
     color: rgb(150, 150, 150);
     font-size: 0.8em;
+}
+
+#message_erreur {
+    color: red;
+    font-family: Urbanist, sans-serif;
 }

@@ -1,3 +1,8 @@
+#error_message {
+    font-family: Urbanist, sans-serif;
+    color: red;
+}
+
 h1 {
     font-family: Urbanist, sans-serif;
     color: #3BC393;

@@ -6,6 +6,7 @@
 //} A TESTER
 ?>
 
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -13,20 +14,20 @@
 </head>
 <body>
 
-
+    <?php if ($_SESSION) : ?> 
 
     <h1>Tableau de bord</h1>
 
     <h2><?php echo 'Bonjour, ' . htmlspecialchars($_SESSION['user']['Email']) . ' vous êtes connecté'; ?></h2>
 
     <?php
-    $sql = "SELECT * FROM testuser"; 
-    $pre = $pdo->prepare($sql); 
-    $pre->execute();
-    $data = $pre->fetchAll(PDO::FETCH_ASSOC);
+              $sql = "SELECT * FROM testuser"; 
+              $pre = $pdo->prepare($sql); 
+              $pre->execute();
+              $data = $pre->fetchAll(PDO::FETCH_ASSOC);
     ?>
 
-    
+    <a href="connexion.php"><p>Déconnexion</p></a>
     
     <table>
         <tr>
@@ -47,6 +48,12 @@
         </tr>
         <?php endforeach; ?>
     </table>
+
+    <?php else : ?>
+
+    <p id="error_message">Veuillez vous connecter si vous souhaitez accéder à votre tableau de bord. </p>
+
+    <?php endif; ?>
     
 
         
