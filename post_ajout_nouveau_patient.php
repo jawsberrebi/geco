@@ -2,8 +2,9 @@
 include_once("config.php");
 include('backend/fonctions.php');
 
-if (!isset($_POST['nom']) || $_POST['prenom']) {
-    echo 'Veuillez rentrer les informations demandées.';
+if (!isset($_POST['nom']) || !isset($_POST['prenom']) || !isset($_POST['email'])) {
+    header('Location:connexion?erreur=1.php');
+    exit();
 }
 
 $email = $_POST['nom'];
@@ -16,10 +17,10 @@ $userName = strtolower(substr($email, 0 , 1) . $password); //Générateur de nom d
 $sql = 'INSERT INTO testuser(Email, Password) VALUES (:Email, :Password)';
 $pre = $pdo->prepare($sql);
 $pre->execute([
-    'Email' => $email,
-    'Password' => $password,
+    'Email' => htmlspecialchars($email),
+    'Password' => htmlspecialchars($password),
     ]);
 
-header('Location:tableau_de_bord_personnel.php');
+header('Location:tableau_de_bord_personnel?confirmation=1.php');
 exit();
 ?>

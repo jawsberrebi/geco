@@ -16,7 +16,7 @@
 
             <input type="text" placeholder="Nom*" name="nom" required />
 
-            <input type="text" placeholder="Pr�nom*" name="prenom" required />
+            <input type="text" placeholder="Prénom*" name="prenom" required />
 
             <input type="email" placeholder="Email*" name="email" required />
 
@@ -25,13 +25,14 @@
             <input type="submit" id='submit' value='Ajouter' />
 
 
-            <?php
-                    if(isset($_GET['erreur'])){
-                        $err = $_GET['erreur'];
-                        if($err==1 || $err==2)
-                            echo "<p style='color:red'>Utilisateur ou mot de passe incorrect</p>";
-                    }
-            ?>
+            <?php if(isset($_GET['erreur'])){
+                      $err = $_GET['erreur'];
+                      if($err==1){
+                          echo '<p id="message_erreur">Il manque des informations. Veillez à rentrer toutes les informations.</p>';
+                      }
+
+
+                  }?>
 
 
 

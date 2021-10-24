@@ -20,6 +20,17 @@
 
     <h2><?php echo 'Bonjour, ' . htmlspecialchars($_SESSION['user']['Email']) . ' vous êtes connecté'; ?></h2>
 
+    <a href="deconnexion.php" id="deconnexion">Déconnexion</a><br />
+
+    <a href="ajout_patient.php" class="ajout">Ajouter un nouveau patient</a>
+
+    <?php if(isset($_GET['confirmation'])){
+              $confirmation = $_GET['confirmation'];
+              if($confirmation==1) {
+                  echo '<p>Un nouveau patient a bien été ajouté à la liste.</p>';
+              }
+          }?>
+
     <?php
     $sql = "SELECT * FROM testuser"; 
     $pre = $pdo->prepare($sql); 
@@ -27,10 +38,6 @@
     $users = $pre->fetchAll(PDO::FETCH_ASSOC);
     ?>
 
-    <a href="deconnexion.php" id="deconnexion">Déconnexion</a> <br />
-
-    <a href="ajout_patient.php" class="ajout">Ajouter un nouveau patient</a>
-   
     <table>
         <thead>
             <tr>

@@ -25,18 +25,14 @@
 
                 <a href="" id="password_lost">Mot de passe oublié ?</a>
 
-                <p id="indication">Si vous n'avez pas de compte, veuillez contacter votre médecin.</p>
-
-
-                <?php
-                    if(isset($_GET['erreur'])){
+                <?php if(isset($_GET['erreur'])){
                         $err = $_GET['erreur'];
-                        if($err==1 || $err==2)
-                            echo "<p style='color:red'>Utilisateur ou mot de passe incorrect</p>";
-                    }
-                ?>
+                        if($err==1) {
+                            echo '<p id="message_erreur">Utilisateur ou mot de passe incorrect</p>';
+                        }
+                    }?>
 
-
+                <p id="indication">Si vous n'avez pas de compte, veuillez contacter votre médecin.</p>
 
             </form>
         </div>

@@ -11,11 +11,10 @@ if ($_SESSION['user'] != 0) {
     header('Location:tableau_de_bord_personnel.php');
     exit();
 
-
 }
 
 else {
-    header('Location:connexion_incorrecte.php');
+    header('Location:connexion?erreur=1.php');
     exit();
 }
 ?>
