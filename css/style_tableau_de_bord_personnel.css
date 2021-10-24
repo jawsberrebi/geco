@@ -12,11 +12,10 @@ h1 {
 th {
     font-family: Urbanist, sans-serif;
     font-weight: normal;
-    text-align: left;
+    text-align: center;
 }
 
 .contenu_table {
-    padding: 1%;
     margin-bottom: 2%;
     border: 0.05px solid;
     border-color: white;
@@ -38,4 +37,8 @@ table {
 a:visited
 {
     color: none;
+}
+
+td {
+    padding: 1.5%;
 }
