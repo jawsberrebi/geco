@@ -3,7 +3,7 @@ include_once("config.php");
 include('backend/fonctions.php');
 
 if (!isset($_POST['nom']) || !isset($_POST['prenom']) || !isset($_POST['email'])) {
-    header('Location:connexion?erreur=1.php');
+    header('Location:ajout_patient?erreur=1.php');
     exit();
 }
 
@@ -13,6 +13,15 @@ $realpass = passwordGenerator($pdo); //Générateur de mot de passe aléatoire
 $userName = strtolower(substr($email, 0 , 1) . $password); //Générateur de nom d'utilisateur : 1ère lettre du prénom + nom. Remplacer $email par la variable contenant le prénom et $password par la variable contenant le nom.
 
 
+$sql = "SELECT * FROM testuser WHERE Email='".$_POST['nom']."'";
+$pre = $pdo->prepare($sql);
+$pre->execute();
+$user = current($pre->fetchAll(PDO::FETCH_ASSOC));
+$result= $user;
+if($result->results == 0) {
+    header('Location:ajout_patient?erreur=2.php');
+    exit();
+}
 
 $sql = 'INSERT INTO testuser(Email, Password) VALUES (:Email, :Password)';
 $pre = $pdo->prepare($sql);

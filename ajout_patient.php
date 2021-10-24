@@ -26,12 +26,13 @@
 
 
             <?php if(isset($_GET['erreur'])){
-                      $err = $_GET['erreur'];
-                      if($err==1){
+                      $error = $_GET['erreur'];
+                      if($error==1){
                           echo '<p id="message_erreur">Il manque des informations. Veillez à rentrer toutes les informations.</p>';
                       }
-
-
+                      if($error==2){
+                          echo '<p id="message_erreur">L\'adresse email a déjà été utilisée. Veuillez entrer une autre adresse email.</p>';
+                      }
                   }?>
 
 
