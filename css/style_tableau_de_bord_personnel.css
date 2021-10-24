@@ -1,4 +1,4 @@
-p {
+#message_erreur {
     font-family: Urbanist, sans-serif;
     color: red;
 }
@@ -16,7 +16,6 @@ th {
 }
 
 .contenu_table {
-
     padding: 1%;
     margin-bottom: 2%;
     border: 0.05px solid;
@@ -24,8 +23,6 @@ th {
     border-radius: 10px;
     box-shadow: 0.05px 0.05px 5px grey;
     font-family: Urbanist, sans-serif;
-
-    
 }
 
 table {

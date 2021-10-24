@@ -21,10 +21,10 @@
     <h2><?php echo 'Bonjour, ' . htmlspecialchars($_SESSION['user']['Email']) . ' vous êtes connecté'; ?></h2>
 
     <?php
-              $sql = "SELECT * FROM testuser"; 
-              $pre = $pdo->prepare($sql); 
-              $pre->execute();
-              $data = $pre->fetchAll(PDO::FETCH_ASSOC);
+    $sql = "SELECT * FROM testuser"; 
+    $pre = $pdo->prepare($sql); 
+    $pre->execute();
+    $users = $pre->fetchAll(PDO::FETCH_ASSOC);
     ?>
 
     <a href="deconnexion.php" id="deconnexion">Déconnexion</a>
@@ -38,20 +38,27 @@
             <th>Niveau sonore</th>
             <th>Concentration en CO2</th>
         </tr>
-        <?php foreach($data as $user) : ?>
-        <tr>
 
-            <td class="contenu_table">
+        <?php foreach($users as $user) : ?>
+
+        <tr class="contenu_table">
+
+            <td>
                 <?php echo $user['Email'] ?>
             </td>
 
+            <td>
+                <?php echo $user['Password'] ?>
+            </td>
+
         </tr>
+
         <?php endforeach; ?>
     </table>
 
     <?php else : ?>
 
-    <p id="error_message">Veuillez vous connecter si vous souhaitez accéder à votre tableau de bord. </p>
+    <p id="message_erreur">Veuillez vous connecter si vous souhaitez accéder à votre tableau de bord. </p>
 
     <?php endif; ?>
     
