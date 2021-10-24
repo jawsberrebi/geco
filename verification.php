@@ -1,5 +1,6 @@
 <?php
 include_once("config.php");
+
 $sql = "SELECT * FROM testuser WHERE Email='".$_POST['email']."' AND Password='".$_POST['password']."'";
 $pre = $pdo->prepare($sql);
 $pre->execute();

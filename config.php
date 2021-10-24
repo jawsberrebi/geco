@@ -1,8 +1,7 @@
 <?php
 session_start();
 
-
-try 
+try
 {
     $pdo = new PDO(
   'mysql:host=localhost;dbname=test;',
@@ -16,5 +15,5 @@ catch (Exception $e)
     die('Erreur : ' . $e->getMessage());
 }
 
-//$pdo->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);
+$pdo->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);
 ?>

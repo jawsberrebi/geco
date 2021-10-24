@@ -27,33 +27,39 @@
     $users = $pre->fetchAll(PDO::FETCH_ASSOC);
     ?>
 
-    <a href="deconnexion.php" id="deconnexion">Déconnexion</a>
+    <a href="deconnexion.php" id="deconnexion">Déconnexion</a> <br />
+
+    <a href="ajout_patient.php" class="ajout">Ajouter un nouveau patient</a>
    
     <table>
-        <tr>
-            <th>Id</th>
-            <th>Nom du membre</th>
-            <th>Type de membre</th>
-            <th>Rythme cardiaque</th>
-            <th>Niveau sonore</th>
-            <th>Concentration en CO2</th>
-        </tr>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom du membre</th>
+                <th>Type de membre</th>
+                <th>Rythme cardiaque</th>
+                <th>Niveau sonore</th>
+                <th>Concentration en CO2</th>
+            </tr>
+        </thead>
 
-        <?php foreach($users as $user) : ?>
+        <tbody>
+            <?php foreach($users as $user) : ?>
 
-        <tr class="contenu_table">
+            <tr class="contenu_table" data-href="https://www.google.com/" onclick="location.href='https://www.franceculture.fr'">
 
-            <td>
-                <?php echo $user['Email'] ?>
-            </td>
+                <td>
+                    <?php echo $user['Email'] ?>
+                </td>
 
-            <td>
-                <?php echo $user['Password'] ?>
-            </td>
+                <td>
+                    <?php echo $user['Password'] ?>
+                </td>
 
-        </tr>
+            </tr>
 
-        <?php endforeach; ?>
+            <?php endforeach; ?>
+        </tbody>
     </table>
 
     <?php else : ?>

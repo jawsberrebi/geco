@@ -22,6 +22,7 @@ th {
     border-radius: 10px;
     box-shadow: 0.05px 0.05px 5px grey;
     font-family: Urbanist, sans-serif;
+    cursor: pointer;
 }
 
 table {
@@ -41,4 +42,10 @@ a:visited
 
 td {
     padding: 1.15%;
+}
+
+.ajout {
+    font-family: Urbanist, sans-serif;
+    text-decoration: none;
+    color: black;
 }
