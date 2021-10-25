@@ -2,6 +2,15 @@
 require_once "config.php"; 
 ?>
 
+<?php
+
+if(!isset($_GET['type'])) {
+    header('Location:tableau_de_bord_personnel.php');
+    exit();
+}
+
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
