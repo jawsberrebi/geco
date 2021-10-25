@@ -22,7 +22,9 @@
 
     <a href="deconnexion.php" id="deconnexion">Déconnexion</a><br />
 
-    <a href="ajout_patient.php" class="ajout">Ajouter un nouveau patient</a>
+    <a href="ajout_patient?type=patient" class="ajout">Ajouter un nouveau patient</a><br />
+
+    <a href="ajout_patient?type=infirmier" class="ajout">Ajouter un nouvel infirmier</a>
 
     <?php if(isset($_GET['confirmation'])){
               $confirmation = $_GET['confirmation'];
@@ -37,6 +39,8 @@
     $pre->execute();
     $users = $pre->fetchAll(PDO::FETCH_ASSOC);
     ?>
+
+    <!-- Pour rediriger chaque lien vers patient correspondant, voir sur OpenClassroom modification page-->
 
     <table>
         <thead>
@@ -71,7 +75,9 @@
 
     <?php else : ?>
 
-    <p id="message_erreur">Veuillez vous connecter si vous souhaitez accéder à votre tableau de bord. </p>
+    <?php 
+    header('Location:connexion?erreur=2.php');
+    exit(); ?>
 
     <?php endif; ?>
     

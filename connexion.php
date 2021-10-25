@@ -26,9 +26,12 @@
                 <a href="" id="password_lost">Mot de passe oublié ?</a>
 
                 <?php if(isset($_GET['erreur'])){
-                        $err = $_GET['erreur'];
-                        if($err==1) {
-                            echo '<p id="message_erreur">Utilisateur ou mot de passe incorrect</p>';
+                        $erreur = $_GET['erreur'];
+                        if($erreur==1) {
+                            echo '<p id="message_erreur">Nom d\'utilisateur ou mot de passe incorrect.</p>';
+                        }
+                        if($erreur==2) {
+                            echo '<p id="message_erreur">Il faut d\'abord se connecter avant de pouvoir accéder à cette page.</p>';
                         }
                     }?>
 

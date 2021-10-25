@@ -1,4 +1,6 @@
-<?php require_once "config.php"; ?>
+<?php 
+require_once "config.php"; 
+?>
 
 <!DOCTYPE html>
 <html>
@@ -12,7 +14,18 @@
     <div id="box">
 
         <form action="post_ajout_nouveau_patient.php" method="post">
+
+            <?php if($_GET['type']=='patient') : ?>
+
             <h1 id="title_form">Nouveau Patient</h1>
+
+            <?php endif; ?>
+
+            <?php if($_GET['type']=='infirmier') : ?>
+
+            <h1 id="title_form">Nouvel infirmier</h1>
+
+            <?php endif; ?>
 
             <input type="text" placeholder="Nom*" name="nom" required />
 
@@ -20,7 +33,11 @@
 
             <input type="email" placeholder="Email*" name="email" required />
 
-            <input type="text" placeholder="Description" name="email" />
+            <?php if($_GET['type']=='patient') : ?>
+
+            <input type="text" placeholder="Description" name="description" />
+
+            <?php endif; ?>
 
             <input type="submit" id='submit' value='Ajouter' />
 
