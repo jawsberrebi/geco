@@ -7,11 +7,21 @@ if (!isset($_POST['nom']) || !isset($_POST['prenom']) || !isset($_POST['email'])
     exit();
 }
 
-$email = $_POST['nom'];
-$password = $_POST['prenom'];
-$realpass = passwordGenerator($pdo); //Générateur de mot de passe aléatoire
-$userName = strtolower(substr($email, 0 , 1) . $password); //Générateur de nom d'utilisateur : 1ère lettre du prénom + nom. Remplacer $email par la variable contenant le prénom et $password par la variable contenant le nom.
+$name = $_POST['nom'];
+$firstName = $_POST['prenom'];
+$password = passwordGenerator($pdo); //Générateur de mot de passe aléatoire
+$userName = strtolower(substr($firstName, 0 , 1) . $name); //Générateur de nom d'utilisateur : 1ère lettre du prénom + nom. Remplacer $email par la variable contenant le prénom et $password par la variable contenant le nom.
 
+if ($_POST['type'] == 'patient') {
+
+} elseif ($_POST['type'] == 'infirmier') {
+
+} elseif ($_POST['type'] == 'medecin') {
+
+} else {
+    header('Location:tableau_de_bord_personnel?erreur=3.php');
+    exit();
+}
 
 $sql = "SELECT * FROM testuser WHERE Email='".$_POST['nom']."'";
 $pre = $pdo->prepare($sql);

@@ -5,10 +5,19 @@ require_once "config.php";
 <?php
 
 if(!isset($_GET['type'])) {
-    header('Location:tableau_de_bord_personnel.php');
+    header('Location:tableau_de_bord_personnel?erreur=2.php');
     exit();
 }
 
+if($_GET['type'] != 'patient' && $_GET['type'] != 'infirmier' && $_GET['type'] != 'medecin') {
+    header('Location:tableau_de_bord_personnel?erreur=2.php');
+    exit();
+}
+
+if(!isset($_SESSION['userAdmin']) || $_SESSION['userPersonnel']['type'] != 'medecin') { //ERREUR DETECTEE ICI
+    header('Location:tableau_de_bord_personnel?erreur=1.php');
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -28,11 +37,33 @@ if(!isset($_GET['type'])) {
 
             <h1 id="title_form">Nouveau Patient</h1>
 
+            <input name="type "value="patient" type="hidden"/>
+
             <?php endif; ?>
 
             <?php if($_GET['type']=='infirmier') : ?>
 
-            <h1 id="title_form">Nouvel infirmier</h1>
+            <h1 id="title_form">Nouvel Infirmier</h1>
+
+            <input name="type " value="infirmier" type="hidden" />
+
+            <?php endif; ?>
+
+            <?php if($_GET['type']=='medecin') : ?>
+
+            <?php if(isset($_POST['userAdmin'])) : ?>
+
+            <h1 id="title_form">Nouveau Médecin</h1>
+
+            <input name="type " value="medecin" type="hidden" />
+
+            <?php else : ?>
+
+            <?php header('Location:tableau_de_bord_personnel?erreur=1.php');
+                  exit(); 
+            ?>
+
+            <?php endif; ?>
 
             <?php endif; ?>
 
@@ -42,9 +73,13 @@ if(!isset($_GET['type'])) {
 
             <input type="email" placeholder="Email*" name="email" required />
 
+            <input type="tel" placeholder="Numéro de téléphone" name="telephone" />
+
             <?php if($_GET['type']=='patient') : ?>
 
-            <input type="text" placeholder="Description" name="description" />
+            <input type="text" placeholder="Adresse" name="description" />
+
+            <textarea placeholder="Description" name="description"></textarea>
 
             <?php endif; ?>
 
@@ -59,11 +94,14 @@ if(!isset($_GET['type'])) {
                       if($error==2){
                           echo '<p id="message_erreur">L\'adresse email a déjà été utilisée. Veuillez entrer une autre adresse email.</p>';
                       }
+
                   }?>
 
 
 
         </form>
     </div>
+
+    
 </body>
 </html>

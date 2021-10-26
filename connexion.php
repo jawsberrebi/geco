@@ -17,7 +17,7 @@
             <form action="verification.php" method="post">
                 <h1 id="title_form">Connexion</h1>
 
-                <input type="text" placeholder="Email ou nom d'utilisateur" name="email" class="input_mail" required />
+                <input type="text" placeholder="Email ou nom d'utilisateur" name="email_pseudo" class="input_mail" required />
 
                 <input type="password" placeholder="Mot de passe" name="password" required />
 
@@ -32,6 +32,12 @@
                         }
                         if($erreur==2) {
                             echo '<p id="message_erreur">Il faut d\'abord se connecter avant de pouvoir accéder à cette page.</p>';
+                        }
+                        if($erreur==3){
+                            echo '<p id="message_erreur">Il faut d\'abord vous connecter avant de pouvoir accéder à cette page.</p>';
+                        }
+                        if($erreur==4){
+                            echo '<p id="message_erreur">Vous n\'êtes pas autorisé à accéder à ces informations.</p>';
                         }
                     }?>
 
