@@ -4,14 +4,27 @@ include_once("config.php");
 function passwordGenerator(PDO $pdo) : string
 {
     $realpass = bin2hex(random_bytes(8));
-    $compareQuery = 'SELECT Password FROM testuser';
+    $compareQuery = 'SELECT mdp FROM patient';
     $pre = $pdo->prepare($compareQuery);
     $pre->execute();
     $compare = $pre->fetchAll(PDO::FETCH_ASSOC);
 
     foreach ($compare as $list_result) {
 
-        while ($realpass == $list_result['Password']) {
+        while ($realpass == $list_result['mdp']) {
+
+            $realpass = bin2hex(random_bytes(8));
+        }
+    }
+
+    $compareQuery = 'SELECT mdp FROM personnel';
+    $pre = $pdo->prepare($compareQuery);
+    $pre->execute();
+    $compare = $pre->fetchAll(PDO::FETCH_ASSOC);
+
+    foreach ($compare as $list_result) {
+
+        while ($realpass == $list_result['mdp']) {
 
             $realpass = bin2hex(random_bytes(8));
         }

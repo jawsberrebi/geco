@@ -7,16 +7,37 @@ if (!isset($_POST['nom']) || !isset($_POST['prenom']) || !isset($_POST['email'])
     exit();
 }
 
-$name = $_POST['nom'];
-$firstName = $_POST['prenom'];
+$name = htmlspecialchars($_POST['nom']);
+$firstName = htmlspecialchars($_POST['prenom']);
 $password = passwordGenerator($pdo); //Générateur de mot de passe aléatoire
 $userName = strtolower(substr($firstName, 0 , 1) . $name); //Générateur de nom d'utilisateur : 1ère lettre du prénom + nom. Remplacer $email par la variable contenant le prénom et $password par la variable contenant le nom.
+$mail = htmlspecialchars($_POST['email']);
+$phone = htmlspecialchars($_POST['telephone']);
 
-if ($_POST['type'] == 'patient') {
+if (htmlspecialchars($_POST['type']) == 'patient') {
 
-} elseif ($_POST['type'] == 'infirmier') {
+    $description = htmlspecialchars($_POST['description']);
+    $adresse = htmlspecialchars($_POST['adresse']);
 
-} elseif ($_POST['type'] == 'medecin') {
+    $sql = "SELECT * FROM patient WHERE mail='".$mail."'";
+    $pre = $pdo->prepare($sql);
+    $pre->execute();
+    $user = current($pre->fetchAll(PDO::FETCH_ASSOC));
+    $result= $user;
+    if($result->results == 0) {
+        header('Location:ajout_patient?erreur=2.php');
+        exit();
+    }
+
+    //INSERER INFOS BDD
+
+} elseif (htmlspecialchars($_POST['type']) == 'infirmier') {
+
+    //COMPLETER
+
+} elseif (htmlspecialchars($_POST['type']) == 'medecin') {
+
+    //COMPLETER
 
 } else {
     header('Location:tableau_de_bord_personnel?erreur=3.php');
