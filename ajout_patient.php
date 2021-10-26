@@ -14,10 +14,18 @@ if($_GET['type'] != 'patient' && $_GET['type'] != 'infirmier' && $_GET['type'] !
     exit();
 }
 
-if(!isset($_SESSION['userAdmin']) || $_SESSION['userPersonnel']['type'] != 'medecin') { //ERREUR DETECTEE ICI
+if(!isset($_SESSION['userAdmin']) ) { //ERREUR DETECTEE ICI
     header('Location:tableau_de_bord_personnel?erreur=1.php');
     exit();
 }
+
+if(isset($_SESSION['userPersonnel']) ) { //ERREUR DETECTEE ICI
+    if($_SESSION['userPersonnel']['type'] != 'medecin') {
+        header('Location:tableau_de_bord_personnel?erreur=1.php');
+        exit();
+    }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -51,17 +59,23 @@ if(!isset($_SESSION['userAdmin']) || $_SESSION['userPersonnel']['type'] != 'mede
 
             <?php if($_GET['type']=='medecin') : ?>
 
-            <?php if(isset($_POST['userAdmin'])) : ?>
+            <?php if($_SESSION['userAdmin']) : ?>
 
             <h1 id="title_form">Nouveau Médecin</h1>
 
             <input name="type " value="medecin" type="hidden" />
 
-            <?php else : ?>
+            <?php endif; ?>
+
+            <?php if(isset($_SESSION['userPersonnel'])) : ?>
+
+            <?php if($_SESSION['userPersonnel']) : ?>
 
             <?php header('Location:tableau_de_bord_personnel?erreur=1.php');
-                  exit(); 
+                  exit();
             ?>
+
+            <?php endif; ?>
 
             <?php endif; ?>
 
