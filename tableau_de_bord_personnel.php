@@ -59,6 +59,12 @@ if (!isset($_SESSION['userPatient']) && !isset($_SESSION['userAdmin']) && !isset
               if($confirmation==1) {
                   echo '<p>Un nouveau patient a bien été ajouté à la liste.</p>';
               }
+              elseif($confirmation==2) {
+                  echo '<p>Un nouvel infirmier a bien été ajouté à la liste.</p>';
+              }
+              elseif($confirmation==3) {
+                  echo '<p>Un nouveau médecin a bien été ajouté à la liste.</p>';
+              }
           }?>
 
     <?php endif; ?>

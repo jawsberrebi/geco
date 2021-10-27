@@ -4,15 +4,10 @@ require_once "config.php";
 
 <?php
 
-if(!isset($_GET['type'])) {
-    header('Location:tableau_de_bord_personnel?erreur=2.php');
-    exit();
-}
-
-if($_GET['type'] != 'patient' && $_GET['type'] != 'infirmier' && $_GET['type'] != 'medecin') {
-    header('Location:tableau_de_bord_personnel?erreur=2.php');
-    exit();
-}
+//if($_GET['type'] != 'patient' && $_GET['type'] != 'infirmier' && $_GET['type'] != 'medecin') {
+    //header('Location:tableau_de_bord_personnel?erreur=2.php');
+    //exit();
+//}
 
 if(!isset($_SESSION['userAdmin']) ) {
     header('Location:tableau_de_bord_personnel?erreur=1.php');
@@ -41,7 +36,7 @@ if(isset($_SESSION['userPersonnel']) ) {
 
         <form action="post_ajout_nouveau_patient.php" method="post">
 
-            <?php if($_GET['type']=='patient') : ?>
+            <?php if($_GET['type'] == 'patient') : ?>
 
             <h1 id="title_form">Nouveau Patient</h1>
 
@@ -49,7 +44,7 @@ if(isset($_SESSION['userPersonnel']) ) {
 
             <?php endif; ?>
 
-            <?php if($_GET['type']=='infirmier') : ?>
+            <?php if($_GET['type'] == 'infirmier') : ?>
 
             <h1 id="title_form">Nouvel Infirmier</h1>
 
@@ -97,7 +92,7 @@ if(isset($_SESSION['userPersonnel']) ) {
 
             <?php endif; ?>
 
-            <input type="submit" id='submit' value='Ajouter' />
+            <input type="submit" id='submit' value='Sauvegarder' />
 
 
             <?php if(isset($_GET['erreur'])){

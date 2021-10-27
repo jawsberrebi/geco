@@ -21,10 +21,10 @@ body {
     width: 400px;
     margin: 0 auto;
     justify-content: right;
-    margin-left: 10%;
+    margin-left: 33%;
     display: inline-block;
     position: fixed;
-    padding-top: 10%;
+    padding-top: 2%;
 }
 
 form {
@@ -37,6 +37,10 @@ form {
 }
 
 input:focus {
+    outline: none;
+}
+
+textarea:focus {
     outline: none;
 }
 
