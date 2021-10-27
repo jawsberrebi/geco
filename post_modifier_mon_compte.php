@@ -1,7 +1,7 @@
 <?php
 include_once("config.php");
 
-if (!isset($_POST['nom']) || !isset($_POST['prenom']) || !isset($_POST['email'])) {
+if (!isset($_POST['nom']) || !isset($_POST['prenom'])) {
     header('Location:modifier_mon_compte?erreur=1.php');
     exit();
 }
@@ -18,7 +18,7 @@ if ($_SESSION['userAdmin']) {
     $city = htmlspecialchars($_POST['ville']);
     $hospitalName = htmlspecialchars($_POST['nom_hopital']);
 
-    $sql = "SELECT * FROM admin WHERE nom_hopital='".$hospitalName."'";
+    $sql = "SELECT * FROM admin WHERE (nom_hopital='".$hospitalName."' AND id_admin != '".$_SESSION['userAdmin']['id_admin']."'"; //AJOUTER CONDITION POUR PAS REPERER ID ADMIN
     $pre = $pdo->prepare($sql);
     $pre->execute();
     $user = current($pre->fetchAll(PDO::FETCH_ASSOC));
@@ -28,26 +28,29 @@ if ($_SESSION['userAdmin']) {
         exit();
     }
 
-    //############################" ULTRA CHECKPOINT, MODIFIER TOUT CE QUI EST REQUÊTE SQL POUR TERMINER LE POST MODIFIER MON COMPTE "########################
-    //UPDATE INFOS BDD 
-
-    $sql = 'INSERT INTO patient(prenom, nom, mail, tel, adresse, description, mdp, nom_utilisateur) VALUES (:prenom, :nom, :mail, :tel, :adresse, :description, :mdp, :nom_utilisateur)';
+    $sql = "UPDATE admin SET prenom = :prenom, nom = :nom, adresse = :adresse, ville = :ville, nom_hopital = :nom_hopital WHERE id_admin = '".$_SESSION['userAdmin']['id_admin']."' ";
     $pre = $pdo->prepare($sql);
     $pre->execute([
         'prenom' => $firstName,
         'nom' => $name,
-        'mail' => $mail,
-        'tel' => $phone,
         'adresse' => $adresse,
-        'description' => $description,
-        'mdp' => $password,
-        'nom_utilisateur' => $userName,
+        'ville' => $city,
+        'nom_hopital' => $hospitalName,
         ]);
+
+    $_SESSION['userAdmin']['prenom'] = $firstName;
+    $_SESSION['userAdmin']['nom'] = $name;
+    $_SESSION['userAdmin']['adresse'] = $adresse;
+    $_SESSION['userAdmin']['ville'] = $city;
+    $_SESSION['userAdmin']['nom_hopital'] = $hospitalName;
 
     header('Location:tableau_de_bord_personnel?confirmation=4.php');
     exit();
 
 } elseif ($_SESSION['userPersonnel'] == 'infirmier') {
+
+    //############################" ULTRA CHECKPOINT, MODIFIER TOUT CE QUI EST REQUÊTE SQL POUR TERMINER LE POST MODIFIER MON COMPTE "########################
+    //UPDATE INFOS BDD
 
     $sql = "SELECT * FROM personnel WHERE mail='".$mail."'";
     $pre = $pdo->prepare($sql);

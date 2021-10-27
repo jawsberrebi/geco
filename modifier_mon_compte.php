@@ -48,12 +48,12 @@ if (!isset($_SESSION['userPatient']) && !isset($_SESSION['userAdmin']) && !isset
             <?php endif; ?>
             <?php endif; ?>
 
-            <!-- MODIFICATION DU PRÉNOM -->
+            <!-- MODIFICATION DU PRï¿½NOM -->
 
             <?php if (isset($_SESSION['userAdmin'])) : ?>
             <?php if ($_SESSION['userAdmin']) : ?>
 
-            <input type="text" placeholder="Prénom*" name="prenom" value="<?php echo $_SESSION['userAdmin']['prenom'] ?>" required />
+            <input type="text" placeholder="Prï¿½nom*" name="prenom" value="<?php echo $_SESSION['userAdmin']['prenom'] ?>" required />
 
             <?php endif; ?>
             <?php endif; ?>
@@ -61,7 +61,7 @@ if (!isset($_SESSION['userPatient']) && !isset($_SESSION['userAdmin']) && !isset
             <?php if (isset($_SESSION['userPersonnel'])) : ?>
             <?php if ($_SESSION['userPersonnel']) : ?>
 
-            <input type="text" placeholder="Prénom*" name="prenom" value="<?php echo $_SESSION['userPersonnel']['prenom'] ?>" required />
+            <input type="text" placeholder="Prï¿½nom*" name="prenom" value="<?php echo $_SESSION['userPersonnel']['prenom'] ?>" required />
 
             <?php endif; ?>
             <?php endif; ?>
@@ -69,7 +69,7 @@ if (!isset($_SESSION['userPatient']) && !isset($_SESSION['userAdmin']) && !isset
             <?php if (isset($_SESSION['userPatient'])) : ?>
             <?php if ($_SESSION['userPatient']) : ?>
 
-            <input type="text" placeholder="Prénom*" name="prenom" value="<?php echo $_SESSION['userPatient']['prenom'] ?>" required />
+            <input type="text" placeholder="Prï¿½nom*" name="prenom" value="<?php echo $_SESSION['userPatient']['prenom'] ?>" required />
 
             <?php endif; ?>
             <?php endif; ?>
@@ -92,12 +92,12 @@ if (!isset($_SESSION['userPatient']) && !isset($_SESSION['userAdmin']) && !isset
             <?php endif; ?>
             <?php endif; ?>
 
-            <!-- MODIFICATION DU NUMÉRO DE TÉLÉPHONE -->
+            <!-- MODIFICATION DU NUMï¿½RO DE Tï¿½Lï¿½PHONE -->
 
             <?php if (isset($_SESSION['userPersonnel'])) : ?>
             <?php if ($_SESSION['userPersonnel']) : ?>
 
-            <input type="tel" placeholder="Numéro de téléphone" name="telephone" value="<?php echo $_SESSION['userPersonnel']['tel'] ?>" />
+            <input type="tel" placeholder="Numï¿½ro de tï¿½lï¿½phone" name="telephone" value="<?php echo $_SESSION['userPersonnel']['tel'] ?>" />
 
             <?php endif; ?>
             <?php endif; ?>
@@ -105,7 +105,7 @@ if (!isset($_SESSION['userPatient']) && !isset($_SESSION['userAdmin']) && !isset
             <?php if (isset($_SESSION['userPatient'])) : ?>
             <?php if ($_SESSION['userPatient']) : ?>
 
-            <input type="tel" placeholder="Numéro de téléphone" name="telephone" value="<?php echo $_SESSION['userPatient']['tel'] ?>" />
+            <input type="tel" placeholder="Numï¿½ro de tï¿½lï¿½phone" name="telephone" value="<?php echo $_SESSION['userPatient']['tel'] ?>" />
 
             <?php endif; ?>
             <?php endif; ?>
@@ -125,7 +125,7 @@ if (!isset($_SESSION['userPatient']) && !isset($_SESSION['userAdmin']) && !isset
 
             <input type="text" placeholder="Adresse" name="adresse" value="<?php echo $_SESSION['userPatient']['adresse'] ?>" /> <!-- LE PATIENT PEUT-IL MODIFIER SON ADRESSE ??? -->
 
-            <!-- MODIFICATION DE LA VILLE ET DU NOM DE L'HÔPITAL POUR L'ADMINISTRATEUR -->
+            <!-- MODIFICATION DE LA VILLE ET DU NOM DE L'Hï¿½PITAL POUR L'ADMINISTRATEUR -->
 
             <?php endif; ?>
             <?php endif; ?>
@@ -135,7 +135,7 @@ if (!isset($_SESSION['userPatient']) && !isset($_SESSION['userAdmin']) && !isset
 
             <input type="text" placeholder="Ville*" name="ville" value="<?php echo $_SESSION['userAdmin']['ville'] ?>" required />
 
-            <input type="text" placeholder="Nom de l'hôpital*" name="nom_hopital" value="<?php echo $_SESSION['userAdmin']['nom_hopital'] ?>" />
+            <input type="text" placeholder="Nom de l'hï¿½pital*" name="nom_hopital" value="<?php echo $_SESSION['userAdmin']['nom_hopital'] ?>" />
 
             <?php endif; ?>
             <?php endif; ?>
@@ -152,23 +152,23 @@ if (!isset($_SESSION['userPatient']) && !isset($_SESSION['userAdmin']) && !isset
 
             <?php if (isset($_SESSION['userPersonnel']) || isset($_SESSION['userPatient'])) : ?>
 
-            <p id="indication">Si vous modifiez votre nom et/ou votre prénom, votre nom d'utilisateur sera également modifié (de la manière : "première lettre du prénom + nom de famille").</p>
+            <p id="indication">Si vous modifiez votre nom et/ou votre prï¿½nom, votre nom d'utilisateur sera ï¿½galement modifiï¿½ (de la maniï¿½re : "premiï¿½re lettre du prï¿½nom + nom de famille").</p>
 
-            <p id="indication">Si vous souhaitez modifier votre mot de passe, veuillez vous rendre sur la page de connexion (section "mot de passe oublié").</p>
+            <p id="indication">Si vous souhaitez modifier votre mot de passe, veuillez vous rendre sur la page de connexion (section "mot de passe oubliï¿½").</p>
 
             <?php endif; ?>
 
             <?php if(isset($_GET['erreur'])){
                       $error = $_GET['erreur'];
                       if($error==1){
-                          echo '<p id="message_erreur">Il manque des informations. Veillez à rentrer toutes les informations marquées d\'un *.</p>';
+                          echo '<p id="message_erreur">Il manque des informations. Veillez ï¿½ rentrer toutes les informations marquï¿½es d\'un *.</p>';
                       }
                       if($error==2){
-                          echo '<p id="message_erreur">L\'adresse email a déjà été utilisée. Veuillez entrer une autre adresse email.</p>';
+                          echo '<p id="message_erreur">L\'adresse email a dï¿½jï¿½ ï¿½tï¿½ utilisï¿½e. Veuillez entrer une autre adresse email.</p>';
                       }
                       if ($_SESSION['userAdmin']) {
                           if($error==3){
-                              echo '<p id="message_erreur">Ce nom d\'hôpital a déjà été attribué.</p>';
+                              echo '<p id="message_erreur">Ce nom d\'hï¿½pital a dï¿½jï¿½ ï¿½tï¿½ attribuï¿½.</p>';
                           }
                       }
 
