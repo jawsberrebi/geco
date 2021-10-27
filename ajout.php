@@ -28,13 +28,31 @@ if(isset($_SESSION['userPersonnel']) ) {
 <head>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="css/style_ajout.css" />
+
+    <?php if($_GET['type'] == 'patient') : ?>
+
     <title>Ajouter un patient</title>
+
+    <?php endif; ?>
+
+    <?php if($_GET['type'] == 'infirmier') : ?>
+
+    <title>Ajouter un infirmier</title>
+
+    <?php endif; ?>
+
+    <?php if($_GET['type']=='medecin') : ?>
+
+    <title>Ajouter un médecin</title>
+
+    <?php endif; ?>
+
 </head>
 <body>
 
     <div id="box">
 
-        <form action="post_ajout_nouveau_patient.php" method="post">
+        <form action="post_ajout.php" method="post">
 
             <?php if($_GET['type'] == 'patient') : ?>
 
@@ -98,7 +116,7 @@ if(isset($_SESSION['userPersonnel']) ) {
             <?php if(isset($_GET['erreur'])){
                       $error = $_GET['erreur'];
                       if($error==1){
-                          echo '<p id="message_erreur">Il manque des informations. Veillez à rentrer toutes les informations.</p>';
+                          echo '<p id="message_erreur">Il manque des informations. Veillez à rentrer toutes les informations marquées d\'un *.</p>';
                       }
                       if($error==2){
                           echo '<p id="message_erreur">L\'adresse email a déjà été utilisée. Veuillez entrer une autre adresse email.</p>';

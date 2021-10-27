@@ -1,3 +1,9 @@
+#modification_compte {
+    font-family: Urbanist, sans-serif;
+    color: #3BC393;
+    text-decoration: none;
+}
+
 .message_erreur {
     font-family: Urbanist, sans-serif;
     color: red;
@@ -13,6 +19,7 @@ th {
     font-family: Urbanist, sans-serif;
     font-weight: normal;
     text-align: center;
+    white-space: pre;
 }
 
 .contenu_table {
@@ -27,6 +34,7 @@ th {
 
 table {
     border-spacing: 10px;
+    margin-left: 13%;
 }
 
 #deconnexion {

@@ -3,7 +3,7 @@ include_once("config.php");
 include('backend/fonctions.php');
 
 if (!isset($_POST['nom']) || !isset($_POST['prenom']) || !isset($_POST['email'])) {
-    header('Location:ajout_patient?erreur=1.php');
+    header('Location:ajout?erreur=1.php');
     exit();
 }
 
@@ -25,7 +25,7 @@ if (htmlspecialchars($_POST['type']) == 'patient') {
     $user = current($pre->fetchAll(PDO::FETCH_ASSOC));
     $result= $user;
     if($result != 0) {
-        header('Location:ajout_patient?type=patient&erreur=2.php');
+        header('Location:ajout?type=patient&erreur=2.php');
         exit();
     }
 
@@ -57,7 +57,7 @@ if (htmlspecialchars($_POST['type']) == 'patient') {
     $user = current($pre->fetchAll(PDO::FETCH_ASSOC));
     $result= $user;
     if($result != 0) {
-        header('Location:ajout_patient?type=infirmier&erreur=2.php');
+        header('Location:ajout?type=infirmier&erreur=2.php');
         exit();
     }
 
@@ -86,7 +86,7 @@ if (htmlspecialchars($_POST['type']) == 'patient') {
     $user = current($pre->fetchAll(PDO::FETCH_ASSOC));
     $result= $user;
     if($result != 0) {
-        header('Location:ajout_patient?type=medecin&erreur=2.php');
+        header('Location:ajout?type=medecin&erreur=2.php');
         exit();
     }
 

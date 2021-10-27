@@ -12,6 +12,7 @@ if (!isset($_SESSION['userPatient']) && !isset($_SESSION['userAdmin']) && !isset
 <head>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="css/style_tableau_de_bord_personnel.css" />
+    <title>Tableau de bord</title>
 </head>
 <body>
 
@@ -38,17 +39,19 @@ if (!isset($_SESSION['userPatient']) && !isset($_SESSION['userAdmin']) && !isset
 
     <?php endif; ?>
 
+    <a href="modifier_mon_compte.php" id="modification_compte">Modifier mon compte</a><br />
+
     <a href="deconnexion.php" id="deconnexion">Déconnexion</a><br />
 
     <?php if($_SESSION['userAdmin'] || $_SESSION['userPersonnel']['type'] == 'medecin') : ?>
 
-    <a href="ajout_patient?type=patient" class="ajout">Ajouter un nouveau patient</a><br />
+    <a href="ajout?type=patient" class="ajout">Ajouter un nouveau patient</a><br />
 
-    <a href="ajout_patient?type=infirmier" class="ajout">Ajouter un nouvel infirmier</a><br />
+    <a href="ajout?type=infirmier" class="ajout">Ajouter un nouvel infirmier</a><br />
 
     <?php if ($_SESSION['userAdmin']) : ?>
 
-    <a href="ajout_patient?type=medecin" class="ajout">Ajouter un nouveau médecin</a> <!-- Modifier URL-->
+    <a href="ajout?type=medecin" class="ajout">Ajouter un nouveau médecin</a> <!-- Modifier URL-->
 
     <!-- Y AJOUTER LA CONFIRMATION DE CRÉATION DE COMPTE MÉDECIN-->
 
@@ -64,6 +67,9 @@ if (!isset($_SESSION['userPatient']) && !isset($_SESSION['userAdmin']) && !isset
               }
               elseif($confirmation==3) {
                   echo '<p>Un nouveau médecin a bien été ajouté à la liste.</p>';
+              }
+              elseif($confirmation==4) {
+                  echo '<p>Vos informations ont bien été modifiées.</p>';
               }
           }?>
 
@@ -87,12 +93,12 @@ if (!isset($_SESSION['userPatient']) && !isset($_SESSION['userAdmin']) && !isset
     <table>
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Nom du membre</th>
-                <th>Type de membre</th>
-                <th>Rythme cardiaque</th>
-                <th>Niveau sonore</th>
-                <th>Concentration en CO2</th>
+                <th>Id          </th>
+                <th>Nom du membre           </th>
+                <th>Type de membre                                              </th>
+                <th>Rythme cardiaque            </th>
+                <th>Niveau sonore           </th>
+                <th>Concentration en CO2            </th>
             </tr>
         </thead>
 
