@@ -4,10 +4,10 @@ require_once "config.php";
 
 <?php
 
-//if($_GET['type'] != 'patient' && $_GET['type'] != 'infirmier' && $_GET['type'] != 'medecin') {
-    //header('Location:tableau_de_bord_personnel?erreur=2.php');
-    //exit();
-//}
+if($_GET['type'] != 'patient' && $_GET['type'] != 'infirmier' && $_GET['type'] != 'medecin') {
+    header('Location:tableau_de_bord_personnel?erreur=2.php');
+    exit();
+}
 
 if(!isset($_SESSION['userAdmin']) ) {
     header('Location:tableau_de_bord_personnel?erreur=1.php');
