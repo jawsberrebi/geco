@@ -1,8 +1,18 @@
 <?php  require_once "config.php";
 
-if (!isset($_SESSION['userPatient']) && !isset($_SESSION['userAdmin']) && !isset($_SESSION['userPersonnel'])) {
+if ($_SESSION['userAdmin'] == 0 && $_SESSION['userPersonnel'] == 0) { //SI Y A ERREUR CHECKER ICI
+
+    session_destroy();
     header('Location:connexion?erreur=3.php');
     exit();
+}
+
+if(isset($_SESSION['userPatient'])) {
+
+    session_destroy();
+    header('Location:connexion?erreur=4.php');
+    exit();
+
 }
 
 ?>
@@ -27,13 +37,14 @@ if (!isset($_SESSION['userPatient']) && !isset($_SESSION['userAdmin']) && !isset
 
     <h1>Tableau de bord</h1>
 
-    <?php if (isset($_SESSION['userAdmin']) && !isset($_SESSION['userPersonnel'])) : ?>
+    <?php if (isset($_SESSION['userAdmin']) && $_SESSION['userAdmin']) : ?>
 
     <h2><?php echo 'Bonjour, ' . htmlspecialchars($_SESSION['userAdmin']['nom_utilisateur']) . ' de ' . htmlspecialchars($_SESSION['userAdmin']['nom_hopital']) . ', vous êtes connecté'; ?></h2>
 
     <?php endif; ?>
 
-    <?php if (isset($_SESSION['userPersonnel'])) : ?>
+
+    <?php if (isset($_SESSION['userPersonnel']) && $_SESSION['userPersonnel']) : ?>
 
     <h2><?php echo 'Bonjour, ' . htmlspecialchars($_SESSION['userPersonnel']['nom_utilisateur']) . ' vous êtes connecté'; ?></h2>
 
@@ -68,12 +79,17 @@ if (!isset($_SESSION['userPatient']) && !isset($_SESSION['userAdmin']) && !isset
               elseif($confirmation==3) {
                   echo '<p>Un nouveau médecin a bien été ajouté à la liste.</p>';
               }
-              elseif($confirmation==4) {
-                  echo '<p>Vos informations ont bien été modifiées.</p>';
-              }
           }?>
 
     <?php endif; ?>
+
+    <?php if(isset($_GET['confirmation'])){
+              $confirmation = $_GET['confirmation'];
+              
+              if($confirmation==4) {
+                  echo '<p>Vos informations ont bien été modifiées.</p>';
+              }
+          }?>
 
     <?php if(isset($_GET['erreur'])){
               $erreur = $_GET['erreur'];
@@ -113,7 +129,7 @@ if (!isset($_SESSION['userPatient']) && !isset($_SESSION['userAdmin']) && !isset
 
             <?php foreach($users as $user) : ?>
 
-            <tr class="contenu_table" data-href="https://www.google.com/" onclick="location.href='https://www.franceculture.fr'">
+            <tr class="contenu_table" onclick="location.href='https://www.franceculture.fr'">
 
                 <td>
                     <?php echo $user['id_patient'] ?>

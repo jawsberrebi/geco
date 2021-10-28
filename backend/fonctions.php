@@ -1,9 +1,20 @@
 <?php
 include_once("config.php");
 
-function passwordGenerator(PDO $pdo) : string
+function passwordGenerator(PDO $pdo, int $length) : string
 {
-    $realpass = bin2hex(random_bytes(8));
+
+    function randomizer(int $length) : string
+    {
+        $charList = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $finalChar = '';
+        for($i=0; $i<$length; $i++){
+            $finalChar .= $charList[rand(0, strlen($charList)-1)];
+        }
+        return $finalChar;
+    }
+
+    $realpass = randomizer(8);
     $compareQuery = 'SELECT mdp FROM patient';
     $pre = $pdo->prepare($compareQuery);
     $pre->execute();
@@ -13,7 +24,7 @@ function passwordGenerator(PDO $pdo) : string
 
         while ($realpass == $list_result['mdp']) {
 
-            $realpass = bin2hex(random_bytes(8));
+            $realpass = randomizer($length);
         }
     }
 
@@ -26,7 +37,7 @@ function passwordGenerator(PDO $pdo) : string
 
         while ($realpass == $list_result['mdp']) {
 
-            $realpass = bin2hex(random_bytes(8));
+            $realpass = randomizer($length);
         }
     }
 

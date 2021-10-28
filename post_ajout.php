@@ -9,8 +9,8 @@ if (!isset($_POST['nom']) || !isset($_POST['prenom']) || !isset($_POST['email'])
 
 $name = htmlspecialchars($_POST['nom']);
 $firstName = htmlspecialchars($_POST['prenom']);
-$password = passwordGenerator($pdo); //Générateur de mot de passe aléatoire
-$userName = strtolower(substr($firstName, 0 , 1) . $name); //Générateur de nom d'utilisateur : 1ère lettre du prénom + nom. Remplacer $email par la variable contenant le prénom et $password par la variable contenant le nom.
+$password = passwordGenerator($pdo, 8); //Générateur de mot de passe aléatoire
+$userName = mb_strtolower(mb_substr($firstName, 0 , 1) . $name); //Générateur de nom d'utilisateur : 1ère lettre du prénom + nom. Remplacer $email par la variable contenant le prénom et $password par la variable contenant le nom.
 $mail = htmlspecialchars($_POST['email']);
 $phone = htmlspecialchars($_POST['telephone']);
 

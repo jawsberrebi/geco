@@ -6,12 +6,19 @@ if (!isset($_POST['nom']) || !isset($_POST['prenom'])) {
     exit();
 }
 
+
+
+
+////// RÉCUPÉRATION DES ÉLÉMENTS DE FORMULAIRE
 $name = htmlspecialchars($_POST['nom']);
 $firstName = htmlspecialchars($_POST['prenom']);
-$userName = strtolower(substr($firstName, 0 , 1) . $name); //Générateur de nom d'utilisateur : 1ère lettre du prénom + nom. Remplacer $email par la variable contenant le prénom et $password par la variable contenant le nom.
+$userName = mb_strtolower(mb_substr($firstName, 0 , 1) . $name); //Générateur de nom d'utilisateur : 1ère lettre du prénom + nom. Remplacer $email par la variable contenant le prénom et $password par la variable contenant le nom.
 $mail = htmlspecialchars($_POST['email']);
 $phone = htmlspecialchars($_POST['telephone']);
 
+/////////////                                                                   \\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+///////////// DANS LE CAS OÙ L'ADMIN ACCÈDE À LA PAGE DE MODIFICATION DE COMPTE \\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+////////////                                                                     \\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 if ($_SESSION['userAdmin']) {
 
     $adresse = htmlspecialchars($_POST['adresse']);
@@ -47,69 +54,50 @@ if ($_SESSION['userAdmin']) {
     header('Location:tableau_de_bord_personnel?confirmation=4.php');
     exit();
 
-} elseif ($_SESSION['userPersonnel'] == 'infirmier') {
 
-    //############################" ULTRA CHECKPOINT, MODIFIER TOUT CE QUI EST REQUÊTE SQL POUR TERMINER LE POST MODIFIER MON COMPTE "########################
+    /////////////                                                                                  \\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+    ///////////// DANS LE CAS OÙ UN MEMBRE DU PERSONNEL ACCÈDE À LA PAGE DE MODIFICATION DE COMPTE \\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+    ////////////                                                                                    \\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+} elseif ($_SESSION['userPersonnel']) {
+
     //UPDATE INFOS BDD
 
-    $sql = "SELECT * FROM personnel WHERE mail='".$mail."'";
+    $sql = "SELECT * FROM personnel WHERE mail='".$mail."' AND id_personnel != '".$_SESSION['userPersonnel']['id_personnel']."'";
     $pre = $pdo->prepare($sql);
     $pre->execute();
     $user = current($pre->fetchAll(PDO::FETCH_ASSOC));
     $result= $user;
     if($result != 0) {
-        header('Location:ajout?type=infirmier&erreur=2.php');
+        header('Location:modifier_mon_compte?erreur=2.php');
         exit();
     }
 
-    $sql = 'INSERT INTO personnel(prenom, nom, mail, tel, type, mdp, nom_utilisateur) VALUES (:prenom, :nom, :mail, :tel, :type, :mdp, :nom_utilisateur)';
+    $sql = "UPDATE personnel SET prenom = :prenom, nom = :nom, mail = :mail, tel = :tel, nom_utilisateur = :nom_utilisateur WHERE id_personnel = '".$_SESSION['userPersonnel']['id_personnel']."' ";
     $pre = $pdo->prepare($sql);
     $pre->execute([
         'prenom' => $firstName,
         'nom' => $name,
         'mail' => $mail,
         'tel' => $phone,
-        'type' => 'infirmier',
-        'mdp' => $password,
         'nom_utilisateur' => $userName,
         ]);
 
-    //DEVELOPPER FONCTIONNALITE D'ENVOI D'IDENTIFIANTS PAR MAIL ICI ET METTRE REDIRECTION VERS FORMULAIRE D'AJOUT SI ÇA MARCHE PAS, SI ÇA MARCHE REDIRIGER VERS LE TABLEAU DE BORD AVEC LE GET QUI AFFICHE MESSAGE DE CONFIRMATION
+    $_SESSION['userPersonnel']['prenom'] = $firstName;
+    $_SESSION['userPersonnel']['nom'] = $name;
+    $_SESSION['userPersonnel']['mail'] = $mail;
+    $_SESSION['userPersonnel']['tel'] = $phone;
+    $_SESSION['userPersonnel']['nom_utilisateur'] = $userName;
 
     header('Location:tableau_de_bord_personnel?confirmation=4.php');
     exit();
 
-} elseif ($_SESSION['userPersonnel'] == 'medecin') {
+    /////////////                                                                      \\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+    ///////////// DANS LE CAS OÙ UN PATIENT ACCÈDE À LA PAGE DE MODIFICATION DE COMPTE \\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+    ////////////                                                                        \\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
-    $sql = "SELECT * FROM personnel WHERE mail='".$mail."'"; //UN INFIRMIER PEUT-IL AVOIR À LA FOIS UN COMPTE MEDECIN ET UN COMPTE INFIRMIER ?
-    $pre = $pdo->prepare($sql);
-    $pre->execute();
-    $user = current($pre->fetchAll(PDO::FETCH_ASSOC));
-    $result= $user;
-    if($result != 0) {
-        header('Location:ajout?type=medecin&erreur=2.php');
-        exit();
-    }
-
-    $sql = 'INSERT INTO personnel(prenom, nom, mail, tel, type, mdp, nom_utilisateur) VALUES (:prenom, :nom, :mail, :tel, :type, :mdp, :nom_utilisateur)';
-    $pre = $pdo->prepare($sql);
-    $pre->execute([
-        'prenom' => $firstName,
-        'nom' => $name,
-        'mail' => $mail,
-        'tel' => $phone,
-        'type' => 'medecin',
-        'mdp' => $password,
-        'nom_utilisateur' => $userName,
-        ]);
-
-    //DEVELOPPER FONCTIONNALITE D'ENVOI D'IDENTIFIANTS PAR MAIL ICI ET METTRE REDIRECTION VERS FORMULAIRE D'AJOUT SI ÇA MARCHE PAS, SI ÇA MARCHE REDIRIGER VERS LE TABLEAU DE BORD AVEC LE GET QUI AFFICHE MESSAGE DE CONFIRMATION
-
-    header('Location:tableau_de_bord_personnel?confirmation=4.php');
-    exit();
 } elseif ($_SESSION['userPatient']) {
 
-    $description = htmlspecialchars($_POST['description']);
     $adresse = htmlspecialchars($_POST['adresse']);
 
     $sql = "SELECT * FROM patient WHERE mail='".$mail."'";
@@ -118,13 +106,11 @@ if ($_SESSION['userAdmin']) {
     $user = current($pre->fetchAll(PDO::FETCH_ASSOC));
     $result= $user;
     if($result != 0) {
-        header('Location:ajout?type=patient&erreur=2.php');
+        header('Location:modifier_mon_compte?erreur=2.php');
         exit();
     }
 
-    //INSERER INFOS BDD
-
-    $sql = 'INSERT INTO patient(prenom, nom, mail, tel, adresse, description, mdp, nom_utilisateur) VALUES (:prenom, :nom, :mail, :tel, :adresse, :description, :mdp, :nom_utilisateur)';
+    $sql = " UPDATE patient SET prenom = :prenom, nom = :nom, mail = :mail, tel = :tel, nom_utilisateur = :nom_utilisateur WHERE id_personnel = '".$_SESSION['userPatient']['id_patient']."' ";
     $pre = $pdo->prepare($sql);
     $pre->execute([
         'prenom' => $firstName,
@@ -132,15 +118,20 @@ if ($_SESSION['userAdmin']) {
         'mail' => $mail,
         'tel' => $phone,
         'adresse' => $adresse,
-        'description' => $description,
-        'mdp' => $password,
         'nom_utilisateur' => $userName,
         ]);
 
-    //DEVELOPPER FONCTIONNALITE D'ENVOI D'IDENTIFIANTS PAR MAIL ICI ET METTRE REDIRECTION VERS FORMULAIRE D'AJOUT SI ÇA MARCHE PAS, SI ÇA MARCHE REDIRIGER VERS LE TABLEAU DE BORD AVEC LE GET QUI AFFICHE MESSAGE DE CONFIRMATION
+    $_SESSION['userPatient']['prenom'] = $firstName;
+    $_SESSION['userPatient']['nom'] = $name;
+    $_SESSION['userPatient']['mail'] = $mail;
+    $_SESSION['userPatient']['tel'] = $tel;
+    $_SESSION['userPatient']['nom_utilisateur'] = $userName;
 
-    header('Location:tableau_de_bord_personnel?confirmation=4.php');
+    //header('Location:tableau_de_bord_personnel?confirmation=4.php');
     exit();
+
+
+    ////////////////// OU SINON REDIRECTION SI LE COMPTE N'EST PAS CONNECTÉ \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
 } else {
     header('Location:tableau_de_bord_personnel?erreur=3.php');
