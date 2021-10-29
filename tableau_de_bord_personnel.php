@@ -1,19 +1,6 @@
-<?php  require_once "config.php";
-
-if (!isset($_SESSION['userAdmin']) && !isset($_SESSION['userPersonnel'])) {
-
-    if(isset($_SESSION['userPatient'])) {
-
-        session_destroy();
-        header('Location:connexion?erreur=4.php');
-        exit();
-
-    }
-
-    session_destroy();
-    header('Location:connexion?erreur=3.php');
-    exit();
-}
+<?php
+require_once "config.php";
+include("backend/conditions_accès_page_personnel_et_admin.php");
 
 ?>
 
@@ -50,9 +37,7 @@ if (!isset($_SESSION['userAdmin']) && !isset($_SESSION['userPersonnel'])) {
 
     <?php endif; ?>
 
-    <a href="modifier_mon_compte.php" id="modification_compte">Modifier mon compte</a><br />
-
-    <a href="deconnexion.php" id="deconnexion">Déconnexion</a><br />
+    <?php include("backend/fenetre_modale_tableau_de_bord.php"); ?>
 
     <?php if($_SESSION['userAdmin'] || $_SESSION['userPersonnel']['type'] == 'medecin') : ?>
 
@@ -67,6 +52,10 @@ if (!isset($_SESSION['userAdmin']) && !isset($_SESSION['userPersonnel'])) {
     <!-- Y AJOUTER LA CONFIRMATION DE CRÉATION DE COMPTE MÉDECIN-->
 
     <?php endif; ?>
+
+
+    <!-- FACTORISATION DES MESSAGES DU TABLEAU DE BORD -->
+    <?php include("backend/messages_tableau_de_bord_personnel.php")?>
 
     <?php if(isset($_GET['confirmation'])){
               $confirmation = $_GET['confirmation'];

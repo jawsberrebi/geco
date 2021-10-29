@@ -112,23 +112,4 @@ if (htmlspecialchars($_POST['type']) == 'patient') {
     exit();
 }
 
-//$sql = "SELECT * FROM testuser WHERE Email='".$_POST['nom']."'";
-//$pre = $pdo->prepare($sql);
-//$pre->execute();
-//$user = current($pre->fetchAll(PDO::FETCH_ASSOC));
-//$result= $user;
-//if($result->results == 0) {
-    //header('Location:ajout_patient?erreur=2.php');
-    //exit();
-//}
-
-//$sql = 'INSERT INTO testuser(Email, Password) VALUES (:Email, :Password)';
-//$pre = $pdo->prepare($sql);
-//$pre->execute([
-    //'Email' => htmlspecialchars($email),
-    //'Password' => htmlspecialchars($password),
-    //]);
-
-//header('Location:tableau_de_bord_personnel?confirmation=1.php');
-//exit();
 ?>
