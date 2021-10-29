@@ -38,7 +38,7 @@ $user = current($pre->fetchAll(PDO::FETCH_ASSOC)); //current prend la première l
 $_SESSION['userPatient'] = $user; //on enregistre que l'utilisateur est connecté (on peut modif)
 
 if ($_SESSION['userPatient'] != 0) {
-    header('Location:tableau_de_bord_personnel.php'); //MODIF LA PAGE
+    header('Location:tableau_de_bord_patient.php'); //MODIF LA PAGE
     exit();
 
 }

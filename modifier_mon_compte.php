@@ -43,7 +43,7 @@ if (!isset($_SESSION['userPatient']) && !isset($_SESSION['userAdmin']) && !isset
             <?php if (isset($_SESSION['userPatient'])) : ?>
             <?php if ($_SESSION['userPatient']) : ?>
 
-            <input type="text" placeholder="Nom*" name="nom" value="<?php echo $_SESSION['userPersonnel']['nom'] ?>" required />
+            <input type="text" placeholder="Nom*" name="nom" value="<?php echo $_SESSION['userPatient']['nom'] ?>" required />
 
             <?php endif; ?>
             <?php endif; ?>

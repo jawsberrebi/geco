@@ -1,18 +1,18 @@
 <?php  require_once "config.php";
 
-if ($_SESSION['userAdmin'] == 0 && $_SESSION['userPersonnel'] == 0) { //SI Y A ERREUR CHECKER ICI
+if (!isset($_SESSION['userAdmin']) && !isset($_SESSION['userPersonnel'])) {
+
+    if(isset($_SESSION['userPatient'])) {
+
+        session_destroy();
+        header('Location:connexion?erreur=4.php');
+        exit();
+
+    }
 
     session_destroy();
     header('Location:connexion?erreur=3.php');
     exit();
-}
-
-if(isset($_SESSION['userPatient'])) {
-
-    session_destroy();
-    header('Location:connexion?erreur=4.php');
-    exit();
-
 }
 
 ?>
@@ -96,11 +96,14 @@ if(isset($_SESSION['userPatient'])) {
               if($erreur==1) {
                   echo '<p class="message_erreur">Vous n\'êtes pas autorisé à accéder à ces informations.</p>';
               }
-              if($erreur==2) {
+              elseif($erreur==2) {
                   echo '<p class="message_erreur">Veuillez cliquer sur le bon bouton renvoyant au formulaire d\'ajout correspondant.</p>';
               }
-              if($erreur==3) {
+              elseif($erreur==3) {
                   echo '<p class="message_erreur">Il y a eu une erreur lors de l\'envoi des informations. Veuillez réessayer.</p>';
+              }
+              elseif($erreur==4) {
+                  echo '<p class="message_erreur">La page que vous essayez d\'afficher n\'existe pas.</p>';
               }
           }?>
 
@@ -129,7 +132,7 @@ if(isset($_SESSION['userPatient'])) {
 
             <?php foreach($users as $user) : ?>
 
-            <tr class="contenu_table" onclick="location.href='https://www.franceculture.fr'">
+            <tr class="contenu_table" onclick="location.href='profil?id_patient=<?php echo $user['id_patient'] ?>' ">
 
                 <td>
                     <?php echo $user['id_patient'] ?>
@@ -158,7 +161,7 @@ if(isset($_SESSION['userPatient'])) {
 
             <?php foreach($users as $user) : ?>
 
-            <tr class="contenu_table" data-href="https://www.google.com/" onclick="location.href='https://www.franceculture.fr'">
+            <tr class="contenu_table" data-href="https://www.google.com/" onclick="location.href='profil?id_infirmier=<?php echo $user['id_personnel'] ?>'">
 
                 <td>
                     <?php echo $user['id_personnel'] ?>
@@ -201,7 +204,7 @@ if(isset($_SESSION['userPatient'])) {
 
             <?php foreach($users as $user) : ?>
 
-            <tr class="contenu_table" data-href="https://www.google.com/" onclick="location.href='https://www.franceculture.fr'">
+            <tr class="contenu_table" data-href="https://www.google.com/" onclick="location.href='profil?id_medecin=<?php echo $user['id_personnel'] ?>'">
 
                 <td>
                     <?php echo $user['id_personnel'] ?>

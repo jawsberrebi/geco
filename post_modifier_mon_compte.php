@@ -100,7 +100,7 @@ if ($_SESSION['userAdmin']) {
 
     $adresse = htmlspecialchars($_POST['adresse']);
 
-    $sql = "SELECT * FROM patient WHERE mail='".$mail."'";
+    $sql = "SELECT * FROM patient WHERE mail='".$mail."' AND id_patient != '".$_SESSION['userPatient']['id_patient']."' ";
     $pre = $pdo->prepare($sql);
     $pre->execute();
     $user = current($pre->fetchAll(PDO::FETCH_ASSOC));
@@ -110,7 +110,7 @@ if ($_SESSION['userAdmin']) {
         exit();
     }
 
-    $sql = " UPDATE patient SET prenom = :prenom, nom = :nom, mail = :mail, tel = :tel, nom_utilisateur = :nom_utilisateur WHERE id_personnel = '".$_SESSION['userPatient']['id_patient']."' ";
+    $sql = " UPDATE patient SET prenom = :prenom, nom = :nom, mail = :mail, tel = :tel, adresse = :adresse,nom_utilisateur = :nom_utilisateur WHERE id_patient = '".$_SESSION['userPatient']['id_patient']."' ";
     $pre = $pdo->prepare($sql);
     $pre->execute([
         'prenom' => $firstName,
@@ -124,10 +124,11 @@ if ($_SESSION['userAdmin']) {
     $_SESSION['userPatient']['prenom'] = $firstName;
     $_SESSION['userPatient']['nom'] = $name;
     $_SESSION['userPatient']['mail'] = $mail;
-    $_SESSION['userPatient']['tel'] = $tel;
+    $_SESSION['userPatient']['tel'] = $phone;
+    $_SESSION['userPatient']['adresse'] = $adresse;
     $_SESSION['userPatient']['nom_utilisateur'] = $userName;
 
-    //header('Location:tableau_de_bord_personnel?confirmation=4.php');
+    header('Location:tableau_de_bord_patient.php');
     exit();
 
 
