@@ -22,81 +22,14 @@ include("backend/conditions_accès_page_personnel_et_admin.php");
 
     ?>
 
-    <h1>Tableau de bord</h1>
-
-    <?php if (isset($_SESSION['userAdmin']) && $_SESSION['userAdmin']) : ?>
-
-    <h2><?php echo 'Bonjour, ' . htmlspecialchars($_SESSION['userAdmin']['nom_utilisateur']) . ' de ' . htmlspecialchars($_SESSION['userAdmin']['nom_hopital']) . ', vous êtes connecté'; ?></h2>
-
-    <?php endif; ?>
-
-
-    <?php if (isset($_SESSION['userPersonnel']) && $_SESSION['userPersonnel']) : ?>
-
-    <h2><?php echo 'Bonjour, ' . htmlspecialchars($_SESSION['userPersonnel']['nom_utilisateur']) . ' vous êtes connecté'; ?></h2>
-
-    <?php endif; ?>
-
+    <!-- MESSAGE D'ACCUEIL-->
+    <?php include("backend/message_accueil_tableau_de_bord.php"); ?>
+    <!-- OPTION CONNEXION/DECONNEXION -->
     <?php include("backend/fenetre_modale_tableau_de_bord.php"); ?>
-
-    <?php if($_SESSION['userAdmin'] || $_SESSION['userPersonnel']['type'] == 'medecin') : ?>
-
-    <a href="ajout?type=patient" class="ajout">Ajouter un nouveau patient</a><br />
-
-    <a href="ajout?type=infirmier" class="ajout">Ajouter un nouvel infirmier</a><br />
-
-    <?php if ($_SESSION['userAdmin']) : ?>
-
-    <a href="ajout?type=medecin" class="ajout">Ajouter un nouveau médecin</a> <!-- Modifier URL-->
-
-    <!-- Y AJOUTER LA CONFIRMATION DE CRÉATION DE COMPTE MÉDECIN-->
-
-    <?php endif; ?>
-
-
+    <!-- FONCTIONNALITÉS ADMIN ET MÉDECIN -->
+    <?php include("backend/fonctionnalités_admin_medecin_tableau_de_bord_personnel.php") ?>
     <!-- FACTORISATION DES MESSAGES DU TABLEAU DE BORD -->
     <?php include("backend/messages_tableau_de_bord_personnel.php")?>
-
-    <?php if(isset($_GET['confirmation'])){
-              $confirmation = $_GET['confirmation'];
-              if($confirmation==1) {
-                  echo '<p>Un nouveau patient a bien été ajouté à la liste.</p>';
-              }
-              elseif($confirmation==2) {
-                  echo '<p>Un nouvel infirmier a bien été ajouté à la liste.</p>';
-              }
-              elseif($confirmation==3) {
-                  echo '<p>Un nouveau médecin a bien été ajouté à la liste.</p>';
-              }
-          }?>
-
-    <?php endif; ?>
-
-    <?php if(isset($_GET['confirmation'])){
-              $confirmation = $_GET['confirmation'];
-              
-              if($confirmation==4) {
-                  echo '<p>Vos informations ont bien été modifiées.</p>';
-              }
-          }?>
-
-    <?php if(isset($_GET['erreur'])){
-              $erreur = $_GET['erreur'];
-              if($erreur==1) {
-                  echo '<p class="message_erreur">Vous n\'êtes pas autorisé à accéder à ces informations.</p>';
-              }
-              elseif($erreur==2) {
-                  echo '<p class="message_erreur">Veuillez cliquer sur le bon bouton renvoyant au formulaire d\'ajout correspondant.</p>';
-              }
-              elseif($erreur==3) {
-                  echo '<p class="message_erreur">Il y a eu une erreur lors de l\'envoi des informations. Veuillez réessayer.</p>';
-              }
-              elseif($erreur==4) {
-                  echo '<p class="message_erreur">La page que vous essayez d\'afficher n\'existe pas.</p>';
-              }
-          }?>
-
-    <!-- Pour rediriger chaque lien vers patient correspondant, voir sur OpenClassroom modification page-->
 
     <table>
         <thead>

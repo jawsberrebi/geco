@@ -1,7 +1,7 @@
 <?php
 include_once("config.php");
 
-//// GÉNÉRATEUR DE MOT DE PASSE ALÉATOIRE
+//// Gï¿½Nï¿½RATEUR DE MOT DE PASSE ALï¿½ATOIRE
 function passwordGenerator(PDO $pdo, int $length) : string
 {
 
@@ -47,15 +47,40 @@ function passwordGenerator(PDO $pdo, int $length) : string
 
 ?>
 
-<?php ////// GÉNÉRATEUR DE TABLEAU DE DONNÉES POUR LES PROFILS DES PATIENT, MÉDECINS, ET INFIRMIERS ?>
+<?php ////// Gï¿½Nï¿½RATEUR DE TABLEAU DE DONNï¿½ES POUR LES PROFILS DES PATIENT, Mï¿½DECINS, ET INFIRMIERS ?>
 
 <?php function dataGenerator(array $user, string $type) : void {
 
 ?>
 
+<meta charset="utf-8" />
 <h1>
     <?php echo $user['nom'] . ', ' . $user['prenom']; ?>
 </h1>
+
+<?php if((isset($_SESSION['userAdmin']) && $_SESSION['userAdmin']) || (isset($_SESSION['userPersonnel']) && ($_SESSION['userPersonnel']['type'] == 'medecin'))) : ?>
+
+<?php if($type == 'patient') : ?>
+<a href="backend/suppression?id_patient=<?php echo $user['id_patient'] ?>" id="supprimer">Supprimer ðŸ—‘ </a>
+
+<?php endif; ?>
+<?php endif; ?>
+
+<?php if((isset($_SESSION['userAdmin']) && $_SESSION['userAdmin']) || (isset($_SESSION['userPersonnel']) && ($_SESSION['userPersonnel']['type'] == 'medecin'))) : ?>
+
+<?php if($type == 'infirmier') : ?>
+<a href="backend/suppression?id_infirmier=<?php echo $user['id_personnel'] ?>" id="supprimer">Supprimer ðŸ—‘ </a>
+
+<?php endif; ?>
+<?php endif; ?>
+
+<?php if(isset($_SESSION['userAdmin'])) : ?>
+
+<?php if($type == 'medecin') : ?>
+<a href="backend/suppression?id_medecin=<?php echo $user['id_personnel'] ?>" id="supprimer">Supprimer ðŸ—‘ </a>
+
+<?php endif; ?>
+<?php endif; ?>
 
 <table class="donnees_utilisateur">
     <thead class="titrage_donnees">
@@ -107,7 +132,7 @@ function passwordGenerator(PDO $pdo, int $length) : string
     <thead class="titrage_donnees">
         <tr>
             <th>TYPE D'UTILISATEUR</th>
-            <th>TÉLÉPHONE</th>
+            <th>TÃ‰LÃ‰PHONE</th>
 
             <?php if($type == 'patient') : ?>
             <th>ADRESSE</th>
@@ -125,12 +150,12 @@ function passwordGenerator(PDO $pdo, int $length) : string
         <?php endif; ?>
 
         <?php if($type == 'medecin') : ?>
-        <td>Médecin</td>
+        <td>Mï¿½decin</td>
         <?php endif; ?>
 
         <td>
             <?php if($user['tel'] == null) {
-                      echo '<a>AJOUTER</a>';
+                      echo '<a href="">AJOUTER</a>';
                   }
                   else {
                       echo $user['tel'];
@@ -143,7 +168,7 @@ function passwordGenerator(PDO $pdo, int $length) : string
         <?php if($type == 'patient') : ?>
         <td>
             <?php if($user['adresse'] == null) {
-                      echo '<a>AJOUTER</a>';
+                      echo '<a href="">AJOUTER</a>';
                   }
                   else {
                       echo $user['adresse'];

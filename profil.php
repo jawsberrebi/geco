@@ -70,18 +70,21 @@ elseif(isset($_GET['id_medecin'])) {
                         <p id="text">
                             Test
                         </p>
+                        <input type="range" min="0" max="100" id="curseur_rouge"/>
                     </div>
 
                     <div class="cadran">
                         <p id="text">
                             Test
                         </p>
+                        <input type="range" min="0" max="100" id="curseur_bleu"/>
                     </div>
 
                     <div class="cadran">
                         <p id="text">
                             Test
                         </p>
+                        <input type="range" min="0" max="100" id="curseur_vert"/>
                     </div>
                 </div>
             </div>
@@ -100,6 +103,12 @@ elseif(isset($_GET['id_medecin'])) {
 
         </div>
 
+        <?php else : ?>
+        <?php
+                  header('Location:tableau_de_bord_personnel?erreur=1.php');
+                  exit();
+        ?>
+
         <?php endif; ?>
         <?php endif; ?>
 
@@ -115,7 +124,7 @@ elseif(isset($_GET['id_medecin'])) {
               $userInfirmier = current($pre->fetchAll(PDO::FETCH_ASSOC));
         ?>
 
-        <?php if((isset($_SESSION['userPersonnel']) && $_SESSION['userPersonnel']['type'] == 'medecin')  || isset($_SESSION['userAdmin'])) : ?>
+        <?php if((isset($_SESSION['userAdmin']) && $_SESSION['userAdmin']) || (isset($_SESSION['userPersonnel']) && ($_SESSION['userPersonnel']['type'] == 'medecin'))) : ?>
 
         <?php if ($userInfirmier == null) {
                 header('Location:tableau_de_bord_personnel?erreur=4.php');
@@ -125,7 +134,16 @@ elseif(isset($_GET['id_medecin'])) {
 
         <?php echo dataGenerator($userInfirmier, 'infirmier'); ?>
 
+        <?php else : ?>
+        <?php
+                  header('Location:tableau_de_bord_personnel?erreur=1.php');
+                  exit();
+        ?>
+
         <?php endif; ?>
+
+        
+
         <?php endif; ?>
 
         <!--///////////////////////////////-->
@@ -150,7 +168,13 @@ elseif(isset($_GET['id_medecin'])) {
 
         <?php echo dataGenerator($userMedecin, 'medecin'); ?>
 
+        <?php else : ?>
+        <?php
+                  header('Location:tableau_de_bord_personnel?erreur=1.php');
+                  exit();
+        ?>
         <?php endif; ?>
+
         <?php endif; ?>
 
     </body>

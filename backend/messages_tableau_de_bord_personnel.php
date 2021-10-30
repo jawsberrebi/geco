@@ -1,19 +1,29 @@
+<meta charset="utf-8" />
+
 <?php
 
 
 //// MESSAGES DE CONFIRMATION
-if(isset($_GET['confirmation'])) {
+
+if($_SESSION['userAdmin'] || $_SESSION['userPersonnel']['type'] == 'medecin') {
+    if(isset($_GET['confirmation'])){
+        $confirmation = $_GET['confirmation'];
+        if($confirmation==1) {
+            echo '<p>Un nouveau patient a bien été ajouté à la liste.</p>';
+        }
+        elseif($confirmation==2) {
+            echo '<p>Un nouvel infirmier a bien été ajouté à la liste.</p>';
+        }
+        elseif($confirmation==3) {
+            echo '<p>Un nouveau médecin a bien été ajouté à la liste.</p>';
+        }
+    }
+}
+
+if(isset($_GET['confirmation'])){
     $confirmation = $_GET['confirmation'];
-    if($confirmation==1) {
-        echo '<p>Un nouveau patient a bien été ajouté à la liste.</p>';
-    }
-    elseif($confirmation==2) {
-                  echo '<p>Un nouvel infirmier a bien été ajouté à la liste.</p>';
-    }
-    elseif($confirmation==3) {
-                  echo '<p>Un nouveau médecin a bien été ajouté à la liste.</p>';
-    }
-    elseif($confirmation==4) {
+
+    if($confirmation==4) {
         echo '<p>Vos informations ont bien été modifiées.</p>';
     }
 }

@@ -24,7 +24,7 @@ if(!isset($_SESSION['userPatient'])) {
 
         <h1>Tableau de bord</h1>
 
-        <?php include("fenetre_modale_tableau_de_bord"); ?>
+        <?php include("backend/fenetre_modale_tableau_de_bord.php"); ?>
 
         <div class="tableau_onglets">
 
