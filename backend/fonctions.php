@@ -192,7 +192,7 @@ function passwordGenerator(PDO $pdo, int $length) : string
 <?php //// GÉNÉRATEUR DE TABLEAU DE MEMBRES (POUR LE TABLEAU DE BORD DU PERSONNEL ?>
 
 <?php
-function dataTableMembersGenerator(PDO $pdo, string $userType, bool $querySearch) : void {
+function dataTableMembersGenerator(PDO $pdo, string $userType, bool $querySearch, string $superVariableGet) : void {
 
 ?>
 
@@ -202,7 +202,7 @@ function dataTableMembersGenerator(PDO $pdo, string $userType, bool $querySearch
             <?php if ($userType == 'patient') : ?>
             <?php if ($querySearch == false) : ?>
             <?php
-                      $sql = "SELECT * FROM patient";
+                      $sql = "SELECT * FROM patient ORDER BY id_patient DESC";
                       $pre = $pdo->prepare($sql);
                       $pre->execute();
                       $users = $pre->fetchAll(PDO::FETCH_ASSOC);?>
@@ -232,19 +232,17 @@ function dataTableMembersGenerator(PDO $pdo, string $userType, bool $querySearch
 
             <?php if ($querySearch == true) : ?>
 
-            <?php 
-                $searchResults = '';
-                if(isset($_POST['moteur_recherche']) && !empty($_POST['moteur_recherche'])) {
+            <?php
+                if(isset($superVariableGet) && !empty($superVariableGet)) {
+                $search = htmlspecialchars($superVariableGet);
 
-                    $search = preg_replace('#[^a-z _!?0-9]#i', '', $_POST['moteur_recherche']);
+                $sql = 'SELECT * FROM patient WHERE prenom LIKE "%'.$search.'%" OR nom LIKE "%'.$search.'%" ORDER BY id_patient DESC';
+                $pre = $pdo->prepare($sql);
+                $pre->execute();
+                $searchResults = $pre->fetchAll(PDO::FETCH_ASSOC);
 
-                    $requete = htmlspecialchars($_POST['moteur_recherche']);
-
-                    $sql = "SELECT prenom, nom FROM patient WHERE prenom, nom LIKE '%test%' ";
-                    $pre = $pdo->prepare($sql);
-                    $pre->execute();
-                    $searchResults = $pre->fetchAll(PDO::FETCH_ASSOC);
                 }
+
             ?>
 
             <?php foreach($searchResults as $user) : ?>
@@ -277,7 +275,7 @@ function dataTableMembersGenerator(PDO $pdo, string $userType, bool $querySearch
             <!-- SI ON VEUT GÉNÉRER UNE TABLE D'INFIRMIERS-->
             <?php if ($userType == 'infirmier') : ?>
             <?php
-                      $sql = "SELECT * FROM personnel WHERE type='infirmier'";
+                      $sql = "SELECT * FROM personnel WHERE type='infirmier' ORDER BY id_personnel DESC";
                       $pre = $pdo->prepare($sql);
                       $pre->execute();
                       $users = $pre->fetchAll(PDO::FETCH_ASSOC);
@@ -320,10 +318,61 @@ function dataTableMembersGenerator(PDO $pdo, string $userType, bool $querySearch
 
 
 
-            <!-- SI ON VEUT GÉNÉRER UNE TABLE D'INFIRMIERS-->
+            <?php if ($querySearch == true) : ?>
+            <?php if ($userType == 'infirmier') : ?>
+
+            <?php
+                    if(isset($superVariableGet) && !empty($superVariableGet)) {
+                        $search = htmlspecialchars($superVariableGet);
+
+                        $sql = 'SELECT * FROM personnel WHERE prenom LIKE ("%'.$search.'%" OR nom LIKE "%'.$search.'%") AND (type="infirmier") ORDER BY id_personnel DESC';
+                        $pre = $pdo->prepare($sql);
+                        $pre->execute();
+                        $searchResults = $pre->fetchAll(PDO::FETCH_ASSOC);
+
+                    }
+            ?>
+
+            <?php foreach($searchResults as $user) : ?>
+
+            <tr class="contenu_table" onclick="location.href='profil?id_infirmier=<?php echo $user['id_personnel'] ?>'">
+
+                <td>
+                    <?php echo $user['id_personnel'] ?>
+                </td>
+
+                <td>
+                    <?php echo $user['prenom'] . ' ' . $user['nom'] ?>
+                </td>
+
+                <td>
+                    <?php echo 'Infirmier' ?>
+                </td>
+
+                <td>
+                    <?php echo 'N/A' ?>
+                </td>
+
+                <td>
+                    <?php echo 'N/A' ?>
+                </td>
+
+                <td>
+                    <?php echo 'N/A' ?>
+                </td>
+
+            </tr>
+
+            <?php endforeach; ?>
+
+            <?php endif; ?>
+            <?php endif; ?>
+
+
+            <!-- SI ON VEUT GÉNÉRER UNE TABLE DE MÉDECINS-->
             <?php if ($userType == 'medecin') : ?>
             <?php
-                    $sql = "SELECT * FROM personnel WHERE type='medecin'";
+                    $sql = "SELECT * FROM personnel WHERE type='medecin' ORDER BY id_personnel DESC";
                     $pre = $pdo->prepare($sql);
                     $pre->execute();
                     $users = $pre->fetchAll(PDO::FETCH_ASSOC);

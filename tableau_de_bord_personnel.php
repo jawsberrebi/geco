@@ -2,7 +2,7 @@
 require_once "config.php";
 include("backend/fonctions.php");
 include("backend/conditions_accès_page_personnel_et_admin.php");
-include("backend/traitement_recherche.php");
+//include("backend/traitement_recherche.php");
 ?>
 
 <!DOCTYPE html>
@@ -32,7 +32,7 @@ include("backend/traitement_recherche.php");
     <!-- FACTORISATION DES MESSAGES DU TABLEAU DE BORD -->
     <?php include("backend/messages_tableau_de_bord_personnel.php")?>
 
-    <form action="tableau_de_bord_personnel.php" method="post">
+    <form method="get">
         <input type="search" name="moteur_recherche" placeholder="Chercher un membre" id="moteur_recherche" />
         <input type="submit" value="Rechercher"/>
         <!-- AJOUTER UN FILTRE DE RECHERCHE EN FONCTIONNALITÉ SUPPLÉMENTAIRE -->
@@ -56,18 +56,18 @@ include("backend/traitement_recherche.php");
         </thead>
 
         <!-- SI L'UTILISATEUR N'A RIEN RENTRÉ DANS LE CHAMP DE RECHERCHE, AFFICHER LA TABLE DE TOUS LES UTILISATEURS -->
-        <?php if(!isset($_POST['moteur_recherche']) || empty($_POST['moteur_recherche'])) : ?>
+        <?php if(!isset($_GET['moteur_recherche']) || empty($_GET['moteur_recherche'])) : ?>
 
 
 
         <!-- GÉNÉRATION DU TABLEAU DES PATIENTS -->
-        <?php echo dataTableMembersGenerator($pdo, 'patient', false); ?> 
+        <?php echo dataTableMembersGenerator($pdo, 'patient', false, ''); ?>
 
 
         <?php if($_SESSION['userAdmin'] || $_SESSION['userPersonnel']['type'] == 'medecin') : ?>
 
         <!-- GÉNÉRATION DU TABLEAU DES INFIRMIERS -->
-        <?php echo dataTableMembersGenerator($pdo, 'infirmier', false); ?>
+        <?php echo dataTableMembersGenerator($pdo, 'infirmier', false, ''); ?>
 
         <?php endif; ?>
 
@@ -76,15 +76,18 @@ include("backend/traitement_recherche.php");
         <?php if($_SESSION['userAdmin']) : ?>
 
         <!-- GÉNÉRATION DU TABLEAU DES MÉDECINS -->
-        <?php echo dataTableMembersGenerator($pdo, 'medecin', false); ?>
+        <?php echo dataTableMembersGenerator($pdo, 'medecin', false, ''); ?>
 
         <?php endif; ?>
 
 
-        <!-- SI L'UTILISATEUR N'A RIEN RENTRÉ DANS LE CHAMP DE RECHERCHE, AFFICHER LA TABLE DE TOUS LES UTILISATEURS -->
+        <!-- SI L'UTILISATEUR A RENTRÉ QUELQUE CHOSE DANS LE CHAMP DE RECHERCHE, AFFICHER LA TABLE DE RÉSULTATS -->
         <?php else : ?>
 
-        <?php echo dataTableMembersGenerator($pdo, 'patient', true); ?>
+        <?php echo dataTableMembersGenerator($pdo, 'patient', true, $_GET['moteur_recherche']); ?>
+
+
+        <!-- AJOUTER FONCTIONS AVEC INFIRMIERS ET MÉDECINS AVEC LES CONDITIONS ADÉQUATES -->
 
         <?php endif; ?>
 
@@ -92,7 +95,6 @@ include("backend/traitement_recherche.php");
 
 
     
-        
-
+       
 </body>
 </html>
