@@ -61,13 +61,13 @@ include("backend/traitement_recherche.php");
 
 
         <!-- GÉNÉRATION DU TABLEAU DES PATIENTS -->
-        <?php echo dataTableMembersGenerator($pdo, 'patient'); ?> 
+        <?php echo dataTableMembersGenerator($pdo, 'patient', false); ?> 
 
 
         <?php if($_SESSION['userAdmin'] || $_SESSION['userPersonnel']['type'] == 'medecin') : ?>
 
         <!-- GÉNÉRATION DU TABLEAU DES INFIRMIERS -->
-        <?php echo dataTableMembersGenerator($pdo, 'infirmier'); ?>
+        <?php echo dataTableMembersGenerator($pdo, 'infirmier', false); ?>
 
         <?php endif; ?>
 
@@ -76,7 +76,7 @@ include("backend/traitement_recherche.php");
         <?php if($_SESSION['userAdmin']) : ?>
 
         <!-- GÉNÉRATION DU TABLEAU DES MÉDECINS -->
-        <?php echo dataTableMembersGenerator($pdo, 'medecin'); ?>
+        <?php echo dataTableMembersGenerator($pdo, 'medecin', false); ?>
 
         <?php endif; ?>
 
@@ -84,7 +84,7 @@ include("backend/traitement_recherche.php");
         <!-- SI L'UTILISATEUR N'A RIEN RENTRÉ DANS LE CHAMP DE RECHERCHE, AFFICHER LA TABLE DE TOUS LES UTILISATEURS -->
         <?php else : ?>
 
-        <?php echo $searchResults; ?>
+        <?php echo dataTableMembersGenerator($pdo, 'patient', true); ?>
 
         <?php endif; ?>
 
