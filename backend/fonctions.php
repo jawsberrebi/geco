@@ -152,7 +152,7 @@ function passwordGenerator(PDO $pdo, int $length) : string
         <?php endif; ?>
 
         <?php if($type == 'medecin') : ?>
-        <td>M�decin</td>
+        <td>Médecin</td>
         <?php endif; ?>
 
         <td>
@@ -418,6 +418,178 @@ function dataTableMembersGenerator(PDO $pdo, string $userType, bool $querySearch
 
 
 }
+?>
 
+
+<?php //// GÉNÉRATEUR DE RÉSULTATS DE TABLEAU DE MEMBRES (POUR LE TABLEAU DE BORD DU PERSONNEL) ?>
+<?php
+function dataResultsResearchTableMember(PDO $pdo, string $userType, string $superVariableGet) : array {
+
+    $isThereResult = [
+        'patient' => false,
+        'infirmier' => false,
+        'medecin' => false
+        ];
+    
+?>
+
+    <tbody>
+
+
+        <?php if($userType == 'patient') : ?>
+
+        <?php
+            if(isset($superVariableGet) && !empty($superVariableGet)) {
+                $search = htmlspecialchars($superVariableGet);
+
+                $sql = 'SELECT * FROM patient WHERE prenom LIKE "%'.$search.'%" OR nom LIKE "%'.$search.'%" ORDER BY id_patient DESC';
+                $pre = $pdo->prepare($sql);
+                $pre->execute();
+                $searchResults = $pre->fetchAll(PDO::FETCH_ASSOC);
+
+                if(!empty($searchResults)) {
+                    $isThereResult['patient'] = true;
+                }
+
+            }
+
+        ?>
+
+        <?php foreach($searchResults as $user) : ?>
+
+        <tr class="contenu_table" onclick="location.href='profil?id_patient=<?php echo $user['id_patient'] ?>' ">
+
+            <td>
+                <?php echo $user['id_patient'] ?>
+            </td>
+
+            <td>
+                <?php echo $user['prenom'] . ' ' . $user['nom'] ?>
+            </td>
+
+            <td>
+                <?php echo 'Patient' ?>
+            </td>
+
+        </tr>
+
+        <?php endforeach; ?>
+
+
+
+
+
+        <?php elseif($userType == 'infirmier') : ?>
+
+        <?php
+            if(isset($superVariableGet) && !empty($superVariableGet)) {
+                $search = htmlspecialchars($superVariableGet);
+
+                $sql = 'SELECT * FROM personnel WHERE (type="infirmier") AND (prenom LIKE "%'.$search.'%" OR nom LIKE "%'.$search.'%") ORDER BY id_personnel DESC';
+                $pre = $pdo->prepare($sql);
+                $pre->execute();
+                $searchResults = $pre->fetchAll(PDO::FETCH_ASSOC);
+
+                if(!empty($searchResults)) {
+                    $isThereResult['infirmier'] = true;
+                }
+
+            }
+
+        ?>
+
+        <?php foreach($searchResults as $user) : ?>
+
+        <tr class="contenu_table" onclick="location.href='profil?id_infirmier=<?php echo $user['id_personnel'] ?>'">
+
+            <td>
+                <?php echo $user['id_personnel'] ?>
+            </td>
+
+            <td>
+                <?php echo $user['prenom'] . ' ' . $user['nom'] ?>
+            </td>
+
+            <td>
+                <?php echo 'Infirmier' ?>
+            </td>
+
+            <td>
+                <?php echo 'N/A' ?>
+            </td>
+
+            <td>
+                <?php echo 'N/A' ?>
+            </td>
+
+            <td>
+                <?php echo 'N/A' ?>
+            </td>
+
+        </tr>
+
+        <?php endforeach; ?>
+
+
+
+        <?php elseif ($userType == 'medecin') : ?>
+
+        <?php
+            if(isset($superVariableGet) && !empty($superVariableGet)) {
+                $search = htmlspecialchars($superVariableGet);
+
+                $sql = 'SELECT * FROM personnel WHERE (type="medecin") AND (prenom LIKE "%'.$search.'%" OR nom LIKE "%'.$search.'%") ORDER BY id_personnel DESC';
+                $pre = $pdo->prepare($sql);
+                $pre->execute();
+                $searchResults = $pre->fetchAll(PDO::FETCH_ASSOC);
+
+                if(!empty($searchResults)) {
+                    $isThereResult['medecin'] = true;
+                }
+
+            }
+        ?>
+
+        <?php foreach($searchResults as $user) : ?>
+
+        <tr class="contenu_table" data-href="https://www.google.com/" onclick="location.href='profil?id_medecin=<?php echo $user['id_personnel'] ?>'">
+
+            <td>
+                <?php echo $user['id_personnel'] ?>
+            </td>
+
+            <td>
+                <?php echo $user['prenom'] . ' ' . $user['nom'] ?>
+            </td>
+
+            <td>
+                <?php echo 'Médecin' ?>
+            </td>
+
+            <td>
+                <?php echo 'N/A' ?>
+            </td>
+
+            <td>
+                <?php echo 'N/A' ?>
+            </td>
+
+            <td>
+                <?php echo 'N/A' ?>
+            </td>
+
+        </tr>
+
+        <?php endforeach; ?>
+
+        <?php endif; ?>
+
+
+
+    </tbody>
+
+<?php
+    return $isThereResult;
+}
 
 ?>

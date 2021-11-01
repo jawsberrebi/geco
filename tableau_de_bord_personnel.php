@@ -2,7 +2,6 @@
 require_once "config.php";
 include("backend/fonctions.php");
 include("backend/conditions_accès_page_personnel_et_admin.php");
-//include("backend/traitement_recherche.php");
 ?>
 
 <!DOCTYPE html>
@@ -81,13 +80,65 @@ include("backend/conditions_accès_page_personnel_et_admin.php");
         <?php endif; ?>
 
 
+
+
+
         <!-- SI L'UTILISATEUR A RENTRÉ QUELQUE CHOSE DANS LE CHAMP DE RECHERCHE, AFFICHER LA TABLE DE RÉSULTATS -->
         <?php else : ?>
 
-        <?php echo dataTableMembersGenerator($pdo, 'patient', true, $_GET['moteur_recherche']); ?>
+        <?php if(isset($_SESSION['userPersonnel']) && $_SESSION['userPersonnel']['type'] == 'infirmier') : ?>
 
+        <?php 
+        $isThereResult['patient'] = dataResultsResearchTableMember($pdo, 'patient', $_GET['moteur_recherche']); 
+        
+        if(!$isThereResult['patient']) {
+            echo '<p>Aucun résultat.</p>';
+        }
+        ?>
 
-        <!-- AJOUTER FONCTIONS AVEC INFIRMIERS ET MÉDECINS AVEC LES CONDITIONS ADÉQUATES -->
+        <?php endif; ?>
+
+        <?php if(isset($_SESSION['userPersonnel']) && $_SESSION['userPersonnel']['type'] == 'medecin') : ?>
+
+        <?php
+        $isThereResult = dataResultsResearchTableMember($pdo, 'patient', $_GET['moteur_recherche']);
+        $isThereResult = dataResultsResearchTableMember($pdo, 'infirmier', $_GET['moteur_recherche']);
+
+        if(!$isThereResult['patient']) {
+
+            if(!$isThereResult['infirmier']) {
+
+                echo '<p>Aucun résultat.</p>';
+
+            }
+
+        }
+        ?>
+
+        <?php endif; ?>
+
+        <?php if(isset($_SESSION['userAdmin']) && $_SESSION['userAdmin']) : ?>
+
+        <?php
+        $isThereResult = dataResultsResearchTableMember($pdo, 'patient', $_GET['moteur_recherche']);
+        $isThereResult = dataResultsResearchTableMember($pdo, 'infirmier', $_GET['moteur_recherche']);
+        $isThereResult = dataResultsResearchTableMember($pdo, 'medecin', $_GET['moteur_recherche']);
+
+        if(!$isThereResult['patient']) {
+
+            if(!$isThereResult['infirmier']) {
+
+                if (!$isThereResult['medecin']) {
+                    echo '<p>Aucun résultat.</p>';
+                }
+
+            }
+
+        }
+
+        ?>
+
+        <?php endif; ?>
 
         <?php endif; ?>
 
