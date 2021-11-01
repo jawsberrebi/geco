@@ -1,24 +1,8 @@
 <?php
-require_once "config.php";
-include("backend/conditions_accès_page_personnel_et_admin.php");
+require_once("config.php");
+include('backend/conditions_accès_page_personnel_et_admin.php');
 include('backend/fonctions.php');
-
-
-if(!isset($_GET['id_patient']) && !isset($_GET['id_infirmier']) && !isset($_GET['id_medecin'])) {
-    header('Location:tableau_de_bord_personnel?erreur=4.php');
-    exit();
-}
-
-if(isset($_GET['id_patient'])) {
-    $id = $_GET['id_patient'];
-}
-elseif(isset($_GET['id_infirmier'])) {
-    $id = $_GET['id_infirmier'];
-}
-elseif(isset($_GET['id_medecin'])) {
-    $id = $_GET['id_medecin'];
-}
-
+include('backend/conditions_id.php');
 ?>
 
 <!DOCTYPE html>
@@ -28,8 +12,6 @@ elseif(isset($_GET['id_medecin'])) {
         <link rel="stylesheet" href="css/style_tableau_de_bord_personnel.css" />
         <title>Tableau de bord</title>
     </head>
-
-    
 
     <body>
 
@@ -42,18 +24,18 @@ elseif(isset($_GET['id_medecin'])) {
         <?php $sql = "SELECT * FROM patient WHERE id_patient='".$id."'";
               $pre = $pdo->prepare($sql);
               $pre->execute();
-              $userPatient = current($pre->fetchAll(PDO::FETCH_ASSOC));
+              $userPatientProfil = current($pre->fetchAll(PDO::FETCH_ASSOC));
         ?>
 
         <?php if(isset($_SESSION['userPersonnel']) || isset($_SESSION['userAdmin'])) : ?>
 
-        <?php if ($userPatient == null) {
+        <?php if ($userPatientProfil == null) {
                 header('Location:tableau_de_bord_personnel?erreur=4.php');
                 exit();
               }
         ?>
 
-        <?php echo dataGenerator($userPatient, 'patient'); ?>
+        <?php echo dataUserGenerator($userPatientProfil, 'patient'); ?>
 
         <div class="tableau_onglets">
 
@@ -121,18 +103,18 @@ elseif(isset($_GET['id_medecin'])) {
         <?php $sql = "SELECT * FROM personnel WHERE id_personnel='".$id."'";
               $pre = $pdo->prepare($sql);
               $pre->execute();
-              $userInfirmier = current($pre->fetchAll(PDO::FETCH_ASSOC));
+              $userInfirmierProfil = current($pre->fetchAll(PDO::FETCH_ASSOC));
         ?>
 
         <?php if((isset($_SESSION['userAdmin']) && $_SESSION['userAdmin']) || (isset($_SESSION['userPersonnel']) && ($_SESSION['userPersonnel']['type'] == 'medecin'))) : ?>
 
-        <?php if ($userInfirmier == null) {
+        <?php if ($userInfirmierProfil == null) {
                 header('Location:tableau_de_bord_personnel?erreur=4.php');
                 exit();
               }
         ?>
 
-        <?php echo dataGenerator($userInfirmier, 'infirmier'); ?>
+        <?php echo dataUserGenerator($userInfirmierProfil, 'infirmier'); ?>
 
         <?php else : ?>
         <?php
@@ -155,18 +137,18 @@ elseif(isset($_GET['id_medecin'])) {
         <?php $sql = "SELECT * FROM personnel WHERE id_personnel='".$id."'";
               $pre = $pdo->prepare($sql);
               $pre->execute();
-              $userMedecin = current($pre->fetchAll(PDO::FETCH_ASSOC));
+              $userMedecinProfil = current($pre->fetchAll(PDO::FETCH_ASSOC));
         ?>
 
         <?php if(isset($_SESSION['userAdmin']) && $_SESSION['userAdmin']) :?>
 
-        <?php if ($userMedecin == null) {
+        <?php if ($userMedecinProfil == null) {
                 header('Location:tableau_de_bord_personnel?erreur=4.php');
                 exit();
               }
         ?>
 
-        <?php echo dataGenerator($userMedecin, 'medecin'); ?>
+        <?php echo dataUserGenerator($userMedecinProfil, 'medecin'); ?>
 
         <?php else : ?>
         <?php

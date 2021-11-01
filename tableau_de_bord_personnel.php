@@ -1,7 +1,8 @@
 <?php
 require_once "config.php";
+include("backend/fonctions.php");
 include("backend/conditions_accès_page_personnel_et_admin.php");
-
+include("backend/traitement_recherche.php");
 ?>
 
 <!DOCTYPE html>
@@ -31,6 +32,17 @@ include("backend/conditions_accès_page_personnel_et_admin.php");
     <!-- FACTORISATION DES MESSAGES DU TABLEAU DE BORD -->
     <?php include("backend/messages_tableau_de_bord_personnel.php")?>
 
+    <form action="tableau_de_bord_personnel.php" method="post">
+        <input type="search" name="moteur_recherche" placeholder="Chercher un membre" id="moteur_recherche" />
+        <input type="submit" value="Rechercher"/>
+        <!-- AJOUTER UN FILTRE DE RECHERCHE EN FONCTIONNALITÉ SUPPLÉMENTAIRE -->
+    </form>
+
+
+
+
+    
+
     <table>
         <thead>
             <tr>
@@ -43,125 +55,44 @@ include("backend/conditions_accès_page_personnel_et_admin.php");
             </tr>
         </thead>
 
-        <tbody>
+        <!-- SI L'UTILISATEUR N'A RIEN RENTRÉ DANS LE CHAMP DE RECHERCHE, AFFICHER LA TABLE DE TOUS LES UTILISATEURS -->
+        <?php if(!isset($_POST['moteur_recherche']) || empty($_POST['moteur_recherche'])) : ?>
 
-            <?php
-            $sql = "SELECT * FROM patient";
-            $pre = $pdo->prepare($sql);
-            $pre->execute();
-            $users = $pre->fetchAll(PDO::FETCH_ASSOC);
-            ?>
 
-            <?php foreach($users as $user) : ?>
 
-            <tr class="contenu_table" onclick="location.href='profil?id_patient=<?php echo $user['id_patient'] ?>' ">
+        <!-- GÉNÉRATION DU TABLEAU DES PATIENTS -->
+        <?php echo dataTableMembersGenerator($pdo, 'patient'); ?> 
 
-                <td>
-                    <?php echo $user['id_patient'] ?>
-                </td>
 
-                <td>
-                    <?php echo $user['prenom'] . ' ' . $user['nom'] ?>
-                </td>
+        <?php if($_SESSION['userAdmin'] || $_SESSION['userPersonnel']['type'] == 'medecin') : ?>
 
-                <td>
-                    <?php echo 'Patient' ?>
-                </td>
+        <!-- GÉNÉRATION DU TABLEAU DES INFIRMIERS -->
+        <?php echo dataTableMembersGenerator($pdo, 'infirmier'); ?>
 
-            </tr>
+        <?php endif; ?>
 
-            <?php endforeach; ?>
 
-            <?php if($_SESSION['userAdmin'] || $_SESSION['userPersonnel']['type'] == 'medecin') : ?>
+        
+        <?php if($_SESSION['userAdmin']) : ?>
 
-            <?php
-                      $sql = "SELECT * FROM personnel WHERE type='infirmier'";
-                      $pre = $pdo->prepare($sql);
-                      $pre->execute();
-                      $users = $pre->fetchAll(PDO::FETCH_ASSOC);
-            ?>
+        <!-- GÉNÉRATION DU TABLEAU DES MÉDECINS -->
+        <?php echo dataTableMembersGenerator($pdo, 'medecin'); ?>
 
-            <?php foreach($users as $user) : ?>
+        <?php endif; ?>
 
-            <tr class="contenu_table" data-href="https://www.google.com/" onclick="location.href='profil?id_infirmier=<?php echo $user['id_personnel'] ?>'">
 
-                <td>
-                    <?php echo $user['id_personnel'] ?>
-                </td>
+        <!-- SI L'UTILISATEUR N'A RIEN RENTRÉ DANS LE CHAMP DE RECHERCHE, AFFICHER LA TABLE DE TOUS LES UTILISATEURS -->
+        <?php else : ?>
 
-                <td>
-                    <?php echo $user['prenom'] . ' ' . $user['nom'] ?>
-                </td>
+        <?php echo $searchResults; ?>
 
-                <td>
-                    <?php echo 'Infirmier' ?>
-                </td>
+        <?php endif; ?>
 
-                <td>
-                    <?php echo 'N/A' ?>
-                </td>
-
-                <td>
-                    <?php echo 'N/A' ?>
-                </td>
-
-                <td>
-                    <?php echo 'N/A' ?>
-                </td>
-
-            </tr>
-
-            <?php endforeach; ?>
-
-            <?php endif; ?>
-
-            <?php if($_SESSION['userAdmin']) : ?>
-
-            <?php
-                      $sql = "SELECT * FROM personnel WHERE type='medecin'";
-                      $pre = $pdo->prepare($sql);
-                      $pre->execute();
-                      $users = $pre->fetchAll(PDO::FETCH_ASSOC);
-            ?>
-
-            <?php foreach($users as $user) : ?>
-
-            <tr class="contenu_table" data-href="https://www.google.com/" onclick="location.href='profil?id_medecin=<?php echo $user['id_personnel'] ?>'">
-
-                <td>
-                    <?php echo $user['id_personnel'] ?>
-                </td>
-
-                <td>
-                    <?php echo $user['prenom'] . ' ' . $user['nom'] ?>
-                </td>
-
-                <td>
-                    <?php echo 'Médecin' ?>
-                </td>
-
-                <td>
-                    <?php echo 'N/A' ?>
-                </td>
-
-                <td>
-                    <?php echo 'N/A' ?>
-                </td>
-
-                <td>
-                    <?php echo 'N/A' ?>
-                </td>
-
-            </tr>
-
-            <?php endforeach; ?>
-
-            <?php endif; ?>
-
-        </tbody>
     </table>
 
 
     
+        
+
 </body>
 </html>

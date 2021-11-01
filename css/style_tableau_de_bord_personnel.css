@@ -15,6 +15,22 @@ h1 {
     font-size: 2em;
 }
 
+#moteur_de_recherche:focus {
+    outline: none;
+}
+
+#moteur_recherche {
+    font-family: Urbanist, sans-serif;
+    color: rgb(150, 150, 150);
+    padding: 0.5%;
+    width: 15%;
+    display: inline-block;
+    border: none;
+    border-radius: 5px;
+    box-sizing: border-box;
+    background-color: #FAFAFA;
+}
+
 th {
     font-family: Urbanist, sans-serif;
     font-weight: normal;

@@ -5,6 +5,9 @@ include('backend/fonctions.php');
 echo passwordGenerator($pdo, 8);
 ?>
 
+
+
+<!-- 
 <h1>
     <?php echo $userPatient['nom'] . ', ' . $userPatient['prenom']; ?>
 </h1>
@@ -78,3 +81,4 @@ echo passwordGenerator($pdo, 8);
         </td>
     </tr>
 </table>
+    -->
