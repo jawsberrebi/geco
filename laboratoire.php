@@ -1,84 +1,21 @@
 <?php
 include_once("config.php");
 include('backend/fonctions.php');
-
-echo passwordGenerator($pdo, 8);
 ?>
 
 
+<?php
+$handle = curl_init();
 
-<!-- 
-<h1>
-    <?php echo $userPatient['nom'] . ', ' . $userPatient['prenom']; ?>
-</h1>
+$url = "http://localhost:8081/geco/Test/serveur.php";
 
-<table class="donnees_utilisateur">
-    <thead class="titrage_donnees">
-        <tr>
-            <th>ID</th>
-            <th>EMAIL</th>
-            <th>DESCRIPTION</th>
-        </tr>
-    </thead>
+curl_setopt($handle, CURLOPT_URL, $url);
 
-    <tr>
-        <td>
-            <?php echo $userPatient['id_patient'] ?>
-        </td>
+curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
 
-        <td>
-            <?php if($userPatient['mail'] == null) {
-                      echo '<a>AJOUTER</a>';
-                  }
-                  else {
-                      echo $userPatient['mail'];
-                  }
+$output = curl_exec($handle);
 
-            ?>
-        </td>
-        <td>
-            <?php if($userPatient['description'] == null) {
-                      echo '<a href="">AJOUTER</a>';
-                  }
-                  else {
-                      echo $userPatient['description'];
-                  }
+curl_close($handle);
 
-            ?>
-        </td>
-    </tr>
-    <thead class="titrage_donnees">
-        <tr>
-            <th>TYPE D'UTILISATEUR</th>
-            <th>TÉLÉPHONE</th>
-            <th>ADRESSE</th>
-        </tr>
-    </thead>
-    <tr>
-        <td>Patient</td>
-        <td>
-            <?php if($userPatient['tel'] == null) {
-                      echo '<a>AJOUTER</a>';
-                  }
-                  else {
-                      echo $userPatient['tel'];
-                  }
-
-            ?>
-
-        </td>
-
-        <td>
-            <?php if($userPatient['adresse'] == null) {
-                      echo '<a>AJOUTER</a>';
-                  }
-                  else {
-                      echo $userPatient['adresse'];
-                  }
-
-            ?>
-
-        </td>
-    </tr>
-</table>
-    -->
+echo $output;
+?>
