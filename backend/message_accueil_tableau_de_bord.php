@@ -5,7 +5,7 @@
 <?php if (isset($_SESSION['userAdmin']) && $_SESSION['userAdmin']) : ?>
 
 <h2>
-    <?php echo 'Bonjour, ' . htmlspecialchars($_SESSION['userAdmin']['nom_utilisateur']) . ' de ' . htmlspecialchars($_SESSION['userAdmin']['nom_hopital']) . ', vous êtes connecté'; ?>
+    <?php echo 'Bonjour, ' . htmlspecialchars($_SESSION['userAdmin']['nom_utilisateur']) . ' de ' . htmlspecialchars($_SESSION['userAdmin']['nom_hopital']) . ', vous ï¿½tes connectï¿½'; ?>
 </h2>
 
 <?php endif; ?>
@@ -14,7 +14,7 @@
 <?php if (isset($_SESSION['userPersonnel']) && $_SESSION['userPersonnel']) : ?>
 
 <h2>
-    <?php echo 'Bonjour, ' . htmlspecialchars($_SESSION['userPersonnel']['nom_utilisateur']) . ' vous êtes connecté'; ?>
+    <?php echo 'Bonjour, ' . htmlspecialchars($_SESSION['userPersonnel']['nom_utilisateur']) . ' vous Ãªtes connectÃ©'; ?>
 </h2>
 
 <?php endif; ?>
