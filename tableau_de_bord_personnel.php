@@ -1,7 +1,7 @@
 <?php
 require_once "config.php";
+include("backend/fonctions.php");
 include("backend/conditions_accès_page_personnel_et_admin.php");
-
 ?>
 
 <!DOCTYPE html>
@@ -31,6 +31,17 @@ include("backend/conditions_accès_page_personnel_et_admin.php");
     <!-- FACTORISATION DES MESSAGES DU TABLEAU DE BORD -->
     <?php include("backend/messages_tableau_de_bord_personnel.php")?>
 
+    <form method="get">
+        <input type="search" name="moteur_recherche" placeholder="Chercher un membre" id="moteur_recherche" />
+        <input type="submit" value="Rechercher"/>
+        <!-- AJOUTER UN FILTRE DE RECHERCHE EN FONCTIONNALITÉ SUPPLÉMENTAIRE -->
+    </form>
+
+
+
+
+    
+
     <table>
         <thead>
             <tr>
@@ -43,125 +54,98 @@ include("backend/conditions_accès_page_personnel_et_admin.php");
             </tr>
         </thead>
 
-        <tbody>
+        <!-- SI L'UTILISATEUR N'A RIEN RENTRÉ DANS LE CHAMP DE RECHERCHE, AFFICHER LA TABLE DE TOUS LES UTILISATEURS -->
+        <?php if(!isset($_GET['moteur_recherche']) || empty($_GET['moteur_recherche'])) : ?>
 
-            <?php
-            $sql = "SELECT * FROM patient";
-            $pre = $pdo->prepare($sql);
-            $pre->execute();
-            $users = $pre->fetchAll(PDO::FETCH_ASSOC);
-            ?>
 
-            <?php foreach($users as $user) : ?>
 
-            <tr class="contenu_table" onclick="location.href='profil?id_patient=<?php echo $user['id_patient'] ?>' ">
+        <!-- GÉNÉRATION DU TABLEAU DES PATIENTS -->
+        <?php echo dataTableMembersGenerator($pdo, 'patient', false, ''); ?>
 
-                <td>
-                    <?php echo $user['id_patient'] ?>
-                </td>
 
-                <td>
-                    <?php echo $user['prenom'] . ' ' . $user['nom'] ?>
-                </td>
+        <?php if($_SESSION['userAdmin'] || $_SESSION['userPersonnel']['type'] == 'medecin') : ?>
 
-                <td>
-                    <?php echo 'Patient' ?>
-                </td>
+        <!-- GÉNÉRATION DU TABLEAU DES INFIRMIERS -->
+        <?php echo dataTableMembersGenerator($pdo, 'infirmier', false, ''); ?>
 
-            </tr>
+        <?php endif; ?>
 
-            <?php endforeach; ?>
 
-            <?php if($_SESSION['userAdmin'] || $_SESSION['userPersonnel']['type'] == 'medecin') : ?>
+        
+        <?php if($_SESSION['userAdmin']) : ?>
 
-            <?php
-                      $sql = "SELECT * FROM personnel WHERE type='infirmier'";
-                      $pre = $pdo->prepare($sql);
-                      $pre->execute();
-                      $users = $pre->fetchAll(PDO::FETCH_ASSOC);
-            ?>
+        <!-- GÉNÉRATION DU TABLEAU DES MÉDECINS -->
+        <?php echo dataTableMembersGenerator($pdo, 'medecin', false, ''); ?>
 
-            <?php foreach($users as $user) : ?>
+        <?php endif; ?>
 
-            <tr class="contenu_table" data-href="https://www.google.com/" onclick="location.href='profil?id_infirmier=<?php echo $user['id_personnel'] ?>'">
 
-                <td>
-                    <?php echo $user['id_personnel'] ?>
-                </td>
 
-                <td>
-                    <?php echo $user['prenom'] . ' ' . $user['nom'] ?>
-                </td>
 
-                <td>
-                    <?php echo 'Infirmier' ?>
-                </td>
 
-                <td>
-                    <?php echo 'N/A' ?>
-                </td>
+        <!-- SI L'UTILISATEUR A RENTRÉ QUELQUE CHOSE DANS LE CHAMP DE RECHERCHE, AFFICHER LA TABLE DE RÉSULTATS -->
+        <?php else : ?>
 
-                <td>
-                    <?php echo 'N/A' ?>
-                </td>
+        <?php if(isset($_SESSION['userPersonnel']) && $_SESSION['userPersonnel']['type'] == 'infirmier') : ?>
 
-                <td>
-                    <?php echo 'N/A' ?>
-                </td>
+        <?php 
+        $isThereResult['patient'] = dataResultsResearchTableMember($pdo, 'patient', $_GET['moteur_recherche']); 
+        
+        if(!$isThereResult['patient']) {
+            echo '<p>Aucun résultat.</p>';
+        }
+        ?>
 
-            </tr>
+        <?php endif; ?>
 
-            <?php endforeach; ?>
+        <?php if(isset($_SESSION['userPersonnel']) && $_SESSION['userPersonnel']['type'] == 'medecin') : ?>
 
-            <?php endif; ?>
+        <?php
+        $isThereResult = dataResultsResearchTableMember($pdo, 'patient', $_GET['moteur_recherche']);
+        $isThereResult = dataResultsResearchTableMember($pdo, 'infirmier', $_GET['moteur_recherche']);
 
-            <?php if($_SESSION['userAdmin']) : ?>
+        if(!$isThereResult['patient']) {
 
-            <?php
-                      $sql = "SELECT * FROM personnel WHERE type='medecin'";
-                      $pre = $pdo->prepare($sql);
-                      $pre->execute();
-                      $users = $pre->fetchAll(PDO::FETCH_ASSOC);
-            ?>
+            if(!$isThereResult['infirmier']) {
 
-            <?php foreach($users as $user) : ?>
+                echo '<p>Aucun résultat.</p>';
 
-            <tr class="contenu_table" data-href="https://www.google.com/" onclick="location.href='profil?id_medecin=<?php echo $user['id_personnel'] ?>'">
+            }
 
-                <td>
-                    <?php echo $user['id_personnel'] ?>
-                </td>
+        }
+        ?>
 
-                <td>
-                    <?php echo $user['prenom'] . ' ' . $user['nom'] ?>
-                </td>
+        <?php endif; ?>
 
-                <td>
-                    <?php echo 'Médecin' ?>
-                </td>
+        <?php if(isset($_SESSION['userAdmin']) && $_SESSION['userAdmin']) : ?>
 
-                <td>
-                    <?php echo 'N/A' ?>
-                </td>
+        <?php
+        $isThereResult = dataResultsResearchTableMember($pdo, 'patient', $_GET['moteur_recherche']);
+        $isThereResult = dataResultsResearchTableMember($pdo, 'infirmier', $_GET['moteur_recherche']);
+        $isThereResult = dataResultsResearchTableMember($pdo, 'medecin', $_GET['moteur_recherche']);
 
-                <td>
-                    <?php echo 'N/A' ?>
-                </td>
+        if(!$isThereResult['patient']) {
 
-                <td>
-                    <?php echo 'N/A' ?>
-                </td>
+            if(!$isThereResult['infirmier']) {
 
-            </tr>
+                if (!$isThereResult['medecin']) {
+                    echo '<p>Aucun résultat.</p>';
+                }
 
-            <?php endforeach; ?>
+            }
 
-            <?php endif; ?>
+        }
 
-        </tbody>
+        ?>
+
+        <?php endif; ?>
+
+        <?php endif; ?>
+
     </table>
 
 
     
+       
 </body>
 </html>
