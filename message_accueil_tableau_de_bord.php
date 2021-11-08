@@ -4,7 +4,7 @@
 
 <?php if (isset($_SESSION['userAdmin']) && $_SESSION['userAdmin']) : ?>
 
-<h2>
+<h2 style="padding-left: 2%.">
     <?php echo 'Bonjour, ' . htmlspecialchars($_SESSION['userAdmin']['nom_utilisateur']) . ' de ' . htmlspecialchars($_SESSION['userAdmin']['nom_hopital']) . ', vous �tes connect�'; ?>
 </h2>
 
@@ -13,7 +13,7 @@
 
 <?php if (isset($_SESSION['userPersonnel']) && $_SESSION['userPersonnel']) : ?>
 
-<h2>
+<h2 style="padding-left: 2%.">
     <?php echo 'Bonjour, ' . htmlspecialchars($_SESSION['userPersonnel']['nom_utilisateur']) . ' vous êtes connecté'; ?>
 </h2>
 

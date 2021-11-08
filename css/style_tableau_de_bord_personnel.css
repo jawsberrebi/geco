@@ -1,0 +1,164 @@
+#modification_compte {
+    font-family: Urbanist, sans-serif;
+    color: #3BC393;
+    text-decoration: none;
+}
+
+.message_erreur {
+    font-family: Urbanist, sans-serif;
+    color: red;
+}
+
+h1 {
+    font-family: Urbanist, sans-serif;
+    color: #3BC393;
+    font-size: 2em;
+    padding-left: 2%;
+}
+
+#moteur_de_recherche:focus {
+    outline: none;
+}
+
+#moteur_recherche {
+    font-family: Urbanist, sans-serif;
+    color: rgb(150, 150, 150);
+    padding: 0.5%;
+    width: 15%;
+    display: inline-block;
+    border: none;
+    border-radius: 5px;
+    box-sizing: border-box;
+    background-color: #FAFAFA;
+}
+
+th {
+    font-family: Urbanist, sans-serif;
+    font-weight: normal;
+    text-align: center;
+    white-space: pre;
+}
+
+.contenu_table {
+    margin-bottom: 2%;
+    border: 0.05px solid;
+    border-color: white;
+    border-radius: 10px;
+    box-shadow: 0.05px 0.05px 5px grey;
+    font-family: Urbanist, sans-serif;
+    cursor: pointer;
+}
+
+table {
+    border-spacing: 10px;
+    margin-left: 2%;
+}
+
+#deconnexion {
+    font-family: Urbanist, sans-serif;
+    text-decoration: none;
+    color: red;
+}
+
+a:visited
+{
+    color: none;
+}
+
+td {
+    padding: 1.15%;
+}
+
+.ajout {
+    font-family: Urbanist, sans-serif;
+    text-decoration: none;
+    color: black;
+    padding-left: 2%;
+}
+
+.tableau_onglets {
+    font-family: Urbanist, sans-serif;
+}
+
+#table {
+    justify-content: center;
+    display: flex;
+}
+
+.cadran {
+    margin: 30px;
+    padding-top: 6.5%;
+    padding-bottom: 0.8%;
+    border: 1px solid white;
+    border-radius: 20px;
+    width: 12%;
+    height: 15%;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2), 0 0 10px 0 rgba(0, 0, 0, 0.2);
+}
+
+#text {
+    text-align: center;
+}
+
+.donnees_utilisateur {
+    justify-content: left;
+    font-family: Urbanist, sans-serif;
+}
+
+.titrage_donnees {
+    color: #9D9D9D;
+    justify-content: left;
+}
+
+#supprimer {
+    font-family: Urbanist, sans-serif;
+    color: red;
+}
+
+input[type = range] {
+    -webkit-appearance: none;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+    width: 90%;
+    background: #8B8B8B;
+    height: 2px;
+    outline: none;
+}
+
+input[type = range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 13px;
+    height: 13px;
+    background: white;
+    border-radius: 50%;
+}
+
+#curseur_rouge::-webkit-slider-thumb {
+    border: 1px solid #AC0002;
+}
+
+#curseur_bleu::-webkit-slider-thumb {
+    border: 1px solid #43CCDD;
+}
+
+#curseur_vert::-webkit-slider-thumb {
+    border: 1px solid #37C394;
+}
+
+.connexion{
+    padding-left: 2%;
+}
+
+#recherche{
+    padding-left: 2%;
+}
+
+#btn_recherche{
+    height: 1.7em;
+}
+
+#identifiant{
+    padding-left: 0.8em;
+}
