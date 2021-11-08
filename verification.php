@@ -1,6 +1,14 @@
 <?php
 include_once("config.php");
 
+//$hashedEntry = password_hash($_POST['password'], PASSWORD_DEFAULT); //Hashage pour comparaison avec la BDD
+
+//$hashedEntry = $_POST['password'];
+
+//$hashedEntry = password_hash($_POST['password'], PASSWORD_DEFAULT); //Hashage pour comparaison avec la BDD
+
+//$hashedEntry = $_POST['password'];
+
 //######VERIFICATION DE CONNEXION POUR L'ADMINISTRATEUR######\\
 
 $sql = "SELECT * FROM admin WHERE nom_utilisateur='".$_POST['email_pseudo']."' AND mdp='".$_POST['password']."'";

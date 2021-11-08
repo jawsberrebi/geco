@@ -10,6 +10,7 @@ if (!isset($_POST['nom']) || !isset($_POST['prenom']) || !isset($_POST['email'])
 $name = htmlspecialchars($_POST['nom']);
 $firstName = htmlspecialchars($_POST['prenom']);
 $password = passwordGenerator($pdo, 8); //Générateur de mot de passe aléatoire
+$hashedPassword = password_hash($password, PASSWORD_DEFAULT); //Sécurisation du mot de passe par hashage
 $userName = mb_strtolower(mb_substr($firstName, 0 , 1) . $name); //Générateur de nom d'utilisateur : 1ère lettre du prénom + nom. Remplacer $email par la variable contenant le prénom et $password par la variable contenant le nom.
 $mail = htmlspecialchars($_POST['email']);
 $phone = htmlspecialchars($_POST['telephone']);
@@ -40,11 +41,17 @@ if (htmlspecialchars($_POST['type']) == 'patient') {
         'tel' => $phone,
         'adresse' => $adresse,
         'description' => $description,
-        'mdp' => $password,
+        'mdp' => $hashedPassword,
         'nom_utilisateur' => $userName,
         ]);
 
     //DEVELOPPER FONCTIONNALITE D'ENVOI D'IDENTIFIANTS PAR MAIL ICI ET METTRE REDIRECTION VERS FORMULAIRE D'AJOUT SI ÇA MARCHE PAS, SI ÇA MARCHE REDIRIGER VERS LE TABLEAU DE BORD AVEC LE GET QUI AFFICHE MESSAGE DE CONFIRMATION
+
+    mail(
+        'berjaws@gmail.com',
+        'test',
+        'test',
+        );
 
     header('Location:tableau_de_bord_personnel?confirmation=1.php');
     exit();
@@ -69,7 +76,7 @@ if (htmlspecialchars($_POST['type']) == 'patient') {
         'mail' => $mail,
         'tel' => $phone,
         'type' => 'infirmier',
-        'mdp' => $password,
+        'mdp' => $hashedPassword,
         'nom_utilisateur' => $userName,
         ]);
 
@@ -98,7 +105,7 @@ if (htmlspecialchars($_POST['type']) == 'patient') {
         'mail' => $mail,
         'tel' => $phone,
         'type' => 'medecin',
-        'mdp' => $password,
+        'mdp' => $hashedPassword,
         'nom_utilisateur' => $userName,
         ]);
 

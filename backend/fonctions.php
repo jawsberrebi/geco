@@ -104,7 +104,7 @@ function passwordGenerator(PDO $pdo, int $length) : string
 
         <?php if(($type == 'infirmier') || ($type == 'medecin')) : ?>
         <td>
-            <?php echo $user['id_personnel']; ?>
+            <?php echo $user['id_personnel'] . $user['mdp']; ?>
         </td>
         <?php endif; ?>
 
