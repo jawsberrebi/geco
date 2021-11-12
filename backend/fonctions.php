@@ -596,9 +596,8 @@ function dataResultsResearchTableMember(PDO $pdo, string $userType, string $supe
 
 <?php
 
-function envoyer_donnees($mail, $donnees)
-
-     {
+function envoyer_donnees($mail, $donnees) : void 
+{
 
           $to = $mail;
 

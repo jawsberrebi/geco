@@ -4,33 +4,33 @@ include('fonctions.php');
 
      #Adresse mail sur laquelle les informations du formulaire vont arriver
 
-     $mail_admin = "berjaws@gmail.com";
+$mail_admin = "rd.berrebi@gmail.com";
 
 
 
      #Lorsqu'un utilisateur valide le formaire
 
-     $nom = 'yes';
+$nom = 'yes';
 
-     $prenom = 'yes';
+$prenom = 'yes';
 
-     $email = 'berjaws@gmail.com';
+$email = "rd.berrebi@gmail.com";
 
-     $message = 'Hellooo';
+$message = 'Hellooo';
 
 
 
      #Ajout des champs dans un tableau
 
-     $champs = array();
+$champs = array();
 
-     array_push($champs, $nom, $prenom, $email, $message);
+array_push($champs, $nom, $prenom, $email, $message);
 
 
 
      #Envoie des données par mail
 
-     envoyer_donnees($mail_admin, $champs);
+envoyer_donnees($mail_admin, $champs);
 
 
 
