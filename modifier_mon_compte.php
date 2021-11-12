@@ -1,6 +1,6 @@
 <?php include_once("config.php");
 
-if (!isset($_SESSION['userPatient']) && !isset($_SESSION['userAdmin']) && !isset($_SESSION['userPersonnel'])) {
+if (!isset($_SESSION['userPatient']) && !isset($_SESSION['userPersonnel'])) {
     header('Location:connexion?erreur=3.php');
     exit();
 }
@@ -24,14 +24,6 @@ if (!isset($_SESSION['userPatient']) && !isset($_SESSION['userAdmin']) && !isset
 
             <!-- MODIFICATION DU NOM -->
 
-            <?php if (isset($_SESSION['userAdmin'])) : ?>
-            <?php if ($_SESSION['userAdmin']) : ?>
-
-            <input type="text" placeholder="Nom*" name="nom" required value="<?php echo $_SESSION['userAdmin']['nom'] ?>"/>
-
-            <?php endif; ?>
-            <?php endif; ?>
-
             <?php if (isset($_SESSION['userPersonnel'])) : ?>
             <?php if ($_SESSION['userPersonnel']) : ?>
 
@@ -49,14 +41,6 @@ if (!isset($_SESSION['userPatient']) && !isset($_SESSION['userAdmin']) && !isset
             <?php endif; ?>
 
             <!-- MODIFICATION DU PR�NOM -->
-
-            <?php if (isset($_SESSION['userAdmin'])) : ?>
-            <?php if ($_SESSION['userAdmin']) : ?>
-
-            <input type="text" placeholder="Prénom*" name="prenom" value="<?php echo $_SESSION['userAdmin']['prenom'] ?>" required />
-
-            <?php endif; ?>
-            <?php endif; ?>
 
             <?php if (isset($_SESSION['userPersonnel'])) : ?>
             <?php if ($_SESSION['userPersonnel']) : ?>
@@ -112,10 +96,10 @@ if (!isset($_SESSION['userPatient']) && !isset($_SESSION['userAdmin']) && !isset
 
             <!-- MODIFICATION DE L'ADRESSE -->
 
-            <?php if (isset($_SESSION['userAdmin'])) : ?>
-            <?php if ($_SESSION['userAdmin']) : ?>
+            <?php if (isset($_SESSION['userPersonnel'])) : ?>
+            <?php if ($_SESSION['userPersonnel']['type'] == 'admin') : ?>
 
-            <input type="text" placeholder="Adresse" name="adresse" value="<?php echo $_SESSION['userAdmin']['adresse'] ?>" />
+            <input type="text" placeholder="Adresse" name="adresse" value="<?php echo $_SESSION['userPersonnel']['adresse'] ?>" />
 
             <?php endif; ?>
             <?php endif; ?>
@@ -130,20 +114,20 @@ if (!isset($_SESSION['userPatient']) && !isset($_SESSION['userAdmin']) && !isset
             <?php endif; ?>
             <?php endif; ?>
 
-            <?php if (isset($_SESSION['userAdmin'])) : ?>
-            <?php if ($_SESSION['userAdmin']) : ?>
+            <?php if (isset($_SESSION['userPersonnel'])) : ?>
+            <?php if ($_SESSION['userPersonnel']['type'] == 'admin') : ?>
 
-            <input type="text" placeholder="Ville*" name="ville" value="<?php echo $_SESSION['userAdmin']['ville'] ?>" required />
+            <input type="text" placeholder="Ville*" name="ville" value="<?php echo $_SESSION['userPersonnel']['ville'] ?>" required />
 
-            <input type="text" placeholder="Nom de l'hôpital*" name="nom_hopital" value="<?php echo $_SESSION['userAdmin']['nom_hopital'] ?>" />
+            <input type="text" placeholder="Nom de l'hôpital*" name="nom_hopital" value="<?php echo $_SESSION['userPersonnel']['nom_hopital'] ?>" />
 
             <?php endif; ?>
             <?php endif; ?>
 
             <input type="submit" id='submit' value='Sauvegarder' />
 
-            <?php if (isset($_SESSION['userAdmin'])) : ?>
-            <?php if ($_SESSION['userAdmin']) : ?>
+            <?php if (isset($_SESSION['userPersonnel'])) : ?>
+            <?php if ($_SESSION['userPersonnel']['type'] == 'admin') : ?>
 
             <p id="indication">Si vous souhaitez modifier votre mot de passe et/ou votre nom d'utilisateur, veuillez contacter Infinite Measures.</p>
 
@@ -166,7 +150,7 @@ if (!isset($_SESSION['userPatient']) && !isset($_SESSION['userAdmin']) && !isset
                       if($error==2){
                           echo '<p id="message_erreur">L\'adresse email a déjà été utilisée. Veuillez entrer une autre adresse email.</p>';
                       }
-                      if ($_SESSION['userAdmin']) {
+                      if ($_SESSION['userPersonnel']['type'] == 'admin') {
                           if($error==3){
                               echo '<p id="message_erreur">Ce nom d\'hôpital a déjà été attribué.</p>';
                           }
