@@ -1,7 +1,7 @@
 <?php
 
 include_once("config.php");
-include('backend/fonctions.php');
+include('fonctions.php');
 
 
 $ch = curl_init();
@@ -19,6 +19,8 @@ for($i=0, $size=count($data_tab); $i<$size; $i++){
     echo "Trame $i: $data_tab[$i]<br />";
 }
 
+$lastValue = end($data_tab);
+$trame = $lastValue;
 
 //for($n = 0; $n != -1; $n++) {
 
@@ -30,11 +32,24 @@ for($i=0, $size=count($data_tab); $i<$size; $i++){
 
 //}
 
+//set_time_limit(60);
+//$start = time();
+
+//for ($i = 0; $i < 59; ++$i) {
+
+//    if(!empty($trame[i])){
+//        $trame = $data_tab[i];
+//    }
+//    else{
+//        $i = $i - 1;
+//        $trame = $data_tab[$i];
+//    }
+
+//    time_sleep_until($start + $i + 1);
+//}
 
 
-
-//$trame = $data_tab[0];
-// décodage avec des substring
+//décodage avec des substring
 $t = substr($trame,0,1);
 $o = substr($trame,1,4);
 
@@ -69,58 +84,58 @@ $dateTimestamp = strtotime($date);
 //A ---> son
 // 4 --> Gaz
 
-if($c == 7){
+//if($c == 7){
 
-    $sql = "SELECT id_capteur FROM capteur WHERE id_patient = '".$_SESSION['userPatient']['id_patient']."' AND type = frequenceCardiaque";
-    $pre = $pdo->prepare($sql);
-    $pre->execute();
-    $idCapteur = $pre->fetchAll(PDO::FETCH_ASSOC);
-
-
-    $sql = 'INSERT INTO mesure(valeur, date, id_capteur) VALUES (:valeur, :date, :id_capteur)';
-    $pre = $pdo->prepare($sql);
-    $pre->execute([
-        'valeur' => $value,
-        'date' => $dateTimestamp,
-        'id_capteur' => $idCapteur,
-        ]);
-}
-elseif($c == 'A'){
-
-    $sql = "SELECT id_capteur FROM capteur WHERE id_patient = '".$_SESSION['userPatient']['id_patient']."' AND type = niveauSonore";
-    $pre = $pdo->prepare($sql);
-    $pre->execute();
-    $idCapteur = $pre->fetchAll(PDO::FETCH_ASSOC);
+//    $sql = "SELECT id_capteur FROM capteur WHERE id_patient = '".$_SESSION['userPatient']['id_patient']."' AND type = frequenceCardiaque";
+//    $pre = $pdo->prepare($sql);
+//    $pre->execute();
+//    $idCapteur = $pre->fetchAll(PDO::FETCH_ASSOC);
 
 
-    $sql = 'INSERT INTO mesure(valeur, date, id_capteur) VALUES (:valeur, :date, :id_capteur)';
-    $pre = $pdo->prepare($sql);
-    $pre->execute([
-        'valeur' => $value,
-        'date' => $dateTimestamp,
-        'id_capteur' => $idCapteur,
-        ]);
+//    $sql = 'INSERT INTO mesure(valeur, date, id_capteur) VALUES (:valeur, :date, :id_capteur)';
+//    $pre = $pdo->prepare($sql);
+//    $pre->execute([
+//        'valeur' => $value,
+//        'date' => $dateTimestamp,
+//        'id_capteur' => $idCapteur,
+//        ]);
+//}
+//elseif($c == 'A'){
+
+//    $sql = "SELECT id_capteur FROM capteur WHERE id_patient = '".$_SESSION['userPatient']['id_patient']."' AND type = niveauSonore";
+//    $pre = $pdo->prepare($sql);
+//    $pre->execute();
+//    $idCapteur = $pre->fetchAll(PDO::FETCH_ASSOC);
 
 
-}
-elseif($c == 4){
-
-    $sql = "SELECT id_capteur FROM capteur WHERE id_patient = '".$_SESSION['userPatient']['id_patient']."' AND type = concentrationGaz";
-    $pre = $pdo->prepare($sql);
-    $pre->execute();
-    $idCapteur = $pre->fetchAll(PDO::FETCH_ASSOC);
-
-
-    $sql = 'INSERT INTO mesure(valeur, date, id_capteur) VALUES (:valeur, :date, :id_capteur)';
-    $pre = $pdo->prepare($sql);
-    $pre->execute([
-        'valeur' => $value,
-        'date' => $dateTimestamp,
-        'id_capteur' => $idCapteur,
-        ]);
+//    $sql = 'INSERT INTO mesure(valeur, date, id_capteur) VALUES (:valeur, :date, :id_capteur)';
+//    $pre = $pdo->prepare($sql);
+//    $pre->execute([
+//        'valeur' => $value,
+//        'date' => $dateTimestamp,
+//        'id_capteur' => $idCapteur,
+//        ]);
 
 
-}
+//}
+//elseif($c == 4){
+
+//    $sql = "SELECT id_capteur FROM capteur WHERE id_patient = '".$_SESSION['userPatient']['id_patient']."' AND type = concentrationGaz";
+//    $pre = $pdo->prepare($sql);
+//    $pre->execute();
+//    $idCapteur = $pre->fetchAll(PDO::FETCH_ASSOC);
+
+
+//    $sql = 'INSERT INTO mesure(valeur, date, id_capteur) VALUES (:valeur, :date, :id_capteur)';
+//    $pre = $pdo->prepare($sql);
+//    $pre->execute([
+//        'valeur' => $value,
+//        'date' => $dateTimestamp,
+//        'id_capteur' => $idCapteur,
+//        ]);
+
+
+//}
 
 
 

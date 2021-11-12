@@ -1,5 +1,7 @@
 <?php
 
+include('fonctions.php');
+
      #Adresse mail sur laquelle les informations du formulaire vont arriver
 
      $mail_admin = "berjaws@gmail.com";
@@ -12,9 +14,9 @@
 
      $prenom = 'yes';
 
-     $email = htmlspecialchars($_POST['email']);
+     $email = 'berjaws@gmail.com';
 
-     $message = htmlspecialchars($_POST['message']);
+     $message = 'Hellooo';
 
 
 
@@ -32,11 +34,6 @@
 
 
 
-     #Redirection
-
-     header('Location:../form/form.html');
-
-     exit;
 
 
 
