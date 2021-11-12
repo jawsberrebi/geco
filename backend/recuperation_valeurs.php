@@ -1,47 +1,8 @@
 <?php
+
 include_once("config.php");
 include('backend/fonctions.php');
-?>
 
-<?php
-//$trame = $data_tab[1];
-// décodage avec des substring
-//$t = substr($trame,0,1);
-//$o = substr($trame,1,4);
-// …
-// décodage avec sscanf
-//list($t, $o, $r, $c, $n, $v, $a, $x, $year, $month, $day, $hour, $min, $sec) =
-//sscanf($trame,"%1s%4s%1s%1s%2s%4s%4s%2s%4s%2s%2s%2s%2s%2s");
-//echo("<br />$t,$o,$r,$c,$n,$v,$a,$x,$year,$month,$day,$hour,$min,$sec<br />");
-?>
-
-<?php
-
-//mail(
-//        'berjaws@gmail.com',
-//        'test',
-//        'test',
-//        );
-
-
-?>
-
-<?php
-//$handle = curl_init();
-
-//$url = "http://projets-tomcat.isep.fr:8080/appService?ACTION=GETLOG&TEAM=9999";
-
-////curl_setopt($handle, CURLOPT_URL, $url);
-
-//curl_setopt($handle, CURLOPT_HEADER, FALSE);
-
-//curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
-
-//$output = curl_exec($handle);
-
-//curl_close($handle);
-
-//echo $output;
 
 $ch = curl_init();
 curl_setopt($ch, CURLOPT_URL, "http://projets-tomcat.isep.fr:8080/appService/?ACTION=GETLOG&TEAM=G5A4");
@@ -55,7 +16,7 @@ var_dump($data);
 $data_tab = str_split($data,33);
 echo "Tabular Data:<br />";
 for($i=0, $size=count($data_tab); $i<$size; $i++){
-echo "Trame $i: $data_tab[$i]<br />";
+    echo "Trame $i: $data_tab[$i]<br />";
 }
 
 
@@ -92,8 +53,24 @@ $numbSensor = $n;
 $value = $v;
 $tim = $a;
 $checkseum = $x;
+$date = $day . '-' . $month . '-' . $year;
+$dateTimestamp = strtotime($date);
 
 
+if(){
+    
+}elseif($c ==)
 
+if($c == 3){
+    
+}
+
+
+$sql = 'INSERT INTO mesure(valeur, date) VALUES (:valeur, :date)';
+$pre = $pdo->prepare($sql);
+$pre->execute([
+    'valeur' => $value,
+    'date' => $dateTimestamp
+    ]);
 
 ?>
