@@ -86,7 +86,7 @@ CREATE TABLE IF NOT EXISTS `patient` (
   `mdp` varchar(256) NOT NULL,
   `nom_utilisateur` varchar(256) NOT NULL,
   PRIMARY KEY (`id_patient`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `patient`
@@ -127,7 +127,7 @@ CREATE TABLE IF NOT EXISTS `personnel` (
   `nom_hopital` text NOT NULL,
   `ville` text NOT NULL,
   PRIMARY KEY (`id_personnel`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `personnel`
@@ -158,7 +158,7 @@ CREATE TABLE IF NOT EXISTS `travaille_pour` (
   PRIMARY KEY (`id_travaille_pour`),
   KEY `patient_personnel` (`id_patient`),
   KEY `personnel_patient` (`id_personnel`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Contraintes pour les tables déchargées
