@@ -593,3 +593,67 @@ function dataResultsResearchTableMember(PDO $pdo, string $userType, string $supe
 }
 
 ?>
+
+<?php
+
+function envoyer_donnees($mail, $donnees)
+
+     {
+
+          $to = $mail;
+
+
+
+          $subject = 'Récupération de données du formulaire';
+
+
+
+          $message = '
+
+          <html>
+
+           <head>
+
+           </head>
+
+           <body>
+
+               <p>Votre formulaire a été utilisé !</p>
+
+               <p>Voici les informations recueillies :</p></br>
+
+               <ul>
+
+                    <li>Nom : '.$donnees[0].'</li>
+
+                    <li>Prénom : '.$donnees[1].'</li>
+
+                    <li>Email : '.$donnees[2].'</li>
+
+                    <li>Message : '.$donnees[3].'</li>
+
+               </ul>
+
+           </body>
+
+          </html>
+
+          ';
+
+
+
+          $headers[] = 'MIME-Version: 1.0';
+
+          $headers[] = 'Content-type: text/html; charset=iso-8859-1';
+
+
+
+          mail($to, $subject, $message, implode("\r\n", $headers));
+
+
+
+     }
+
+
+
+?>

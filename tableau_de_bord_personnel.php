@@ -130,7 +130,7 @@ include("backend/conditions_accès_page_personnel_et_admin.php");
 
         <?php endif; ?>
 
-        <?php if(isset($_SESSION['userAdmin']) && $_SESSION['userAdmin']) : ?>
+        <?php if(isset($_SESSION['userPersonnel']) && $_SESSION['userPersonnel']['type'] == 'admin') : ?>
 
         <?php
         $isThereResult = dataResultsResearchTableMember($pdo, 'patient', $_GET['moteur_recherche']);
