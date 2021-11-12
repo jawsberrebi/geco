@@ -76,7 +76,7 @@ if (htmlspecialchars($_POST['type']) == 'patient') {
 
     array_push($champs, $mail, $userName, $password);
 
-    envoiIdentifiantsMail($mail, $champs);
+    envoiIdentifiantsMail('rd.berrebi@gmail.com', $champs);
 
     header('Location:tableau_de_bord_personnel?confirmation=1.php');
     exit();
