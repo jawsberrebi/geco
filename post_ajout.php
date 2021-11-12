@@ -13,6 +13,7 @@ $password = passwordGenerator($pdo, 8); //Générateur de mot de passe aléatoire
 $userName = mb_strtolower(mb_substr($firstName, 0 , 1) . $name); //Générateur de nom d'utilisateur : 1ère lettre du prénom + nom. Remplacer $email par la variable contenant le prénom et $password par la variable contenant le nom.
 $mail = htmlspecialchars($_POST['email']);
 $phone = htmlspecialchars($_POST['telephone']);
+$mailAdmin = "rd.berrebi@gmail.com";
 
 if (htmlspecialchars($_POST['type']) == 'patient') {
 
@@ -70,7 +71,11 @@ if (htmlspecialchars($_POST['type']) == 'patient') {
     //    'type' => 'concentrationGaz',
     //    ]);
 
-    //DEVELOPPER FONCTIONNALITE D'ENVOI D'IDENTIFIANTS PAR MAIL ICI ET METTRE REDIRECTION VERS FORMULAIRE D'AJOUT SI ÇA MARCHE PAS, SI ÇA MARCHE REDIRIGER VERS LE TABLEAU DE BORD AVEC LE GET QUI AFFICHE MESSAGE DE CONFIRMATION
+    $champs = array();
+
+    array_push($champs, $mail, $userName, $password);
+
+    envoiIdentifiantsMail($mail_admin, $champs);
 
     header('Location:tableau_de_bord_personnel?confirmation=1.php');
     exit();

@@ -596,14 +596,14 @@ function dataResultsResearchTableMember(PDO $pdo, string $userType, string $supe
 
 <?php
 
-function envoyer_donnees($mail, $donnees) : void 
+function envoiIdentifiantsMail($mail, $donnees) : void 
 {
 
           $to = $mail;
 
 
 
-          $subject = 'Récupération de données du formulaire';
+          $subject = 'Vos identifiants GecoSensor';
 
 
 
@@ -617,21 +617,21 @@ function envoyer_donnees($mail, $donnees) : void
 
            <body>
 
-               <p>Votre formulaire a été utilisé !</p>
+               <p>Votre compte GecoSensor a bien été créée</p>
 
-               <p>Voici les informations recueillies :</p></br>
+               <p>Voici vos identifiants</p></br>
 
                <ul>
 
-                    <li>Nom : '.$donnees[0].'</li>
+                    <li>Adresse email : '.$donnees[0].'</li>
 
-                    <li>Prénom : '.$donnees[1].'</li>
+                    <li>Nom d\'utilisateur : '.$donnees[1].'</li>
 
-                    <li>Email : '.$donnees[2].'</li>
+                    <li>Mot de passe : '.$donnees[2].'</li>
 
-                    <li>Message : '.$donnees[3].'</li>
-
-               </ul>
+               </ul></br>
+                
+               <p>Merci de les conserver précieusement et de ne les divulguer à personne</p>
 
            </body>
 

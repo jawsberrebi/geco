@@ -10,7 +10,7 @@ $mail_admin = "rd.berrebi@gmail.com";
 
      #Lorsqu'un utilisateur valide le formaire
 
-$nom = 'yes';
+$mail = 'yes';
 
 $prenom = 'yes';
 
