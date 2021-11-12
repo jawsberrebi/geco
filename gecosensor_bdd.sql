@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : ven. 12 nov. 2021 à 14:55
+-- Généré le : ven. 12 nov. 2021 à 15:42
 -- Version du serveur :  8.0.21
 -- Version de PHP : 7.3.21
 
@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS `capteur` (
   `id_patient` int NOT NULL,
   PRIMARY KEY (`id_capteur`),
   KEY `patient_capteur` (`id_patient`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -50,7 +50,7 @@ CREATE TABLE IF NOT EXISTS `gere` (
   PRIMARY KEY (`id_gere`),
   KEY `personnel_capteur` (`id_personnel`),
   KEY `capteur_personnel` (`id_capteur`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -66,7 +66,7 @@ CREATE TABLE IF NOT EXISTS `mesure` (
   `id_capteur` int NOT NULL,
   PRIMARY KEY (`id_mesure`),
   KEY `capteur_mesure` (`id_capteur`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -123,6 +123,9 @@ CREATE TABLE IF NOT EXISTS `personnel` (
   `type` varchar(256) NOT NULL,
   `mdp` text NOT NULL,
   `nom_utilisateur` varchar(256) NOT NULL,
+  `adresse` text NOT NULL,
+  `nom_hopital` text NOT NULL,
+  `ville` text NOT NULL,
   PRIMARY KEY (`id_personnel`)
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -130,16 +133,16 @@ CREATE TABLE IF NOT EXISTS `personnel` (
 -- Déchargement des données de la table `personnel`
 --
 
-INSERT INTO `personnel` (`id_personnel`, `prenom`, `nom`, `mail`, `tel`, `type`, `mdp`, `nom_utilisateur`) VALUES
-(1, 'Johnny', 'Doc', 'berjaws@gmail.com', 600000000, 'medecin', 'root', 'jdoc'),
-(2, 'Johnny', 'Infirmier', 'no@yes.fr', 600000000, 'infirmier', 'root', 'jinfirmier'),
-(3, 'De Vivre', 'Joie', 'joie@devivre.fr', 0, 'infirmier', '0517b37b9972ab8b', 'djoie'),
-(4, 'Brieuc', 'Henriot', 'brieuc@henriot.com', 6666, 'medecin', '4c2df1c6fa6c1c6b', 'bhenriot'),
-(7, 'Maxime', 'Héroult', 'max@her.fr', 0, 'infirmier', 'EyX3wqiR', 'mhéroult'),
-(9, 'You', 'Hey', 'Hey@You.fr', 0, 'infirmier', '4EGXxX30', 'yhey'),
-(10, '', '', '', 0, 'admin', 'root', 'admin'),
-(11, 'dac', 'oui', 'dac@gmail.com', 0, 'infirmier', 'Ckr1VdsV', 'doui'),
-(12, 'de', 'test', 'test@de.fr', 0, 'medecin', 'Oh6MSmv7', 'dtest');
+INSERT INTO `personnel` (`id_personnel`, `prenom`, `nom`, `mail`, `tel`, `type`, `mdp`, `nom_utilisateur`, `adresse`, `nom_hopital`, `ville`) VALUES
+(1, 'Johnny', 'Doc', 'berjaws@gail.com', 60000000, 'medecin', 'root', 'jdoc', '', '', ''),
+(2, 'Johnny', 'Infirmier', 'no@yes.f', 60000000, 'infirmier', 'root', 'jinfirmier', '', '', ''),
+(3, 'De Vivre', 'Joie', 'joie@devivre.fr', 0, 'infirmier', '0517b37b9972ab8b', 'djoie', '', '', ''),
+(4, 'Brieuc', 'Henriot', 'brieuc@henriot.com', 6666, 'medecin', '4c2df1c6fa6c1c6b', 'bhenriot', '', '', ''),
+(7, 'Maxime', 'Héroult', 'max@her.fr', 0, 'infirmier', 'EyX3wqiR', 'mhéroult', '', '', ''),
+(9, 'You', 'Hey', 'Hey@You.fr', 0, 'infirmier', '4EGXxX30', 'yhey', '', '', ''),
+(10, 'Joseph', 'Admin', 'bs@gmail.com', 60606060, 'admin', 'root', 'admin', '1 Rue Paul Delaroche', 'Saint-Joseph', 'Paris'),
+(11, 'dac', 'oui', 'dac@gmail.com', 0, 'infirmier', 'Ckr1VdsV', 'doui', '', '', ''),
+(12, 'de', 'test', 'test@de.fr', 0, 'medecin', 'Oh6MSmv7', 'dtest', '', '', '');
 
 -- --------------------------------------------------------
 
