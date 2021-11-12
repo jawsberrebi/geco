@@ -11,6 +11,7 @@ $name = htmlspecialchars($_POST['nom']);
 $firstName = htmlspecialchars($_POST['prenom']);
 $password = passwordGenerator($pdo, 8); //Générateur de mot de passe aléatoire
 $userName = mb_strtolower(mb_substr($firstName, 0 , 1) . $name); //Générateur de nom d'utilisateur : 1ère lettre du prénom + nom. Remplacer $email par la variable contenant le prénom et $password par la variable contenant le nom.
+$hashedPassword = password_hash($password, PASSWORD_DEFAULT); //Hash du mot de passe
 $mail = htmlspecialchars($_POST['email']);
 $phone = htmlspecialchars($_POST['telephone']);
 $mailAdmin = "rd.berrebi@gmail.com";
@@ -41,7 +42,7 @@ if (htmlspecialchars($_POST['type']) == 'patient') {
         'tel' => $phone,
         'adresse' => $adresse,
         'description' => $description,
-        'mdp' => $password,
+        'mdp' => $hashedPassword,
         'nom_utilisateur' => $userName,
         ]);
 
@@ -75,7 +76,7 @@ if (htmlspecialchars($_POST['type']) == 'patient') {
 
     array_push($champs, $mail, $userName, $password);
 
-    envoiIdentifiantsMail($mail_admin, $champs);
+    envoiIdentifiantsMail($mailAdmin, $champs);
 
     header('Location:tableau_de_bord_personnel?confirmation=1.php');
     exit();
@@ -100,7 +101,7 @@ if (htmlspecialchars($_POST['type']) == 'patient') {
         'mail' => $mail,
         'tel' => $phone,
         'type' => 'infirmier',
-        'mdp' => $password,
+        'mdp' => $hashedPassword,
         'nom_utilisateur' => $userName,
         ]);
 
@@ -129,7 +130,7 @@ if (htmlspecialchars($_POST['type']) == 'patient') {
         'mail' => $mail,
         'tel' => $phone,
         'type' => 'medecin',
-        'mdp' => $password,
+        'mdp' => $hashedPassword,
         'nom_utilisateur' => $userName,
         ]);
 
