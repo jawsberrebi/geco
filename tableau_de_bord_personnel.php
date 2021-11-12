@@ -38,7 +38,7 @@ include("backend/conditions_accès_page_personnel_et_admin.php");
     <!-- MESSAGE D'ACCUEIL-->
     <?php include("backend/message_accueil_tableau_de_bord.php"); ?> 
     <!-- OPTION CONNEXION/DECONNEXION -->
-    <?php //include("backend/fenetre_modale_tableau_de_bord.php"); ?>
+    <?php include("backend/fenetre_modale_tableau_de_bord.php"); ?>
     <!-- FONCTIONNALITÉS ADMIN ET MÉDECIN -->
     <?php include("backend/fonctionnalités_admin_medecin_tableau_de_bord_personnel.php") ?>
     <!-- FACTORISATION DES MESSAGES DU TABLEAU DE BORD -->

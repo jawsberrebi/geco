@@ -25,7 +25,7 @@ if ($_SESSION['userPersonnel']['type'] == 'admin') {
     $city = htmlspecialchars($_POST['ville']);
     $hospitalName = htmlspecialchars($_POST['nom_hopital']);
 
-    $sql = "SELECT * FROM personnel WHERE (nom_hopital='".$hospitalName."' AND id_personnel != '".$_SESSION['userPersonnel']['id_personnel']."'"; //AJOUTER CONDITION POUR PAS REPERER ID ADMIN
+    $sql = "SELECT * FROM personnel WHERE nom_hopital='".$hospitalName."' AND id_personnel != '".$_SESSION['userPersonnel']['id_personnel']."'"; //AJOUTER CONDITION POUR PAS REPERER ID ADMIN
     $pre = $pdo->prepare($sql);
     $pre->execute();
     $user = current($pre->fetchAll(PDO::FETCH_ASSOC));
@@ -43,7 +43,8 @@ if ($_SESSION['userPersonnel']['type'] == 'admin') {
         'adresse' => $adresse,
         'ville' => $city,
         'nom_hopital' => $hospitalName,
-        'mail' => $mail
+        'mail' => $mail,
+        'tel' => $phone
         ]);
 
     $_SESSION['userPersonnel']['prenom'] = $firstName;
@@ -52,6 +53,7 @@ if ($_SESSION['userPersonnel']['type'] == 'admin') {
     $_SESSION['userPersonnel']['ville'] = $city;
     $_SESSION['userPersonnel']['nom_hopital'] = $hospitalName;
     $_SESSION['userPersonnel']['mail'] = $mail;
+    $_SESSION['userPersonnel']['mail'] = $phone;
 
     header('Location:tableau_de_bord_personnel?confirmation=4.php');
     exit();
