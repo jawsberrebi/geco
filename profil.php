@@ -27,7 +27,7 @@ include('backend/conditions_id.php');
               $userPatientProfil = current($pre->fetchAll(PDO::FETCH_ASSOC));
         ?>
 
-        <?php if(isset($_SESSION['userPersonnel']) || isset($_SESSION['userAdmin'])) : ?>
+        <?php if(isset($_SESSION['userPersonnel'])) : ?>
 
         <?php if ($userPatientProfil == null) {
                 header('Location:tableau_de_bord_personnel?erreur=4.php');
@@ -106,7 +106,7 @@ include('backend/conditions_id.php');
               $userInfirmierProfil = current($pre->fetchAll(PDO::FETCH_ASSOC));
         ?>
 
-        <?php if((isset($_SESSION['userAdmin']) && $_SESSION['userAdmin']) || (isset($_SESSION['userPersonnel']) && ($_SESSION['userPersonnel']['type'] == 'medecin'))) : ?>
+        <?php if((isset($_SESSION['userPersonnel']) && ($_SESSION['userPersonnel']['type'] == 'admin')) || (isset($_SESSION['userPersonnel']) && ($_SESSION['userPersonnel']['type'] == 'medecin'))) : ?>
 
         <?php if ($userInfirmierProfil == null) {
                 header('Location:tableau_de_bord_personnel?erreur=4.php');
@@ -140,7 +140,7 @@ include('backend/conditions_id.php');
               $userMedecinProfil = current($pre->fetchAll(PDO::FETCH_ASSOC));
         ?>
 
-        <?php if(isset($_SESSION['userAdmin']) && $_SESSION['userAdmin']) :?>
+        <?php if(isset($_SESSION['userPersonnel']) && $_SESSION['userPersonnel']['type'] == 'admin') :?>
 
         <?php if ($userMedecinProfil == null) {
                 header('Location:tableau_de_bord_personnel?erreur=4.php');

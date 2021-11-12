@@ -35,7 +35,7 @@ if ($_SESSION['userPersonnel']['type'] == 'admin') {
         exit();
     }
 
-    $sql = "UPDATE personnel SET prenom = :prenom, nom = :nom, adresse = :adresse, ville = :ville, nom_hopital = :nom_hopital WHERE id_personnel = '".$_SESSION['userPersonnel']['id_personnel']."' ";
+    $sql = "UPDATE personnel SET prenom = :prenom, nom = :nom, adresse = :adresse, ville = :ville, nom_hopital = :nom_hopital, mail = :mail, tel = :tel WHERE id_personnel = '".$_SESSION['userPersonnel']['id_personnel']."' ";
     $pre = $pdo->prepare($sql);
     $pre->execute([
         'prenom' => $firstName,
@@ -53,7 +53,7 @@ if ($_SESSION['userPersonnel']['type'] == 'admin') {
     $_SESSION['userPersonnel']['ville'] = $city;
     $_SESSION['userPersonnel']['nom_hopital'] = $hospitalName;
     $_SESSION['userPersonnel']['mail'] = $mail;
-    $_SESSION['userPersonnel']['mail'] = $phone;
+    $_SESSION['userPersonnel']['tel'] = $phone;
 
     header('Location:tableau_de_bord_personnel?confirmation=4.php');
     exit();

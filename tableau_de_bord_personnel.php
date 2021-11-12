@@ -76,7 +76,7 @@ include("backend/conditions_accès_page_personnel_et_admin.php");
         <?php echo dataTableMembersGenerator($pdo, 'patient', false, ''); ?>
 
 
-        <?php if($_SESSION['userAdmin'] || $_SESSION['userPersonnel']['type'] == 'medecin') : ?>
+        <?php if($_SESSION['userPersonnel']['type'] == 'admin' || $_SESSION['userPersonnel']['type'] == 'medecin') : ?>
 
         <!-- GÉNÉRATION DU TABLEAU DES INFIRMIERS -->
         <?php echo dataTableMembersGenerator($pdo, 'infirmier', false, ''); ?>
@@ -85,7 +85,7 @@ include("backend/conditions_accès_page_personnel_et_admin.php");
 
 
         
-        <?php if($_SESSION['userAdmin']) : ?>
+        <?php if($_SESSION['userPersonnel']['type'] == 'admin') : ?>
 
         <!-- GÉNÉRATION DU TABLEAU DES MÉDECINS -->
         <?php echo dataTableMembersGenerator($pdo, 'medecin', false, ''); ?>
