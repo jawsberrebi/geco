@@ -56,21 +56,73 @@ $checkseum = $x;
 $date = $day . '-' . $month . '-' . $year;
 $dateTimestamp = strtotime($date);
 
+// Pas besoin de récupérer l'ID Patient ?
+//$sql = 'SELECT id_patient FROM patient';
+//$pre = $pdo->prepare($sql);
+//$pre->execute();
+//$idPatient = $pre->fetchAll(PDO::FETCH_ASSOC);
 
-if(){
-    
-}elseif($c ==)
 
-if($c == 3){
-    
+
+// Valeurs du simulateur, $c renvoie le type de capteur
+// 7 ---> fréquence cardiaque
+//A ---> son
+// 4 --> Gaz
+
+if($c == 7){
+
+    $sql = "SELECT id_capteur FROM capteur WHERE id_patient = '".$_SESSION['userPatient']['id_patient']."' AND type = frequenceCardiaque";
+    $pre = $pdo->prepare($sql);
+    $pre->execute();
+    $idCapteur = $pre->fetchAll(PDO::FETCH_ASSOC);
+
+
+    $sql = 'INSERT INTO mesure(valeur, date, id_capteur) VALUES (:valeur, :date, :id_capteur)';
+    $pre = $pdo->prepare($sql);
+    $pre->execute([
+        'valeur' => $value,
+        'date' => $dateTimestamp,
+        'id_capteur' => $idCapteur,
+        ]);
+}
+elseif($c == 'A'){
+
+    $sql = "SELECT id_capteur FROM capteur WHERE id_patient = '".$_SESSION['userPatient']['id_patient']."' AND type = niveauSonore";
+    $pre = $pdo->prepare($sql);
+    $pre->execute();
+    $idCapteur = $pre->fetchAll(PDO::FETCH_ASSOC);
+
+
+    $sql = 'INSERT INTO mesure(valeur, date, id_capteur) VALUES (:valeur, :date, :id_capteur)';
+    $pre = $pdo->prepare($sql);
+    $pre->execute([
+        'valeur' => $value,
+        'date' => $dateTimestamp,
+        'id_capteur' => $idCapteur,
+        ]);
+
+
+}
+elseif($c == 4){
+
+    $sql = "SELECT id_capteur FROM capteur WHERE id_patient = '".$_SESSION['userPatient']['id_patient']."' AND type = concentrationGaz";
+    $pre = $pdo->prepare($sql);
+    $pre->execute();
+    $idCapteur = $pre->fetchAll(PDO::FETCH_ASSOC);
+
+
+    $sql = 'INSERT INTO mesure(valeur, date, id_capteur) VALUES (:valeur, :date, :id_capteur)';
+    $pre = $pdo->prepare($sql);
+    $pre->execute([
+        'valeur' => $value,
+        'date' => $dateTimestamp,
+        'id_capteur' => $idCapteur,
+        ]);
+
+
 }
 
 
-$sql = 'INSERT INTO mesure(valeur, date) VALUES (:valeur, :date)';
-$pre = $pdo->prepare($sql);
-$pre->execute([
-    'valeur' => $value,
-    'date' => $dateTimestamp
-    ]);
+
 
 ?>

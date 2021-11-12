@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : lun. 01 nov. 2021 à 14:43
+-- Généré le : ven. 12 nov. 2021 à 14:55
 -- Version du serveur :  8.0.21
 -- Version de PHP : 7.3.21
 
@@ -24,32 +24,6 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Structure de la table `admin`
---
-
-DROP TABLE IF EXISTS `admin`;
-CREATE TABLE IF NOT EXISTS `admin` (
-  `id_admin` int NOT NULL AUTO_INCREMENT,
-  `prenom` varchar(256) NOT NULL,
-  `nom` varchar(256) NOT NULL,
-  `mdp` text NOT NULL,
-  `nom_utilisateur` varchar(256) NOT NULL,
-  `adresse` text NOT NULL,
-  `ville` varchar(256) NOT NULL,
-  `nom_hopital` varchar(256) NOT NULL,
-  PRIMARY KEY (`id_admin`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Déchargement des données de la table `admin`
---
-
-INSERT INTO `admin` (`id_admin`, `prenom`, `nom`, `mdp`, `nom_utilisateur`, `adresse`, `ville`, `nom_hopital`) VALUES
-(0, 'Johnny', 'Appleseed', 'root', 'admin', '185 Rue Raymond Losserand', 'Paris 14 ', 'Hôpital Saint-Joseph');
-
--- --------------------------------------------------------
-
---
 -- Structure de la table `capteur`
 --
 
@@ -60,7 +34,7 @@ CREATE TABLE IF NOT EXISTS `capteur` (
   `id_patient` int NOT NULL,
   PRIMARY KEY (`id_capteur`),
   KEY `patient_capteur` (`id_patient`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -76,7 +50,7 @@ CREATE TABLE IF NOT EXISTS `gere` (
   PRIMARY KEY (`id_gere`),
   KEY `personnel_capteur` (`id_personnel`),
   KEY `capteur_personnel` (`id_capteur`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -92,7 +66,7 @@ CREATE TABLE IF NOT EXISTS `mesure` (
   `id_capteur` int NOT NULL,
   PRIMARY KEY (`id_mesure`),
   KEY `capteur_mesure` (`id_capteur`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -111,23 +85,27 @@ CREATE TABLE IF NOT EXISTS `patient` (
   `description` text NOT NULL,
   `mdp` varchar(256) NOT NULL,
   `nom_utilisateur` varchar(256) NOT NULL,
-  `id_admin` int NOT NULL,
-  PRIMARY KEY (`id_patient`),
-  KEY `admin_patient` (`id_admin`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  PRIMARY KEY (`id_patient`)
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `patient`
 --
 
-INSERT INTO `patient` (`id_patient`, `prenom`, `nom`, `mail`, `tel`, `adresse`, `description`, `mdp`, `nom_utilisateur`, `id_admin`) VALUES
-(6, 'Test', 'x', 'test@test.fr', 48484, '1 rue de la victoire', '', '736ecef54c44c0f3', 'tx', 0),
-(7, 't', 'test', 't@t.t', 0, '', '', '957b23c650170d3c', 'ttest', 0),
-(8, 'co', 'co', 'co@co.fr', 0, '', '', 'a9a9f44bfb74d660', 'cco', 0),
-(9, 'Bernard', 'Géralt', 'b@g.fr', 654, '24 rue des rosiers', 'Souffre d\'asthme', 'ef7456da8d42fd53', 'bg??ralt', 0),
-(12, 'éd', 'éd', 'd@d.fr', 0, '', '', 'f7228750d602b1cf', '?éd', 0),
-(14, 'Bertrand', 'Géralt', 'ber@ge.fr', 648, '12 rue des hérous des magiques', 'Souffre de folie', '', 'bgéralt', 0),
-(15, 'Johnny', 'Patient', 'j@p.fr', 0, '', '', 'sIjGjdh5', 'jpatient', 0);
+INSERT INTO `patient` (`id_patient`, `prenom`, `nom`, `mail`, `tel`, `adresse`, `description`, `mdp`, `nom_utilisateur`) VALUES
+(6, 'Test', 'x', 'test@test.fr', 48484, '1 rue de la victoire', '', '736ecef54c44c0f3', 'tx'),
+(7, 't', 'test', 't@t.t', 0, '', '', '957b23c650170d3c', 'ttest'),
+(8, 'co', 'co', 'co@co.fr', 0, '', '', 'a9a9f44bfb74d660', 'cco'),
+(9, 'Bernard', 'Géralt', 'b@g.fr', 654, '24 rue des rosiers', 'Souffre d\'asthme', 'ef7456da8d42fd53', 'bg??ralt'),
+(12, 'éd', 'éd', 'd@d.fr', 0, '', '', 'f7228750d602b1cf', '?éd'),
+(14, 'Bertrand', 'Géralt', 'ber@ge.fr', 648, '12 rue des hérous des magiques', 'Souffre de folie', '', 'bgéralt'),
+(15, 'Johnny', 'Patient', 'j@p.fr', 0, '', '', 'sIjGjdh5', 'jpatient'),
+(16, 'Jer', 'Her', 'jer@gmail.com', 0, 'any', 'Aucune', 'm1lneESd', 'jher'),
+(17, 'Hashé', 'Le Patient', 'hash@hashed.fr', 0, 'Not', 'Not\r\n', '$2y$10$730vII9h7gTqiMPMmndtmeXmspU9Kh4CMYZLAZbCp1PUAiPUC29iq', 'hle patient'),
+(18, 'Mail', 'Envoi', 'yes@yes.yes', 0, '', '', '$2y$10$v5CQeR2DNf89LovEtnFqo.Jf42uWtXMu5IMFi/QALGLOjU/XCwFcS', 'menvoi'),
+(19, 'Vénèr', 'Test', 'ven@test.fr', 0, '', '', 'A5uoORGn', 'vtest'),
+(20, 'IDP', 'Test', 'id@id.fr', 0, '', '', '9INMXTMu', 'itest'),
+(21, 'stress', 'test', 's@t.fr', 0, '', '', 'FhguZ4ak', 'stest');
 
 -- --------------------------------------------------------
 
@@ -145,21 +123,23 @@ CREATE TABLE IF NOT EXISTS `personnel` (
   `type` varchar(256) NOT NULL,
   `mdp` text NOT NULL,
   `nom_utilisateur` varchar(256) NOT NULL,
-  `id_admin` int NOT NULL,
-  PRIMARY KEY (`id_personnel`),
-  KEY `admin_personnel` (`id_admin`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  PRIMARY KEY (`id_personnel`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `personnel`
 --
 
-INSERT INTO `personnel` (`id_personnel`, `prenom`, `nom`, `mail`, `tel`, `type`, `mdp`, `nom_utilisateur`, `id_admin`) VALUES
-(1, 'Johnny', 'Doc', 'berjaws@gmail.com', 600000000, 'medecin', 'root', 'jdoc', 0),
-(2, 'Johnny', 'Infirmier', 'no@yes.fr', 600000000, 'infirmier', 'root', 'jinfirmier', 0),
-(3, 'De Vivre', 'Joie', 'joie@devivre.fr', 0, 'infirmier', '0517b37b9972ab8b', 'djoie', 0),
-(4, 'Brieuc', 'Henriot', 'brieuc@henriot.com', 6666, 'medecin', '4c2df1c6fa6c1c6b', 'bhenriot', 0),
-(7, 'Maxime', 'Héroult', 'max@her.fr', 0, 'infirmier', 'EyX3wqiR', 'mhéroult', 0);
+INSERT INTO `personnel` (`id_personnel`, `prenom`, `nom`, `mail`, `tel`, `type`, `mdp`, `nom_utilisateur`) VALUES
+(1, 'Johnny', 'Doc', 'berjaws@gmail.com', 600000000, 'medecin', 'root', 'jdoc'),
+(2, 'Johnny', 'Infirmier', 'no@yes.fr', 600000000, 'infirmier', 'root', 'jinfirmier'),
+(3, 'De Vivre', 'Joie', 'joie@devivre.fr', 0, 'infirmier', '0517b37b9972ab8b', 'djoie'),
+(4, 'Brieuc', 'Henriot', 'brieuc@henriot.com', 6666, 'medecin', '4c2df1c6fa6c1c6b', 'bhenriot'),
+(7, 'Maxime', 'Héroult', 'max@her.fr', 0, 'infirmier', 'EyX3wqiR', 'mhéroult'),
+(9, 'You', 'Hey', 'Hey@You.fr', 0, 'infirmier', '4EGXxX30', 'yhey'),
+(10, '', '', '', 0, 'admin', 'root', 'admin'),
+(11, 'dac', 'oui', 'dac@gmail.com', 0, 'infirmier', 'Ckr1VdsV', 'doui'),
+(12, 'de', 'test', 'test@de.fr', 0, 'medecin', 'Oh6MSmv7', 'dtest');
 
 -- --------------------------------------------------------
 
@@ -175,7 +155,7 @@ CREATE TABLE IF NOT EXISTS `travaille_pour` (
   PRIMARY KEY (`id_travaille_pour`),
   KEY `patient_personnel` (`id_patient`),
   KEY `personnel_patient` (`id_personnel`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Contraintes pour les tables déchargées
@@ -199,18 +179,6 @@ ALTER TABLE `gere`
 --
 ALTER TABLE `mesure`
   ADD CONSTRAINT `capteur_mesure` FOREIGN KEY (`id_capteur`) REFERENCES `capteur` (`id_capteur`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Contraintes pour la table `patient`
---
-ALTER TABLE `patient`
-  ADD CONSTRAINT `admin_patient` FOREIGN KEY (`id_admin`) REFERENCES `admin` (`id_admin`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Contraintes pour la table `personnel`
---
-ALTER TABLE `personnel`
-  ADD CONSTRAINT `admin_personnel` FOREIGN KEY (`id_admin`) REFERENCES `admin` (`id_admin`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `travaille_pour`

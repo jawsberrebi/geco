@@ -5,7 +5,7 @@
 
 //// MESSAGES DE CONFIRMATION
 
-if($_SESSION['userAdmin'] || $_SESSION['userPersonnel']['type'] == 'medecin') {
+if($_SESSION['userPersonnel']['type'] == 'admin' || $_SESSION['userPersonnel']['type'] == 'medecin') {
     if(isset($_GET['confirmation'])){
         $confirmation = $_GET['confirmation'];
         if($confirmation==1) {

@@ -9,15 +9,20 @@ if($_GET['type'] != 'patient' && $_GET['type'] != 'infirmier' && $_GET['type'] !
     exit();
 }
 
-if(!isset($_SESSION['userAdmin']) ) {
-    header('Location:tableau_de_bord_personnel?erreur=1.php');
-    exit();
-}
+//if(!isset($_SESSION['userAdmin']) ) {
+//    header('Location:tableau_de_bord_personnel?erreur=1.php');
+//    exit();
+//}
 
 if(isset($_SESSION['userPersonnel']) ) {
     if($_SESSION['userPersonnel']['type'] != 'medecin') {
-        header('Location:tableau_de_bord_personnel?erreur=1.php');
-        exit();
+
+        if($_SESSION['userPersonnel']['type'] != 'admin'){
+            header('Location:tableau_de_bord_personnel?erreur=1.php');
+            exit();
+        }
+
+
     }
 }
 
@@ -72,7 +77,7 @@ if(isset($_SESSION['userPersonnel']) ) {
 
             <?php if($_GET['type']=='medecin') : ?>
 
-            <?php if($_SESSION['userAdmin']) : ?>
+            <?php if($_SESSION['userPersonnel']['type'] == 'admin') : ?>
 
             <h1 id="title_form">Nouveau Médecin</h1>
 
@@ -82,7 +87,7 @@ if(isset($_SESSION['userPersonnel']) ) {
 
             <?php if(isset($_SESSION['userPersonnel'])) : ?>
 
-            <?php if($_SESSION['userPersonnel']) : ?>
+            <?php if($_SESSION['userPersonnel']['type'] != 'admin') : ?>
 
             <?php header('Location:tableau_de_bord_personnel?erreur=1.php');
                   exit();

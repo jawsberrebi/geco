@@ -26,7 +26,7 @@ include("backend/conditions_accès_page_personnel_et_admin.php");
 </header>
 <body>
 
-    <?php if (!isset($_SESSION['userAdmin']) && !isset($_SESSION['userPersonnel'])) {
+    <?php if (!isset($_SESSION['userPersonnel'])) {
 
             header('Location:connexion?erreur=4.php');
             exit();
