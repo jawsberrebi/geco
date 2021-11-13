@@ -96,33 +96,14 @@ if (!isset($_SESSION['userPatient']) && !isset($_SESSION['userPersonnel'])) {
 
             <!-- MODIFICATION DE L'ADRESSE -->
 
-            <?php if (isset($_SESSION['userPersonnel'])) : ?>
-            <?php if ($_SESSION['userPersonnel']['type'] == 'admin') : ?>
-
-            <input type="text" placeholder="Adresse" name="adresse" value="<?php echo $_SESSION['userPersonnel']['adresse'] ?>" />
-
-            <?php endif; ?>
-            <?php endif; ?>
-
             <?php if (isset($_SESSION['userPatient'])) : ?>
             <?php if ($_SESSION['userPatient']) : ?>
 
             <input type="text" placeholder="Adresse" name="adresse" value="<?php echo $_SESSION['userPatient']['adresse'] ?>" /> <!-- LE PATIENT PEUT-IL MODIFIER SON ADRESSE ??? -->
 
+            <?php endif; ?>
+            <?php endif; ?>
             <!-- MODIFICATION DE LA VILLE ET DU NOM DE L'H�PITAL POUR L'ADMINISTRATEUR -->
-
-            <?php endif; ?>
-            <?php endif; ?>
-
-            <?php if (isset($_SESSION['userPersonnel'])) : ?>
-            <?php if ($_SESSION['userPersonnel']['type'] == 'admin') : ?>
-
-            <input type="text" placeholder="Ville*" name="ville" value="<?php echo $_SESSION['userPersonnel']['ville'] ?>" required />
-
-            <input type="text" placeholder="Nom de l'hôpital*" name="nom_hopital" value="<?php echo $_SESSION['userPersonnel']['nom_hopital'] ?>" />
-
-            <?php endif; ?>
-            <?php endif; ?>
 
             <input type="submit" id='submit' value='Sauvegarder' />
 
@@ -134,7 +115,7 @@ if (!isset($_SESSION['userPatient']) && !isset($_SESSION['userPersonnel'])) {
             <?php endif; ?>
             <?php endif; ?>
 
-            <?php if (isset($_SESSION['userPersonnel']) || isset($_SESSION['userPatient'])) : ?>
+            <?php if ((isset($_SESSION['userPersonnel']) && ($_SESSION['userPersonnel']['type'] == 'medecin' || $_SESSION['userPersonnel']['type'] == 'infirmier')) || isset($_SESSION['userPatient'])) : ?>
 
             <p id="indication">Si vous modifiez votre nom et/ou votre prénom, votre nom d'utilisateur sera également modifié (de la manière : "première lettre du prénom + nom de famille").</p>
 
