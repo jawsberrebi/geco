@@ -29,6 +29,16 @@ include('backend/conditions_id.php');
 
         <?php if(isset($_SESSION['userPersonnel'])) : ?>
 
+        <?php
+
+            if ($userPatientProfil['id_hopital'] != $_SESSION['userPersonnel']['id_hopital']) {
+                header('Location:tableau_de_bord_personnel?erreur=1.php');
+                exit();
+              }
+
+
+        ?>
+
         <?php if ($userPatientProfil == null) {
                 header('Location:tableau_de_bord_personnel?erreur=4.php');
                 exit();
@@ -108,6 +118,16 @@ include('backend/conditions_id.php');
 
         <?php if((isset($_SESSION['userPersonnel']) && ($_SESSION['userPersonnel']['type'] == 'admin')) || (isset($_SESSION['userPersonnel']) && ($_SESSION['userPersonnel']['type'] == 'medecin'))) : ?>
 
+        <?php
+
+            if ($userInfirmierProfil['id_hopital'] != $_SESSION['userPersonnel']['id_hopital']) {
+                header('Location:tableau_de_bord_personnel?erreur=1.php');
+                exit();
+            }
+
+
+        ?>
+
         <?php if ($userInfirmierProfil == null) {
                 header('Location:tableau_de_bord_personnel?erreur=4.php');
                 exit();
@@ -141,6 +161,15 @@ include('backend/conditions_id.php');
         ?>
 
         <?php if(isset($_SESSION['userPersonnel']) && $_SESSION['userPersonnel']['type'] == 'admin') :?>
+
+        <?php
+
+            if ($userMedecinProfil['id_hopital'] != $_SESSION['userPersonnel']['id_hopital']) {
+                header('Location:tableau_de_bord_personnel?erreur=1.php');
+                exit();
+            }
+
+        ?>
 
         <?php if ($userMedecinProfil == null) {
                 header('Location:tableau_de_bord_personnel?erreur=4.php');

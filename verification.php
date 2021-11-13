@@ -34,7 +34,7 @@ if ($_SESSION['userPersonnel'] != 0) {
 $sql = "SELECT * FROM patient WHERE (nom_utilisateur='".$_POST['email_pseudo']."' OR mail='".$_POST['email_pseudo']."')";
 $pre = $pdo->prepare($sql);
 $pre->execute();
-$user = $pre->fetchAll(PDO::FETCH_ASSOC); //current prend la première ligne du tableau
+$user = $pre->fetchAll(PDO::FETCH_ASSOC);
 var_dump($user);
 
 foreach($user as $users){

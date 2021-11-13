@@ -202,7 +202,7 @@ function dataTableMembersGenerator(PDO $pdo, string $userType, bool $querySearch
             <?php if ($userType == 'patient') : ?>
             <?php if ($querySearch == false) : ?>
             <?php
-                      $sql = "SELECT * FROM patient ORDER BY id_patient DESC";
+                      $sql = "SELECT * FROM patient WHERE id_hopital = '".$_SESSION['userPersonnel']['id_hopital']."' ORDER BY id_patient DESC";
                       $pre = $pdo->prepare($sql);
                       $pre->execute();
                       $users = $pre->fetchAll(PDO::FETCH_ASSOC);?>
@@ -236,7 +236,7 @@ function dataTableMembersGenerator(PDO $pdo, string $userType, bool $querySearch
                 if(isset($superVariableGet) && !empty($superVariableGet)) {
                 $search = htmlspecialchars($superVariableGet);
 
-                $sql = 'SELECT * FROM patient WHERE prenom LIKE "%'.$search.'%" OR nom LIKE "%'.$search.'%" ORDER BY id_patient DESC';
+                $sql = 'SELECT * FROM patient WHERE prenom LIKE "%'.$search.'%" OR nom LIKE "%'.$search.'%" AND id_hopital = "'.$_SESSION['userPersonnel']['id_hopital'].'" ORDER BY id_patient DESC';
                 $pre = $pdo->prepare($sql);
                 $pre->execute();
                 $searchResults = $pre->fetchAll(PDO::FETCH_ASSOC);
@@ -275,7 +275,7 @@ function dataTableMembersGenerator(PDO $pdo, string $userType, bool $querySearch
             <!-- SI ON VEUT GÉNÉRER UNE TABLE D'INFIRMIERS-->
             <?php if ($userType == 'infirmier') : ?>
             <?php
-                      $sql = "SELECT * FROM personnel WHERE type='infirmier' ORDER BY id_personnel DESC";
+                      $sql = "SELECT * FROM personnel WHERE type='infirmier' AND id_hopital = '".$_SESSION['userPersonnel']['id_hopital']."' ORDER BY id_personnel DESC";
                       $pre = $pdo->prepare($sql);
                       $pre->execute();
                       $users = $pre->fetchAll(PDO::FETCH_ASSOC);
@@ -325,7 +325,7 @@ function dataTableMembersGenerator(PDO $pdo, string $userType, bool $querySearch
                     if(isset($superVariableGet) && !empty($superVariableGet)) {
                         $search = htmlspecialchars($superVariableGet);
 
-                        $sql = 'SELECT * FROM personnel WHERE prenom LIKE ("%'.$search.'%" OR nom LIKE "%'.$search.'%") AND (type="infirmier") ORDER BY id_personnel DESC';
+                        $sql = 'SELECT * FROM personnel WHERE prenom LIKE ("%'.$search.'%" OR nom LIKE "%'.$search.'%") AND (type="infirmier") AND id_hopital = "'.$_SESSION['userPersonnel']['id_hopital'].'" ORDER BY id_personnel DESC';
                         $pre = $pdo->prepare($sql);
                         $pre->execute();
                         $searchResults = $pre->fetchAll(PDO::FETCH_ASSOC);
@@ -372,7 +372,7 @@ function dataTableMembersGenerator(PDO $pdo, string $userType, bool $querySearch
             <!-- SI ON VEUT GÉNÉRER UNE TABLE DE MÉDECINS-->
             <?php if ($userType == 'medecin') : ?>
             <?php
-                    $sql = "SELECT * FROM personnel WHERE type='medecin' ORDER BY id_personnel DESC";
+                    $sql = "SELECT * FROM personnel WHERE type='medecin' AND id_hopital = '".$_SESSION['userPersonnel']['id_hopital']."' ORDER BY id_personnel DESC";
                     $pre = $pdo->prepare($sql);
                     $pre->execute();
                     $users = $pre->fetchAll(PDO::FETCH_ASSOC);
@@ -442,7 +442,7 @@ function dataResultsResearchTableMember(PDO $pdo, string $userType, string $supe
             if(isset($superVariableGet) && !empty($superVariableGet)) {
                 $search = htmlspecialchars($superVariableGet);
 
-                $sql = 'SELECT * FROM patient WHERE prenom LIKE "%'.$search.'%" OR nom LIKE "%'.$search.'%" ORDER BY id_patient DESC';
+                $sql = 'SELECT * FROM patient WHERE prenom LIKE "%'.$search.'%" OR nom LIKE "%'.$search.'%" AND id_hopital = "'.$_SESSION['userPersonnel']['id_hopital'].'" ORDER BY id_patient DESC';
                 $pre = $pdo->prepare($sql);
                 $pre->execute();
                 $searchResults = $pre->fetchAll(PDO::FETCH_ASSOC);
@@ -485,7 +485,7 @@ function dataResultsResearchTableMember(PDO $pdo, string $userType, string $supe
             if(isset($superVariableGet) && !empty($superVariableGet)) {
                 $search = htmlspecialchars($superVariableGet);
 
-                $sql = 'SELECT * FROM personnel WHERE (type="infirmier") AND (prenom LIKE "%'.$search.'%" OR nom LIKE "%'.$search.'%") ORDER BY id_personnel DESC';
+                $sql = 'SELECT * FROM personnel WHERE (type="infirmier") AND (prenom LIKE "%'.$search.'%" OR nom LIKE "%'.$search.'%") AND (id_hopital = "'.$_SESSION['userPersonnel']['id_hopital'].'") ORDER BY id_personnel DESC';
                 $pre = $pdo->prepare($sql);
                 $pre->execute();
                 $searchResults = $pre->fetchAll(PDO::FETCH_ASSOC);
@@ -538,7 +538,7 @@ function dataResultsResearchTableMember(PDO $pdo, string $userType, string $supe
             if(isset($superVariableGet) && !empty($superVariableGet)) {
                 $search = htmlspecialchars($superVariableGet);
 
-                $sql = 'SELECT * FROM personnel WHERE (type="medecin") AND (prenom LIKE "%'.$search.'%" OR nom LIKE "%'.$search.'%") ORDER BY id_personnel DESC';
+                $sql = 'SELECT * FROM personnel WHERE (type="medecin") AND (prenom LIKE "%'.$search.'%" OR nom LIKE "%'.$search.'%") AND (id_hopital = "'.$_SESSION['userPersonnel']['id_hopital'].'") ORDER BY id_personnel DESC';
                 $pre = $pdo->prepare($sql);
                 $pre->execute();
                 $searchResults = $pre->fetchAll(PDO::FETCH_ASSOC);
