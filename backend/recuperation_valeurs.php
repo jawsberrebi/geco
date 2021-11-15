@@ -19,35 +19,11 @@ for($i=0, $size=count($data_tab); $i<$size; $i++){
     echo "Trame $i: $data_tab[$i]<br />";
 }
 
-$lastValue = end($data_tab);
+end($data_tab);
+$lastValue = prev($data_tab);
 $trame = $lastValue;
 
-//for($n = 0; $n != -1; $n++) {
-
-//    $trame = $data_tab[$n];
-
-//    if(empty($data_tab[$n])) {
-//        $trame = $data_tab[$n - 1];
-//    }
-
-//}
-
-//set_time_limit(60);
-//$start = time();
-
-//for ($i = 0; $i < 59; ++$i) {
-
-//    if(!empty($trame[i])){
-//        $trame = $data_tab[i];
-//    }
-//    else{
-//        $i = $i - 1;
-//        $trame = $data_tab[$i];
-//    }
-
-//    time_sleep_until($start + $i + 1);
-//}
-
+var_dump($trame);
 
 //décodage avec des substring
 $t = substr($trame,0,1);
@@ -71,7 +47,24 @@ $checkseum = $x;
 $date = $day . '-' . $month . '-' . $year;
 $dateTimestamp = strtotime($date);
 
+var_dump($typeSensor);
+var_dump($dateTimestamp);
+
+$finalDate = date('d/m/Y', $dateTimestamp);
+
+var_dump($finalDate);
+
+$finalTime = $hour . ':' . $min . ':' . $sec;
+
+var_dump($finalTime);
+
+$finalDateTime = $finalDate . ' ' . $finalTime;
+
+var_dump($finalDateTime);
+
+
 // Pas besoin de récupérer l'ID Patient ?
+
 //$sql = 'SELECT id_patient FROM patient';
 //$pre = $pdo->prepare($sql);
 //$pre->execute();
@@ -84,58 +77,66 @@ $dateTimestamp = strtotime($date);
 //A ---> son
 // 4 --> Gaz
 
-//if($c == 7){
 
-//    $sql = "SELECT id_capteur FROM capteur WHERE id_patient = '".$_SESSION['userPatient']['id_patient']."' AND type = frequenceCardiaque";
-//    $pre = $pdo->prepare($sql);
-//    $pre->execute();
-//    $idCapteur = $pre->fetchAll(PDO::FETCH_ASSOC);
+$sql = "SELECT * FROM mesure";
+$pre = $pdo->prepare($sql);
+$pre->execute();
+$valTest = $pre->fetchAll(PDO::FETCH_ASSOC); //current prend la première ligne du tableau
+$timed = $valTest; //on enregistre que l'utilisateur est connecté (on peut modif)
+var_dump($timed);
 
+if($typeSensor == 3){ //Remplacer par 7 pour avoir le capteur fréquence cardiaque
 
-//    $sql = 'INSERT INTO mesure(valeur, date, id_capteur) VALUES (:valeur, :date, :id_capteur)';
-//    $pre = $pdo->prepare($sql);
-//    $pre->execute([
-//        'valeur' => $value,
-//        'date' => $dateTimestamp,
-//        'id_capteur' => $idCapteur,
-//        ]);
-//}
-//elseif($c == 'A'){
-
-//    $sql = "SELECT id_capteur FROM capteur WHERE id_patient = '".$_SESSION['userPatient']['id_patient']."' AND type = niveauSonore";
-//    $pre = $pdo->prepare($sql);
-//    $pre->execute();
-//    $idCapteur = $pre->fetchAll(PDO::FETCH_ASSOC);
+    //$sql = "SELECT id_capteur FROM capteur WHERE id_patient = '".$_SESSION['userPatient']['id_patient']."' AND type = frequenceCardiaque";
+    //$pre = $pdo->prepare($sql);
+    //$pre->execute();
+    //$idCapteur = $pre->fetchAll(PDO::FETCH_ASSOC);
 
 
-//    $sql = 'INSERT INTO mesure(valeur, date, id_capteur) VALUES (:valeur, :date, :id_capteur)';
-//    $pre = $pdo->prepare($sql);
-//    $pre->execute([
-//        'valeur' => $value,
-//        'date' => $dateTimestamp,
-//        'id_capteur' => $idCapteur,
-//        ]);
+    $sql = 'INSERT INTO mesure(valeur, date_heure, id_capteur) VALUES (:valeur, :date_heure, :id_capteur)';
+    $pre = $pdo->prepare($sql);
+    $pre->execute([
+        'valeur' => $value,
+        'date_heure' => $finalDateTime,
+        'id_capteur' => 4, //Remplacer par $idCapteur
+        ]);
+}
+elseif($typeSensor == 'A'){
+
+    $sql = "SELECT id_capteur FROM capteur WHERE id_patient = '".$_SESSION['userPatient']['id_patient']."' AND type = niveauSonore";
+    $pre = $pdo->prepare($sql);
+    $pre->execute();
+    $idCapteur = $pre->fetchAll(PDO::FETCH_ASSOC);
 
 
-//}
-//elseif($c == 4){
-
-//    $sql = "SELECT id_capteur FROM capteur WHERE id_patient = '".$_SESSION['userPatient']['id_patient']."' AND type = concentrationGaz";
-//    $pre = $pdo->prepare($sql);
-//    $pre->execute();
-//    $idCapteur = $pre->fetchAll(PDO::FETCH_ASSOC);
-
-
-//    $sql = 'INSERT INTO mesure(valeur, date, id_capteur) VALUES (:valeur, :date, :id_capteur)';
-//    $pre = $pdo->prepare($sql);
-//    $pre->execute([
-//        'valeur' => $value,
-//        'date' => $dateTimestamp,
-//        'id_capteur' => $idCapteur,
-//        ]);
+    $sql = 'INSERT INTO mesure(valeur, date_heure, id_capteur) VALUES (:valeur, :date_heure, :id_capteur)';
+    $pre = $pdo->prepare($sql);
+    $pre->execute([
+        'valeur' => $value,
+        'date_heure' => $finalDateTime,
+        'id_capteur' => $idCapteur,
+        ]);
 
 
-//}
+}
+elseif($typeSensor == 4){
+
+    $sql = "SELECT id_capteur FROM capteur WHERE id_patient = '".$_SESSION['userPatient']['id_patient']."' AND type = concentrationGaz";
+    $pre = $pdo->prepare($sql);
+    $pre->execute();
+    $idCapteur = $pre->fetchAll(PDO::FETCH_ASSOC);
+
+
+    $sql = 'INSERT INTO mesure(valeur, date_heure, id_capteur) VALUES (:valeur, :date_heure, :id_capteur)';
+    $pre = $pdo->prepare($sql);
+    $pre->execute([
+        'valeur' => $value,
+        'date_heure' => $finalDateTime,
+        'id_capteur' => $idCapteur,
+        ]);
+
+
+}
 
 
 
