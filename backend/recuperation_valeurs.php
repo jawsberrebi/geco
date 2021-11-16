@@ -50,7 +50,7 @@ $dateTimestamp = strtotime($date);
 var_dump($typeSensor);
 var_dump($dateTimestamp);
 
-$finalDate = date('d/m/Y', $dateTimestamp);
+$finalDate = date('Y-m-d', $dateTimestamp);
 
 var_dump($finalDate);
 
@@ -92,13 +92,18 @@ if($typeSensor == 3){ //Remplacer par 7 pour avoir le capteur fréquence cardiaqu
     //$pre->execute();
     //$idCapteur = $pre->fetchAll(PDO::FETCH_ASSOC);
 
+    $sql = "SELECT MAX(id_mesure) FROM mesure WHERE id_capteur = '".$_SESSION['userPatient']['id_patient']."'";
+    $pre = $pdo->prepare($sql);
+    $pre->execute();
+    $idCapteur = $pre->fetchAll(PDO::FETCH_ASSOC);
+
 
     $sql = 'INSERT INTO mesure(valeur, date_heure, id_capteur) VALUES (:valeur, :date_heure, :id_capteur)';
     $pre = $pdo->prepare($sql);
     $pre->execute([
         'valeur' => $value,
         'date_heure' => $finalDateTime,
-        'id_capteur' => 4, //Remplacer par $idCapteur
+        'id_capteur' => 46, //Remplacer par $idCapteur
         ]);
 }
 elseif($typeSensor == 'A'){
@@ -108,7 +113,7 @@ elseif($typeSensor == 'A'){
     $pre->execute();
     $idCapteur = $pre->fetchAll(PDO::FETCH_ASSOC);
 
-    //Mettre une condition pour comparer la dernière valeur entrée du patient dans les mesures 
+    //Mettre une condition pour comparer la dernière valeur entrée du patient dans les mesures
 
     $sql = 'INSERT INTO mesure(valeur, date_heure, id_capteur) VALUES (:valeur, :date_heure, :id_capteur)';
     $pre = $pdo->prepare($sql);

@@ -4,22 +4,18 @@ include('backend/fonctions.php');
 ?>
 
 <?php
-$sql = 'SELECT MAX(id_patient) FROM patient';
+$sql = "SELECT id_capteur FROM capteur WHERE id_patient = 5 AND type = 'frequenceCardiaque'";
 $pre = $pdo->prepare($sql);
 $pre->execute();
-$idPatientTab = $pre->fetchAll(PDO::FETCH_ASSOC);
+$idCapteurTab = $pre->fetchAll(PDO::FETCH_ASSOC);
+$idCapteur = $idCapteurTab[0]['id_capteur'];
 
 
-
-$idPatient = $idPatientTab[0]['MAX(id_patient)'];
-
-echo $idPatient;
-
-
-$sql = 'INSERT INTO capteur(id_patient, type) VALUES (:id_patient, :type)';
+//RECUPERER DERNIERE VALEUR ENREGISTREE DES MESURES POUR COMPARER AVEC CELLE A ENTRER
+$sql = "SELECT MAX(id_mesure) FROM mesure WHERE id_capteur = '".$idCapteur."'";
 $pre = $pdo->prepare($sql);
-$pre->execute([
-    'id_patient' => $idPatient,
-    'type' => 'frequenceCardiaque',
-    ]);
+$pre->execute();
+$idCapteur = $pre->fetchAll(PDO::FETCH_ASSOC);
+
+
 ?>
