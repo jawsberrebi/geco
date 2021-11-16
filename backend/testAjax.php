@@ -11,7 +11,7 @@
 
 <script>
     $(document).ready(function getData() {
-        //var xhttp = new XMLHttpRequest();
+        var xhttp = new XMLHttpRequest();
         //xhttp.onreadystatechange = function() {
         //  if (this.readyState == 4 && this.status == 200) {
         //    document.getElementById("demo").innerHTML = this.responseText;
@@ -20,6 +20,10 @@
         //  
         //xhttp.open("GET", "http://projets-tomcat.isep.fr:8080/appService/?ACTION=GETLOG&TEAM=G5A4", false);
         //xhttp.send();
+
+        xmlhttp.open("GET","http://projets-tomcat.isep.fr:8080/appService/?ACTION=GETLOG&TEAM=G5A4",true);
+        xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+        xmlhttp.send("fname=Henry&lname=Ford");
 
         var settings = {
             "url": "http://projets-tomcat.isep.fr:8080/appService/?ACTION=GETLOG&TEAM=G5A4",

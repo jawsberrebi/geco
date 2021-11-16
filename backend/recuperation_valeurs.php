@@ -108,6 +108,7 @@ elseif($typeSensor == 'A'){
     $pre->execute();
     $idCapteur = $pre->fetchAll(PDO::FETCH_ASSOC);
 
+    //Mettre une condition pour comparer la dernière valeur entrée du patient dans les mesures 
 
     $sql = 'INSERT INTO mesure(valeur, date_heure, id_capteur) VALUES (:valeur, :date_heure, :id_capteur)';
     $pre = $pdo->prepare($sql);

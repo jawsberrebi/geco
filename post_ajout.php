@@ -48,31 +48,33 @@ if (htmlspecialchars($_POST['type']) == 'patient') {
         'id_hopital' => $idHospital
         ]);
 
-    $sql = "SELECT MAX(id_patient) FROM patient";
+    $sql = 'SELECT MAX(id_patient) FROM patient';
     $pre = $pdo->prepare($sql);
     $pre->execute();
-    $idPatient = $pre->fetchAll(PDO::FETCH_ASSOC);
+    $idPatientTab = $pre->fetchAll(PDO::FETCH_ASSOC);
 
-    //$sql = 'INSERT INTO capteur(type, id_patient) VALUES (:type, :id_patient)';
-    //$pre = $pdo->prepare($sql);
-    //$pre->execute([
-    //    'id_patient' => $idPatient,
-    //    'type' => 'frequenceCardiaque',
-    //    ]);
+    $idPatient = $idPatientTab[0]['MAX(id_patient)'];
 
-    //$sql = 'INSERT INTO capteur(type, id_patient) VALUES (:type, :id_patient)';
-    //$pre = $pdo->prepare($sql);
-    //$pre->execute([
-    //    'id_patient' => $idPatient,
-    //    'type' => 'niveauSonore',
-    //    ]);
+    $sql = 'INSERT INTO capteur(id_patient, type) VALUES (:id_patient, :type)';
+    $pre = $pdo->prepare($sql);
+    $pre->execute([
+        'id_patient' => $idPatient,
+        'type' => 'frequenceCardiaque',
+        ]);
 
-    //$sql = 'INSERT INTO capteur(type, id_patient) VALUES (:type, :id_patient)';
-    //$pre = $pdo->prepare($sql);
-    //$pre->execute([
-    //    'id_patient' => $idPatient,
-    //    'type' => 'concentrationGaz',
-    //    ]);
+    $sql = 'INSERT INTO capteur(type, id_patient) VALUES (:type, :id_patient)';
+    $pre = $pdo->prepare($sql);
+    $pre->execute([
+        'id_patient' => $idPatient,
+        'type' => 'niveauSonore'
+        ]);
+
+    $sql = 'INSERT INTO capteur(type, id_patient) VALUES (:type, :id_patient)';
+    $pre = $pdo->prepare($sql);
+    $pre->execute([
+        'id_patient' => $idPatient,
+        'type' => 'concentrationGaz'
+        ]);
 
     $champs = array();
 
