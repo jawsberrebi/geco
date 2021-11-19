@@ -1,6 +1,7 @@
 <?php
 
 require_once("config.php");
+include('backend/recuperation_valeurs.php');
 
 if(!isset($_SESSION['userPatient'])) {
 
