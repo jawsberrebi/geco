@@ -19,13 +19,13 @@ $phone = htmlspecialchars($_POST['telephone']);
 /////////////                                                                   \\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 ///////////// DANS LE CAS OÙ L'ADMIN ACCÈDE À LA PAGE DE MODIFICATION DE COMPTE \\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 ////////////                                                                     \\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-if ($_SESSION['userAdmin']) {
+if ($_SESSION['userPersonnel']['type'] == 'admin') {
 
     $adresse = htmlspecialchars($_POST['adresse']);
     $city = htmlspecialchars($_POST['ville']);
     $hospitalName = htmlspecialchars($_POST['nom_hopital']);
 
-    $sql = "SELECT * FROM admin WHERE (nom_hopital='".$hospitalName."' AND id_admin != '".$_SESSION['userAdmin']['id_admin']."'"; //AJOUTER CONDITION POUR PAS REPERER ID ADMIN
+    $sql = "SELECT * FROM personnel WHERE nom_hopital='".$hospitalName."' AND id_personnel != '".$_SESSION['userPersonnel']['id_personnel']."'"; //AJOUTER CONDITION POUR PAS REPERER ID ADMIN
     $pre = $pdo->prepare($sql);
     $pre->execute();
     $user = current($pre->fetchAll(PDO::FETCH_ASSOC));
@@ -35,7 +35,7 @@ if ($_SESSION['userAdmin']) {
         exit();
     }
 
-    $sql = "UPDATE admin SET prenom = :prenom, nom = :nom, adresse = :adresse, ville = :ville, nom_hopital = :nom_hopital WHERE id_admin = '".$_SESSION['userAdmin']['id_admin']."' ";
+    $sql = "UPDATE personnel SET prenom = :prenom, nom = :nom, adresse = :adresse, ville = :ville, nom_hopital = :nom_hopital, mail = :mail, tel = :tel WHERE id_personnel = '".$_SESSION['userPersonnel']['id_personnel']."' ";
     $pre = $pdo->prepare($sql);
     $pre->execute([
         'prenom' => $firstName,
@@ -43,13 +43,17 @@ if ($_SESSION['userAdmin']) {
         'adresse' => $adresse,
         'ville' => $city,
         'nom_hopital' => $hospitalName,
+        'mail' => $mail,
+        'tel' => $phone
         ]);
 
-    $_SESSION['userAdmin']['prenom'] = $firstName;
-    $_SESSION['userAdmin']['nom'] = $name;
-    $_SESSION['userAdmin']['adresse'] = $adresse;
-    $_SESSION['userAdmin']['ville'] = $city;
-    $_SESSION['userAdmin']['nom_hopital'] = $hospitalName;
+    $_SESSION['userPersonnel']['prenom'] = $firstName;
+    $_SESSION['userPersonnel']['nom'] = $name;
+    $_SESSION['userPersonnel']['adresse'] = $adresse;
+    $_SESSION['userPersonnel']['ville'] = $city;
+    $_SESSION['userPersonnel']['nom_hopital'] = $hospitalName;
+    $_SESSION['userPersonnel']['mail'] = $mail;
+    $_SESSION['userPersonnel']['tel'] = $phone;
 
     header('Location:tableau_de_bord_personnel?confirmation=4.php');
     exit();
@@ -59,7 +63,7 @@ if ($_SESSION['userAdmin']) {
     ///////////// DANS LE CAS OÙ UN MEMBRE DU PERSONNEL ACCÈDE À LA PAGE DE MODIFICATION DE COMPTE \\\\\\\\\\\\\\\\\\\\\\\\\\\\\
     ////////////                                                                                    \\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
-} elseif ($_SESSION['userPersonnel']) {
+} elseif ($_SESSION['userPersonnel'] != 'admin') {
 
     //UPDATE INFOS BDD
 

@@ -10,10 +10,23 @@ include("backend/conditions_accès_page_personnel_et_admin.php");
     <meta charset="utf-8" />
     <link rel="stylesheet" href="css/style_tableau_de_bord_personnel.css" />
     <title>Tableau de bord</title>
+    <link rel="stylesheet" href="css/navbar_pro.css">
 </head>
+<header>
+    <nav>
+        <a href="#" class="nav-logo">Geco.</a>
+
+        <ul>
+          <li><a class="active" href="#tableaudebord">Tableau de bord</a></li>
+          <li><a href="profil.php" id="profil">Profil</a></li>
+          <li><a href="deconnexion.php" id="deconnexion">Déconnexion</a></li>
+        </ul>
+
+    </nav>
+</header>
 <body>
 
-    <?php if (!isset($_SESSION['userAdmin']) && !isset($_SESSION['userPersonnel'])) {
+    <?php if (!isset($_SESSION['userPersonnel'])) {
 
             header('Location:connexion?erreur=4.php');
             exit();
@@ -23,7 +36,7 @@ include("backend/conditions_accès_page_personnel_et_admin.php");
     ?>
 
     <!-- MESSAGE D'ACCUEIL-->
-    <?php include("backend/message_accueil_tableau_de_bord.php"); ?>
+    <?php //include("backend/message_accueil_tableau_de_bord.php"); ?> 
     <!-- OPTION CONNEXION/DECONNEXION -->
     <?php include("backend/fenetre_modale_tableau_de_bord.php"); ?>
     <!-- FONCTIONNALITÉS ADMIN ET MÉDECIN -->
@@ -31,9 +44,9 @@ include("backend/conditions_accès_page_personnel_et_admin.php");
     <!-- FACTORISATION DES MESSAGES DU TABLEAU DE BORD -->
     <?php include("backend/messages_tableau_de_bord_personnel.php")?>
 
-    <form method="get">
+    <form method="get" id="recherche">
         <input type="search" name="moteur_recherche" placeholder="Chercher un membre" id="moteur_recherche" />
-        <input type="submit" value="Rechercher"/>
+        <input type="submit" value="Rechercher" id="btn_recherche"/>
         <!-- AJOUTER UN FILTRE DE RECHERCHE EN FONCTIONNALITÉ SUPPLÉMENTAIRE -->
     </form>
 
@@ -45,7 +58,7 @@ include("backend/conditions_accès_page_personnel_et_admin.php");
     <table>
         <thead>
             <tr>
-                <th>Id          </th>
+                <th id="identifiant">Id          </th>
                 <th>Nom du membre           </th>
                 <th>Type de membre                                              </th>
                 <th>Rythme cardiaque            </th>
@@ -63,7 +76,7 @@ include("backend/conditions_accès_page_personnel_et_admin.php");
         <?php echo dataTableMembersGenerator($pdo, 'patient', false, ''); ?>
 
 
-        <?php if($_SESSION['userAdmin'] || $_SESSION['userPersonnel']['type'] == 'medecin') : ?>
+        <?php if($_SESSION['userPersonnel']['type'] == 'admin' || $_SESSION['userPersonnel']['type'] == 'medecin') : ?>
 
         <!-- GÉNÉRATION DU TABLEAU DES INFIRMIERS -->
         <?php echo dataTableMembersGenerator($pdo, 'infirmier', false, ''); ?>
@@ -72,7 +85,7 @@ include("backend/conditions_accès_page_personnel_et_admin.php");
 
 
         
-        <?php if($_SESSION['userAdmin']) : ?>
+        <?php if($_SESSION['userPersonnel']['type'] == 'admin') : ?>
 
         <!-- GÉNÉRATION DU TABLEAU DES MÉDECINS -->
         <?php echo dataTableMembersGenerator($pdo, 'medecin', false, ''); ?>
@@ -117,7 +130,7 @@ include("backend/conditions_accès_page_personnel_et_admin.php");
 
         <?php endif; ?>
 
-        <?php if(isset($_SESSION['userAdmin']) && $_SESSION['userAdmin']) : ?>
+        <?php if(isset($_SESSION['userPersonnel']) && $_SESSION['userPersonnel']['type'] == 'admin') : ?>
 
         <?php
         $isThereResult = dataResultsResearchTableMember($pdo, 'patient', $_GET['moteur_recherche']);

@@ -60,7 +60,7 @@ function passwordGenerator(PDO $pdo, int $length) : string
     <?php echo $user['nom'] . ', ' . $user['prenom']; ?>
 </h1>
 
-<?php if((isset($_SESSION['userAdmin']) && $_SESSION['userAdmin']) || (isset($_SESSION['userPersonnel']) && ($_SESSION['userPersonnel']['type'] == 'medecin'))) : ?>
+<?php if((isset($_SESSION['userPersonnel']) && ($_SESSION['userPersonnel']['type'] == 'admin')) || (isset($_SESSION['userPersonnel']) && ($_SESSION['userPersonnel']['type'] == 'medecin'))) : ?>
 
 <?php if($type == 'patient') : ?>
 <a href="backend/suppression?id_patient=<?php echo $user['id_patient'] ?>" id="supprimer">Supprimer 🗑 </a>
@@ -68,7 +68,7 @@ function passwordGenerator(PDO $pdo, int $length) : string
 <?php endif; ?>
 <?php endif; ?>
 
-<?php if((isset($_SESSION['userAdmin']) && $_SESSION['userAdmin']) || (isset($_SESSION['userPersonnel']) && ($_SESSION['userPersonnel']['type'] == 'medecin'))) : ?>
+<?php if((isset($_SESSION['userPersonnel']) && ($_SESSION['userPersonnel']['type'] == 'admin')) || (isset($_SESSION['userPersonnel']) && ($_SESSION['userPersonnel']['type'] == 'medecin'))) : ?>
 
 <?php if($type == 'infirmier') : ?>
 <a href="backend/suppression?id_infirmier=<?php echo $user['id_personnel'] ?>" id="supprimer">Supprimer 🗑 </a>
@@ -76,7 +76,7 @@ function passwordGenerator(PDO $pdo, int $length) : string
 <?php endif; ?>
 <?php endif; ?>
 
-<?php if(isset($_SESSION['userAdmin'])) : ?>
+<?php if((isset($_SESSION['userPersonnel']) && ($_SESSION['userPersonnel']['type'] == 'admin'))) : ?>
 
 <?php if($type == 'medecin') : ?>
 <a href="backend/suppression?id_medecin=<?php echo $user['id_personnel'] ?>" id="supprimer">Supprimer 🗑 </a>
@@ -202,7 +202,7 @@ function dataTableMembersGenerator(PDO $pdo, string $userType, bool $querySearch
             <?php if ($userType == 'patient') : ?>
             <?php if ($querySearch == false) : ?>
             <?php
-                      $sql = "SELECT * FROM patient ORDER BY id_patient DESC";
+                      $sql = "SELECT * FROM patient WHERE id_hopital = '".$_SESSION['userPersonnel']['id_hopital']."' ORDER BY id_patient DESC";
                       $pre = $pdo->prepare($sql);
                       $pre->execute();
                       $users = $pre->fetchAll(PDO::FETCH_ASSOC);?>
@@ -236,7 +236,7 @@ function dataTableMembersGenerator(PDO $pdo, string $userType, bool $querySearch
                 if(isset($superVariableGet) && !empty($superVariableGet)) {
                 $search = htmlspecialchars($superVariableGet);
 
-                $sql = 'SELECT * FROM patient WHERE prenom LIKE "%'.$search.'%" OR nom LIKE "%'.$search.'%" ORDER BY id_patient DESC';
+                $sql = 'SELECT * FROM patient WHERE prenom LIKE "%'.$search.'%" OR nom LIKE "%'.$search.'%" AND id_hopital = "'.$_SESSION['userPersonnel']['id_hopital'].'" ORDER BY id_patient DESC';
                 $pre = $pdo->prepare($sql);
                 $pre->execute();
                 $searchResults = $pre->fetchAll(PDO::FETCH_ASSOC);
@@ -275,7 +275,7 @@ function dataTableMembersGenerator(PDO $pdo, string $userType, bool $querySearch
             <!-- SI ON VEUT GÉNÉRER UNE TABLE D'INFIRMIERS-->
             <?php if ($userType == 'infirmier') : ?>
             <?php
-                      $sql = "SELECT * FROM personnel WHERE type='infirmier' ORDER BY id_personnel DESC";
+                      $sql = "SELECT * FROM personnel WHERE type='infirmier' AND id_hopital = '".$_SESSION['userPersonnel']['id_hopital']."' ORDER BY id_personnel DESC";
                       $pre = $pdo->prepare($sql);
                       $pre->execute();
                       $users = $pre->fetchAll(PDO::FETCH_ASSOC);
@@ -325,7 +325,7 @@ function dataTableMembersGenerator(PDO $pdo, string $userType, bool $querySearch
                     if(isset($superVariableGet) && !empty($superVariableGet)) {
                         $search = htmlspecialchars($superVariableGet);
 
-                        $sql = 'SELECT * FROM personnel WHERE prenom LIKE ("%'.$search.'%" OR nom LIKE "%'.$search.'%") AND (type="infirmier") ORDER BY id_personnel DESC';
+                        $sql = 'SELECT * FROM personnel WHERE prenom LIKE ("%'.$search.'%" OR nom LIKE "%'.$search.'%") AND (type="infirmier") AND id_hopital = "'.$_SESSION['userPersonnel']['id_hopital'].'" ORDER BY id_personnel DESC';
                         $pre = $pdo->prepare($sql);
                         $pre->execute();
                         $searchResults = $pre->fetchAll(PDO::FETCH_ASSOC);
@@ -372,7 +372,7 @@ function dataTableMembersGenerator(PDO $pdo, string $userType, bool $querySearch
             <!-- SI ON VEUT GÉNÉRER UNE TABLE DE MÉDECINS-->
             <?php if ($userType == 'medecin') : ?>
             <?php
-                    $sql = "SELECT * FROM personnel WHERE type='medecin' ORDER BY id_personnel DESC";
+                    $sql = "SELECT * FROM personnel WHERE type='medecin' AND id_hopital = '".$_SESSION['userPersonnel']['id_hopital']."' ORDER BY id_personnel DESC";
                     $pre = $pdo->prepare($sql);
                     $pre->execute();
                     $users = $pre->fetchAll(PDO::FETCH_ASSOC);
@@ -442,7 +442,7 @@ function dataResultsResearchTableMember(PDO $pdo, string $userType, string $supe
             if(isset($superVariableGet) && !empty($superVariableGet)) {
                 $search = htmlspecialchars($superVariableGet);
 
-                $sql = 'SELECT * FROM patient WHERE prenom LIKE "%'.$search.'%" OR nom LIKE "%'.$search.'%" ORDER BY id_patient DESC';
+                $sql = 'SELECT * FROM patient WHERE prenom LIKE "%'.$search.'%" OR nom LIKE "%'.$search.'%" AND id_hopital = "'.$_SESSION['userPersonnel']['id_hopital'].'" ORDER BY id_patient DESC';
                 $pre = $pdo->prepare($sql);
                 $pre->execute();
                 $searchResults = $pre->fetchAll(PDO::FETCH_ASSOC);
@@ -485,7 +485,7 @@ function dataResultsResearchTableMember(PDO $pdo, string $userType, string $supe
             if(isset($superVariableGet) && !empty($superVariableGet)) {
                 $search = htmlspecialchars($superVariableGet);
 
-                $sql = 'SELECT * FROM personnel WHERE (type="infirmier") AND (prenom LIKE "%'.$search.'%" OR nom LIKE "%'.$search.'%") ORDER BY id_personnel DESC';
+                $sql = 'SELECT * FROM personnel WHERE (type="infirmier") AND (prenom LIKE "%'.$search.'%" OR nom LIKE "%'.$search.'%") AND (id_hopital = "'.$_SESSION['userPersonnel']['id_hopital'].'") ORDER BY id_personnel DESC';
                 $pre = $pdo->prepare($sql);
                 $pre->execute();
                 $searchResults = $pre->fetchAll(PDO::FETCH_ASSOC);
@@ -538,7 +538,7 @@ function dataResultsResearchTableMember(PDO $pdo, string $userType, string $supe
             if(isset($superVariableGet) && !empty($superVariableGet)) {
                 $search = htmlspecialchars($superVariableGet);
 
-                $sql = 'SELECT * FROM personnel WHERE (type="medecin") AND (prenom LIKE "%'.$search.'%" OR nom LIKE "%'.$search.'%") ORDER BY id_personnel DESC';
+                $sql = 'SELECT * FROM personnel WHERE (type="medecin") AND (prenom LIKE "%'.$search.'%" OR nom LIKE "%'.$search.'%") AND (id_hopital = "'.$_SESSION['userPersonnel']['id_hopital'].'") ORDER BY id_personnel DESC';
                 $pre = $pdo->prepare($sql);
                 $pre->execute();
                 $searchResults = $pre->fetchAll(PDO::FETCH_ASSOC);
@@ -591,5 +591,68 @@ function dataResultsResearchTableMember(PDO $pdo, string $userType, string $supe
 <?php
     return $isThereResult;
 }
+
+?>
+
+<?php
+
+function envoiIdentifiantsMail($mail, $donnees) : void 
+{
+
+          $to = $mail;
+
+
+
+          $subject = 'Vos identifiants GecoSensor';
+
+
+
+          $message = '
+
+          <html>
+
+           <head>
+
+           </head>
+
+           <body>
+
+               <p>Votre compte GecoSensor a bien été créée</p>
+
+               <p>Voici vos identifiants</p></br>
+
+               <ul>
+
+                    <li>Adresse email : '.$donnees[0].'</li>
+
+                    <li>Nom d\'utilisateur : '.$donnees[1].'</li>
+
+                    <li>Mot de passe : '.$donnees[2].'</li>
+
+               </ul></br>
+                
+               <p>Merci de les conserver précieusement et de ne les divulguer à personne</p>
+
+           </body>
+
+          </html>
+
+          ';
+
+
+
+          $headers[] = 'MIME-Version: 1.0';
+
+          $headers[] = 'Content-type: text/html; charset=iso-8859-1';
+
+
+
+          mail($to, $subject, $message, implode("\r\n", $headers));
+
+
+
+     }
+
+
 
 ?>

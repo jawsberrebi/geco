@@ -3,7 +3,7 @@ include_once("../config.php");
 include("conditions_accès_page_personnel_et_admin.php");
 
 if(isset($_SESSION['userPersonnel'])) {
-    if($_SESSION['userPersonnel']['type'] != 'medecin') {
+    if($_SESSION['userPersonnel']['type'] != 'medecin' && $_SESSION['userPersonnel']['type'] != 'admin') {
         header('Location:../tableau_de_bord_personnel?erreur=1');
         exit();
     }
@@ -31,7 +31,7 @@ elseif(isset($_GET['id_infirmier'])) {
 }
 elseif(isset($_GET['id_medecin'])) {
 
-    if(isset($_SESSION['userPersonnel'])) {
+    if($_SESSION['userPersonnel']['type'] != 'admin') {
 
         header('Location:../tableau_de_bord_personnel?erreur=1');
         exit();
