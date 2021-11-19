@@ -1,7 +1,8 @@
 <?php
 
 require_once("config.php");
-include('backend/recuperation_valeurs.php');
+include('backend/recuperation_valeurs.php'); //Module de récupération de valeur
+include('backend/affichage_valeurs.php');
 
 if(!isset($_SESSION['userPatient'])) {
 
@@ -40,19 +41,19 @@ if(!isset($_SESSION['userPatient'])) {
                 <div id="table">
                     <div class="cadran">
                         <p id="text">
-                            Test
+                            <?php echo $finalValues[0]['valeur']; ?>
                         </p>
                     </div>
 
                     <div class="cadran">
                         <p id="text">
-                            Test
+                            <?php echo $finalValues[1]['valeur']; ?>
                         </p>
                     </div>
 
                     <div class="cadran">
                         <p id="text">
-                            Test
+                            <?php echo $finalValues[2]['valeur']; ?>
                         </p>
                     </div>
                 </div>
