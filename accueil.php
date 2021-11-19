@@ -132,8 +132,21 @@
 		<hr>
 
 		<form>
-			<input type="email" placeholder="Email">
-			<a href="#" class="btn">Subscribe now</a>
+
+			<label for="email">Adresse email :</label>
+			<input type="email" name="email" id="email" placeholder="Email">
+			
+			<label for="prenom">Prénom :</label>
+			<input type="text" name="prenom" id="prenom" placeholder="Prénom" />
+
+			<label for="nom">Nom :</label>
+			<input type="text" name="nom" id="nom" placeholder="Nom" />
+
+			<label for="sujet">Sujet : </label>
+			<input type="text" name="sujet" id="sujet" placeholder="Sujet" />
+
+			<label for="message">Message :</label>
+			<textarea name="message" id="message"></textarea>
 		</form>
 	</section>
 

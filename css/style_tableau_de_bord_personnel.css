@@ -7,13 +7,14 @@
 .message_erreur {
     font-family: Urbanist, sans-serif;
     color: red;
+    padding-left: 15%;
 }
 
 h1 {
     font-family: Urbanist, sans-serif;
     color: #3BC393;
     font-size: 2em;
-    padding-left: 2%;
+    padding-left: 15%;
 }
 
 #moteur_de_recherche:focus {
@@ -32,11 +33,12 @@ h1 {
     background-color: #FAFAFA;
 }
 
-th {
+.tab_personnel {
     font-family: Urbanist, sans-serif;
     font-weight: normal;
     text-align: center;
     white-space: pre;
+    padding-right: 2em;
 }
 
 .contenu_table {
@@ -51,7 +53,7 @@ th {
 
 table {
     border-spacing: 10px;
-    margin-left: 2%;
+    margin-left: 15%;
 }
 
 #deconnexion {
@@ -67,13 +69,14 @@ a:visited
 
 td {
     padding: 1.15%;
+    /* text-align: center; */
 }
 
 .ajout {
     font-family: Urbanist, sans-serif;
     text-decoration: none;
     color: black;
-    padding-left: 2%;
+    padding-left: 15%;
 }
 
 .tableau_onglets {
@@ -152,13 +155,77 @@ input[type = range]::-webkit-slider-thumb {
 }
 
 #recherche{
-    padding-left: 2%;
+    padding-left: 15%;
+    display: initial;
 }
 
 #btn_recherche{
-    height: 1.7em;
+    height: 1.9em;
 }
 
 #identifiant{
     padding-left: 0.8em;
+    font-family: Urbanist, sans-serif;
+    font-weight: normal;
+    text-align: center;
+    white-space: pre;
+    padding-right: 2em;
+}
+
+/* Bouton Dropdown */
+.dropbtn {
+    background-color: #3BC393;
+    color: white;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+/* Bouton Dropdown on hover & focus */
+.dropbtn:hover, .dropbtn:focus {
+    background-color: #3e8e41;
+}
+
+/* Permet de fixer le bouton de la page */
+.dropdown {
+    position: relative;
+    display: inline-block;
+    position: relative;
+    left: 32.5%;
+}
+
+/* Contenu du bouton dropdown */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+/* Liens à l'intérieur du dropdown */
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+/* Change la couleur lors d'un passage sur l'élément */
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+/* Montre le bouton Dropdown */
+.show {
+    display:block;
+    border-radius: 10px;
+}
+
+th {
+    font-family: Urbanist, sans-serif;
+    font-weight: normal;
+    text-align: center;
+    white-space: pre;
+    text-align: center;
 }

@@ -1,42 +1,39 @@
 <?php
 
+include('fonctions.php');
+
      #Adresse mail sur laquelle les informations du formulaire vont arriver
 
-     $mail_admin = "berjaws@gmail.com";
+$mail_admin = "rd.berrebi@gmail.com";
 
 
 
      #Lorsqu'un utilisateur valide le formaire
 
-     $nom = 'yes';
+$mail = 'yes';
 
-     $prenom = 'yes';
+$prenom = 'yes';
 
-     $email = htmlspecialchars($_POST['email']);
+$email = "rd.berrebi@gmail.com";
 
-     $message = htmlspecialchars($_POST['message']);
+$message = 'Hellooo';
 
 
 
      #Ajout des champs dans un tableau
 
-     $champs = array();
+$champs = array();
 
-     array_push($champs, $nom, $prenom, $email, $message);
+array_push($champs, $nom, $prenom, $email, $message);
 
 
 
      #Envoie des données par mail
 
-     envoyer_donnees($mail_admin, $champs);
+envoyer_donnees($mail_admin, $champs);
 
 
 
-     #Redirection
-
-     header('Location:../form/form.html');
-
-     exit;
 
 
 

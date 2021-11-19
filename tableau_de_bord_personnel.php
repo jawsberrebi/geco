@@ -17,14 +17,38 @@ include("backend/conditions_accès_page_personnel_et_admin.php");
         <a href="#" class="nav-logo">Geco.</a>
 
         <ul>
-          <li><a class="active" href="#tableaudebord">Tableau de bord</a></li>
-          <li><a href="profil.php" id="profil">Profil</a></li>
+          <li><a class="active" href="tableau_de_bord_personnel.php">Tableau de bord</a></li>
+          <li><a href="modifier_mon_compte.php" id="profil">Modifier mon compte</a></li>
           <li><a href="deconnexion.php" id="deconnexion">Déconnexion</a></li>
         </ul>
 
     </nav>
 </header>
+<script>
+    /* Fonction permettant de montrer la liste d'action après un clique sur le bouton*/
+    function myFunction() {
+        document.getElementById("myDropdown").classList.toggle("show");
+    }
+
+    // Fonction permettant de fermer la liste d'action lors d'un clique en dehors de la liste
+    window.onclick = function(event) {
+        if (!event.target.matches('.dropbtn')) {
+
+            var dropdowns = document.getElementsByClassName("dropdown-content");
+            var i;
+            for (i = 0; i < dropdowns.length; i++) {
+            var openDropdown = dropdowns[i];
+            if (openDropdown.classList.contains('show')) {
+                openDropdown.classList.remove('show');
+            }
+            }
+        }
+    }
+</script>
 <body>
+    <h1>
+        Tableau de bord
+    </h1>
 
     <?php if (!isset($_SESSION['userPersonnel'])) {
 
@@ -34,13 +58,6 @@ include("backend/conditions_accès_page_personnel_et_admin.php");
           }
 
     ?>
-
-    <!-- MESSAGE D'ACCUEIL-->
-    <?php include("backend/message_accueil_tableau_de_bord.php"); ?> 
-    <!-- OPTION CONNEXION/DECONNEXION -->
-    <?php include("backend/fenetre_modale_tableau_de_bord.php"); ?>
-    <!-- FONCTIONNALITÉS ADMIN ET MÉDECIN -->
-    <?php include("backend/fonctionnalités_admin_medecin_tableau_de_bord_personnel.php") ?>
     <!-- FACTORISATION DES MESSAGES DU TABLEAU DE BORD -->
     <?php include("backend/messages_tableau_de_bord_personnel.php")?>
 
@@ -49,6 +66,13 @@ include("backend/conditions_accès_page_personnel_et_admin.php");
         <input type="submit" value="Rechercher" id="btn_recherche"/>
         <!-- AJOUTER UN FILTRE DE RECHERCHE EN FONCTIONNALITÉ SUPPLÉMENTAIRE -->
     </form>
+    <div class="dropdown">
+        <button onclick="myFunction()" class="dropbtn">Ajouter un membre</button>
+        <div id="myDropdown" class="dropdown-content">
+            <!-- FONCTIONNALITÉS ADMIN ET MÉDECIN -->
+            <?php include("backend/fonctionnalités_admin_medecin_tableau_de_bord_personnel.php") ?>
+        </div>
+</div>
 
 
 
@@ -58,12 +82,12 @@ include("backend/conditions_accès_page_personnel_et_admin.php");
     <table>
         <thead>
             <tr>
-                <th id="identifiant">Id          </th>
-                <th>Nom du membre           </th>
-                <th>Type de membre                                              </th>
-                <th>Rythme cardiaque            </th>
-                <th>Niveau sonore           </th>
-                <th>Concentration en CO2            </th>
+                <th id="identifiant">Id</th>
+                <th class="tab_personnel">Nom du membre</th>
+                <th class="tab_personnel">Type de membre</th>
+                <th class="tab_personnel">Rythme cardiaque</th>
+                <th class="tab_personnel">Niveau sonore</th>
+                <th class="tab_personnel">Concentration en CO2</th>
             </tr>
         </thead>
 

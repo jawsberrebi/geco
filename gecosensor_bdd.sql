@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : ven. 12 nov. 2021 à 15:42
+-- Généré le : sam. 13 nov. 2021 à 11:37
 -- Version du serveur :  8.0.21
--- Version de PHP : 7.3.21
+-- Version de PHP : 7.4.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -55,6 +55,29 @@ CREATE TABLE IF NOT EXISTS `gere` (
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `hopital`
+--
+
+DROP TABLE IF EXISTS `hopital`;
+CREATE TABLE IF NOT EXISTS `hopital` (
+  `id_hopital` int NOT NULL AUTO_INCREMENT,
+  `nom` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ville` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `adresse` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`id_hopital`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `hopital`
+--
+
+INSERT INTO `hopital` (`id_hopital`, `nom`, `ville`, `adresse`) VALUES
+(2, 'ok', 'ok', 'ok'),
+(3, 'No', 'Name', 'ded');
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `mesure`
 --
 
@@ -85,27 +108,19 @@ CREATE TABLE IF NOT EXISTS `patient` (
   `description` text NOT NULL,
   `mdp` varchar(256) NOT NULL,
   `nom_utilisateur` varchar(256) NOT NULL,
-  PRIMARY KEY (`id_patient`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `id_hopital` int NOT NULL,
+  PRIMARY KEY (`id_patient`),
+  KEY `id_hopital` (`id_hopital`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `patient`
 --
 
-INSERT INTO `patient` (`id_patient`, `prenom`, `nom`, `mail`, `tel`, `adresse`, `description`, `mdp`, `nom_utilisateur`) VALUES
-(6, 'Test', 'x', 'test@test.fr', 48484, '1 rue de la victoire', '', '736ecef54c44c0f3', 'tx'),
-(7, 't', 'test', 't@t.t', 0, '', '', '957b23c650170d3c', 'ttest'),
-(8, 'co', 'co', 'co@co.fr', 0, '', '', 'a9a9f44bfb74d660', 'cco'),
-(9, 'Bernard', 'Géralt', 'b@g.fr', 654, '24 rue des rosiers', 'Souffre d\'asthme', 'ef7456da8d42fd53', 'bg??ralt'),
-(12, 'éd', 'éd', 'd@d.fr', 0, '', '', 'f7228750d602b1cf', '?éd'),
-(14, 'Bertrand', 'Géralt', 'ber@ge.fr', 648, '12 rue des hérous des magiques', 'Souffre de folie', '', 'bgéralt'),
-(15, 'Johnny', 'Patient', 'j@p.fr', 0, '', '', 'sIjGjdh5', 'jpatient'),
-(16, 'Jer', 'Her', 'jer@gmail.com', 0, 'any', 'Aucune', 'm1lneESd', 'jher'),
-(17, 'Hashé', 'Le Patient', 'hash@hashed.fr', 0, 'Not', 'Not\r\n', '$2y$10$730vII9h7gTqiMPMmndtmeXmspU9Kh4CMYZLAZbCp1PUAiPUC29iq', 'hle patient'),
-(18, 'Mail', 'Envoi', 'yes@yes.yes', 0, '', '', '$2y$10$v5CQeR2DNf89LovEtnFqo.Jf42uWtXMu5IMFi/QALGLOjU/XCwFcS', 'menvoi'),
-(19, 'Vénèr', 'Test', 'ven@test.fr', 0, '', '', 'A5uoORGn', 'vtest'),
-(20, 'IDP', 'Test', 'id@id.fr', 0, '', '', '9INMXTMu', 'itest'),
-(21, 'stress', 'test', 's@t.fr', 0, '', '', 'FhguZ4ak', 'stest');
+INSERT INTO `patient` (`id_patient`, `prenom`, `nom`, `mail`, `tel`, `adresse`, `description`, `mdp`, `nom_utilisateur`, `id_hopital`) VALUES
+(1, 'Crève', 'Je', 'ok@ok.fr', 0, '', '', '$2y$10$TzQNUrq3DgQ7keWlcaS3QeqIsEJ8ZdMFqXYpST0aXyh6FjnB4wF7O', 'cje', 2),
+(2, '', '', '', 0, '', '', '', 'nimp', 3),
+(3, 'Pire', 'New', 'd@d.d', 0, '', '', '$2y$10$Ax1IoJgkDTz/yAQbN8MHMOvrMditY3xfbxsEG01TltopRpiirW4Ie', 'pnew', 3);
 
 -- --------------------------------------------------------
 
@@ -123,26 +138,25 @@ CREATE TABLE IF NOT EXISTS `personnel` (
   `type` varchar(256) NOT NULL,
   `mdp` text NOT NULL,
   `nom_utilisateur` varchar(256) NOT NULL,
-  `adresse` text NOT NULL,
-  `nom_hopital` text NOT NULL,
-  `ville` text NOT NULL,
-  PRIMARY KEY (`id_personnel`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `id_hopital` int NOT NULL,
+  PRIMARY KEY (`id_personnel`),
+  KEY `hopital_personnel` (`id_hopital`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `personnel`
 --
 
-INSERT INTO `personnel` (`id_personnel`, `prenom`, `nom`, `mail`, `tel`, `type`, `mdp`, `nom_utilisateur`, `adresse`, `nom_hopital`, `ville`) VALUES
-(1, 'Johnny', 'Doc', 'berjaws@gail.com', 60000000, 'medecin', 'root', 'jdoc', '', '', ''),
-(2, 'Johnny', 'Infirmier', 'no@yes.f', 60000000, 'infirmier', 'root', 'jinfirmier', '', '', ''),
-(3, 'De Vivre', 'Joie', 'joie@devivre.fr', 0, 'infirmier', '0517b37b9972ab8b', 'djoie', '', '', ''),
-(4, 'Brieuc', 'Henriot', 'brieuc@henriot.com', 6666, 'medecin', '4c2df1c6fa6c1c6b', 'bhenriot', '', '', ''),
-(7, 'Maxime', 'Héroult', 'max@her.fr', 0, 'infirmier', 'EyX3wqiR', 'mhéroult', '', '', ''),
-(9, 'You', 'Hey', 'Hey@You.fr', 0, 'infirmier', '4EGXxX30', 'yhey', '', '', ''),
-(10, 'Joseph', 'Admin', 'bs@gmail.com', 60606060, 'admin', 'root', 'admin', '1 Rue Paul Delaroche', 'Saint-Joseph', 'Paris'),
-(11, 'dac', 'oui', 'dac@gmail.com', 0, 'infirmier', 'Ckr1VdsV', 'doui', '', '', ''),
-(12, 'de', 'test', 'test@de.fr', 0, 'medecin', 'Oh6MSmv7', 'dtest', '', '', '');
+INSERT INTO `personnel` (`id_personnel`, `prenom`, `nom`, `mail`, `tel`, `type`, `mdp`, `nom_utilisateur`, `id_hopital`) VALUES
+(3, 'Johnny', 'Docteur', '', 0, 'medecin', 'root', 'jdoc', 2),
+(4, 'Statut', 'd\'Hivern', '', 0, 'admin', 'root', 'admin', 2),
+(6, '', '', '', 0, 'infirmier', 'root', 'jinfirmier', 2),
+(7, 'Suicide', 'Go', 'go@suicide.fr', 0, 'infirmier', '$2y$10$FktdlG5BZ/hyKmEXjy8YOOnnCrRjgzeAZ3ZYdUyhEBHIyqaZ29ygG', 'sgo', 2),
+(8, 'admi', '', '', 0, 'infirmier', 'papa', 'athenes', 3),
+(10, '', '', '', 0, 'admin', 'root', 'admindeux', 3),
+(11, '', '', '', 0, 'medecin', 'meux', 'docdeux', 3),
+(12, 'Inf', 'Un', 'j@j.fr', 0, 'infirmier', '$2y$10$j/i0TIK25nSnKNONzYnsNu8HHwTv1WbyGUah5wX2HW.bXsojx1AOW', 'iun', 3),
+(13, 'at', 'Sold', 'sol@dd.fr', 0, 'medecin', '$2y$10$S2wowCH.eaGMOBAmomEH.e21mSDHcC30rhW0ym4eU30FWfOKR35v6', 'asold', 3);
 
 -- --------------------------------------------------------
 
@@ -182,6 +196,18 @@ ALTER TABLE `gere`
 --
 ALTER TABLE `mesure`
   ADD CONSTRAINT `capteur_mesure` FOREIGN KEY (`id_capteur`) REFERENCES `capteur` (`id_capteur`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Contraintes pour la table `patient`
+--
+ALTER TABLE `patient`
+  ADD CONSTRAINT `hopital_patient` FOREIGN KEY (`id_hopital`) REFERENCES `hopital` (`id_hopital`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Contraintes pour la table `personnel`
+--
+ALTER TABLE `personnel`
+  ADD CONSTRAINT `hopital_personnel` FOREIGN KEY (`id_hopital`) REFERENCES `hopital` (`id_hopital`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `travaille_pour`

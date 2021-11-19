@@ -10,9 +10,21 @@ include('backend/conditions_id.php');
     <head>
         <meta charset="utf-8" />
         <link rel="stylesheet" href="css/style_tableau_de_bord_personnel.css" />
+        <link rel="stylesheet" href="css/navbar_pro.css">
         <title>Tableau de bord</title>
     </head>
+    <header>
+        <nav>
+            <a href="#" class="nav-logo">Geco.</a>
 
+            <ul>
+            <li><a class="active" href="tableau_de_bord_personnel.php">Tableau de bord</a></li>
+            <li><a href="modifier_mon_compte.php" id="profil">Modifier mon compte</a></li>
+            <li><a href="deconnexion.php" id="deconnexion">Déconnexion</a></li>
+            </ul>
+
+        </nav>  
+    </header>
     <body>
 
         <!--///////////////////////////////-->
@@ -28,6 +40,16 @@ include('backend/conditions_id.php');
         ?>
 
         <?php if(isset($_SESSION['userPersonnel'])) : ?>
+
+        <?php
+
+            if ($userPatientProfil['id_hopital'] != $_SESSION['userPersonnel']['id_hopital']) {
+                header('Location:tableau_de_bord_personnel?erreur=1.php');
+                exit();
+              }
+
+
+        ?>
 
         <?php if ($userPatientProfil == null) {
                 header('Location:tableau_de_bord_personnel?erreur=4.php');
@@ -108,6 +130,16 @@ include('backend/conditions_id.php');
 
         <?php if((isset($_SESSION['userPersonnel']) && ($_SESSION['userPersonnel']['type'] == 'admin')) || (isset($_SESSION['userPersonnel']) && ($_SESSION['userPersonnel']['type'] == 'medecin'))) : ?>
 
+        <?php
+
+            if ($userInfirmierProfil['id_hopital'] != $_SESSION['userPersonnel']['id_hopital']) {
+                header('Location:tableau_de_bord_personnel?erreur=1.php');
+                exit();
+            }
+
+
+        ?>
+
         <?php if ($userInfirmierProfil == null) {
                 header('Location:tableau_de_bord_personnel?erreur=4.php');
                 exit();
@@ -141,6 +173,15 @@ include('backend/conditions_id.php');
         ?>
 
         <?php if(isset($_SESSION['userPersonnel']) && $_SESSION['userPersonnel']['type'] == 'admin') :?>
+
+        <?php
+
+            if ($userMedecinProfil['id_hopital'] != $_SESSION['userPersonnel']['id_hopital']) {
+                header('Location:tableau_de_bord_personnel?erreur=1.php');
+                exit();
+            }
+
+        ?>
 
         <?php if ($userMedecinProfil == null) {
                 header('Location:tableau_de_bord_personnel?erreur=4.php');

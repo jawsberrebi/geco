@@ -31,18 +31,27 @@ if ($_SESSION['userPersonnel'] != 0) {
 
 //######VERIFICATION DE CONNEXION POUR LE PATIENT######\\
 
-$sql = "SELECT * FROM patient WHERE (nom_utilisateur='".$_POST['email_pseudo']."' OR mail='".$_POST['email_pseudo']."') AND mdp='".$_POST['password']."'";
+$sql = "SELECT * FROM patient WHERE (nom_utilisateur='".$_POST['email_pseudo']."' OR mail='".$_POST['email_pseudo']."')";
 $pre = $pdo->prepare($sql);
 $pre->execute();
-$user = current($pre->fetchAll(PDO::FETCH_ASSOC)); //current prend la première ligne du tableau
-$_SESSION['userPatient'] = $user; //on enregistre que l'utilisateur est connecté (on peut modif)
+$user = $pre->fetchAll(PDO::FETCH_ASSOC);
+var_dump($user);
 
-if ($_SESSION['userPatient'] != 0) {
+foreach($user as $users){
+    if(password_verify($_POST['password'], $users['mdp'])){
+
+        $_SESSION['userPatient'] = $users;
+
+        header('Location:tableau_de_bord_patient.php'); //MODIF LA PAGE
+        exit();
+    }
+}
+
+if (isset($_SESSION['userPatient'])) {
     header('Location:tableau_de_bord_patient.php'); //MODIF LA PAGE
     exit();
 
 }
-
 else {
     header('Location:connexion?erreur=1.php');
     exit();

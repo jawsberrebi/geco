@@ -11,8 +11,11 @@ $name = htmlspecialchars($_POST['nom']);
 $firstName = htmlspecialchars($_POST['prenom']);
 $password = passwordGenerator($pdo, 8); //Générateur de mot de passe aléatoire
 $userName = mb_strtolower(mb_substr($firstName, 0 , 1) . $name); //Générateur de nom d'utilisateur : 1ère lettre du prénom + nom. Remplacer $email par la variable contenant le prénom et $password par la variable contenant le nom.
+$hashedPassword = password_hash($password, PASSWORD_DEFAULT); //Hash du mot de passe
 $mail = htmlspecialchars($_POST['email']);
 $phone = htmlspecialchars($_POST['telephone']);
+$mailAdmin = "rd.berrebi@gmail.com";
+$idHospital = $_SESSION['userPersonnel']['id_hopital'];
 
 if (htmlspecialchars($_POST['type']) == 'patient') {
 
@@ -31,7 +34,7 @@ if (htmlspecialchars($_POST['type']) == 'patient') {
 
     //INSERER INFOS BDD
 
-    $sql = 'INSERT INTO patient(prenom, nom, mail, tel, adresse, description, mdp, nom_utilisateur) VALUES (:prenom, :nom, :mail, :tel, :adresse, :description, :mdp, :nom_utilisateur)';
+    $sql = 'INSERT INTO patient(prenom, nom, mail, tel, adresse, description, mdp, nom_utilisateur, id_hopital) VALUES (:prenom, :nom, :mail, :tel, :adresse, :description, :mdp, :nom_utilisateur, :id_hopital)';
     $pre = $pdo->prepare($sql);
     $pre->execute([
         'prenom' => $firstName,
@@ -40,8 +43,9 @@ if (htmlspecialchars($_POST['type']) == 'patient') {
         'tel' => $phone,
         'adresse' => $adresse,
         'description' => $description,
-        'mdp' => $password,
+        'mdp' => $hashedPassword,
         'nom_utilisateur' => $userName,
+        'id_hopital' => $idHospital
         ]);
 
     $sql = "SELECT MAX(id_patient) FROM patient";
@@ -70,7 +74,11 @@ if (htmlspecialchars($_POST['type']) == 'patient') {
     //    'type' => 'concentrationGaz',
     //    ]);
 
-    //DEVELOPPER FONCTIONNALITE D'ENVOI D'IDENTIFIANTS PAR MAIL ICI ET METTRE REDIRECTION VERS FORMULAIRE D'AJOUT SI ÇA MARCHE PAS, SI ÇA MARCHE REDIRIGER VERS LE TABLEAU DE BORD AVEC LE GET QUI AFFICHE MESSAGE DE CONFIRMATION
+    $champs = array();
+
+    array_push($champs, $mail, $userName, $password);
+
+    envoiIdentifiantsMail('rd.berrebi@gmail.com', $champs);
 
     header('Location:tableau_de_bord_personnel?confirmation=1.php');
     exit();
@@ -87,7 +95,7 @@ if (htmlspecialchars($_POST['type']) == 'patient') {
         exit();
     }
 
-    $sql = 'INSERT INTO personnel(prenom, nom, mail, tel, type, mdp, nom_utilisateur) VALUES (:prenom, :nom, :mail, :tel, :type, :mdp, :nom_utilisateur)';
+    $sql = 'INSERT INTO personnel(prenom, nom, mail, tel, type, mdp, nom_utilisateur, id_hopital) VALUES (:prenom, :nom, :mail, :tel, :type, :mdp, :nom_utilisateur, :id_hopital)';
     $pre = $pdo->prepare($sql);
     $pre->execute([
         'prenom' => $firstName,
@@ -95,8 +103,9 @@ if (htmlspecialchars($_POST['type']) == 'patient') {
         'mail' => $mail,
         'tel' => $phone,
         'type' => 'infirmier',
-        'mdp' => $password,
+        'mdp' => $hashedPassword,
         'nom_utilisateur' => $userName,
+        'id_hopital' => $idHospital
         ]);
 
     //DEVELOPPER FONCTIONNALITE D'ENVOI D'IDENTIFIANTS PAR MAIL ICI ET METTRE REDIRECTION VERS FORMULAIRE D'AJOUT SI ÇA MARCHE PAS, SI ÇA MARCHE REDIRIGER VERS LE TABLEAU DE BORD AVEC LE GET QUI AFFICHE MESSAGE DE CONFIRMATION
@@ -116,7 +125,7 @@ if (htmlspecialchars($_POST['type']) == 'patient') {
         exit();
     }
 
-    $sql = 'INSERT INTO personnel(prenom, nom, mail, tel, type, mdp, nom_utilisateur) VALUES (:prenom, :nom, :mail, :tel, :type, :mdp, :nom_utilisateur)';
+    $sql = 'INSERT INTO personnel(prenom, nom, mail, tel, type, mdp, nom_utilisateur, id_hopital) VALUES (:prenom, :nom, :mail, :tel, :type, :mdp, :nom_utilisateur, :id_hopital)';
     $pre = $pdo->prepare($sql);
     $pre->execute([
         'prenom' => $firstName,
@@ -124,8 +133,9 @@ if (htmlspecialchars($_POST['type']) == 'patient') {
         'mail' => $mail,
         'tel' => $phone,
         'type' => 'medecin',
-        'mdp' => $password,
+        'mdp' => $hashedPassword,
         'nom_utilisateur' => $userName,
+        'id_hopital' => $idHospital
         ]);
 
     //DEVELOPPER FONCTIONNALITE D'ENVOI D'IDENTIFIANTS PAR MAIL ICI ET METTRE REDIRECTION VERS FORMULAIRE D'AJOUT SI ÇA MARCHE PAS, SI ÇA MARCHE REDIRIGER VERS LE TABLEAU DE BORD AVEC LE GET QUI AFFICHE MESSAGE DE CONFIRMATION
