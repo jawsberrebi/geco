@@ -4,32 +4,28 @@ include('backend/fonctions.php');
 ?>
 
 <?php
-$sql = "SELECT id_capteur FROM capteur WHERE id_patient = 5 AND type = 'frequenceCardiaque'";
-$pre = $pdo->prepare($sql);
-$pre->execute();
-$idCapteurTab = $pre->fetchAll(PDO::FETCH_ASSOC);
-$idCapteur = $idCapteurTab[0]['id_capteur'];
+//
+// A very simple PHP example that sends a HTTP POST to a remote site
+//
 
-var_dump($idCapteur);
+$ch = curl_init();
 
-//RECUPERER DERNIERE VALEUR ENREGISTREE DES MESURES POUR COMPARER AVEC CELLE A ENTRER
-//$sql = "SELECT MAX(id_mesure) FROM mesure WHERE id_capteur = '".$idCapteur."'";
-$sql = "SELECT valeur FROM mesure ORDER BY id_capteur = '".$idCapteur."' DESC LIMIT 1";
-$pre = $pdo->prepare($sql);
-$pre->execute();
-$idCapteur = $pre->fetchAll(PDO::FETCH_ASSOC);
+curl_setopt($ch, CURLOPT_URL,"http://projets-tomcat.isep.fr:8080/appService/?ACTION=GETLOG&TEAM=G5A4");
+curl_setopt($ch, CURLOPT_HTTPGET, 1);
+curl_setopt($ch, CURLOPT_POSTFIELDS,
+            "postvar1=value1&postvar2=value2&postvar3=value3");
 
-var_dump($idCapteur[0]['valeur']);
+// In real life you should use something like:
+// curl_setopt($ch, CURLOPT_POSTFIELDS, 
+//          http_build_query(array('postvar1' => 'value1')));
 
-$sql = "SELECT id_capteur FROM capteur WHERE id_patient = 5 AND type = 'frequenceCardiaque'";
-$pre = $pdo->prepare($sql);
-$pre->execute();
-$idCapteurTab = $pre->fetchAll(PDO::FETCH_ASSOC);
+// Receive server response ...
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
-var_dump($idCapteurTab);
+$server_output = curl_exec($ch);
 
-$idCapteur = $idCapteurTab[0]['id_capteur'];
+curl_close ($ch);
 
-var_dump($idCapteur);
-
+// Further processing ...
+//if ($server_output == "OK") { ... } else { ... }
 ?>

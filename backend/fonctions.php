@@ -665,13 +665,13 @@ function getFrameValue($url) : string
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
     $data = curl_exec($ch);
     curl_close($ch);
-    echo "Raw Data:<br />";
-    var_dump($data);
+    //echo "Raw Data:<br />";
+    //var_dump($data);
 
     $data_tab = str_split($data,33);
-    echo "Tabular Data:<br />";
+    //echo "Tabular Data:<br />";
     for($i=0, $size=count($data_tab); $i<$size; $i++){
-        echo "Trame $i: $data_tab[$i]<br />";
+        //echo "Trame $i: $data_tab[$i]<br />";
     }
 
     end($data_tab);
