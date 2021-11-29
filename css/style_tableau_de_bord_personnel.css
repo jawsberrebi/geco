@@ -118,10 +118,10 @@ td {
 input[type = range] {
     -webkit-appearance: none;
     display: block;
-    margin-left: auto;
+    margin-left: 0;
     margin-right: auto;
     justify-content: center;
-    width: 90%;
+    width: 70%;
     background: #8B8B8B;
     height: 2px;
     outline: none;
@@ -135,6 +135,8 @@ input[type = range]::-webkit-slider-thumb {
     border-radius: 50%;
 }
 
+
+
 #curseur_rouge::-webkit-slider-thumb {
     border: 1px solid #AC0002;
 }
@@ -145,6 +147,36 @@ input[type = range]::-webkit-slider-thumb {
 
 #curseur_vert::-webkit-slider-thumb {
     border: 1px solid #37C394;
+}
+
+#bouton_rouge {
+    margin-left: 70%;
+    margin-top: -100%;
+    width: 30%;
+    border: none;
+    background: #AC0002;
+    border-radius: 10px;
+    color: white;
+}
+
+#bouton_bleu {
+    margin-left: 70%;
+    margin-top: -100%;
+    width: 30%;
+    border: none;
+    background: #43CCDD;
+    border-radius: 10px;
+    color: white;
+}
+
+#bouton_vert {
+    margin-left: 70%;
+    margin-top: -100%;
+    width: 30%;
+    border: none;
+    background: #37C394;
+    border-radius: 10px;
+    color: white;
 }
 
 .connexion{

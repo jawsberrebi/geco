@@ -22,6 +22,9 @@ list($t, $o, $r, $c, $n, $v, $a, $x, $year, $month, $day, $hour, $min, $sec) =
 sscanf($trame,"%1s%4s%1s%1s%2s%4s%4s%2s%4s%2s%2s%2s%2s%2s");
 //echo("<br />$t,$o,$r,$c,$n,$v,$a,$x,$year,$month,$day,$hour,$min,$sec<br />");
 
+//1 - G5A4 - 3 - "inserer type sensor (1 cractère) " - "logiquement id du patient (2 caractères)" - "valeur sensibilité (4 caractères)" - "timestamp (4 caractères)" - "checksum (2 caractères)" - 211108143513
+//1G5A41A00004200088220211122150724
+
 $numbTra = $t;
 $idPage = $o;
 $typeRequest = $r;
