@@ -63,22 +63,39 @@ include('backend/conditions_id.php');
                             Test
                         </p>
 
-                        <form method="post" action="backend/envoi_valeurs.php">
+                        <form method="post" action="backend/envoi_valeurs?id_patient=<?php echo $id ?>.php">
                             <input name="type" value="cardiaque" type="hidden"/>
                             <input type="range" min="0" max="100" id="curseur_rouge" name="valeur"/> <input type="submit" value="Envoyer" id="bouton_rouge"/>
                         </form>
 
+                        <?php 
+                            if(isset($_GET['confirmation'])){
+                                if($_GET['confirmation'] == 1){
+                                    echo '<p>La valeur de la sensibilité pour ce capteur a bien été modifiée</p>';
+                                }
+                            }
+                        ?>
                     </div>
+
+                    
 
                     <div class="cadran">
                         <p id="text">
                             Test
                         </p>
 
-                        <form method="post" action="backend/envoi_valeurs.php">
+                        <form method="post" action="backend/envoi_valeurs?id_patient=<?php echo $id ?>.php">
                             <input name="type" value="son" type="hidden"/>
                             <input type="range" min="0" max="100" id="curseur_bleu" name="valeur"/> <input type="submit" value="Envoyer" id="bouton_bleu"/>
                         </form>
+
+                        <?php 
+                            if(isset($_GET['confirmation'])){
+                                if($_GET['confirmation'] == 2){
+                                    echo '<p>La valeur de la sensibilité pour ce capteur a bien été modifiée</p>';
+                                }
+                            }
+                        ?>
                     </div>
 
                     <div class="cadran">
@@ -86,10 +103,18 @@ include('backend/conditions_id.php');
                             Test
                         </p>
                         
-                        <form method="post" action="backend/envoi_valeurs.php">
+                        <form method="post" action="backend/envoi_valeurs?id_patient=<?php echo $id ?>.php">
                             <input name="type" value="gaz" type="hidden"/>
                             <input type="range" min="0" max="100" id="curseur_vert" name="valeur"/> <input type="submit" value="Envoyer" id="bouton_vert"/>
                         </form>
+
+                        <?php 
+                            if(isset($_GET['confirmation'])){
+                                if($_GET['confirmation'] == 3){
+                                    echo '<p>La valeur de la sensibilité pour ce capteur a bien été modifiée</p>';
+                                }
+                            }
+                        ?>
                     </div>
                 </div>
             </div>

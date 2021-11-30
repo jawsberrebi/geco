@@ -20,9 +20,9 @@ $o = substr($trame,1,4);
 // décodage avec sscanf
 list($t, $o, $r, $c, $n, $v, $a, $x, $year, $month, $day, $hour, $min, $sec) =
 sscanf($trame,"%1s%4s%1s%1s%2s%4s%4s%2s%4s%2s%2s%2s%2s%2s");
-//echo("<br />$t,$o,$r,$c,$n,$v,$a,$x,$year,$month,$day,$hour,$min,$sec<br />");
+echo("<br />$t,$o,$r,$c,$n,$v,$a,$x,$year,$month,$day,$hour,$min,$sec<br />");
 
-//1 - G5A4 - 3 - "inserer type sensor (1 cractère) " - "logiquement id du patient (2 caractères)" - "valeur sensibilité (4 caractères)" - "timestamp (4 caractères)" - "checksum (2 caractères)" - 211108143513
+//1 - G5A4 - 1 - "inserer type sensor (1 caractère) " - "logiquement id du patient (2 caractères)" - "valeur sensibilité (4 caractères)" - "timestamp (4 caractères)" - "checksum (2 caractères)" - "année (4 caractères)" - "mois (2 caractères)" - "jour (2 caractères)" - "heure (2 caractères)" - "minute (2 caractères)" - "seconde (2 caractères)"
 //1G5A41A00004200088220211122150724
 
 $numbTra = $t;
@@ -92,7 +92,7 @@ if(6 == 6){ //Si l'ID du patient correspond bien avec l'ID de l'appareil du pati
 
     
     }
-    elseif($typeSensor == 'A'){
+    elseif($typeSensor == 'A'){ // Son
 
         //RECUPERE L'ID DU CAPTEUR À PARTIR DE L'ID PATIENT CORRESPONDANT
 
@@ -126,7 +126,7 @@ if(6 == 6){ //Si l'ID du patient correspond bien avec l'ID de l'appareil du pati
 
 
     }
-    elseif($typeSensor == 4){
+    elseif($typeSensor == 4){ //Gaz
 
         //RECUPERE L'ID DU CAPTEUR À PARTIR DE L'ID PATIENT CORRESPONDANT
 

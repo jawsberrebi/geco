@@ -41,7 +41,7 @@ if(isset($_GET['erreur'])){
         echo '<p class="message_erreur">Veuillez cliquer sur le bon bouton renvoyant au formulaire d\'ajout correspondant.</p>';
     }
     elseif($erreur==3) {
-        echo '<p class="message_erreur">Il y a eu une erreur lors de l\'envoi des informations. Veuillez r�essayer.</p>';
+        echo '<p class="message_erreur">Il y a eu une erreur lors de l\'envoi des informations. Veuillez réessayer.</p>';
     }
     elseif($erreur==4) {
         echo '<p class="message_erreur">La page que vous essayez d\'afficher n\'existe pas.</p>';

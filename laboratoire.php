@@ -32,24 +32,36 @@ include('backend/fonctions.php');
 
 <?php
 
-$curl = curl_init();
+$check = crc32('1G5A1330100990001');
+var_dump($check);
 
-curl_setopt_array($curl, array(
-  CURLOPT_URL => 'http://projets-tomcat.isep.fr:8080/appService/?ACTION=COMMAND&TEAM=G5A4&TRAME=1G5A43301009900017c20211108143513',
-  CURLOPT_RETURNTRANSFER => true,
-  CURLOPT_ENCODING => '',
-  CURLOPT_MAXREDIRS => 10,
-  CURLOPT_TIMEOUT => 0,
-  CURLOPT_FOLLOWLOCATION => true,
-  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-  CURLOPT_CUSTOMREQUEST => 'GET',
-));
+$deuxcheck = $check % 256;
+var_dump($deuxcheck);
+//$curl = curl_init();
 
-$response = curl_exec($curl);
+//curl_setopt_array($curl, array(
+//  CURLOPT_URL => 'http://projets-tomcat.isep.fr:8080/appService/?ACTION=COMMAND&TEAM=G5A4&TRAME=1G5A43301009900017c20211108143513',
+//  CURLOPT_RETURNTRANSFER => true,
+//  CURLOPT_ENCODING => '',
+//  CURLOPT_MAXREDIRS => 10,
+//  CURLOPT_TIMEOUT => 0,
+//  CURLOPT_FOLLOWLOCATION => true,
+//  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+//  CURLOPT_CUSTOMREQUEST => 'GET',
+//));
 
-curl_close($curl);
-echo $response;
+//$response = curl_exec($curl);
+
+//curl_close($curl);
+//echo $response;
 
 //1G5A43301009900017c20211108143513
 
+//$check = crc32('1G5A1330100990001');
+//var_dump($check);
+
+//$deuxcheck = $check % 256;
+//var_dump($deuxcheck);
+
+//1 - G5A4 - 1 - "inserer type sensor (1 caractère) " - "logiquement id du patient (2 caractères)" - "valeur sensibilité (4 caractères)" - "timestamp (4 caractères)" - "checksum (2 caractères)" - "année (4 caractères)" - "mois (2 caractères)" - "jour (2 caractères)" - "heure (2 caractères)" - "minute (2 caractères)" - "seconde (2 caractères)"
 ?>
