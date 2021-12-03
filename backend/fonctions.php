@@ -441,8 +441,7 @@ function dataResultsResearchTableMember(PDO $pdo, string $userType, string $supe
         <?php
             if(isset($superVariableGet) && !empty($superVariableGet)) {
                 $search = htmlspecialchars($superVariableGet);
-
-                $sql = 'SELECT * FROM patient WHERE prenom LIKE "%'.$search.'%" OR nom LIKE "%'.$search.'%" AND id_hopital = "'.$_SESSION['userPersonnel']['id_hopital'].'" ORDER BY id_patient DESC';
+                $sql = 'SELECT * FROM patient WHERE prenom LIKE (("%'.$search.'%") OR nom LIKE ("%'.$search.'%")) AND (id_hopital = "'.$_SESSION['userPersonnel']['id_hopital'].'") ORDER BY id_patient DESC';
                 $pre = $pdo->prepare($sql);
                 $pre->execute();
                 $searchResults = $pre->fetchAll(PDO::FETCH_ASSOC);
@@ -596,7 +595,8 @@ function dataResultsResearchTableMember(PDO $pdo, string $userType, string $supe
 
 <?php
 
-function envoiIdentifiantsMail($mail, $donnees) : void 
+
+function sendingIdsMail($mail, $donnees) : void 
 {
 
           $to = $mail;
@@ -653,6 +653,86 @@ function envoiIdentifiantsMail($mail, $donnees) : void
 
      }
 
+?>
+
+<?php 
+
+function getFrameValue($url) : string
+{
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, "http://projets-tomcat.isep.fr:8080/appService/?ACTION=GETLOG&TEAM=G5A4");
+    curl_setopt($ch, CURLOPT_HEADER, FALSE);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+    $data = curl_exec($ch);
+    curl_close($ch);
+    //echo "Raw Data:<br />";
+    //var_dump($data);
+
+    $data_tab = str_split($data,33);
+    //echo "Tabular Data:<br />";
+    for($i=0, $size=count($data_tab); $i<$size; $i++){
+        //echo "Trame $i: $data_tab[$i]<br />";
+    }
+
+    end($data_tab);
+    $lastValue = prev($data_tab);
+    $trame = $lastValue;
+
+    return $trame;
+}
+
+?>
+
+<?php 
+
+function sendingMailAlert($mail, $typeSensor, $value, $patientName) : void
+{
+    $to = $mail;
+
+    if($typeSensor == 'cardiaque'){
+       $unit = 'bpm';
+    }
+    elseif($typeSensor == 'sonore'){
+       $unit = 'dB';
+    }
+    elseif($typeSensor == 'de gaz'){
+       $unit = '%';
+    }
+          $subject = 'Attention ! La valeur du capteur ' . $typeSensor . ' du patient ' . $patientName . ' semble anormale';
+
+
+
+          $message = '
+
+          <html>
+
+           <head>
+
+           </head>
+
+           <body>
+
+               <p>La valeur du capteur ' . $typeSensor . ' de ' . $patientName . ' a excédée le maximum déterminé.</p>
+
+               <p>La dernière valeur enregistrée est de ' . $value . ' ' . $unit .'</p></br>
+
+           </body>
+
+          </html>
+
+          ';
+
+
+
+          $headers[] = 'MIME-Version: 1.0';
+
+          $headers[] = 'Content-type: text/html; charset=iso-8859-1';
+
+          //implode("\r\n", $headers)
+
+
+          mail($to, $subject, $message);
+}
 
 
 ?>

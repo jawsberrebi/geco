@@ -60,7 +60,7 @@ function passwordGenerator(PDO $pdo, int $length) : string
     <?php echo $user['nom'] . ', ' . $user['prenom']; ?>
 </h1>
 
-<?php if((isset($_SESSION['userPersonnel']) && ($_SESSION['userPersonnel']['type'] == 'admin')) || (isset($_SESSION['userPersonnel']) && ($_SESSION['userPersonnel']['type'] == 'medecin'))) : ?>
+<?php if((isset($_SESSION['userAdmin']) && $_SESSION['userAdmin']) || (isset($_SESSION['userPersonnel']) && ($_SESSION['userPersonnel']['type'] == 'medecin'))) : ?>
 
 <?php if($type == 'patient') : ?>
 <a href="backend/suppression?id_patient=<?php echo $user['id_patient'] ?>" id="supprimer">Supprimer 🗑 </a>
@@ -68,7 +68,7 @@ function passwordGenerator(PDO $pdo, int $length) : string
 <?php endif; ?>
 <?php endif; ?>
 
-<?php if((isset($_SESSION['userPersonnel']) && ($_SESSION['userPersonnel']['type'] == 'admin')) || (isset($_SESSION['userPersonnel']) && ($_SESSION['userPersonnel']['type'] == 'medecin'))) : ?>
+<?php if((isset($_SESSION['userAdmin']) && $_SESSION['userAdmin']) || (isset($_SESSION['userPersonnel']) && ($_SESSION['userPersonnel']['type'] == 'medecin'))) : ?>
 
 <?php if($type == 'infirmier') : ?>
 <a href="backend/suppression?id_infirmier=<?php echo $user['id_personnel'] ?>" id="supprimer">Supprimer 🗑 </a>
@@ -76,7 +76,7 @@ function passwordGenerator(PDO $pdo, int $length) : string
 <?php endif; ?>
 <?php endif; ?>
 
-<?php if((isset($_SESSION['userPersonnel']) && ($_SESSION['userPersonnel']['type'] == 'admin'))) : ?>
+<?php if(isset($_SESSION['userAdmin'])) : ?>
 
 <?php if($type == 'medecin') : ?>
 <a href="backend/suppression?id_medecin=<?php echo $user['id_personnel'] ?>" id="supprimer">Supprimer 🗑 </a>

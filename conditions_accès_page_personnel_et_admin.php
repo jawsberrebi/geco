@@ -1,5 +1,5 @@
 <?php
-if (!$_SESSION['userPersonnel']) {
+if (!$_SESSION['userAdmin'] && !$_SESSION['userPersonnel']) {
 
     if(isset($_SESSION['userPatient'])) {
 

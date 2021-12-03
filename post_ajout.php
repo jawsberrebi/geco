@@ -9,8 +9,8 @@ if (!isset($_POST['nom']) || !isset($_POST['prenom']) || !isset($_POST['email'])
 
 $name = htmlspecialchars($_POST['nom']);
 $firstName = htmlspecialchars($_POST['prenom']);
-$password = passwordGenerator($pdo, 8); //Générateur de mot de passe aléatoire
-$userName = mb_strtolower(mb_substr($firstName, 0 , 1) . $name); //Générateur de nom d'utilisateur : 1ère lettre du prénom + nom. Remplacer $email par la variable contenant le prénom et $password par la variable contenant le nom.
+$password = passwordGenerator($pdo, 8); //GÃ©nÃ©rateur de mot de passe alÃ©atoire
+$userName = mb_strtolower(mb_substr($firstName, 0 , 1) . $name); //GÃ©nÃ©rateur de nom d'utilisateur : 1Ã¨re lettre du prÃ©nom + nom. Remplacer $email par la variable contenant le prÃ©nom et $password par la variable contenant le nom.
 $hashedPassword = password_hash($password, PASSWORD_DEFAULT); //Hash du mot de passe
 $mail = htmlspecialchars($_POST['email']);
 $phone = htmlspecialchars($_POST['telephone']);
@@ -48,37 +48,38 @@ if (htmlspecialchars($_POST['type']) == 'patient') {
         'id_hopital' => $idHospital
         ]);
 
-    $sql = "SELECT MAX(id_patient) FROM patient";
+    $sql = 'SELECT MAX(id_patient) FROM patient';
     $pre = $pdo->prepare($sql);
     $pre->execute();
-    $idPatient = $pre->fetchAll(PDO::FETCH_ASSOC);
+    $idPatientTab = $pre->fetchAll(PDO::FETCH_ASSOC);
 
-    //$sql = 'INSERT INTO capteur(type, id_patient) VALUES (:type, :id_patient)';
-    //$pre = $pdo->prepare($sql);
-    //$pre->execute([
-    //    'id_patient' => $idPatient,
-    //    'type' => 'frequenceCardiaque',
-    //    ]);
+    $idPatient = $idPatientTab[0]['MAX(id_patient)'];
 
-    //$sql = 'INSERT INTO capteur(type, id_patient) VALUES (:type, :id_patient)';
-    //$pre = $pdo->prepare($sql);
-    //$pre->execute([
-    //    'id_patient' => $idPatient,
-    //    'type' => 'niveauSonore',
-    //    ]);
+    $sql = 'INSERT INTO capteur(id_patient, type) VALUES (:id_patient, :type)';
+    $pre = $pdo->prepare($sql);
+    $pre->execute([
+        'id_patient' => $idPatient,
+        'type' => 'frequenceCardiaque',
+        ]);
 
-    //$sql = 'INSERT INTO capteur(type, id_patient) VALUES (:type, :id_patient)';
-    //$pre = $pdo->prepare($sql);
-    //$pre->execute([
-    //    'id_patient' => $idPatient,
-    //    'type' => 'concentrationGaz',
-    //    ]);
+    $sql = 'INSERT INTO capteur(type, id_patient) VALUES (:type, :id_patient)';
+    $pre = $pdo->prepare($sql);
+    $pre->execute([
+        'id_patient' => $idPatient,
+        'type' => 'niveauSonore'
+        ]);
+
+    $sql = 'INSERT INTO capteur(type, id_patient) VALUES (:type, :id_patient)';
+    $pre = $pdo->prepare($sql);
+    $pre->execute([
+        'id_patient' => $idPatient,
+        'type' => 'concentrationGaz'
+        ]);
 
     $champs = array();
 
     array_push($champs, $mail, $userName, $password);
-
-    envoiIdentifiantsMail('rd.berrebi@gmail.com', $champs);
+    sendingIdsMail('rd.berrebi@gmail.com', $champs);
 
     header('Location:tableau_de_bord_personnel?confirmation=1.php');
     exit();
@@ -108,14 +109,18 @@ if (htmlspecialchars($_POST['type']) == 'patient') {
         'id_hopital' => $idHospital
         ]);
 
-    //DEVELOPPER FONCTIONNALITE D'ENVOI D'IDENTIFIANTS PAR MAIL ICI ET METTRE REDIRECTION VERS FORMULAIRE D'AJOUT SI ÇA MARCHE PAS, SI ÇA MARCHE REDIRIGER VERS LE TABLEAU DE BORD AVEC LE GET QUI AFFICHE MESSAGE DE CONFIRMATION
+    $champs = array();
+
+    array_push($champs, $mail, $userName, $password);
+
+    sendingIdsMail('rd.berrebi@gmail.com', $champs);
 
     header('Location:tableau_de_bord_personnel?confirmation=2.php');
     exit();
 
 } elseif (htmlspecialchars($_POST['type']) == 'medecin') {
 
-    $sql = "SELECT * FROM personnel WHERE mail='".$mail."'"; //UN INFIRMIER PEUT-IL AVOIR À LA FOIS UN COMPTE MEDECIN ET UN COMPTE INFIRMIER ?
+    $sql = "SELECT * FROM personnel WHERE mail='".$mail."'"; //UN INFIRMIER PEUT-IL AVOIR Ã€ LA FOIS UN COMPTE MEDECIN ET UN COMPTE INFIRMIER ?
     $pre = $pdo->prepare($sql);
     $pre->execute();
     $user = current($pre->fetchAll(PDO::FETCH_ASSOC));
@@ -138,7 +143,11 @@ if (htmlspecialchars($_POST['type']) == 'patient') {
         'id_hopital' => $idHospital
         ]);
 
-    //DEVELOPPER FONCTIONNALITE D'ENVOI D'IDENTIFIANTS PAR MAIL ICI ET METTRE REDIRECTION VERS FORMULAIRE D'AJOUT SI ÇA MARCHE PAS, SI ÇA MARCHE REDIRIGER VERS LE TABLEAU DE BORD AVEC LE GET QUI AFFICHE MESSAGE DE CONFIRMATION
+    $champs = array();
+
+    array_push($champs, $mail, $userName, $password);
+
+    sendingIdsMail('rd.berrebi@gmail.com', $champs);
 
     header('Location:tableau_de_bord_personnel?confirmation=3.php');
     exit();

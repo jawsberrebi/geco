@@ -3,59 +3,20 @@
 include_once("config.php");
 include('fonctions.php');
 
+$idPatient = $_SESSION['userPatient']['id_patient'];
+$url = "http://projets-tomcat.isep.fr:8080/appService/?ACTION=GETLOG&TEAM=G5A4";
+//Récupération séquence en hexadécimal
+$trame = getFrameValue($url);
 
-$ch = curl_init();
-curl_setopt($ch, CURLOPT_URL, "http://projets-tomcat.isep.fr:8080/appService/?ACTION=GETLOG&TEAM=G5A4");
-curl_setopt($ch, CURLOPT_HEADER, FALSE);
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-$data = curl_exec($ch);
-curl_close($ch);
-echo "Raw Data:<br />";
-var_dump($data);
+//var_dump($trame);
 
-$data_tab = str_split($data,33);
-echo "Tabular Data:<br />";
-for($i=0, $size=count($data_tab); $i<$size; $i++){
-    echo "Trame $i: $data_tab[$i]<br />";
-}
-
-$lastValue = end($data_tab);
-$trame = $lastValue;
-
-//for($n = 0; $n != -1; $n++) {
-
-//    $trame = $data_tab[$n];
-
-//    if(empty($data_tab[$n])) {
-//        $trame = $data_tab[$n - 1];
-//    }
-
-//}
-
-//set_time_limit(60);
-//$start = time();
-
-//for ($i = 0; $i < 59; ++$i) {
-
-//    if(!empty($trame[i])){
-//        $trame = $data_tab[i];
-//    }
-//    else{
-//        $i = $i - 1;
-//        $trame = $data_tab[$i];
-//    }
-
-//    time_sleep_until($start + $i + 1);
-//}
-
-
-//d�codage avec des substring
+//décodage avec des substring
 $t = substr($trame,0,1);
 $o = substr($trame,1,4);
 
 // $o = valeur de la trame
 
-// d�codage avec sscanf
+// décodage avec sscanf
 list($t, $o, $r, $c, $n, $v, $a, $x, $year, $month, $day, $hour, $min, $sec) =
 sscanf($trame,"%1s%4s%1s%1s%2s%4s%4s%2s%4s%2s%2s%2s%2s%2s");
 echo("<br />$t,$o,$r,$c,$n,$v,$a,$x,$year,$month,$day,$hour,$min,$sec<br />");
@@ -64,80 +25,211 @@ $numbTra = $t;
 $idPage = $o;
 $typeRequest = $r;
 $typeSensor = $c;
-$numbSensor = $n;
+$numbSensor = $n; //Numéro d'appareil. Sera associé à l'ID du patient [RÉGLER CE SOUCI : PEU D'ESPACE DANS LA TRAME, ON PEUT FAIRE ÇA QUE SUR 2 CARACTERES GRAND MAX]
 $value = $v;
 $tim = $a;
 $checkseum = $x;
 $date = $day . '-' . $month . '-' . $year;
 $dateTimestamp = strtotime($date);
 
-// Pas besoin de r�cup�rer l'ID Patient ?
-//$sql = 'SELECT id_patient FROM patient';
-//$pre = $pdo->prepare($sql);
-//$pre->execute();
-//$idPatient = $pre->fetchAll(PDO::FETCH_ASSOC);
+//var_dump($typeSensor);
+//var_dump($dateTimestamp);
+
+$finalDate = date('Y-m-d', $dateTimestamp);
+
+//var_dump($finalDate);
+
+$finalTime = $hour . ':' . $min . ':' . $sec;
+
+//var_dump($finalTime);
+
+$finalDateTime = $finalDate . ' ' . $finalTime;
+
+//var_dump($finalDateTime);
+
+if(6 == 6){ //Si l'ID du patient correspond bien avec l'ID de l'appareil du patient, pour l'instant ne marche pas, mettre 00
+    // Valeurs du simulateur, $typeSensor renvoie le type de capteur
+    // 7 ---> fréquence cardiaque
+    // A ---> son
+    // 4 --> gaz
+
+    if($typeSensor == 7){ //Remplacer par 7 pour avoir le capteur fréquence cardiaque
+
+        //RECUPERE L'ID DU CAPTEUR À PARTIR DE L'ID PATIENT CORRESPONDANT
+
+        $sql = "SELECT id_capteur FROM capteur WHERE id_patient = '".$idPatient."' AND type = 'frequenceCardiaque'";
+        $pre = $pdo->prepare($sql);
+        $pre->execute();
+        $idCapteurTab = $pre->fetchAll(PDO::FETCH_ASSOC);
+        $idCapteur = $idCapteurTab[0]['id_capteur'];
+      
+        //var_dump($idCapteur);
 
 
+        //RECUPERER DERNIERE VALEUR ENREGISTREE DES MESURES POUR COMPARER AVEC CELLE A ENTRER
+        $sql = "SELECT valeur FROM mesure ORDER BY id_capteur = '".$idCapteur."' DESC LIMIT 1";
+        $pre = $pdo->prepare($sql);
+        $pre->execute();
+        $lastValueDataBase = $pre->fetchAll(PDO::FETCH_ASSOC);
+        $lastValueDataBase = $lastValueDataBase[0]['valeur'];
 
-// Valeurs du simulateur, $c renvoie le type de capteur
-// 7 ---> fr�quence cardiaque
-//A ---> son
-// 4 --> Gaz
+        //var_dump($lastValueDataBase);
 
-//if($c == 7){
-
-//    $sql = "SELECT id_capteur FROM capteur WHERE id_patient = '".$_SESSION['userPatient']['id_patient']."' AND type = frequenceCardiaque";
-//    $pre = $pdo->prepare($sql);
-//    $pre->execute();
-//    $idCapteur = $pre->fetchAll(PDO::FETCH_ASSOC);
-
-
-//    $sql = 'INSERT INTO mesure(valeur, date, id_capteur) VALUES (:valeur, :date, :id_capteur)';
-//    $pre = $pdo->prepare($sql);
-//    $pre->execute([
-//        'valeur' => $value,
-//        'date' => $dateTimestamp,
-//        'id_capteur' => $idCapteur,
-//        ]);
-//}
-//elseif($c == 'A'){
-
-//    $sql = "SELECT id_capteur FROM capteur WHERE id_patient = '".$_SESSION['userPatient']['id_patient']."' AND type = niveauSonore";
-//    $pre = $pdo->prepare($sql);
-//    $pre->execute();
-//    $idCapteur = $pre->fetchAll(PDO::FETCH_ASSOC);
+        if($value != $lastValueDataBase){ //SUPPRIMER le [0]['valeur']
+            $sql = 'INSERT INTO mesure(valeur, date_heure, id_capteur) VALUES (:valeur, :date_heure, :id_capteur)';
+            $pre = $pdo->prepare($sql);
+            $pre->execute([
+            'valeur' => $value,
+            'date_heure' => $finalDateTime,
+            'id_capteur' => $idCapteur, //Remplacer par $idCapteur
+            ]);
 
 
-//    $sql = 'INSERT INTO mesure(valeur, date, id_capteur) VALUES (:valeur, :date, :id_capteur)';
-//    $pre = $pdo->prepare($sql);
-//    $pre->execute([
-//        'valeur' => $value,
-//        'date' => $dateTimestamp,
-//        'id_capteur' => $idCapteur,
-//        ]);
+            //Envoi de l'alerte mail
+            if($value > 120){
+                //Préparation du mail pour l'envoi de l'alerte
+
+                $sql = "SELECT prenom, nom, id_hopital FROM patient WHERE id_patient = '".$idPatient."'";
+                $pre = $pdo->prepare($sql);
+                $pre->execute();
+                $infos = $pre->fetchAll(PDO::FETCH_ASSOC);
+
+                $firstName= $infos[0]['prenom'];
+                $lastName = $infos[0]['nom'];
+                $idHospital = $infos[0]['id_hopital'];
+
+                $sql = "SELECT mail FROM personnel WHERE id_hopital = '".$idHospital."'";
+                $pre = $pdo->prepare($sql);
+                $pre->execute();
+                $mails = $pre->fetchAll(PDO::FETCH_ASSOC);
+
+                //On envoie à  tous le personnel de l'hôpital correspondant 
+                foreach($mails as $mail){
+                    sendingMailAlert($mail['mail'], 'cardiaque', $value, $firstName . $lastName);
+                }
+                
+            }
+            
+        }
 
 
-//}
-//elseif($c == 4){
+    }
+    elseif($typeSensor == 'A'){ // Son
 
-//    $sql = "SELECT id_capteur FROM capteur WHERE id_patient = '".$_SESSION['userPatient']['id_patient']."' AND type = concentrationGaz";
-//    $pre = $pdo->prepare($sql);
-//    $pre->execute();
-//    $idCapteur = $pre->fetchAll(PDO::FETCH_ASSOC);
+        //RECUPERE L'ID DU CAPTEUR À PARTIR DE L'ID PATIENT CORRESPONDANT
 
+        $sql = "SELECT id_capteur FROM capteur WHERE id_patient = '".$idPatient."' AND type = 'niveauSonore'";
+        $pre = $pdo->prepare($sql);
+        $pre->execute();
+        $idCapteurTab = $pre->fetchAll(PDO::FETCH_ASSOC);
+        $idCapteur = $idCapteurTab[0]['id_capteur'];
 
-//    $sql = 'INSERT INTO mesure(valeur, date, id_capteur) VALUES (:valeur, :date, :id_capteur)';
-//    $pre = $pdo->prepare($sql);
-//    $pre->execute([
-//        'valeur' => $value,
-//        'date' => $dateTimestamp,
-//        'id_capteur' => $idCapteur,
-//        ]);
+        //var_dump($idCapteur);
 
 
-//}
+        //RECUPERER DERNIERE VALEUR ENREGISTREE DES MESURES POUR COMPARER AVEC CELLE A ENTRER
+        $sql = "SELECT valeur FROM mesure ORDER BY id_capteur = '".$idCapteur."' DESC LIMIT 1";
+        $pre = $pdo->prepare($sql);
+        $pre->execute();
+        $lastValueDataBase = $pre->fetchAll(PDO::FETCH_ASSOC);
+        $lastValueDataBase = $lastValueDataBase[0]['valeur'];
+
+        //var_dump($lastValueDataBase);
+
+        if($value != $lastValueDataBase){ //SUPPRIMER le [0]['valeur']
+            $sql = 'INSERT INTO mesure(valeur, date_heure, id_capteur) VALUES (:valeur, :date_heure, :id_capteur)';
+            $pre = $pdo->prepare($sql);
+            $pre->execute([
+            'valeur' => $value,
+            'date_heure' => $finalDateTime,
+            'id_capteur' => $idCapteur, //Remplacer par $idCapteur
+            ]);
+
+            //Envoi de l'alerte mail
+            if($value > 70){
+                //Préparation du mail pour l'envoi de l'alerte
+
+                $sql = "SELECT prenom, nom, id_hopital FROM patient WHERE id_patient = '".$idPatient."'";
+                $pre = $pdo->prepare($sql);
+                $pre->execute();
+                $infos = $pre->fetchAll(PDO::FETCH_ASSOC);
+
+                $firstName= $infos[0]['prenom'];
+                $lastName = $infos[0]['nom'];
+                $idHospital = $infos[0]['id_hopital'];
+
+                $sql = "SELECT mail FROM personnel WHERE id_hopital = '".$idHospital."'";
+                $pre = $pdo->prepare($sql);
+                $pre->execute();
+                $mails = $pre->fetchAll(PDO::FETCH_ASSOC);
+
+                //On envoie à  tous le personnel de l'hôpital correspondant 
+                foreach($mails as $mail){
+                    sendingMailAlert($mail['mail'], 'sonore', $value, $firstName . $lastName);
+                }
+                
+            }
+        }
+
+    }
+    elseif($typeSensor == 4){ //Gaz
+
+        //RECUPERE L'ID DU CAPTEUR À PARTIR DE L'ID PATIENT CORRESPONDANT
+
+        $sql = "SELECT id_capteur FROM capteur WHERE id_patient = '".$idPatient."' AND type = 'concentrationGaz'";
+        $pre = $pdo->prepare($sql);
+        $pre->execute();
+        $idCapteurTab = $pre->fetchAll(PDO::FETCH_ASSOC);
+        $idCapteur = $idCapteurTab[0]['id_capteur'];
+
+        //var_dump($idCapteur);
 
 
+        //RECUPERER DERNIERE VALEUR ENREGISTREE DES MESURES POUR COMPARER AVEC CELLE A ENTRER
+        $sql = "SELECT valeur FROM mesure ORDER BY id_capteur = '".$idCapteur."' DESC LIMIT 1";
+        $pre = $pdo->prepare($sql);
+        $pre->execute();
+        $lastValueDataBase = $pre->fetchAll(PDO::FETCH_ASSOC);
+        $lastValueDataBase = $lastValueDataBase[0]['valeur'];
 
+        //var_dump($lastValueDataBase);
 
+        if($value != $lastValueDataBase){ //SUPPRIMER le [0]['valeur']
+            $sql = 'INSERT INTO mesure(valeur, date_heure, id_capteur) VALUES (:valeur, :date_heure, :id_capteur)';
+            $pre = $pdo->prepare($sql);
+            $pre->execute([
+            'valeur' => $value,
+            'date_heure' => $finalDateTime,
+            'id_capteur' => $idCapteur, //Remplacer par $idCapteur
+            ]);
+
+            //Envoi de l'alerte mail
+            if($value > 1.3){
+                //Préparation du mail pour l'envoi de l'alerte
+
+                $sql = "SELECT prenom, nom, id_hopital FROM patient WHERE id_patient = '".$idPatient."'";
+                $pre = $pdo->prepare($sql);
+                $pre->execute();
+                $infos = $pre->fetchAll(PDO::FETCH_ASSOC);
+
+                $firstName= $infos[0]['prenom'];
+                $lastName = $infos[0]['nom'];
+                $idHospital = $infos[0]['id_hopital'];
+
+                $sql = "SELECT mail FROM personnel WHERE id_hopital = '".$idHospital."'";
+                $pre = $pdo->prepare($sql);
+                $pre->execute();
+                $mails = $pre->fetchAll(PDO::FETCH_ASSOC);
+
+                //On envoie à  tous le personnel de l'hôpital correspondant 
+                foreach($mails as $mail){
+                    sendingMailAlert($mail['mail'], 'de gaz', $value, $firstName . $lastName);
+                }
+                
+            }
+        }
+
+        //INSÉRER LA FONCTION MAIL POUR L'ENVOI D'ALERTE
+    }
+}
 ?>

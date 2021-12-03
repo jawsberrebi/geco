@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS `capteur` (
   `id_patient` int NOT NULL,
   PRIMARY KEY (`id_capteur`),
   KEY `patient_capteur` (`id_patient`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -50,7 +50,30 @@ CREATE TABLE IF NOT EXISTS `gere` (
   PRIMARY KEY (`id_gere`),
   KEY `personnel_capteur` (`id_personnel`),
   KEY `capteur_personnel` (`id_capteur`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `hopital`
+--
+
+DROP TABLE IF EXISTS `hopital`;
+CREATE TABLE IF NOT EXISTS `hopital` (
+  `id_hopital` int NOT NULL AUTO_INCREMENT,
+  `nom` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ville` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `adresse` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`id_hopital`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `hopital`
+--
+
+INSERT INTO `hopital` (`id_hopital`, `nom`, `ville`, `adresse`) VALUES
+(2, 'ok', 'ok', 'ok'),
+(3, 'No', 'Name', 'ded');
 
 -- --------------------------------------------------------
 
@@ -89,7 +112,7 @@ CREATE TABLE IF NOT EXISTS `mesure` (
   `id_capteur` int NOT NULL,
   PRIMARY KEY (`id_mesure`),
   KEY `capteur_mesure` (`id_capteur`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -172,7 +195,7 @@ CREATE TABLE IF NOT EXISTS `travaille_pour` (
   PRIMARY KEY (`id_travaille_pour`),
   KEY `patient_personnel` (`id_patient`),
   KEY `personnel_patient` (`id_personnel`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Contraintes pour les tables déchargées
