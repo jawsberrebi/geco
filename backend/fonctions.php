@@ -682,3 +682,57 @@ function getFrameValue($url) : string
 }
 
 ?>
+
+<?php 
+
+function sendingMailAlert($mail, $typeSensor, $value, $patientName) : void
+{
+    $to = $mail;
+
+    if($typeSensor == 'cardiaque'){
+       $unit = 'bpm';
+    }
+    elseif($typeSensor == 'sonore'){
+       $unit = 'dB';
+    }
+    elseif($typeSensor == 'de gaz'){
+       $unit = '%';
+    }
+          $subject = 'Attention ! La valeur du capteur ' . $typeSensor . ' du patient ' . $patientName . ' semble anormale';
+
+
+
+          $message = '
+
+          <html>
+
+           <head>
+
+           </head>
+
+           <body>
+
+               <p>La valeur du capteur ' . $typeSensor . ' de ' . $patientName . ' a excédée le maximum déterminé.</p>
+
+               <p>La dernière valeur enregistrée est de ' . $value . ' ' . $unit .'</p></br>
+
+           </body>
+
+          </html>
+
+          ';
+
+
+
+          $headers[] = 'MIME-Version: 1.0';
+
+          $headers[] = 'Content-type: text/html; charset=iso-8859-1';
+
+          //implode("\r\n", $headers)
+
+
+          mail($to, $subject, $message);
+}
+
+
+?>

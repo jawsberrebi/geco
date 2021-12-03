@@ -22,14 +22,11 @@ list($t, $o, $r, $c, $n, $v, $a, $x, $year, $month, $day, $hour, $min, $sec) =
 sscanf($trame,"%1s%4s%1s%1s%2s%4s%4s%2s%4s%2s%2s%2s%2s%2s");
 echo("<br />$t,$o,$r,$c,$n,$v,$a,$x,$year,$month,$day,$hour,$min,$sec<br />");
 
-//1 - G5A4 - 1 - "inserer type sensor (1 caractère) " - "logiquement id du patient (2 caractères)" - "valeur sensibilité (4 caractères)" - "timestamp (4 caractères)" - "checksum (2 caractères)" - "année (4 caractères)" - "mois (2 caractères)" - "jour (2 caractères)" - "heure (2 caractères)" - "minute (2 caractères)" - "seconde (2 caractères)"
-//1G5A41A00004200088220211122150724
-
 $numbTra = $t;
 $idPage = $o;
 $typeRequest = $r;
 $typeSensor = $c;
-$numbSensor = $n; //Numéro d'appareil. Sera associé à l'ID du patient
+$numbSensor = $n; //Numéro d'appareil. Sera associé à l'ID du patient [RÉGLER CE SOUCI : PEU D'ESPACE DANS LA TRAME, ON PEUT FAIRE ÇA QUE SUR 2 CARACTERES GRAND MAX]
 $value = $v;
 $tim = $a;
 $checkseum = $x;
@@ -88,9 +85,36 @@ if(6 == 6){ //Si l'ID du patient correspond bien avec l'ID de l'appareil du pati
             'date_heure' => $finalDateTime,
             'id_capteur' => $idCapteur, //Remplacer par $idCapteur
             ]);
+
+
+            //Envoi de l'alerte mail
+            if($value > 120){
+                //Préparation du mail pour l'envoi de l'alerte
+
+                $sql = "SELECT prenom, nom, id_hopital FROM patient WHERE id_patient = '".$idPatient."'";
+                $pre = $pdo->prepare($sql);
+                $pre->execute();
+                $infos = $pre->fetchAll(PDO::FETCH_ASSOC);
+
+                $firstName= $infos[0]['prenom'];
+                $lastName = $infos[0]['nom'];
+                $idHospital = $infos[0]['id_hopital'];
+
+                $sql = "SELECT mail FROM personnel WHERE id_hopital = '".$idHospital."'";
+                $pre = $pdo->prepare($sql);
+                $pre->execute();
+                $mails = $pre->fetchAll(PDO::FETCH_ASSOC);
+
+                //On envoie à  tous le personnel de l'hôpital correspondant 
+                foreach($mails as $mail){
+                    sendingMailAlert($mail['mail'], 'cardiaque', $value, $firstName . $lastName);
+                }
+                
+            }
+            
         }
 
-    
+
     }
     elseif($typeSensor == 'A'){ // Son
 
@@ -122,8 +146,32 @@ if(6 == 6){ //Si l'ID du patient correspond bien avec l'ID de l'appareil du pati
             'date_heure' => $finalDateTime,
             'id_capteur' => $idCapteur, //Remplacer par $idCapteur
             ]);
-        }
 
+            //Envoi de l'alerte mail
+            if($value > 70){
+                //Préparation du mail pour l'envoi de l'alerte
+
+                $sql = "SELECT prenom, nom, id_hopital FROM patient WHERE id_patient = '".$idPatient."'";
+                $pre = $pdo->prepare($sql);
+                $pre->execute();
+                $infos = $pre->fetchAll(PDO::FETCH_ASSOC);
+
+                $firstName= $infos[0]['prenom'];
+                $lastName = $infos[0]['nom'];
+                $idHospital = $infos[0]['id_hopital'];
+
+                $sql = "SELECT mail FROM personnel WHERE id_hopital = '".$idHospital."'";
+                $pre = $pdo->prepare($sql);
+                $pre->execute();
+                $mails = $pre->fetchAll(PDO::FETCH_ASSOC);
+
+                //On envoie à  tous le personnel de l'hôpital correspondant 
+                foreach($mails as $mail){
+                    sendingMailAlert($mail['mail'], 'sonore', $value, $firstName . $lastName);
+                }
+                
+            }
+        }
 
     }
     elseif($typeSensor == 4){ //Gaz
@@ -156,15 +204,34 @@ if(6 == 6){ //Si l'ID du patient correspond bien avec l'ID de l'appareil du pati
             'date_heure' => $finalDateTime,
             'id_capteur' => $idCapteur, //Remplacer par $idCapteur
             ]);
+
+            //Envoi de l'alerte mail
+            if($value > 1.3){
+                //Préparation du mail pour l'envoi de l'alerte
+
+                $sql = "SELECT prenom, nom, id_hopital FROM patient WHERE id_patient = '".$idPatient."'";
+                $pre = $pdo->prepare($sql);
+                $pre->execute();
+                $infos = $pre->fetchAll(PDO::FETCH_ASSOC);
+
+                $firstName= $infos[0]['prenom'];
+                $lastName = $infos[0]['nom'];
+                $idHospital = $infos[0]['id_hopital'];
+
+                $sql = "SELECT mail FROM personnel WHERE id_hopital = '".$idHospital."'";
+                $pre = $pdo->prepare($sql);
+                $pre->execute();
+                $mails = $pre->fetchAll(PDO::FETCH_ASSOC);
+
+                //On envoie à  tous le personnel de l'hôpital correspondant 
+                foreach($mails as $mail){
+                    sendingMailAlert($mail['mail'], 'de gaz', $value, $firstName . $lastName);
+                }
+                
+            }
         }
 
-
+        //INSÉRER LA FONCTION MAIL POUR L'ENVOI D'ALERTE
     }
 }
-
-
-
-
-
-
 ?>

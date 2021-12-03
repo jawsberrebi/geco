@@ -12,7 +12,9 @@ if(!isset($_GET['id_patient'])){
 
 ////// CRÉATION DE LA TRAME D'ENVOI
 
-$beginingFrame = "1G5A1"; //Début de la chaîne où on spécifie le nom du fichier log, et le type de requête voulue, ici requête en écriture
+// Chose incertaines : création du checksum (à priori fait 2 caractères mais dans ce code il en fait 3) et régler le souci de l'ID du patient lié au numéro ID de la carte électronique
+
+$beginingFrame = "1G5A41"; //Début de la chaîne où on spécifie le nom du fichier log, et le type de requête voulue, ici requête en écriture
 $valueSensorSensitivity = htmlspecialchars($_POST['type']); //Type de capteur
 
 //Assignation du type de capteur pour la trame (on a assigne la valeur du int ou string correspondante à la valeur du type de capteur

@@ -32,11 +32,11 @@ include('backend/fonctions.php');
 
 <?php
 
-$check = crc32('1G5A1330100990001');
-var_dump($check);
+//$check = crc32('1G5A1330100990001');
+//var_dump($check);
 
-$deuxcheck = $check % 256;
-var_dump($deuxcheck);
+//$deuxcheck = $check % 256;
+//var_dump($deuxcheck);
 //$curl = curl_init();
 
 //curl_setopt_array($curl, array(
@@ -64,4 +64,24 @@ var_dump($deuxcheck);
 //var_dump($deuxcheck);
 
 //1 - G5A4 - 1 - "inserer type sensor (1 caractère) " - "logiquement id du patient (2 caractères)" - "valeur sensibilité (4 caractères)" - "timestamp (4 caractères)" - "checksum (2 caractères)" - "année (4 caractères)" - "mois (2 caractères)" - "jour (2 caractères)" - "heure (2 caractères)" - "minute (2 caractères)" - "seconde (2 caractères)"
+?>
+
+<?php 
+
+$idHospital = 2;
+
+$sql = "SELECT mail FROM personnel WHERE id_hopital = '".$idHospital."'";
+$pre = $pdo->prepare($sql);
+$pre->execute();
+$mails = $pre->fetchAll(PDO::FETCH_ASSOC);
+
+var_dump($mails);
+
+foreach($mails as $mail){
+
+    echo $mail['mail'];
+}
+
+
+
 ?>
