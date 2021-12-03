@@ -10,9 +10,21 @@ include('backend/conditions_id.php');
     <head>
         <meta charset="utf-8" />
         <link rel="stylesheet" href="css/style_tableau_de_bord_personnel.css" />
+        <link rel="stylesheet" href="css/navbar_pro.css">
         <title>Tableau de bord</title>
     </head>
+    <header>
+        <nav>
+            <a href="#" class="nav-logo">Geco.</a>
 
+            <ul>
+            <li><a class="active" href="tableau_de_bord_personnel.php">Tableau de bord</a></li>
+            <li><a href="modifier_mon_compte.php" id="profil">Modifier mon compte</a></li>
+            <li><a href="deconnexion.php" id="deconnexion">Déconnexion</a></li>
+            </ul>
+
+        </nav>  
+    </header>
     <body>
 
         <!--///////////////////////////////-->

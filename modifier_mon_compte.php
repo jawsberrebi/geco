@@ -121,8 +121,6 @@ if (!isset($_SESSION['userPatient']) && !isset($_SESSION['userPersonnel'])) {
 
             <?php if ((!empty($_SESSION['userPersonnel']) && ($_SESSION['userPersonnel']['type'] == 'medecin' || $_SESSION['userPersonnel']['type'] == 'infirmier')) || !empty($_SESSION['userPatient'])) : ?>
 
-
-
             <p id="indication">Si vous modifiez votre nom et/ou votre prénom, votre nom d'utilisateur sera également modifié (de la manière : "première lettre du prénom + nom de famille").</p>
 
             <p id="indication">Si vous souhaitez modifier votre mot de passe, veuillez vous rendre sur la page de connexion (section "mot de passe oublié").</p>

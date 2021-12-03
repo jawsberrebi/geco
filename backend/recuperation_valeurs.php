@@ -5,19 +5,18 @@ include('fonctions.php');
 
 $idPatient = $_SESSION['userPatient']['id_patient'];
 $url = "http://projets-tomcat.isep.fr:8080/appService/?ACTION=GETLOG&TEAM=G5A4";
-
-//Récupération séquence en hexadécimal
+//RÃ©cupÃ©ration sÃ©quence en hexadÃ©cimal
 $trame = getFrameValue($url);
 
 //var_dump($trame);
 
-//décodage avec des substring
+//dÃ©codage avec des substring
 $t = substr($trame,0,1);
 $o = substr($trame,1,4);
 
 // $o = valeur de la trame
 
-// décodage avec sscanf
+// dÃ©codage avec sscanf
 list($t, $o, $r, $c, $n, $v, $a, $x, $year, $month, $day, $hour, $min, $sec) =
 sscanf($trame,"%1s%4s%1s%1s%2s%4s%4s%2s%4s%2s%2s%2s%2s%2s");
 echo("<br />$t,$o,$r,$c,$n,$v,$a,$x,$year,$month,$day,$hour,$min,$sec<br />");
@@ -26,7 +25,7 @@ $numbTra = $t;
 $idPage = $o;
 $typeRequest = $r;
 $typeSensor = $c;
-$numbSensor = $n; //Numéro d'appareil. Sera associé à l'ID du patient [RÉGLER CE SOUCI : PEU D'ESPACE DANS LA TRAME, ON PEUT FAIRE ÇA QUE SUR 2 CARACTERES GRAND MAX]
+$numbSensor = $n; //NumÃ©ro d'appareil. Sera associÃ© Ã  l'ID du patient [RÃ‰GLER CE SOUCI : PEU D'ESPACE DANS LA TRAME, ON PEUT FAIRE Ã‡A QUE SUR 2 CARACTERES GRAND MAX]
 $value = $v;
 $tim = $a;
 $checkseum = $x;
@@ -48,23 +47,22 @@ $finalDateTime = $finalDate . ' ' . $finalTime;
 
 //var_dump($finalDateTime);
 
-
 if(6 == 6){ //Si l'ID du patient correspond bien avec l'ID de l'appareil du patient, pour l'instant ne marche pas, mettre 00
     // Valeurs du simulateur, $typeSensor renvoie le type de capteur
-    // 7 ---> fréquence cardiaque
+    // 7 ---> frÃ©quence cardiaque
     // A ---> son
     // 4 --> gaz
 
-    if($typeSensor == 7){ //Remplacer par 7 pour avoir le capteur fréquence cardiaque
+    if($typeSensor == 7){ //Remplacer par 7 pour avoir le capteur frÃ©quence cardiaque
 
-        //RECUPERE L'ID DU CAPTEUR À PARTIR DE L'ID PATIENT CORRESPONDANT
+        //RECUPERE L'ID DU CAPTEUR Ã€ PARTIR DE L'ID PATIENT CORRESPONDANT
 
         $sql = "SELECT id_capteur FROM capteur WHERE id_patient = '".$idPatient."' AND type = 'frequenceCardiaque'";
         $pre = $pdo->prepare($sql);
         $pre->execute();
         $idCapteurTab = $pre->fetchAll(PDO::FETCH_ASSOC);
         $idCapteur = $idCapteurTab[0]['id_capteur'];
-
+      
         //var_dump($idCapteur);
 
 
@@ -89,7 +87,7 @@ if(6 == 6){ //Si l'ID du patient correspond bien avec l'ID de l'appareil du pati
 
             //Envoi de l'alerte mail
             if($value > 120){
-                //Préparation du mail pour l'envoi de l'alerte
+                //PrÃ©paration du mail pour l'envoi de l'alerte
 
                 $sql = "SELECT prenom, nom, id_hopital FROM patient WHERE id_patient = '".$idPatient."'";
                 $pre = $pdo->prepare($sql);
@@ -105,7 +103,7 @@ if(6 == 6){ //Si l'ID du patient correspond bien avec l'ID de l'appareil du pati
                 $pre->execute();
                 $mails = $pre->fetchAll(PDO::FETCH_ASSOC);
 
-                //On envoie à  tous le personnel de l'hôpital correspondant 
+                //On envoie Ã   tous le personnel de l'hÃ´pital correspondant 
                 foreach($mails as $mail){
                     sendingMailAlert($mail['mail'], 'cardiaque', $value, $firstName . $lastName);
                 }
@@ -118,7 +116,7 @@ if(6 == 6){ //Si l'ID du patient correspond bien avec l'ID de l'appareil du pati
     }
     elseif($typeSensor == 'A'){ // Son
 
-        //RECUPERE L'ID DU CAPTEUR À PARTIR DE L'ID PATIENT CORRESPONDANT
+        //RECUPERE L'ID DU CAPTEUR Ã€ PARTIR DE L'ID PATIENT CORRESPONDANT
 
         $sql = "SELECT id_capteur FROM capteur WHERE id_patient = '".$idPatient."' AND type = 'niveauSonore'";
         $pre = $pdo->prepare($sql);
@@ -149,7 +147,7 @@ if(6 == 6){ //Si l'ID du patient correspond bien avec l'ID de l'appareil du pati
 
             //Envoi de l'alerte mail
             if($value > 70){
-                //Préparation du mail pour l'envoi de l'alerte
+                //PrÃ©paration du mail pour l'envoi de l'alerte
 
                 $sql = "SELECT prenom, nom, id_hopital FROM patient WHERE id_patient = '".$idPatient."'";
                 $pre = $pdo->prepare($sql);
@@ -165,7 +163,7 @@ if(6 == 6){ //Si l'ID du patient correspond bien avec l'ID de l'appareil du pati
                 $pre->execute();
                 $mails = $pre->fetchAll(PDO::FETCH_ASSOC);
 
-                //On envoie à  tous le personnel de l'hôpital correspondant 
+                //On envoie Ã   tous le personnel de l'hÃ´pital correspondant 
                 foreach($mails as $mail){
                     sendingMailAlert($mail['mail'], 'sonore', $value, $firstName . $lastName);
                 }
@@ -176,7 +174,7 @@ if(6 == 6){ //Si l'ID du patient correspond bien avec l'ID de l'appareil du pati
     }
     elseif($typeSensor == 4){ //Gaz
 
-        //RECUPERE L'ID DU CAPTEUR À PARTIR DE L'ID PATIENT CORRESPONDANT
+        //RECUPERE L'ID DU CAPTEUR Ã€ PARTIR DE L'ID PATIENT CORRESPONDANT
 
         $sql = "SELECT id_capteur FROM capteur WHERE id_patient = '".$idPatient."' AND type = 'concentrationGaz'";
         $pre = $pdo->prepare($sql);
@@ -207,7 +205,7 @@ if(6 == 6){ //Si l'ID du patient correspond bien avec l'ID de l'appareil du pati
 
             //Envoi de l'alerte mail
             if($value > 1.3){
-                //Préparation du mail pour l'envoi de l'alerte
+                //PrÃ©paration du mail pour l'envoi de l'alerte
 
                 $sql = "SELECT prenom, nom, id_hopital FROM patient WHERE id_patient = '".$idPatient."'";
                 $pre = $pdo->prepare($sql);
@@ -223,7 +221,7 @@ if(6 == 6){ //Si l'ID du patient correspond bien avec l'ID de l'appareil du pati
                 $pre->execute();
                 $mails = $pre->fetchAll(PDO::FETCH_ASSOC);
 
-                //On envoie à  tous le personnel de l'hôpital correspondant 
+                //On envoie Ã   tous le personnel de l'hÃ´pital correspondant 
                 foreach($mails as $mail){
                     sendingMailAlert($mail['mail'], 'de gaz', $value, $firstName . $lastName);
                 }
@@ -231,7 +229,7 @@ if(6 == 6){ //Si l'ID du patient correspond bien avec l'ID de l'appareil du pati
             }
         }
 
-        //INSÉRER LA FONCTION MAIL POUR L'ENVOI D'ALERTE
+        //INSÃ‰RER LA FONCTION MAIL POUR L'ENVOI D'ALERTE
     }
 }
 ?>

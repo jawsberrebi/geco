@@ -78,6 +78,29 @@ INSERT INTO `hopital` (`id_hopital`, `nom`, `ville`, `adresse`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `hopital`
+--
+
+DROP TABLE IF EXISTS `hopital`;
+CREATE TABLE IF NOT EXISTS `hopital` (
+  `id_hopital` int NOT NULL AUTO_INCREMENT,
+  `nom` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ville` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `adresse` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`id_hopital`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `hopital`
+--
+
+INSERT INTO `hopital` (`id_hopital`, `nom`, `ville`, `adresse`) VALUES
+(2, 'ok', 'ok', 'ok'),
+(3, 'No', 'Name', 'ded');
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `mesure`
 --
 
@@ -111,7 +134,7 @@ CREATE TABLE IF NOT EXISTS `patient` (
   `id_hopital` int NOT NULL,
   PRIMARY KEY (`id_patient`),
   KEY `id_hopital` (`id_hopital`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `patient`
@@ -141,7 +164,7 @@ CREATE TABLE IF NOT EXISTS `personnel` (
   `id_hopital` int NOT NULL,
   PRIMARY KEY (`id_personnel`),
   KEY `hopital_personnel` (`id_hopital`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `personnel`

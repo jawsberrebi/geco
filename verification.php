@@ -6,8 +6,8 @@ include_once("config.php");
 //$sql = "SELECT * FROM admin WHERE nom_utilisateur='".$_POST['email_pseudo']."' AND mdp='".$_POST['password']."'";
 //$pre = $pdo->prepare($sql);
 //$pre->execute();
-//$user = current($pre->fetchAll(PDO::FETCH_ASSOC)); //current prend la premiËre ligne du tableau
-//$_SESSION['userAdmin'] = $user; //on enregistre que l'utilisateur est connectÈ (on peut modif)
+//$user = current($pre->fetchAll(PDO::FETCH_ASSOC)); //current prend la premi√®re ligne du tableau
+//$_SESSION['userAdmin'] = $user; //on enregistre que l'utilisateur est connect√© (on peut modif)
 
 //if ($_SESSION['userAdmin'] != 0) {
 //    header('Location:tableau_de_bord_personnel.php');
@@ -20,8 +20,8 @@ include_once("config.php");
 $sql = "SELECT * FROM personnel WHERE (nom_utilisateur='".$_POST['email_pseudo']."' OR mail='".$_POST['email_pseudo']."') AND mdp='".$_POST['password']."'";
 $pre = $pdo->prepare($sql);
 $pre->execute();
-$user = current($pre->fetchAll(PDO::FETCH_ASSOC)); //current prend la premiËre ligne du tableau
-$_SESSION['userPersonnel'] = $user; //on enregistre que l'utilisateur est connectÈ (on peut modif)
+$user = current($pre->fetchAll(PDO::FETCH_ASSOC)); //current prend la premi√®re ligne du tableau
+$_SESSION['userPersonnel'] = $user; //on enregistre que l'utilisateur est connect√© (on peut modif)
 
 //A LA FIN FAIRE
 
