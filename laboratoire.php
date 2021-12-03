@@ -4,18 +4,84 @@ include('backend/fonctions.php');
 ?>
 
 <?php
-$sql = "SELECT id_capteur FROM capteur WHERE id_patient = 5 AND type = 'frequenceCardiaque'";
+//
+// A very simple PHP example that sends a HTTP POST to a remote site
+//
+
+//$ch = curl_init();
+
+//curl_setopt($ch, CURLOPT_URL,"http://projets-tomcat.isep.fr:8080/appService/?ACTION=GETLOG&TEAM=G5A4");
+//curl_setopt($ch, CURLOPT_HTTPGET, 1);
+//curl_setopt($ch, CURLOPT_POSTFIELDS,
+//            "postvar1=value1&postvar2=value2&postvar3=value3");
+
+//// In real life you should use something like:
+//// curl_setopt($ch, CURLOPT_POSTFIELDS, 
+////          http_build_query(array('postvar1' => 'value1')));
+
+//// Receive server response ...
+//curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+//$server_output = curl_exec($ch);
+
+//curl_close ($ch);
+
+//// Further processing ...
+////if ($server_output == "OK") { ... } else { ... }
+?>
+
+<?php
+
+//$check = crc32('1G5A1330100990001');
+//var_dump($check);
+
+//$deuxcheck = $check % 256;
+//var_dump($deuxcheck);
+//$curl = curl_init();
+
+//curl_setopt_array($curl, array(
+//  CURLOPT_URL => 'http://projets-tomcat.isep.fr:8080/appService/?ACTION=COMMAND&TEAM=G5A4&TRAME=1G5A43301009900017c20211108143513',
+//  CURLOPT_RETURNTRANSFER => true,
+//  CURLOPT_ENCODING => '',
+//  CURLOPT_MAXREDIRS => 10,
+//  CURLOPT_TIMEOUT => 0,
+//  CURLOPT_FOLLOWLOCATION => true,
+//  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+//  CURLOPT_CUSTOMREQUEST => 'GET',
+//));
+
+//$response = curl_exec($curl);
+
+//curl_close($curl);
+//echo $response;
+
+//1G5A43301009900017c20211108143513
+
+//$check = crc32('1G5A1330100990001');
+//var_dump($check);
+
+//$deuxcheck = $check % 256;
+//var_dump($deuxcheck);
+
+//1 - G5A4 - 1 - "inserer type sensor (1 caractère) " - "logiquement id du patient (2 caractères)" - "valeur sensibilité (4 caractères)" - "timestamp (4 caractères)" - "checksum (2 caractères)" - "année (4 caractères)" - "mois (2 caractères)" - "jour (2 caractères)" - "heure (2 caractères)" - "minute (2 caractères)" - "seconde (2 caractères)"
+?>
+
+<?php 
+
+$idHospital = 2;
+
+$sql = "SELECT mail FROM personnel WHERE id_hopital = '".$idHospital."'";
 $pre = $pdo->prepare($sql);
 $pre->execute();
-$idCapteurTab = $pre->fetchAll(PDO::FETCH_ASSOC);
-$idCapteur = $idCapteurTab[0]['id_capteur'];
+$mails = $pre->fetchAll(PDO::FETCH_ASSOC);
 
+var_dump($mails);
 
-//RECUPERER DERNIERE VALEUR ENREGISTREE DES MESURES POUR COMPARER AVEC CELLE A ENTRER
-$sql = "SELECT MAX(id_mesure) FROM mesure WHERE id_capteur = '".$idCapteur."'";
-$pre = $pdo->prepare($sql);
-$pre->execute();
-$idCapteur = $pre->fetchAll(PDO::FETCH_ASSOC);
+foreach($mails as $mail){
+
+    echo $mail['mail'];
+}
+
 
 
 ?>

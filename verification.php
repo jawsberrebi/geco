@@ -23,6 +23,18 @@ $pre->execute();
 $user = current($pre->fetchAll(PDO::FETCH_ASSOC)); //current prend la première ligne du tableau
 $_SESSION['userPersonnel'] = $user; //on enregistre que l'utilisateur est connecté (on peut modif)
 
+//A LA FIN FAIRE
+
+//foreach($user as $users){
+//    if(password_verify($_POST['password'], $users['mdp'])){
+
+//        $_SESSION['userPatient'] = $users;
+
+//        header('Location:tableau_de_bord_patient.php'); //MODIF LA PAGE
+//        exit();
+//    }
+//}
+
 if ($_SESSION['userPersonnel'] != 0) {
     header('Location:tableau_de_bord_personnel.php');
     exit();

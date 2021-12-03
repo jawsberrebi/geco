@@ -103,19 +103,25 @@ if (!isset($_SESSION['userPatient']) && !isset($_SESSION['userPersonnel'])) {
 
             <?php endif; ?>
             <?php endif; ?>
-            <!-- MODIFICATION DE LA VILLE ET DU NOM DE L'H�PITAL POUR L'ADMINISTRATEUR -->
+            <!-- MODIFICATION DE LA VILLE ET DU NOM DE L'HÔPITAL POUR L'ADMINISTRATEUR -->
 
             <input type="submit" id='submit' value='Sauvegarder' />
 
-            <?php if (isset($_SESSION['userPersonnel'])) : ?>
-            <?php if ($_SESSION['userPersonnel']['type'] == 'admin') : ?>
+            
 
-            <p id="indication">Si vous souhaitez modifier votre mot de passe et/ou votre nom d'utilisateur, veuillez contacter Infinite Measures.</p>
+            <?php 
+            if (!empty($_SESSION['userPersonnel'])){
+                if ($_SESSION['userPersonnel']['type'] == 'admin'){
+                    echo '<p id="indication">Si vous souhaitez modifier votre mot de passe et/ou votre nom d\'utilisateur, veuillez contacter Infinite Measures.</p>';
+                }
+            }
+            ?>
 
-            <?php endif; ?>
-            <?php endif; ?>
+            
 
-            <?php if ((isset($_SESSION['userPersonnel']) && ($_SESSION['userPersonnel']['type'] == 'medecin' || $_SESSION['userPersonnel']['type'] == 'infirmier')) || isset($_SESSION['userPatient'])) : ?>
+            <?php if ((!empty($_SESSION['userPersonnel']) && ($_SESSION['userPersonnel']['type'] == 'medecin' || $_SESSION['userPersonnel']['type'] == 'infirmier')) || !empty($_SESSION['userPatient'])) : ?>
+
+
 
             <p id="indication">Si vous modifiez votre nom et/ou votre prénom, votre nom d'utilisateur sera également modifié (de la manière : "première lettre du prénom + nom de famille").</p>
 

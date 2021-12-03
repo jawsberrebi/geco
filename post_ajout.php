@@ -80,7 +80,7 @@ if (htmlspecialchars($_POST['type']) == 'patient') {
 
     array_push($champs, $mail, $userName, $password);
 
-    envoiIdentifiantsMail('rd.berrebi@gmail.com', $champs);
+    sendingIdsMail('rd.berrebi@gmail.com', $champs);
 
     header('Location:tableau_de_bord_personnel?confirmation=1.php');
     exit();
@@ -110,7 +110,11 @@ if (htmlspecialchars($_POST['type']) == 'patient') {
         'id_hopital' => $idHospital
         ]);
 
-    //DEVELOPPER FONCTIONNALITE D'ENVOI D'IDENTIFIANTS PAR MAIL ICI ET METTRE REDIRECTION VERS FORMULAIRE D'AJOUT SI ÇA MARCHE PAS, SI ÇA MARCHE REDIRIGER VERS LE TABLEAU DE BORD AVEC LE GET QUI AFFICHE MESSAGE DE CONFIRMATION
+    $champs = array();
+
+    array_push($champs, $mail, $userName, $password);
+
+    sendingIdsMail('rd.berrebi@gmail.com', $champs);
 
     header('Location:tableau_de_bord_personnel?confirmation=2.php');
     exit();
@@ -140,7 +144,11 @@ if (htmlspecialchars($_POST['type']) == 'patient') {
         'id_hopital' => $idHospital
         ]);
 
-    //DEVELOPPER FONCTIONNALITE D'ENVOI D'IDENTIFIANTS PAR MAIL ICI ET METTRE REDIRECTION VERS FORMULAIRE D'AJOUT SI ÇA MARCHE PAS, SI ÇA MARCHE REDIRIGER VERS LE TABLEAU DE BORD AVEC LE GET QUI AFFICHE MESSAGE DE CONFIRMATION
+    $champs = array();
+
+    array_push($champs, $mail, $userName, $password);
+
+    sendingIdsMail('rd.berrebi@gmail.com', $champs);
 
     header('Location:tableau_de_bord_personnel?confirmation=3.php');
     exit();
