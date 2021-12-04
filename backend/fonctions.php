@@ -728,10 +728,8 @@ function sendingMailAlert($mail, $typeSensor, $value, $patientName) : void
 
           $headers[] = 'Content-type: text/html; charset=iso-8859-1';
 
-          //implode("\r\n", $headers)
 
-
-          mail($to, $subject, $message);
+          mail($to, $subject, $message, implode("\r\n", $headers));
 }
 
 
