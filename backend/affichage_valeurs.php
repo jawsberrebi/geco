@@ -1,7 +1,13 @@
 <?php 
 include_once("config.php");
 
-$patientId = $_SESSION['userPatient']['id_patient'];
+if(isset($_SESSION['userPatient']['id_patient'])){
+    $patientId = $_SESSION['userPatient']['id_patient'];
+}
+else{
+    $patientId = $user['id_patient'];
+}
+
 //var_dump($patientId);
 
 $sql = "SELECT id_capteur FROM capteur WHERE id_patient = '".$patientId."'";
@@ -9,7 +15,7 @@ $pre = $pdo->prepare($sql);
 $pre->execute();
 $sensorId = $pre->fetchAll(PDO::FETCH_ASSOC);
 
-//var_dump($sensorId[0]['id_capteur']);
+//var_dump($sensorId);
 
 $sql = "SELECT valeur FROM patient p JOIN capteur c ON '".$patientId."' = c.id_patient JOIN mesure m ON c.id_capteur = m.id_capteur WHERE m.id_capteur = '".$sensorId[0]['id_capteur']."'";
 $pre = $pdo->prepare($sql);

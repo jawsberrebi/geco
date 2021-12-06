@@ -214,13 +214,43 @@ function dataTableMembersGenerator(PDO $pdo, string $userType, bool $querySearch
                 <td>
                     <?php echo $user['id_patient'] ?>
                 </td>
-
+                     <?php include("backend/affichage_valeurs.php"); ?>
                 <td>
                     <?php echo $user['prenom'] . ' ' . $user['nom'] ?>
                 </td>
 
                 <td>
                     <?php echo 'Patient' ?>
+                </td>
+
+                <td>
+                    <?php if(isset($finalValues[0]['valeur'])){
+                            echo $finalValues[0]['valeur'];
+                          }
+                          else{
+                              echo '';
+                          }
+                    ?>
+                </td>
+
+                <td>
+                    <?php if(isset($finalValues[1]['valeur'])){
+                            echo $finalValues[1]['valeur'];
+                          }
+                          else{
+                              echo '';
+                          }
+                    ?>
+                </td>
+
+                <td>
+                    <?php if(isset($finalValues[2]['valeur'])){
+                            echo $finalValues[2]['valeur'];
+                          }
+                          else{
+                              echo '';
+                          }
+                    ?>
                 </td>
 
             </tr>
@@ -252,7 +282,7 @@ function dataTableMembersGenerator(PDO $pdo, string $userType, bool $querySearch
                 <td>
                     <?php echo $user['id_patient'] ?>
                 </td>
-
+                   
                 <td>
                     <?php echo $user['prenom'] . ' ' . $user['nom'] ?>
                 </td>
