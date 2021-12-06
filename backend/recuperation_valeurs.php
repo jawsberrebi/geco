@@ -1,7 +1,7 @@
 <?php
 
 include_once("config.php");
-include('fonctions.php');
+include('backend/fonctions.php');
 
 $idPatient = $_SESSION['userPatient']['id_patient'];
 $url = "http://projets-tomcat.isep.fr:8080/appService/?ACTION=GETLOG&TEAM=G5A4";
