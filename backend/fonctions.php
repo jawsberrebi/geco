@@ -471,7 +471,7 @@ function dataResultsResearchTableMember(PDO $pdo, string $userType, string $supe
         <?php
             if(isset($superVariableGet) && !empty($superVariableGet)) {
                 $search = htmlspecialchars($superVariableGet);
-                $sql = 'SELECT * FROM patient WHERE prenom LIKE (("%'.$search.'%") OR nom LIKE ("%'.$search.'%")) AND (id_hopital = "'.$_SESSION['userPersonnel']['id_hopital'].'") ORDER BY id_patient DESC';
+                $sql = 'SELECT * FROM patient WHERE (prenom LIKE ("%'.$search.'%") OR nom LIKE ("%'.$search.'%")) AND (id_hopital = "'.$_SESSION['userPersonnel']['id_hopital'].'") ORDER BY id_patient DESC';
                 $pre = $pdo->prepare($sql);
                 $pre->execute();
                 $searchResults = $pre->fetchAll(PDO::FETCH_ASSOC);
@@ -514,7 +514,7 @@ function dataResultsResearchTableMember(PDO $pdo, string $userType, string $supe
             if(isset($superVariableGet) && !empty($superVariableGet)) {
                 $search = htmlspecialchars($superVariableGet);
 
-                $sql = 'SELECT * FROM personnel WHERE (type="infirmier") AND (prenom LIKE "%'.$search.'%" OR nom LIKE "%'.$search.'%") AND (id_hopital = "'.$_SESSION['userPersonnel']['id_hopital'].'") ORDER BY id_personnel DESC';
+                $sql = 'SELECT * FROM personnel WHERE (type="infirmier") AND (prenom LIKE ("%'.$search.'%") OR nom LIKE ("%'.$search.'%")) AND (id_hopital = "'.$_SESSION['userPersonnel']['id_hopital'].'") ORDER BY id_personnel DESC';
                 $pre = $pdo->prepare($sql);
                 $pre->execute();
                 $searchResults = $pre->fetchAll(PDO::FETCH_ASSOC);
@@ -625,7 +625,7 @@ function dataResultsResearchTableMember(PDO $pdo, string $userType, string $supe
 
 <?php
 
-
+//Envoi d'indentifiants par mail
 function sendingIdsMail($mail, $donnees) : void 
 {
 
@@ -686,7 +686,7 @@ function sendingIdsMail($mail, $donnees) : void
 ?>
 
 <?php 
-
+//Réception de trames
 function getFrameValue($url) : string
 {
     $ch = curl_init();
@@ -714,7 +714,7 @@ function getFrameValue($url) : string
 ?>
 
 <?php 
-
+//Envoi de mails
 function sendingMailAlert($mail, $typeSensor, $value, $patientName) : void
 {
     $to = $mail;

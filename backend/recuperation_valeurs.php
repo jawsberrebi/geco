@@ -19,7 +19,7 @@ $o = substr($trame,1,4);
 // décodage avec sscanf
 list($t, $o, $r, $c, $n, $v, $a, $x, $year, $month, $day, $hour, $min, $sec) =
 sscanf($trame,"%1s%4s%1s%1s%2s%4s%4s%2s%4s%2s%2s%2s%2s%2s");
-echo("<br />$t,$o,$r,$c,$n,$v,$a,$x,$year,$month,$day,$hour,$min,$sec<br />");
+//echo("<br />$t,$o,$r,$c,$n,$v,$a,$x,$year,$month,$day,$hour,$min,$sec<br />");
 
 $numbTra = $t;
 $idPage = $o;
@@ -47,7 +47,9 @@ $finalDateTime = $finalDate . ' ' . $finalTime;
 
 //var_dump($finalDateTime);
 
-if(6 == 6){ //Si l'ID du patient correspond bien avec l'ID de l'appareil du patient, pour l'instant ne marche pas, mettre 00
+//TESTER ID PATIENT !!!!!!!!!!!!!!!!!!!!!!
+
+if($idPatient == $numbSensor){ //Si l'ID du patient correspond bien avec l'ID de l'appareil du patient, pour l'instant ne marche pas, mettre 00
     // Valeurs du simulateur, $typeSensor renvoie le type de capteur
     // 7 ---> fréquence cardiaque
     // A ---> son
@@ -198,9 +200,9 @@ if(6 == 6){ //Si l'ID du patient correspond bien avec l'ID de l'appareil du pati
             $sql = 'INSERT INTO mesure(valeur, date_heure, id_capteur) VALUES (:valeur, :date_heure, :id_capteur)';
             $pre = $pdo->prepare($sql);
             $pre->execute([
-            'valeur' => $value,
-            'date_heure' => $finalDateTime,
-            'id_capteur' => $idCapteur, //Remplacer par $idCapteur
+            ':valeur' => $value,
+            ':date_heure' => $finalDateTime,
+            ':id_capteur' => $idCapteur, //Remplacer par $idCapteur
             ]);
 
             //Envoi de l'alerte mail

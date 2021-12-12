@@ -37,23 +37,45 @@ if(!isset($_SESSION['userPatient'])) {
                 <div class="onglet" data-anim="4">Concentration CO2</div>
             </div>
 
+
             <div class="contenu_actif" data-anim="1">
                 <div id="table">
                     <div class="cadran">
                         <p id="text">
-                            <?php echo $finalValues[0]['valeur']; ?>
+                            <?php 
+                            if(!isset($finalValues[0]['valeur'])){
+                                echo '';
+                            }
+                            else{
+                               echo $finalValues[0]['valeur'];  
+                            }
+                            ?>
                         </p>
                     </div>
 
                     <div class="cadran">
                         <p id="text">
-                            <?php echo $finalValues[1]['valeur']; ?>
+                            <?php 
+                            if(!isset($finalValues[1]['valeur'])){
+                                echo '';
+                            }
+                            else{
+                               echo $finalValues[1]['valeur'];  
+                            }
+                            ?>
                         </p>
                     </div>
 
                     <div class="cadran">
                         <p id="text">
-                            <?php echo $finalValues[2]['valeur']; ?>
+                            <?php 
+                            if(!isset($finalValues[2]['valeur'])){
+                                echo '';
+                            }
+                            else{
+                               echo $finalValues[2]['valeur'];  
+                            }
+                            ?>
                         </p>
                     </div>
                 </div>

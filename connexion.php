@@ -39,7 +39,9 @@
                         if($erreur==4){
                             echo '<p id="message_erreur">Vous n\'êtes pas autorisé à accéder à ces informations.</p>';
                         }
-                    }?>
+                    }
+                     
+                ?>
 
                 <p id="indication">Si vous n'avez pas de compte, veuillez contacter votre médecin.</p>
 
