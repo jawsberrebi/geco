@@ -4,7 +4,9 @@ include_once("config.php");
 if(isset($_SESSION['userPatient']['id_patient'])){
     $patientId = $_SESSION['userPatient']['id_patient'];
 }
-else{
+elseif(isset($_GET['id_patient'])){
+    $patientId = $_GET['id_patient'];
+}else{
     $patientId = $user['id_patient'];
 }
 

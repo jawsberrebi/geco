@@ -23,7 +23,7 @@
 
                 <input type="submit" id='submit' value='Connexion' />
 
-                <a href="" id="password_lost">Mot de passe oublié ?</a>
+                <a href="mot_de_passe_oublie.php" id="password_lost">Mot de passe oublié ?</a>
 
                 <?php if(isset($_GET['erreur'])){
                         $erreur = $_GET['erreur'];

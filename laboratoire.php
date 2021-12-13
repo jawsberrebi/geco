@@ -63,7 +63,7 @@ include('backend/fonctions.php');
 //$deuxcheck = $check % 256;
 //var_dump($deuxcheck);
 
-//1 - G5A4 - 1 - "inserer type sensor (1 caractère) " - "logiquement id du patient (2 caractères)" - "valeur sensibilité (4 caractères)" - "timestamp (4 caractères)" - "checksum (2 caractères)" - "année (4 caractères)" - "mois (2 caractères)" - "jour (2 caractères)" - "heure (2 caractères)" - "minute (2 caractères)" - "seconde (2 caractères)"
+//1 - G5A4 - 1 - "inserer type sensor (1 caractï¿½re) " - "logiquement id du patient (2 caractï¿½res)" - "valeur sensibilitï¿½ (4 caractï¿½res)" - "timestamp (4 caractï¿½res)" - "checksum (2 caractï¿½res)" - "annï¿½e (4 caractï¿½res)" - "mois (2 caractï¿½res)" - "jour (2 caractï¿½res)" - "heure (2 caractï¿½res)" - "minute (2 caractï¿½res)" - "seconde (2 caractï¿½res)"
 ?>
 
 <?php 

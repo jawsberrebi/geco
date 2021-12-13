@@ -76,7 +76,6 @@ if(!isset($_SESSION['userPatient'])) {
                             <div id="table">
                                 <div class="cadran">
 
-                                    <p></p>
                                     <?php 
                                         if(!isset($finalValues[0]['valeur'])){
                                             echo '<p></p>';

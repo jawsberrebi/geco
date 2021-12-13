@@ -90,13 +90,15 @@ td {
 
 .cadran {
     margin: 30px;
-    padding-top: 6.5%;
-    padding-bottom: 0.8%;
+    padding-top: 2%;
+    padding-bottom: 0.5%;
     border: 1px solid white;
     border-radius: 20px;
     width: 12%;
     height: 15%;
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2), 0 0 10px 0 rgba(0, 0, 0, 0.2);
+    font-weight: bolder;
+    font-size: 2em;
 }
 
 #text {
@@ -128,6 +130,7 @@ input[type = range] {
     background: #8B8B8B;
     height: 2px;
     outline: none;
+    margin-top: 30%;
 }
 
 input[type = range]::-webkit-slider-thumb {
@@ -154,7 +157,6 @@ input[type = range]::-webkit-slider-thumb {
 
 #bouton_rouge {
     margin-left: 70%;
-    margin-top: -100%;
     width: 30%;
     border: none;
     background: #AC0002;
@@ -260,4 +262,25 @@ th {
     text-align: center;
     white-space: pre;
     text-align: center;
+}
+
+#bpm {
+    color: #AC0002;
+    background: none;
+    font-weight: bolder;
+    font-size: 0.5em;
+}
+
+#db {
+    color: #70D9E5;
+    background: none;
+    font-weight: bolder;
+    font-size: 0.5em;
+}
+
+#pourcentage {
+    color: #3CC496;
+    background: none;
+    font-weight: bolder;
+    font-size: 0.5em;
 }

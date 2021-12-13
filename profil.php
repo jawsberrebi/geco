@@ -32,6 +32,7 @@ include('backend/conditions_id.php');
         <!--\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-->
 
         <?php if(isset($_GET['id_patient'])) : ?>
+        <?php include('backend/affichage_valeurs.php'); ?>
 
         <?php $sql = "SELECT * FROM patient WHERE id_patient='".$id."'";
               $pre = $pdo->prepare($sql);
@@ -72,7 +73,14 @@ include('backend/conditions_id.php');
                 <div id="table">
                     <div class="cadran">
                         <p id="text">
-                            Test
+                            <?php 
+                                if(!isset($finalValues[0]['valeur'])){
+                                    echo '<p></p>';
+                                }
+                                else{
+                                    echo '<p class="valeurPHP">' . $finalValues[0]['valeur'] . ' <mark id="bpm">bpm</mark></p>';  
+                                }
+                            ?>
                         </p>
 
                         <form method="post" action="backend/envoi_valeurs?id_patient=<?php echo $id ?>.php">
@@ -93,7 +101,14 @@ include('backend/conditions_id.php');
 
                     <div class="cadran">
                         <p id="text">
-                            Test
+                            <?php 
+                                if(!isset($finalValues[1]['valeur'])){
+                                    echo '<p></p>';
+                                }
+                                else{
+                                    echo '<p class="valeurPHP">' . $finalValues[1]['valeur'] . ' <mark id="db">db</mark></p>';  
+                                }
+                            ?>
                         </p>
 
                         <form method="post" action="backend/envoi_valeurs?id_patient=<?php echo $id ?>.php">
@@ -112,7 +127,14 @@ include('backend/conditions_id.php');
 
                     <div class="cadran">
                         <p id="text">
-                            Test
+                            <?php 
+                                if(!isset($finalValues[2]['valeur'])){
+                                    echo '<p></p>';
+                                }
+                                else{
+                                    echo '<p class="valeurPHP">' . $finalValues[2]['valeur'] . ' <mark id="pourcentage">%</mark></p>';  
+                                }
+                            ?>
                         </p>
                         
                         <form method="post" action="backend/envoi_valeurs?id_patient=<?php echo $id ?>.php">
