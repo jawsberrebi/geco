@@ -15,71 +15,150 @@ if(!isset($_SESSION['userPatient'])) {
 ?>
 
 <!DOCTYPE html>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <html>
     <head>
-        <meta charset="utf-8" />
-        <link rel="stylesheet" href="css/style_tableau_de_bord_personnel.css" />
+          <link rel="stylesheet" href="css/style_patient_1.css">
+          <link rel="stylesheet" href="css/navbar_pro.css">
+          <link rel="stylesheet" href="css/style_patient_2.css">
+          <meta charset="utf-8" />
+        <link rel="stylesheet" href="css/style_patient_3.css" />
         <title>Tableau de bord</title>
     </head>
+    <header>
+        <nav>
+            <a href="#" class="nav-logo">Geco.</a>
+    
+            <ul>
+              <li class="navbara"><a id="chiant" href="#tableaudebord"><strong>Tableau de bord</strong></a></li>
+              <li><a class="bactive" a style="color:#37C394", font-size:2em; href="modifier_mon_compte.php" ><strong> Modifier mon compte</strong></a></li>
+              <li><a href="deconnexion.php" id="deconnexion"> <strong></strong> Déconnexion</strong></a></li>
+            </ul>
+    
+        </nav>
+    </header>
+    
+        </head>
+        <body>
 
-    <body>
+            
+       
 
         <h1>Tableau de bord</h1>
-
-        <?php include("backend/fenetre_modale_tableau_de_bord.php"); ?>
-
-        <div class="tableau_onglets">
-
-            <div class="groupe_onglets">
-                <div class="onglet_actif" data-anim="1">Vue d'ensemble</div>
-                <div class="onglet" data-anim="2">Rythme cardiaque</div>
-                <div class="onglet" data-anim="3">Niveau sonore</div>
-                <div class="onglet" data-anim="4">Concentration CO2</div>
-            </div>
-
+        <div class="id">
 
             <div class="contenu_actif" data-anim="1">
-                <div id="table">
-                    <div class="cadran">
-                        <p id="text">
-                            <?php 
-                            if(!isset($finalValues[0]['valeur'])){
-                                echo '';
-                            }
-                            else{
-                               echo $finalValues[0]['valeur'];  
-                            }
-                            ?>
-                        </p>
+                <div id="t">
+                    <div class="cad">
+                        <ul class="ab">
+                            <li><a><strong> Appleseed </strong></a></li>
+                            
+                          </ul>
+                    
+                
+                    </p>
                     </div>
 
-                    <div class="cadran">
-                        <p id="text">
-                            <?php 
-                            if(!isset($finalValues[1]['valeur'])){
-                                echo '';
-                            }
-                            else{
-                               echo $finalValues[1]['valeur'];  
-                            }
-                            ?>
-                        </p>
-                    </div>
+                    <div class="container">
 
-                    <div class="cadran">
-                        <p id="text">
-                            <?php 
-                            if(!isset($finalValues[2]['valeur'])){
-                                echo '';
-                            }
-                            else{
-                               echo $finalValues[2]['valeur'];  
-                            }
-                            ?>
-                        </p>
-                    </div>
-                </div>
-            </div>
+                      <div class="container-onglets">
+                          <div class="onglets active" data-anim="1">Vue d'ensemble</div>
+                          <div class="onglets" data-anim="2">Rythme cardiaque</div>
+                          <div class="onglets" data-anim="3">Niveau sonore</div>
+                          <div class="onglets" data-amim="4">Gaz</div>
+                        
+                      </div>
+                  
+                      <div class="contenu activeContenu" data-anim="1">
+                          <h3></h3>
+                          <hr>
+                          <div class="contenu_actif" data-anim="1">
+                            <div id="table">
+                                <div class="cadran">
+
+                                    <p></p>
+                                    <?php 
+                                        if(!isset($finalValues[0]['valeur'])){
+                                            echo '<p></p>';
+                                        }
+                                        else{
+                                           echo '<p class="valeurPHP">' . $finalValues[0]['valeur'] . ' <mark id="bpm">bpm</mark></p>';  
+                                        }
+                                    ?>
+                                </div>
+            
+                                <div class="cadran">
+                                    <?php 
+                                        if(!isset($finalValues[1]['valeur'])){
+                                            echo '<p></p>';
+                                        }
+                                        else{
+                                           echo '<p class="valeurPHP">' . $finalValues[1]['valeur'] . ' <mark id="db">db</mark></p>';  
+                                        }
+                                    ?>
+                                </div>
+            
+                                <div class="cadran">
+                                    <?php 
+                                        if(!isset($finalValues[2]['valeur'])){
+                                            echo '<p></p>';
+                                        }
+                                        else{
+                                           echo '<p class="valeurPHP">' . $finalValues[2]['valeur'] . ' <mark id="pourcentage">%</mark></p>';  
+                                        }
+                                    ?>
+                                </div>
+                            </div>
+                        <!--</div>
+                        
+                              <p ><div class="ra"><strong>Notification quand le rythme cardiaque excède 120 bpm </strong> 
+                                  <label id="tre"class="switch">
+                                  <input type="checkbox" checked>
+                                  <span class="slider round"></span>
+                                </label> 
+                              </div></p>
+                      
+                              <p><div class="ra"><strong> Notification quand le niveau sonore excède 70 dB</strong>
+                                      <label id="prems" class="switch">
+                                          <input type="checkbox" checked>
+                                          <span class="slider round"></span>
+                                        </label>
+                                      </div></p>
+                              <p > <div class="ra"><strong>Notification quand le taux de gaz excède 1,3 % </strong> 
+                                  <label id="sec" class="switch">
+                                      <input type="checkbox" checked>
+                                      <span class="slider round"></span>
+                                    </label>
+                                  </div> </p>
+                        
+                      </div>-->
+                  
+                      <div class="contenu" data-anim="2">
+                          <h3></h3>
+                          <hr>
+                          <p></p>
+                      </div>
+                  
+                      <div class="contenu" data-anim="3">
+                          <h3></h3>
+                          <hr>
+                          <p></p>
+                      </div>
+                      <div class="contenu" data-anim="4">
+                          <h3>uvcz</h3>
+                      </div>
+                    
+                      
+                     
+                  
+                      </div>
+                      <script src="Javascript/fenetre.js"></script>
+                  
+       
+
+           
+
+          
             
             <div class="contenu_actif" data-anim="2">
                 
@@ -95,5 +174,7 @@ if(!isset($_SESSION['userPatient'])) {
 
         </div>
 
-    </body>
+   
+    
+</body>
 </html>

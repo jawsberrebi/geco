@@ -1,0 +1,190 @@
+@import url('https://fonts.googleapis.com/css2?family=Urbanist&display=swap');
+
+*, ::before, ::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    padding-top: 3%;
+    margin-left: 2%;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+    .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #CCCC;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 26px;
+        width: 26px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+
+input:checked + .slider {
+    background-color: #3BC393;
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+    border-radius: 34px;
+}
+
+    .slider.round:before {
+        border-radius: 50%;
+    }
+
+.ra {
+    margin-bottom: -70px;
+    border: 1px solid white;
+    border-radius: 10px;
+    width: 50%;
+    background-color: white;
+    height: 4%;
+    border-spacing: 2px;
+}
+
+body {
+    background: #F5F5F5;
+    height: 500px;
+    font-family: 'Urbanist', sans-serif;
+}
+
+#table {
+    margin-left: -15%;
+}
+
+#prems {
+    margin-left: 58px;
+}
+
+#sec {
+    margin-left: 80px;
+}
+
+#tre {
+    margin-left: 10px;
+}
+
+.container {
+    width: 1500px;
+    height: 650px;
+    background: #F1F1F1;
+    border-radius: 5px;
+    margin-top: 30px;
+    margin-left: 2%;
+}
+
+.container-onglets {
+    background: #F1F1F1;
+    width: 100%;
+    height: 10%;
+    display: flex;
+    border-radius: 15px;
+}
+
+.onglets {
+    border-right: 1px solid #FAFAFA;
+    border-radius: 5px;
+}
+
+.onglets {
+    width: 220px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 22px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+#chiant {
+    color: #3bc393;
+}
+
+.contenu {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    opacity: 0;
+}
+
+    .contenu h3 {
+        padding: 20px;
+    }
+
+    .contenu hr {
+        width: 20%;
+        height: 2px;
+        margin-left: 20px;
+        border: none;
+    }
+
+#profil {
+    font-size: 10px;
+    color: rgba(37, 29, 29, 0.904);
+}
+
+.contenu p {
+    padding: 20px;
+}
+
+/* Anim */
+
+.active {
+    background: #F1F1F1;
+    color: #3bc393;
+    transition: all 0.3s ease;
+}
+
+
+.activeContenu {
+    animation: fade 0.5s forwards;
+}
+
+@keyframes fade {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}

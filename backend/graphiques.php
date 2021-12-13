@@ -143,24 +143,6 @@ foreach($cardiacValuesPlot as $cardiacValuesPlotReach){
 
                 ////// TRI PAR JOUR ////
 
-                //foreach($cardiacValuesPlot as $dataToPlot){
-                //    //var_dump($row);
-                //    //echo "['".$row['heure']."',".$row['battement']."],";
-                //    $dataToPlotDateTime = date_parse($dataToPlot['date_heure']);
-
-                //    if($dataToPlotDateTime['year'] == $maxYearCardiacValuesPlotFinal){
-                //        if($dataToPlotDateTime['month'] == $maxMonthCardiacValuesPlotFinal){
-                //            if($dataToPlotDateTime['day'] == $maxDayCardiacValuesPlotFinal){
-                //                $dataToPlot['date_heure'] = date('H:i:s' ,strtotime($dataToPlot['date_heure']));
-                //                echo "['".$dataToPlot['date_heure']."',".$dataToPlot['valeur']."],";
-                //            }
-                //        }
-        
-                //    }
-                //}
-
-                ////// TRI PAR MOIS ////
-
                 foreach($cardiacValuesPlot as $dataToPlot){
                     //var_dump($row);
                     //echo "['".$row['heure']."',".$row['battement']."],";
@@ -168,12 +150,30 @@ foreach($cardiacValuesPlot as $cardiacValuesPlotReach){
 
                     if($dataToPlotDateTime['year'] == $maxYearCardiacValuesPlotFinal){
                         if($dataToPlotDateTime['month'] == $maxMonthCardiacValuesPlotFinal){
-                            $dataToPlot['date_heure'] = date('d, H:i:s' ,strtotime($dataToPlot['date_heure']));
-                            echo "['".$dataToPlot['date_heure']."',".$dataToPlot['valeur']."],";
+                            if($dataToPlotDateTime['day'] == $maxDayCardiacValuesPlotFinal){
+                                $dataToPlot['date_heure'] = date('H:i:s' ,strtotime($dataToPlot['date_heure']));
+                                echo "['".$dataToPlot['date_heure']."',".$dataToPlot['valeur']."],";
+                            }
                         }
         
                     }
                 }
+
+                ////// TRI PAR MOIS ////
+
+                //foreach($cardiacValuesPlot as $dataToPlot){
+                //    //var_dump($row);
+                //    //echo "['".$row['heure']."',".$row['battement']."],";
+                //    $dataToPlotDateTime = date_parse($dataToPlot['date_heure']);
+
+                //    if($dataToPlotDateTime['year'] == $maxYearCardiacValuesPlotFinal){
+                //        if($dataToPlotDateTime['month'] == $maxMonthCardiacValuesPlotFinal){
+                //            $dataToPlot['date_heure'] = date('d, H:i:s' ,strtotime($dataToPlot['date_heure']));
+                //            echo "['".$dataToPlot['date_heure']."',".$dataToPlot['valeur']."],";
+                //        }
+        
+                //    }
+                //}
 
                 ////// TRI PAR AN ////
 
