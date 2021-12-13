@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Responsive Landing Page Template With Flexbox</title>
+    <title>Gecosensor - Accueil</title>
 
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
@@ -26,7 +26,7 @@
 			<li><a href="#">FAQ</a></li>
             <li><a href="#">Jeu ludique</a></li>
             <li><a href="#">Contacter</a></li>
-            <li><a href="#">Connexion</a></li>
+            <li><a href="connexion.php">Connexion</a></li>
 		</nav>
 	</header>
 
