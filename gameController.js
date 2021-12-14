@@ -118,7 +118,7 @@ function updateCookie() {
 
 // get JSON containing level data
 function getLevelDataJson() {
-    fetch("resources/levels.json")
+    fetch("data/levels.json")
         .then(response => {
             return response.json();
         })
