@@ -1,0 +1,191 @@
+/* import fonts */
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro&family=Urbanist:wght@300;400;700;900&display=swap');
+
+/* global styles */
+* {
+    font-family: 'Urbanist', sans-serif;
+}
+
+h1 {
+    font-size: 72px;
+    color: #3bc393;
+    margin-bottom: -24px;
+}
+
+h3 {
+    font-size: 20px;
+    font-weight: lighter;
+    color: #3bc393;
+}
+
+h4 {
+    font-size: 18px;
+    font-weight: 700;
+    color: #3bc393;
+    margin-bottom: 8px;
+}
+
+h5 {
+    font-size: 14px;
+    font-weight: 400;
+    color: lightgrey;
+    margin: 0;
+}
+
+p {
+    margin: 0;
+    font-size: 16px;
+}
+
+/* id elements */
+#guess-input {
+    height: 50px;
+    width: 350px;
+    font-size: 18px;
+    padding-left: 8px;
+    margin-bottom: 32px;
+    background-color: #fafafa;
+    outline:none;
+    border: none;
+    border-radius: 9px;
+    box-shadow: 0 0 6px rgba(0, 0, 0, .08);
+}
+
+#guess-input::placeholder {
+    color: #9a9a9a;
+}
+
+#guess-input:hover,
+#guess-input:focus {
+    outline:none;
+    box-shadow: 0 0 24px rgba(0, 0, 0, .12);
+    transition: 0.5s;
+}
+
+/* classes */
+.container {
+    padding: 0 48px 0 48px;
+}
+
+.flex-container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 24px 8px;
+}
+
+.col {
+    display: flex;
+    flex-direction: column;
+}
+
+.gap-8 {
+    gap: 8px;
+}
+
+.btn-primary {
+    height: 25px;
+    border: none;
+    border-radius: 4px;
+    background-color: #f5f5f5;
+    transition: 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: #3bc393;
+    color: white;
+    transition: 0.3s;
+}
+
+.justify {
+    text-align: justify;
+    text-justify: inter-word;
+}
+
+/* modal */
+.modal {
+    display: none; /* invisible at start */
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    padding-top: 150px;
+    z-index: 2;
+    left: 0;
+    top: 0;
+    overflow: auto;
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+    width: 400px;
+    margin: auto;
+    padding: 16px 24px 24px 24px;
+    border-radius: 8px;
+    background-color: #fafafa;
+}
+
+.btn-close {
+    color: darkgray;
+    float: right;
+    font-size: 24px;
+    font-weight: normal;
+}
+
+.btn-next {
+    width: 100%;
+    height: 40px;
+    margin-top:24px;
+    font-size: 16px;
+    text-align: center;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    background-color: #3bc393;
+    transition: 0.3s;
+}
+
+.btn-next:hover {
+    box-shadow: 0 0 24px rgba(59, 195, 147, .4);
+    transition: 0.3s;
+}
+
+.btn-next:focus {
+    background-color: #298a68;
+    transition: 0.3s;
+}
+
+.btn-close:hover,
+.btn-close:focus {
+    color: #3bc393;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* animations */
+.bounce-anim {
+    animation-name: bounce;
+    animation-duration: 2s;
+}
+
+@keyframes bounce {
+    0% {color: #3bc393;}
+    0%, 30%, 60%, 80%, 100% {transform: translateY(0);}
+    20% {transform: translateY(-30px);}
+    40% {transform: translateY(-15px);}
+}
+
+/* responsive design */
+@media screen and (max-width: 600px) {
+    #guess-input {
+        width: 100%;
+    }
+
+    .flex-container {
+        flex-direction: column;
+        align-items: center;
+    }
+}

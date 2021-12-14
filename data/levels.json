@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "answer": "biodiversité",
+    "searches": ["bio", "diversity"],
+    "definition": "Diversité des espèces vivantes (micro-organismes, végétaux, animaux) présentes dans un milieu."
+  },
+  {
+    "id": 2,
+    "answer": "ecosystème",
+    "searches": ["eco", "système"],
+    "definition": "Définition de écosystème"
+  },
+  {
+    "id": 3,
+    "answer": "greenwashing",
+    "searches": ["green", "washing"]
+  },
+  {
+    "id": 4,
+    "answer": "starfish",
+    "searches": ["star", "fish"]
+  },
+  {
+    "id": 6,
+    "answer": "snowman",
+    "searches": ["snow", "man"]
+  },
+  {
+    "id": 7,
+    "answer": "jumprope",
+    "searches": ["jump", "rope"]
+  },
+  {
+    "id": 8,
+    "answer": "happy hour",
+    "searches": ["happy", "hour"]
+  },
+  {
+    "id": 9,
+    "answer": "rick roll",
+    "searches": ["rick", "roll"]
+  },
+  {
+    "id": 10,
+    "answer": "nutcracker",
+    "searches": ["nut", "cracker"]
+  },
+  {
+    "id": 11,
+    "answer": "keyboard",
+    "searches": ["key", "bored"]
+  },
+  {
+    "id": 12,
+    "answer": "rainbow",
+    "searches": ["rain", "bow"]
+  },
+  {
+    "id": 13,
+    "answer": "catfish",
+    "searches": ["cat", "fish"]
+  },
+  {
+    "id": 14,
+    "answer": "football",
+    "searches": ["foot", "ball"]
+  },
+  {
+    "id": 15,
+    "answer": "toy story",
+    "searches": ["toy", "story"]
+  }
+]

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <link  rel="stylesheet" href="jeu_ludique_styles.css" />
+    <title>Geco - jeu ludique</title>
+
+    <!-- Load scripts -->
+    <script src="gameController.js"></script>
+</head>
+<body onload="main()">
+    <div class="container">
+        <h1>Jeu ludique</h1>
+        <h3 id="lvl-disp">Level ..</h3>
+        <input class="form-control" id="guess-input" placeholder="Guess" autocomplete="off">
+        <script>
+            // keystrokes
+            var input = document.getElementById("guess-input");
+            input.addEventListener("keyup", function(event) {
+                if (event.code === "Enter") {
+                    event.preventDefault();
+                    submitGuess()
+                }
+            });
+        </script>
+        <div class="flex-container">
+            <div class="col gap-8">
+                <img id="gif1" class="" src="" alt="gif 1" />
+                <button type="button" class="btn-primary" onclick="switchGif(1)">Changer le gif</button>
+            </div>
+            <div class="col gap-8">
+                <img id="gif2" class="" src="" alt="gif 2" />
+                <button type="button" class="btn-primary" onclick="switchGif(2)" >Changer le gif</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="definition-modal" class="modal">
+        <div class="modal-content">
+            <span class="btn-close" onclick="closeDefinitionModal()">&times;</span>
+            <h4 id="mot">Mot</h4>
+            <h5 class="subtext">Définition</h5>
+            <p id="definition" class="justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse luctus ante mi, sit amet aliquet augue efficitur at. Morbi eget dictum neque. Duis sollicitudin dolor eget velit elementum, at efficitur justo pharetra.</p>
+            <button type="button" class="btn-next" onclick="closeDefinitionModal()" >Suivant &rightarrow;</button>
+        </div>
+    </div>
+</body>
+</html>
