@@ -15,11 +15,11 @@
         <div id="box">
 
             <form action="post_mot_de_passe_oublie.php" method="post">
-                <h1 id="title_form">Mot de passe oublié</h1>
+                <h1 id="title_form">Mot de passe oubliÃ©</h1>
 
                 <input type="email" placeholder="Email" name="email" class="input_mail" required />
 
-                <input type="submit" id='submit' value='Réinitialiser le mot de passe' />
+                <input type="submit" id='submit' value='RÃ©initialiser le mot de passe' />
 
                 <?php if(isset($_GET['erreur'])){
                         $erreur = $_GET['erreur'];
@@ -27,19 +27,19 @@
                             echo '<p id="message_erreur">Nom d\'utilisateur ou mot de passe incorrect.</p>';
                         }
                         if($erreur==2) {
-                            echo '<p id="message_erreur">Il faut d\'abord se connecter avant de pouvoir accéder à cette page.</p>';
+                            echo '<p id="message_erreur">Il faut d\'abord se connecter avant de pouvoir accï¿½der ï¿½ cette page.</p>';
                         }
                         if($erreur==3){
-                            echo '<p id="message_erreur">Il faut d\'abord vous connecter avant de pouvoir accéder à cette page.</p>';
+                            echo '<p id="message_erreur">Il faut d\'abord vous connecter avant de pouvoir accï¿½der ï¿½ cette page.</p>';
                         }
                         if($erreur==4){
-                            echo '<p id="message_erreur">Vous n\'êtes pas autorisé à accéder à ces informations.</p>';
+                            echo '<p id="message_erreur">Vous n\'ï¿½tes pas autorisï¿½ ï¿½ accï¿½der ï¿½ ces informations.</p>';
                         }
                     }
                      
                 ?>
 
-                <p id="indication">Entrez votre adresse email pour pouvoir réinitialiser votre mot de passe. Le nouveau mot de passe vous sera envoyé par mail. </p>
+                <p id="indication">Entrez votre adresse email pour pouvoir rÃ©initialiser votre mot de passe. Le nouveau mot de passe vous sera envoyÃ© par mail. </p>
 
             </form>
         </div>

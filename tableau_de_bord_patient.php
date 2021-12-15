@@ -16,7 +16,7 @@ if(!isset($_SESSION['userPatient'])) {
 
 <!DOCTYPE html>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<html>
+<html lang="fr">
     <head>
           <link rel="stylesheet" href="css/style_patient_1.css">
           <link rel="stylesheet" href="css/navbar_pro.css">
@@ -49,15 +49,7 @@ if(!isset($_SESSION['userPatient'])) {
 
             <div class="contenu_actif" data-anim="1">
                 <div id="t">
-                    <div class="cad">
-                        <ul class="ab">
-                            <li><a><strong> Appleseed </strong></a></li>
-                            
-                          </ul>
                     
-                
-                    </p>
-                    </div>
 
                     <div class="container">
 
