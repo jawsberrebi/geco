@@ -9,8 +9,9 @@ include('backend/conditions_id.php');
 <html>
     <head>
         <meta charset="utf-8" />
-        <link rel="stylesheet" href="css/style_tableau_de_bord_personnel.css" />
+        <link rel="stylesheet" href="css/style_profil.css" />
         <link rel="stylesheet" href="css/navbar_pro.css">
+        <link rel="stylesheet" href="css/onglet.css">
         <title>Tableau de bord</title>
     </head>
     <header>
@@ -62,42 +63,43 @@ include('backend/conditions_id.php');
 
         <div class="tableau_onglets">
 
-            <div class="groupe_onglets">
-                <div class="onglet_actif" data-anim="1">Vue d'ensemble</div>
-                <div class="onglet" data-anim="2">Rythme cardiaque</div>
-                <div class="onglet" data-anim="3">Niveau sonore</div>
-                <div class="onglet" data-anim="4">Concentration CO2</div>
-            </div>
+            <div class="container">
 
-            <div class="contenu_actif" data-anim="1">
-                <div id="table">
-                    <div class="cadran">
-                        <p id="text">
+
+                <div class="container-onglets">
+                    <div class="onglets active" data-anim="1">Vue d'ensemble</div>
+                    <div class="onglets" data-anim="2">Rythme cardiaque</div>
+                    <div class="onglets" data-anim="3">Niveau sonore</div>
+                    <div class="onglets" data-anim="4">Concentration CO2</div>
+                </div>
+            
+                <div class="contenu activeContenu" data-anim="1">
+                    <div id="table">
+                        <div class="cadran">
+                            <p id="text">
+                                <?php 
+                                  if(!isset($finalValues[0]['valeur'])){
+                                      echo '<p></p>';
+                                  }
+                                  else{
+                                      echo '<p class="valeurPHP">' . $finalValues[0]['valeur'] . ' <mark id="bpm">bpm</mark></p>';  
+                                  }
+                                ?>
+                            </p>
+
+                            <form method="post" action="backend/envoi_valeurs?id_patient=<?php echo $id ?>.php">
+                                <input name="type" value="cardiaque" type="hidden"/>
+                                <input type="range" min="0" max="100" id="curseur_rouge" name="valeur"/> <input type="submit" value="Envoyer" id="bouton_rouge"/>
+                            </form>
+
                             <?php 
-                                if(!isset($finalValues[0]['valeur'])){
-                                    echo '<p></p>';
-                                }
-                                else{
-                                    echo '<p class="valeurPHP">' . $finalValues[0]['valeur'] . ' <mark id="bpm">bpm</mark></p>';  
+                                if(isset($_GET['confirmation'])){
+                                    if($_GET['confirmation'] == 1){
+                                        echo '<p>La valeur de la sensibilité pour ce capteur a bien été modifiée</p>';
+                                    }
                                 }
                             ?>
-                        </p>
-
-                        <form method="post" action="backend/envoi_valeurs?id_patient=<?php echo $id ?>.php">
-                            <input name="type" value="cardiaque" type="hidden"/>
-                            <input type="range" min="0" max="100" id="curseur_rouge" name="valeur"/> <input type="submit" value="Envoyer" id="bouton_rouge"/>
-                        </form>
-
-                        <?php 
-                            if(isset($_GET['confirmation'])){
-                                if($_GET['confirmation'] == 1){
-                                    echo '<p>La valeur de la sensibilité pour ce capteur a bien été modifiée</p>';
-                                }
-                            }
-                        ?>
-                    </div>
-
-                    
+                        </div>
 
                     <div class="cadran">
                         <p id="text">
@@ -116,41 +118,62 @@ include('backend/conditions_id.php');
                             <input type="range" min="0" max="100" id="curseur_bleu" name="valeur"/> <input type="submit" value="Envoyer" id="bouton_bleu"/>
                         </form>
 
-                        <?php 
-                            if(isset($_GET['confirmation'])){
-                                if($_GET['confirmation'] == 2){
-                                    echo '<p>La valeur de la sensibilité pour ce capteur a bien été modifiée</p>';
-                                }
-                            }
-                        ?>
-                    </div>
-
-                    <div class="cadran">
-                        <p id="text">
                             <?php 
-                                if(!isset($finalValues[2]['valeur'])){
-                                    echo '<p></p>';
+                                if(isset($_GET['confirmation'])){
+                                    if($_GET['confirmation'] == 2){
+                                        echo '<p>La valeur de la sensibilité pour ce capteur a bien été modifiée</p>';
+                                    }
                                 }
-                                else{
-                                    echo '<p class="valeurPHP">' . $finalValues[2]['valeur'] . ' <mark id="pourcentage">%</mark></p>';  
+
+                            ?>
+                        </div>
+
+                        <div class="cadran">
+                            <p id="text">
+                                <?php 
+                                  if(!isset($finalValues[2]['valeur'])){
+                                      echo '<p></p>';
+                                  }
+                                  else{
+                                      echo '<p class="valeurPHP">' . $finalValues[2]['valeur'] . ' <mark id="pourcentage">%</mark></p>';  
+                                  }
+                                ?>
+                            </p>
+                            
+                            <form method="post" action="backend/envoi_valeurs?id_patient=<?php echo $id ?>.php">
+                                <input name="type" value="gaz" type="hidden"/>
+                                <input type="range" min="0" max="100" id="curseur_vert" name="valeur"/> <input type="submit" value="Envoyer" id="bouton_vert"/>
+                            </form>
+
+                            <?php 
+                                if(isset($_GET['confirmation'])){
+                                    if($_GET['confirmation'] == 3){
+                                        echo '<p>La valeur de la sensibilité pour ce capteur a bien été modifiée</p>';
+                                    }
                                 }
                             ?>
-                        </p>
-                        
-                        <form method="post" action="backend/envoi_valeurs?id_patient=<?php echo $id ?>.php">
-                            <input name="type" value="gaz" type="hidden"/>
-                            <input type="range" min="0" max="100" id="curseur_vert" name="valeur"/> <input type="submit" value="Envoyer" id="bouton_vert"/>
-                        </form>
-
-                        <?php 
-                            if(isset($_GET['confirmation'])){
-                                if($_GET['confirmation'] == 3){
-                                    echo '<p>La valeur de la sensibilité pour ce capteur a bien été modifiée</p>';
-                                }
-                            }
-                        ?>
+                        </div>
                     </div>
                 </div>
+            
+                <div class="contenu" data-anim="2">
+                        <p>Insérez le graphique ici</p>
+                </div>
+            
+                <div class="contenu" data-anim="3">
+                    <p>Insérez le graphique ici</p>
+                </div>
+                <div class="contenu" data-anim="4">
+                    <p>Insérez le graphique ici</p>
+                </div>
+            
+        
+            </div>
+            <script src="Javascript/onglets.js"></script>
+
+
+            <div class="contenu_actif" data-anim="1">
+                
             </div>
             
             <div class="contenu_actif" data-anim="2">
