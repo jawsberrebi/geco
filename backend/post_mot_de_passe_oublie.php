@@ -8,7 +8,7 @@ $email = htmlspecialchars($_POST['email']);
 //######VERIFICATION DE CONNEXION POUR LE PERSONNEL######\\
 
 $sql = "SELECT * FROM personnel WHERE mail=:mail";
-$dataBinded = array( //Databinding pour sécuriser failles SQL
+$dataBinded = array( 
     ':mail' => $email,
     );
 $pre = $pdo->prepare($sql);
@@ -18,59 +18,45 @@ $user = current($pre->fetchAll(PDO::FETCH_ASSOC)); //current prend la première l
 if ($user != 0) {
     $newPassword = passwordGenerator($pdo, 8);
     $hashedNewPassword = password_hash($newPassword, PASSWORD_DEFAULT);
-    $sql = "UPDATE personnel SET mdp = :mdp WHERE mail = '".$user['mail']."' ";
+    $sql = "UPDATE personnel SET mdp = :mdp WHERE mail = '".$email."' ";
     $pre = $pdo->prepare($sql);
     $pre->execute([
         ':mdp' => $hashedNewPassword
     ]);
 
     //INSERER NOUVELLE FONCTION D'ENVOI DE MAIL
-}
 
-/////
-/////CHECKPOINT, À CONTINUER
-/////
+    exit();
+}
 
 
 //######VERIFICATION DE CONNEXION POUR LE PATIENT######\\
 
-$sql = "SELECT * FROM patient WHERE (nom_utilisateur=:nom_utilisateur OR mail=:mail)";
-$dataBinded = array( //Databinding pour sécuriser failles SQL
-    ':mail' => $usernameEmail,
-    ':nom_utilisateur' => $usernameEmail,
+$sql = "SELECT * FROM patient WHERE mail=:mail";
+$dataBinded = array(
+    ':mail' => $email,
     );
 $pre = $pdo->prepare($sql);
 $pre->execute($dataBinded);
 $user = $pre->fetchAll(PDO::FETCH_ASSOC);
 
 
-foreach($user as $users){
-    if(password_verify($password, $users['mdp'])){
+if ($user != 0) {
+    $newPassword = passwordGenerator($pdo, 8);
+    $hashedNewPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+    $sql = "UPDATE patient SET mdp = :mdp WHERE mail = '".$email."' ";
+    $pre = $pdo->prepare($sql);
+    $pre->execute([
+        ':mdp' => $hashedNewPassword
+    ]);
 
-        $_SESSION['userPatient'] = $users;
-        unset($_SESSION['userPersonnel']);
-        header('Location:tableau_de_bord_patient.php'); //MODIF LA PAGE
-        echo 'yes';
-        exit();
-    }
-    else{
-        header('Location:connexion?erreur=1.php');
-        exit();
-    }
+    //INSERER NOUVELLE FONCTION D'ENVOI DE MAIL
+
+    exit();
 }
-
-if(!isset($_SESSION['userPatient']) && !isset($_SESSION['userPatient'])){
-    header('Location:connexion?erreur=1.php');
+else{
+    header('Location:mot_de_passe_oublie?erreur=1.php');
     exit();
 }
 
-//if (isset($_SESSION['userPatient'])) {
-//    header('Location:tableau_de_bord_patient.php'); //MODIF LA PAGE
-//    exit();
-
-//}
-//else {
-//    header('Location:connexion?erreur=1.php');
-//    exit();
-//}
 ?>

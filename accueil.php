@@ -9,7 +9,6 @@
 
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/accueil.css">
 
 </head>
@@ -147,6 +146,8 @@
 
 			<label for="message">Message :</label><br />
 			<textarea name="message" id="message"></textarea><br />
+
+			<input type="submit" name="envoyer" value="Envoyer" id="envoyer"/>
 		</form>
 	</section>
 

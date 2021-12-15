@@ -272,24 +272,3 @@ th {
 .titre_profil{
     display: flex;
 }
-
-#bpm {
-    color: #AC0002;
-    background: none;
-    font-weight: bolder;
-    font-size: 0.5em;
-}
-
-#db {
-    color: #70D9E5;
-    background: none;
-    font-weight: bolder;
-    font-size: 0.5em;
-}
-
-#pourcentage {
-    color: #3CC496;
-    background: none;
-    font-weight: bolder;
-    font-size: 0.5em;
-}
