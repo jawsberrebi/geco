@@ -62,7 +62,7 @@ include('backend/conditions_id.php');
         <?php echo dataUserGenerator($userPatientProfil, 'patient'); ?>
 
         <div class="tableau_onglets">
-
+            
             <div class="container">
 
 
@@ -72,7 +72,8 @@ include('backend/conditions_id.php');
                     <div class="onglets" data-anim="3">Niveau sonore</div>
                     <div class="onglets" data-anim="4">Concentration CO2</div>
                 </div>
-            
+
+
                 <div class="contenu activeContenu" data-anim="1">
                     <div id="table">
                         <div class="cadran">
@@ -170,23 +171,6 @@ include('backend/conditions_id.php');
         
             </div>
             <script src="Javascript/onglets.js"></script>
-
-
-            <div class="contenu_actif" data-anim="1">
-                
-            </div>
-            
-            <div class="contenu_actif" data-anim="2">
-                
-            </div>
-
-            <div class="contenu_actif" data-anim="3">
-                
-            </div>
-
-            <div class="contenu_actif" data-anim="4">
-             
-            </div>
 
         </div>
 

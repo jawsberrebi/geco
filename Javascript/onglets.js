@@ -1,5 +1,5 @@
 const onglets = document.querySelectorAll('.onglets');
-const contenu = document.querySelectorAll('.contenu')
+const contenu = document.querySelectorAll('.contenu');
 let index = 0;
 
 onglets.forEach(onglet => {

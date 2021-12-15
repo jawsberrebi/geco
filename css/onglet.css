@@ -30,7 +30,6 @@
 .contenu {
     height: 70%;
     width: 85%;
-    position: absolute;
     opacity: 0;
     background-color: #FAFAFA ;
     border-radius: 20px;
@@ -76,3 +75,4 @@
         opacity: 1;
     }
 }
+
