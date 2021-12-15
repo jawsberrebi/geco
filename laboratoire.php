@@ -63,56 +63,129 @@ include('backend/fonctions.php');
 //$deuxcheck = $check % 256;
 //var_dump($deuxcheck);
 
-//1 - G5A4 - 1 - "inserer type sensor (1 caractère) " - "logiquement id du patient (2 caractères)" - "valeur sensibilité (4 caractères)" - "timestamp (4 caractères)" - "checksum (2 caractères)" - "année (4 caractères)" - "mois (2 caractères)" - "jour (2 caractères)" - "heure (2 caractères)" - "minute (2 caractères)" - "seconde (2 caractères)"
+//1 - G5A4 - 1 - "inserer type sensor (1 caractï¿½re) " - "logiquement id du patient (2 caractï¿½res)" - "valeur sensibilitï¿½ (4 caractï¿½res)" - "timestamp (4 caractï¿½res)" - "checksum (2 caractï¿½res)" - "annï¿½e (4 caractï¿½res)" - "mois (2 caractï¿½res)" - "jour (2 caractï¿½res)" - "heure (2 caractï¿½res)" - "minute (2 caractï¿½res)" - "seconde (2 caractï¿½res)"
 ?>
 
 <?php 
 
-$idHospital = 2;
+$test = "yes";
 
-$sql = "SELECT mail FROM personnel WHERE id_hopital = '".$idHospital."'";
-$pre = $pdo->prepare($sql);
-$pre->execute();
-$mails = $pre->fetchAll(PDO::FETCH_ASSOC);
-
-var_dump($mails);
-
-foreach($mails as $mail){
-
-    echo $mail['mail'];
-}
-
-
+$pdo->quote($test);
+echo $test;
 
 ?>
 
 
 <?php
 
-////// POSTER EN PHP CURL
-https://stackoverflow.com/questions/2138527/php-curl-http-post-sample-code
-//
-// A very simple PHP example that sends a HTTP POST to a remote site
-//
+//////// POSTER EN PHP CURL
+//https://stackoverflow.com/questions/2138527/php-curl-http-post-sample-code
+////
+//// A very simple PHP example that sends a HTTP POST to a remote site
+////
 
-$ch = curl_init();
+//$ch = curl_init();
 
-curl_setopt($ch, CURLOPT_URL,"http://www.example.com/tester.phtml");
-curl_setopt($ch, CURLOPT_POST, 1);
-curl_setopt($ch, CURLOPT_POSTFIELDS,
-            "postvar1=value1&postvar2=value2&postvar3=value3");
+//curl_setopt($ch, CURLOPT_URL,"http://www.example.com/tester.phtml");
+//curl_setopt($ch, CURLOPT_POST, 1);
+//curl_setopt($ch, CURLOPT_POSTFIELDS,
+//            "postvar1=value1&postvar2=value2&postvar3=value3");
 
-// In real life you should use something like:
-// curl_setopt($ch, CURLOPT_POSTFIELDS,
-//          http_build_query(array('postvar1' => 'value1')));
+//// In real life you should use something like:
+//// curl_setopt($ch, CURLOPT_POSTFIELDS,
+////          http_build_query(array('postvar1' => 'value1')));
 
-// Receive server response ...
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+//// Receive server response ...
+//curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
-$server_output = curl_exec($ch);
+//$server_output = curl_exec($ch);
 
-curl_close ($ch);
+//curl_close ($ch);
 
-// Further processing ...
-if ($server_output == "OK") { ... } else { ... }
+//// Further processing ...
+//if ($server_output == "OK") { ... } else { ... }
 ?>
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="css/style_tableau_de_bord_personnel.css" />
+        <title>Tableau de bord</title>
+    </head>
+
+    <body>
+
+        <h1>Tableau de bord</h1>
+
+        <?php include("backend/fenetre_modale_tableau_de_bord.php"); ?>
+
+        <div class="tableau_onglets">
+
+            <div class="groupe_onglets">
+                <div class="onglet_actif" data-anim="1">Vue d'ensemble</div>
+                <div class="onglet" data-anim="2">Rythme cardiaque</div>
+                <div class="onglet" data-anim="3">Niveau sonore</div>
+                <div class="onglet" data-anim="4">Concentration CO2</div>
+            </div>
+
+
+            <div class="contenu_actif" data-anim="1">
+                <div id="table">
+                    <div class="cadran">
+                        <p id="text">
+                            <?php 
+                            if(!isset($finalValues[0]['valeur'])){
+                                echo '';
+                            }
+                            else{
+                               echo $finalValues[0]['valeur'];  
+                            }
+                            ?>
+                        </p>
+                    </div>
+
+                    <div class="cadran">
+                        <p id="text">
+                            <?php 
+                            if(!isset($finalValues[1]['valeur'])){
+                                echo '';
+                            }
+                            else{
+                               echo $finalValues[1]['valeur'];  
+                            }
+                            ?>
+                        </p>
+                    </div>
+
+                    <div class="cadran">
+                        <p id="text">
+                            <?php 
+                            if(!isset($finalValues[2]['valeur'])){
+                                echo '';
+                            }
+                            else{
+                               echo $finalValues[2]['valeur'];  
+                            }
+                            ?>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="contenu_actif" data-anim="2">
+                
+            </div>
+
+            <div class="contenu_actif" data-anim="3">
+                
+            </div>
+
+            <div class="contenu_actif" data-anim="4">
+             
+            </div>
+
+        </div>
+
+    </body>
+</html>

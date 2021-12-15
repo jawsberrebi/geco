@@ -23,7 +23,7 @@
 
                 <input type="submit" id='submit' value='Connexion' />
 
-                <a href="" id="password_lost">Mot de passe oublié ?</a>
+                <a href="mot_de_passe_oublie.php" id="password_lost">Mot de passe oublié ?</a>
 
                 <?php if(isset($_GET['erreur'])){
                         $erreur = $_GET['erreur'];
@@ -39,7 +39,9 @@
                         if($erreur==4){
                             echo '<p id="message_erreur">Vous n\'êtes pas autorisé à accéder à ces informations.</p>';
                         }
-                    }?>
+                    }
+                     
+                ?>
 
                 <p id="indication">Si vous n'avez pas de compte, veuillez contacter votre médecin.</p>
 

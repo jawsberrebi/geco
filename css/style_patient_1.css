@@ -1,3 +1,90 @@
+@import url('https://fonts.googleapis.com/css2?family=Urbanist&display=swap');
+
+* {
+    font-family: 'Urbanist', sans-serif;
+}
+
+nav {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #FAFAFA;
+    width: 100%;
+    height: 50px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+ul {
+    display: flex;
+}
+
+li {
+    list-style: none;
+}
+
+.active {
+    list-style-type: circle;
+}
+
+.activea {
+    list-style-type: circle;
+}
+
+.activeb {
+    list-style-type: circle;
+}
+
+.navbara {
+    padding: 10px;
+    list-style: none;
+}
+
+.navbarb {
+    padding: 10px;
+    list-style: none;
+}
+
+.navbarc {
+    padding: 10px;
+    list-style: none;
+}
+
+a {
+    color: black;
+    text-decoration: none;
+    display: block;
+    position: relative;
+    padding: 0.2em 0;
+    overflow: hidden;
+}
+
+    a::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 0.125em;
+        opacity: 1;
+        background-color: #3BC393;
+        transition: opacity 250ms, transform 250ms;
+        transform: translate3d(-100%, 0, 0);
+    }
+
+    a:hover::after,
+    a:focus::after {
+        transform: translate3d(0, 0, 0);
+    }
+
+.active {
+    color: #3BC393;
+}
+
+.nav-logo {
+    padding-left: 1em;
+}
+
 #modification_compte {
     font-family: Urbanist, sans-serif;
     color: #3BC393;
@@ -62,8 +149,7 @@ table {
     color: red;
 }
 
-a:visited
-{
+a:visited {
     color: none;
 }
 
@@ -89,16 +175,36 @@ td {
 }
 
 .cadran {
-    margin: 3%;
-    padding-top: 6.5%;
-    padding-bottom: 0.8%;
+    margin: 30px;
+    padding-top: 6%;
     border: 1px solid white;
     border-radius: 20px;
-    width: 15%;
+    width: 12%;
     height: 15%;
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2), 0 0 10px 0 rgba(0, 0, 0, 0.2);
     font-weight: bolder;
     font-size: 2em;
+}
+
+#bpm {
+    color: #AC0002;
+    background: none;
+    font-weight: bolder;
+    font-size: 0.5em;
+}
+
+#db {
+    color: #70D9E5;
+    background: none;
+    font-weight: bolder;
+    font-size: 0.5em;
+}
+
+#pourcentage {
+    color: #3CC496;
+    background: none;
+    font-weight: bolder;
+    font-size: 0.5em;
 }
 
 #text {
@@ -118,11 +224,6 @@ td {
 #supprimer {
     font-family: Urbanist, sans-serif;
     color: red;
-    margin-top: 2%;
-    margin-left: 2%;
-}
-#supprimer::after{
-    display: none;
 }
 
 input[type = range] {
@@ -135,16 +236,15 @@ input[type = range] {
     background: #8B8B8B;
     height: 2px;
     outline: none;
-    margin-top: 30%;
 }
 
-input[type = range]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    width: 13px;
-    height: 13px;
-    background: white;
-    border-radius: 50%;
-}
+    input[type = range]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        width: 13px;
+        height: 13px;
+        background: white;
+        border-radius: 50%;
+    }
 
 
 
@@ -162,6 +262,7 @@ input[type = range]::-webkit-slider-thumb {
 
 #bouton_rouge {
     margin-left: 70%;
+    margin-top: -100%;
     width: 30%;
     border: none;
     background: #AC0002;
@@ -189,20 +290,20 @@ input[type = range]::-webkit-slider-thumb {
     color: white;
 }
 
-.connexion{
+.connexion {
     padding-left: 2%;
 }
 
-#recherche{
+#recherche {
     padding-left: 15%;
     display: initial;
 }
 
-#btn_recherche{
+#btn_recherche {
     height: 1.9em;
 }
 
-#identifiant{
+#identifiant {
     padding-left: 0.8em;
     font-family: Urbanist, sans-serif;
     font-weight: normal;
@@ -222,10 +323,10 @@ input[type = range]::-webkit-slider-thumb {
     border-radius: 10px;
 }
 
-/* Bouton Dropdown on hover & focus */
-.dropbtn:hover, .dropbtn:focus {
-    background-color: #3e8e41;
-}
+    /* Bouton Dropdown on hover & focus */
+    .dropbtn:hover, .dropbtn:focus {
+        background-color: #3e8e41;
+    }
 
 /* Permet de fixer le bouton de la page */
 .dropdown {
@@ -244,20 +345,22 @@ input[type = range]::-webkit-slider-thumb {
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
 }
 
-/* Liens Ã  l'intÃ©rieur du dropdown */
-.dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-}
+    /* Liens à l'intérieur du dropdown */
+    .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
 
-/* Change la couleur lors d'un passage sur l'Ã©lÃ©ment */
-.dropdown-content a:hover {background-color: #f1f1f1}
+        /* Change la couleur lors d'un passage sur l'élément */
+        .dropdown-content a:hover {
+            background-color: #f1f1f1
+        }
 
 /* Montre le bouton Dropdown */
 .show {
-    display:block;
+    display: block;
     border-radius: 10px;
 }
 
@@ -267,29 +370,4 @@ th {
     text-align: center;
     white-space: pre;
     text-align: center;
-}
-
-.titre_profil{
-    display: flex;
-}
-
-#bpm {
-    color: #AC0002;
-    background: none;
-    font-weight: bolder;
-    font-size: 0.5em;
-}
-
-#db {
-    color: #70D9E5;
-    background: none;
-    font-weight: bolder;
-    font-size: 0.5em;
-}
-
-#pourcentage {
-    color: #3CC496;
-    background: none;
-    font-weight: bolder;
-    font-size: 0.5em;
 }

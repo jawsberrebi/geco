@@ -22,6 +22,9 @@ if (!isset($_SESSION['userPatient']) && !isset($_SESSION['userPersonnel'])) {
 
             <h1 id="title_form">Modifier mon compte</h1>
 
+            
+
+
             <!-- MODIFICATION DU NOM -->
 
             <?php if (isset($_SESSION['userPersonnel'])) : ?>
@@ -76,7 +79,7 @@ if (!isset($_SESSION['userPatient']) && !isset($_SESSION['userPersonnel'])) {
             <?php endif; ?>
             <?php endif; ?>
 
-            <!-- MODIFICATION DU NUM�RO DE T�L�PHONE -->
+            <!-- MODIFICATION DU NUMÉRO DE TÉLÉPHONE -->
 
             <?php if (isset($_SESSION['userPersonnel'])) : ?>
             <?php if ($_SESSION['userPersonnel']) : ?>
@@ -103,7 +106,6 @@ if (!isset($_SESSION['userPatient']) && !isset($_SESSION['userPersonnel'])) {
 
             <?php endif; ?>
             <?php endif; ?>
-            <!-- MODIFICATION DE LA VILLE ET DU NOM DE L'HÔPITAL POUR L'ADMINISTRATEUR -->
 
             <input type="submit" id='submit' value='Sauvegarder' />
 

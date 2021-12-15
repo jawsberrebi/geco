@@ -53,8 +53,6 @@ $finalFrame = $beginingFrame . $valueSensorSensitivity . $_GET['id_patient'] . $
 
 
 
-
-
 echo $valueSensitivity;
 echo $valueSensorSensitivity;
 

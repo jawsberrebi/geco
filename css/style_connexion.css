@@ -43,7 +43,7 @@ input:focus {
 }
 
 
-input[type=text], input[type=password] {
+input[type=text], input[type=password], input[type=email] {
     font-family: Urbanist, sans-serif;
     color: rgb(150, 150, 150);
     width: 100%;
