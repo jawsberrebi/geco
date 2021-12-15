@@ -37,15 +37,15 @@ if (htmlspecialchars($_POST['type']) == 'patient') {
     $sql = 'INSERT INTO patient(prenom, nom, mail, tel, adresse, description, mdp, nom_utilisateur, id_hopital) VALUES (:prenom, :nom, :mail, :tel, :adresse, :description, :mdp, :nom_utilisateur, :id_hopital)';
     $pre = $pdo->prepare($sql);
     $pre->execute([
-        'prenom' => $firstName,
-        'nom' => $name,
-        'mail' => $mail,
-        'tel' => $phone,
-        'adresse' => $adresse,
-        'description' => $description,
-        'mdp' => $hashedPassword,
-        'nom_utilisateur' => $userName,
-        'id_hopital' => $idHospital
+        ':prenom' => $firstName,
+        ':nom' => $name,
+        ':mail' => $mail,
+        ':tel' => $phone,
+        ':adresse' => $adresse,
+        ':description' => $description,
+        ':mdp' => $hashedPassword,
+        ':nom_utilisateur' => $userName,
+        ':id_hopital' => $idHospital
         ]);
 
     $sql = 'SELECT MAX(id_patient) FROM patient';
@@ -99,14 +99,14 @@ if (htmlspecialchars($_POST['type']) == 'patient') {
     $sql = 'INSERT INTO personnel(prenom, nom, mail, tel, type, mdp, nom_utilisateur, id_hopital) VALUES (:prenom, :nom, :mail, :tel, :type, :mdp, :nom_utilisateur, :id_hopital)';
     $pre = $pdo->prepare($sql);
     $pre->execute([
-        'prenom' => $firstName,
-        'nom' => $name,
-        'mail' => $mail,
-        'tel' => $phone,
-        'type' => 'infirmier',
-        'mdp' => $hashedPassword,
-        'nom_utilisateur' => $userName,
-        'id_hopital' => $idHospital
+        ':prenom' => $firstName,
+        ':nom' => $name,
+        ':mail' => $mail,
+        ':tel' => $phone,
+        ':type' => 'infirmier',
+        ':mdp' => $hashedPassword,
+        ':nom_utilisateur' => $userName,
+        ':id_hopital' => $idHospital
         ]);
 
     $champs = array();
@@ -133,14 +133,14 @@ if (htmlspecialchars($_POST['type']) == 'patient') {
     $sql = 'INSERT INTO personnel(prenom, nom, mail, tel, type, mdp, nom_utilisateur, id_hopital) VALUES (:prenom, :nom, :mail, :tel, :type, :mdp, :nom_utilisateur, :id_hopital)';
     $pre = $pdo->prepare($sql);
     $pre->execute([
-        'prenom' => $firstName,
-        'nom' => $name,
-        'mail' => $mail,
-        'tel' => $phone,
-        'type' => 'medecin',
-        'mdp' => $hashedPassword,
-        'nom_utilisateur' => $userName,
-        'id_hopital' => $idHospital
+        ':prenom' => $firstName,
+        ':nom' => $name,
+        ':mail' => $mail,
+        ':tel' => $phone,
+        ':type' => 'medecin',
+        ':mdp' => $hashedPassword,
+        ':nom_utilisateur' => $userName,
+        ':id_hopital' => $idHospital
         ]);
 
     $champs = array();

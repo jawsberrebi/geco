@@ -24,6 +24,7 @@ include("backend/conditions_accès_page_personnel_et_admin.php");
 
     </nav>
 </header>
+
 <script>
     /* Fonction permettant de montrer la liste d'action après un clique sur le bouton*/
     function myFunction() {
@@ -45,6 +46,7 @@ include("backend/conditions_accès_page_personnel_et_admin.php");
         }
     }
 </script>
+
 <body>
     <h1>
         Tableau de bord
@@ -66,15 +68,18 @@ include("backend/conditions_accès_page_personnel_et_admin.php");
         <input type="submit" value="Rechercher" id="btn_recherche"/>
         <!-- AJOUTER UN FILTRE DE RECHERCHE EN FONCTIONNALITÉ SUPPLÉMENTAIRE -->
     </form>
+
+    <?php if($_SESSION['userPersonnel']['type'] == 'medecin' || $_SESSION['userPersonnel']['type'] == 'admin') : ?>
+
     <div class="dropdown">
         <button onclick="myFunction()" class="dropbtn">Ajouter un membre</button>
         <div id="myDropdown" class="dropdown-content">
             <!-- FONCTIONNALITÉS ADMIN ET MÉDECIN -->
             <?php include("backend/fonctionnalités_admin_medecin_tableau_de_bord_personnel.php") ?>
         </div>
-</div>
+    </div>
 
-
+    <?php endif; ?>
 
 
     
@@ -145,7 +150,7 @@ include("backend/conditions_accès_page_personnel_et_admin.php");
 
             if(!$isThereResult['infirmier']) {
 
-                echo '<p>Aucun résultat.</p>';
+                //echo '<p>Aucun résultat.</p>';
 
             }
 
@@ -166,7 +171,7 @@ include("backend/conditions_accès_page_personnel_et_admin.php");
             if(!$isThereResult['infirmier']) {
 
                 if (!$isThereResult['medecin']) {
-                    echo '<p>Aucun résultat.</p>';
+                    //echo '<p>Aucun résultat.</p>';
                 }
 
             }
