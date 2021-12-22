@@ -660,9 +660,9 @@ function sendingIdsMail($mail, $donnees) : void
 
                     <li>Nom d\'utilisateur : '.$donnees[1].'</li>
 
-                    <li>Mot de passe : '.$donnees[2].'</li>
-
                </ul></br>
+
+                <p>Pour créer votre mot de passe, veuillez cliquer sur</p> <a href="http://localhost:8081/geco/modification_mot_de_passe?char=' . $donnees[2] . '&user=' . $donnees[3] . '&type=' . $donnees[4] . '.php">ce lien</a>
                 
                <p>Merci de les conserver précieusement et de ne les divulguer à personne</p>
 

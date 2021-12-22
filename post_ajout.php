@@ -78,7 +78,7 @@ if (htmlspecialchars($_POST['type']) == 'patient') {
 
     $champs = array();
 
-    array_push($champs, $mail, $userName, $password);
+    array_push($champs, $mail, $userName, $hashedPassword, $userName,'patient');
     sendingIdsMail('rd.berrebi@gmail.com', $champs);
 
     header('Location:tableau_de_bord_personnel?confirmation=1.php');
@@ -111,7 +111,7 @@ if (htmlspecialchars($_POST['type']) == 'patient') {
 
     $champs = array();
 
-    array_push($champs, $mail, $userName, $password);
+    array_push($champs, $mail, $userName, $hashedPassword, $userName,'personnel');
 
     sendingIdsMail('rd.berrebi@gmail.com', $champs);
 
@@ -145,7 +145,7 @@ if (htmlspecialchars($_POST['type']) == 'patient') {
 
     $champs = array();
 
-    array_push($champs, $mail, $userName, $password);
+    array_push($champs, $mail, $userName, $hashedPassword, $userName,'personnel');
 
     sendingIdsMail('rd.berrebi@gmail.com', $champs);
 

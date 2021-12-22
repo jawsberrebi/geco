@@ -39,6 +39,16 @@
                         if($erreur==4){
                             echo '<p id="message_erreur">Vous n\'êtes pas autorisé à accéder à ces informations.</p>';
                         }
+                        if($erreur==5){
+                            echo '<p id="message_erreur">Page inexistante. Veuillez réessayer</p>';
+                        }
+                    }
+
+                    if(isset($_GET['confirmation'])){
+                        $confirmation = $_GET['confirmation'];
+                        if($confirmation==1) {
+                            echo '<p id="indication">Votre mot de passe a bien été modifié. Vous pouvez dès à présent vous connecter.</p>';
+                        }
                     }
                      
                 ?>
