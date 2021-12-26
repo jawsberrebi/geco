@@ -10,5 +10,7 @@
 
 <a href="ajout?type=medecin" class="ajout">Ajouter un nouveau médecin</a> <br />
 
+<a href="ajout?type=admin" class="ajout">Ajouter un nouvel administrateur</a> <br />
+
 <?php endif; ?>
 <?php endif; ?>

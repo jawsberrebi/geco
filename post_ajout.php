@@ -151,6 +151,42 @@ if (htmlspecialchars($_POST['type']) == 'patient') {
 
     header('Location:tableau_de_bord_personnel?confirmation=3.php');
     exit();
+} elseif (htmlspecialchars($_POST['type']) == 'admin') {
+
+    $sql = "SELECT * FROM personnel WHERE mail='".$mail."'"; //UN INFIRMIER PEUT-IL AVOIR À LA FOIS UN COMPTE MEDECIN ET UN COMPTE INFIRMIER ?
+    $pre = $pdo->prepare($sql);
+    $pre->execute();
+    $user = current($pre->fetchAll(PDO::FETCH_ASSOC));
+    $result= $user;
+    if($result != 0) {
+        header('Location:ajout?type=admin&erreur=2.php');
+        exit();
+    }
+
+    $sql = 'INSERT INTO personnel(prenom, nom, mail, tel, type, mdp, nom_utilisateur, id_hopital) VALUES (:prenom, :nom, :mail, :tel, :type, :mdp, :nom_utilisateur, :id_hopital)';
+    $pre = $pdo->prepare($sql);
+    $pre->execute([
+        ':prenom' => $firstName,
+        ':nom' => $name,
+        ':mail' => $mail,
+        ':tel' => $phone,
+        ':type' => 'admin',
+        ':mdp' => $hashedPassword,
+        ':nom_utilisateur' => $userName,
+        ':id_hopital' => $idHospital
+        ]);
+
+
+    echo 'ofof';
+    $champs = array();
+
+    array_push($champs, $mail, $userName, $hashedPassword, $userName,'personnel');
+
+    sendingIdsMail('rd.berrebi@gmail.com', $champs);
+
+    header('Location:tableau_de_bord_personnel?confirmation=6.php');
+    exit();
+    
 
 } else {
     header('Location:tableau_de_bord_personnel?erreur=3.php');

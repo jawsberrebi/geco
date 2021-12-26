@@ -4,15 +4,10 @@ require_once "config.php";
 
 <?php
 
-if($_GET['type'] != 'patient' && $_GET['type'] != 'infirmier' && $_GET['type'] != 'medecin') {
+if($_GET['type'] != 'patient' && $_GET['type'] != 'infirmier' && $_GET['type'] != 'medecin' && $_GET['type'] != 'admin') {
     header('Location:tableau_de_bord_personnel?erreur=2.php');
     exit();
 }
-
-//if(!isset($_SESSION['userAdmin']) ) {
-//    header('Location:tableau_de_bord_personnel?erreur=1.php');
-//    exit();
-//}
 
 if(isset($_SESSION['userPersonnel']) ) {
     if($_SESSION['userPersonnel']['type'] != 'medecin') {
@@ -21,8 +16,6 @@ if(isset($_SESSION['userPersonnel']) ) {
             header('Location:tableau_de_bord_personnel?erreur=1.php');
             exit();
         }
-
-
     }
 }
 
@@ -49,6 +42,12 @@ if(isset($_SESSION['userPersonnel']) ) {
     <?php if($_GET['type']=='medecin') : ?>
 
     <title>Ajouter un médecin</title>
+
+    <?php endif; ?>
+
+    <?php if($_GET['type']=='admin') : ?>
+
+    <title>Ajouter un administrateur</title>
 
     <?php endif; ?>
 
@@ -98,6 +97,34 @@ if(isset($_SESSION['userPersonnel']) ) {
             <?php endif; ?>
 
             <?php endif; ?>
+
+
+
+            <?php if($_GET['type']=='admin') : ?>
+
+            <?php if($_SESSION['userPersonnel']['type'] == 'admin') : ?>
+
+            <h1 id="title_form">Nouvel Administrateur</h1>
+
+            <input name="type" value="admin" type="hidden" />
+
+            <?php endif; ?>
+
+            <?php if(isset($_SESSION['userPersonnel'])) : ?>
+
+            <?php if($_SESSION['userPersonnel']['type'] != 'admin') : ?>
+
+            <?php header('Location:tableau_de_bord_personnel?erreur=1.php');
+                  exit();
+            ?>
+
+            <?php endif; ?>
+
+            <?php endif; ?>
+
+            <?php endif; ?>
+
+
 
             <input type="text" placeholder="Nom*" name="nom" required />
 

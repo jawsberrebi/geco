@@ -1,4 +1,4 @@
-﻿<?php 
+<?php 
 require_once "config.php";
 
 $idChar = htmlspecialchars($_POST['char']);
@@ -18,6 +18,8 @@ if($firstPassword != $secondPassword){
     header('Location:../modification_mot_de_passe?char=' . $idChar . '&user=' . $username . '&type=' . $type . '.php&erreur=1.php');
     exit();
 }
+
+$hashedPassword = password_hash($firstPassword, PASSWORD_DEFAULT);
 
 if(empty($idChar)){
    
@@ -64,7 +66,7 @@ if($type == 'patient'){
         $pre->execute([
             ':mdp' => $idChar,
             ':nom_utilisateur' => $username,
-            ':mdp_final' => $secondPassword,
+            ':mdp_final' => $hashedPassword,
             ]);
         header('Location:../connexion?confirmation=1.php');
         exit();
@@ -90,19 +92,15 @@ elseif($type == 'personnel'){
         $pre->execute([
             ':mdp' => $idChar,
             ':nom_utilisateur' => $username,
-            ':mdp_final' => $secondPassword,
+            ':mdp_final' => $hashedPassword,
             ]);
         header('Location:../connexion?confirmation=1.php');
         exit();
     }
 }
 else{
-    //header('Location:../connexion?erreur=5.php');
-    //exit();
-    echo 'ah';
+    header('Location:../connexion?erreur=5.php');
+    exit();
 }
-
-
-
 
 ?>
