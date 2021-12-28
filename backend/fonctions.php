@@ -113,7 +113,22 @@ function passwordGenerator(PDO $pdo, int $length) : string
 
         <td>
             <?php if($user['mail'] == null) {
-                      echo '<a>AJOUTER</a>';
+                    if($_SESSION['userPersonnel']['type'] != 'infirmier'){
+                        if($type == 'infirmier'){
+                           echo '<a href="modification_profil?id_infirmier='. $user['id_personnel'] .'">AJOUTER</a>'; 
+                        }
+                        elseif($type == 'medecin'){
+                           echo '<a href="modification_profil?id_medecin='. $user['id_personnel'] .'">AJOUTER</a>';
+                        }
+                        else{
+                           echo '<a href="modification_profil?id_patient='. $user['id_patient'] .'">AJOUTER</a>'; 
+                        }
+                      
+                    }
+                    else{
+                      echo 'N/A'; 
+                    }
+                      
                   }
                   else {
                       echo $user['mail'];
@@ -124,7 +139,12 @@ function passwordGenerator(PDO $pdo, int $length) : string
         <td>
             <?php if ($type == 'patient') : ?>
             <?php if($user['description'] == null) {
-                      echo '<a href="">AJOUTER</a>';
+                    if($_SESSION['userPersonnel']['type'] != 'infirmier'){
+                      echo '<a href="modification_profil?id_patient='. $user['id_patient'] .'">AJOUTER</a>';  
+                    }
+                    else{
+                        echo 'N/A';
+                    }
                   }
                   else {
                       echo $user['description'];
@@ -159,8 +179,21 @@ function passwordGenerator(PDO $pdo, int $length) : string
         <?php endif; ?>
 
         <td>
-            <?php if($user['tel'] == null) {
-                      echo '<a href="">AJOUTER</a>';
+            <?php if($user['tel'] == 0) {
+                    if($_SESSION['userPersonnel']['type'] != 'infirmier'){
+                      if($type == 'infirmier'){
+                          echo '<a href="modification_profil?id_infirmier='. $user['id_personnel'] .'">AJOUTER</a>'; 
+                      }
+                      elseif($type == 'medecin'){
+                          echo '<a href="modification_profil?id_medecin='. $user['id_personnel'] .'">AJOUTER</a>';
+                      }
+                      else{
+                          echo '<a href="modification_profil?id_patient='. $user['id_patient'] .'">AJOUTER</a>';
+                      }  
+                    }
+                    else{
+                        echo 'N/A';
+                    }
                   }
                   else {
                       echo $user['tel'];
@@ -173,7 +206,12 @@ function passwordGenerator(PDO $pdo, int $length) : string
         <?php if($type == 'patient') : ?>
         <td>
             <?php if($user['adresse'] == null) {
-                      echo '<a href="">AJOUTER</a>';
+                    if($_SESSION['userPersonnel']['type'] != 'infirmier'){
+                      echo '<a href="modification_profil?id_patient='. $user['id_patient'] .'">AJOUTER</a>';  
+                    }
+                    else{
+                        echo 'N/A';
+                    }
                   }
                   else {
                       echo $user['adresse'];
