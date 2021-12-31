@@ -1,7 +1,7 @@
 <?php
 include_once("config.php");
 
-if (!isset($_POST['nom']) || !isset($_POST['prenom'])) {
+if (!isset($_POST['nom']) || !isset($_POST['prenom']) || !isset($_POST['email'])) {
     header('Location:modifier_mon_compte?erreur=1.php');
     exit();
 }
@@ -127,9 +127,6 @@ elseif(isset($_SESSION['userPatient'])){
 
         header('Location:tableau_de_bord_patient.php');
         exit();
-
-
-    
 
     }
 }

@@ -58,22 +58,22 @@ if (htmlspecialchars($_POST['type']) == 'patient') {
     $sql = 'INSERT INTO capteur(id_patient, type) VALUES (:id_patient, :type)';
     $pre = $pdo->prepare($sql);
     $pre->execute([
-        'id_patient' => $idPatient,
-        'type' => 'frequenceCardiaque',
+        ':id_patient' => $idPatient,
+        ':type' => 'frequenceCardiaque',
         ]);
 
     $sql = 'INSERT INTO capteur(type, id_patient) VALUES (:type, :id_patient)';
     $pre = $pdo->prepare($sql);
     $pre->execute([
-        'id_patient' => $idPatient,
-        'type' => 'niveauSonore'
+        ':id_patient' => $idPatient,
+        ':type' => 'niveauSonore'
         ]);
 
     $sql = 'INSERT INTO capteur(type, id_patient) VALUES (:type, :id_patient)';
     $pre = $pdo->prepare($sql);
     $pre->execute([
-        'id_patient' => $idPatient,
-        'type' => 'concentrationGaz'
+        ':id_patient' => $idPatient,
+        ':type' => 'concentrationGaz'
         ]);
 
     $champs = array();

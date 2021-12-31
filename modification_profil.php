@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 require_once "config.php";
 include("backend/conditions_accès_page_personnel_et_admin.php");
 include('backend/conditions_id.php');
@@ -53,8 +53,25 @@ if($user['id_hopital'] != $_SESSION['userPersonnel']['id_hopital']){
 
             <h1 id="title_form">Modification du compte</h1>
 
-            
+            <input name="id" value="<?php echo $id ?>" type="hidden"/>
 
+            <?php if (isset($_GET['id_patient'])) : ?>
+
+            <input name="type" value="patient" type="hidden"/>
+
+            <?php endif; ?>
+
+            <?php if (isset($_GET['id_infirmier'])) : ?>
+
+            <input name="type" value="infirmier" type="hidden"/>
+
+            <?php endif; ?>
+
+            <?php if (isset($_GET['id_medecin'])) : ?>
+
+            <input name="type" value="medecin" type="hidden"/>
+
+            <?php endif; ?>
 
             <!-- MODIFICATION DU NOM -->
 
@@ -76,9 +93,9 @@ if($user['id_hopital'] != $_SESSION['userPersonnel']['id_hopital']){
 
             <?php if (isset($_GET['id_patient'])) : ?>
 
-            <input type="text" placeholder="Adresse" name="adresse" value="<?php echo $user['adresse'] ?>" /> <!-- LE PATIENT PEUT-IL MODIFIER SON ADRESSE ??? -->
+            <input type="text" placeholder="Adresse" name="adresse" value="<?php echo $user['adresse'] ?>" />
 
-            <textarea placeholder="Description" name="description" value="<?php echo $user['adresse'] ?>"></textarea>
+            <textarea placeholder="Description" name="description" value="<?php echo $user['description'] ?>"></textarea>
 
             <?php endif; ?>
 
@@ -92,14 +109,11 @@ if($user['id_hopital'] != $_SESSION['userPersonnel']['id_hopital']){
                       if($error==2){
                           echo '<p id="message_erreur">L\'adresse email a déjà été utilisée. Veuillez entrer une autre adresse email.</p>';
                       }
-                      if ($_SESSION['userPersonnel']['type'] == 'admin') {
-                          if($error==3){
-                              echo '<p id="message_erreur">Ce nom d\'hôpital a déjà été attribué.</p>';
-                          }
-                      }
+                      
 
                   }?>
 
+            <p id="indication">Si vous modifiez le nom et/ou le prénom, le nom d'utilisateur de ce profil sera également modifié (de la manière : "première lettre du prénom + nom de famille").</p>
 
 
         </form>
