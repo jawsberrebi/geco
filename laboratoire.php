@@ -68,10 +68,17 @@ include('backend/fonctions.php');
 
 <?php 
 
-$test = "yes";
+$sql = "SELECT * FROM personnel WHERE mail=:mail";
+$dataBinded = array( 
+    ':mail' => 'boy@boy.fr',
+    );
+$pre = $pdo->prepare($sql);
+$pre->execute($dataBinded);
+$user = $pre->fetchAll(PDO::FETCH_ASSOC); //current prend la première ligne du tableau
 
-$pdo->quote($test);
-echo $test;
+if($user == true){
+    echo 'ok';
+}
 
 ?>
 
@@ -106,7 +113,7 @@ echo $test;
 //if ($server_output == "OK") { ... } else { ... }
 ?>
 
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8" />
@@ -188,4 +195,4 @@ echo $test;
         </div>
 
     </body>
-</html>
+</html>-->

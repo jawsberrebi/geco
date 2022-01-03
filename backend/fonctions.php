@@ -669,14 +669,9 @@ function dataResultsResearchTableMember(PDO $pdo, string $userType, string $supe
 //Envoi d'indentifiants par mail
 function sendingIdsMail($mail, $donnees) : void 
 {
-
           $to = $mail;
 
-
-
           $subject = 'Vos identifiants GecoSensor';
-
-
 
           $message = '
 
@@ -700,7 +695,7 @@ function sendingIdsMail($mail, $donnees) : void
 
                </ul></br>
 
-                <p>Pour créer votre mot de passe, veuillez cliquer sur</p> <a href="http://localhost:8081/geco/modification_mot_de_passe?char=' . $donnees[2] . '&user=' . $donnees[3] . '&type=' . $donnees[4] . '.php">ce lien</a>
+                <p>Pour créer votre mot de passe, veuillez cliquer sur <a href="http://localhost:8081/geco/modification_mot_de_passe?char=' . $donnees[2] . '&user=' . $donnees[3] . '&type=' . $donnees[4] . '.php">ce lien</a> </p> 
                 
                <p>Merci de les conserver précieusement et de ne les divulguer à personne</p>
 
@@ -710,17 +705,49 @@ function sendingIdsMail($mail, $donnees) : void
 
           ';
 
+          $headers[] = 'MIME-Version: 1.0';
 
+          $headers[] = 'Content-type: text/html; charset=iso-8859-1';
+
+          mail($to, $subject, $message, implode("\r\n", $headers));
+
+     }
+
+?>
+
+<?php
+
+//Envoi d'indentifiants par mail
+function sendingLinkPassword($mail, $donnees) : void 
+{
+          $to = $mail;
+
+          $subject = 'Lien de réinitialisation pour le mot de passe de votre compte GecoSensor';
+
+          $message = '
+
+          <html>
+
+           <head>
+
+           </head>
+
+           <body>
+
+               <p>Vous avez demandé à réinitialiser le mot de passe de votre compte GecoSensor.</p>
+
+                <p>Pour réinitialiser votre mot de passe, veuillez cliquer sur <a href="http://localhost:8081/geco/modification_mot_de_passe?char=' . $donnees[0] . '&user=' . $donnees[1] . '&type=' . $donnees[2] . '.php">ce lien</a> </p> 
+           </body>
+
+          </html>
+
+          ';
 
           $headers[] = 'MIME-Version: 1.0';
 
           $headers[] = 'Content-type: text/html; charset=iso-8859-1';
 
-
-
           mail($to, $subject, $message, implode("\r\n", $headers));
-
-
 
      }
 

@@ -49,6 +49,9 @@
                         if($confirmation==1) {
                             echo '<p id="indication">Votre mot de passe a bien été modifié. Vous pouvez dès à présent vous connecter.</p>';
                         }
+                        if($confirmation==2){
+                            echo '<p id="indication">Vous allez recevoir un mail contenant un lien qui vous permettra de réinitialiser votre mot de passe.</p>';
+                        }
                     }
                      
                 ?>

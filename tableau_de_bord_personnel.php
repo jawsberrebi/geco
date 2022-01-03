@@ -46,7 +46,6 @@ include("backend/conditions_accès_page_personnel_et_admin.php");
     <form method="get" id="recherche">
         <input type="search" name="moteur_recherche" placeholder="Chercher un membre" id="moteur_recherche" />
         <input type="submit" value="Rechercher" id="btn_recherche"/>
-        <!-- AJOUTER UN FILTRE DE RECHERCHE EN FONCTIONNALITÉ SUPPLÉMENTAIRE -->
     </form>
 
     <?php if($_SESSION['userPersonnel']['type'] == 'medecin' || $_SESSION['userPersonnel']['type'] == 'admin') : ?>
@@ -80,10 +79,8 @@ include("backend/conditions_accès_page_personnel_et_admin.php");
         <?php if(!isset($_GET['moteur_recherche']) || empty($_GET['moteur_recherche'])) : ?>
 
 
-
         <!-- GÉNÉRATION DU TABLEAU DES PATIENTS -->
         <?php echo dataTableMembersGenerator($pdo, 'patient', false, ''); ?>
-
 
         <?php if($_SESSION['userPersonnel']['type'] == 'admin' || $_SESSION['userPersonnel']['type'] == 'medecin') : ?>
 
@@ -91,8 +88,6 @@ include("backend/conditions_accès_page_personnel_et_admin.php");
         <?php echo dataTableMembersGenerator($pdo, 'infirmier', false, ''); ?>
 
         <?php endif; ?>
-
-
         
         <?php if($_SESSION['userPersonnel']['type'] == 'admin') : ?>
 
@@ -100,9 +95,6 @@ include("backend/conditions_accès_page_personnel_et_admin.php");
         <?php echo dataTableMembersGenerator($pdo, 'medecin', false, ''); ?>
 
         <?php endif; ?>
-
-
-
 
 
         <!-- SI L'UTILISATEUR A RENTRÉ QUELQUE CHOSE DANS LE CHAMP DE RECHERCHE, AFFICHER LA TABLE DE RÉSULTATS -->
@@ -165,8 +157,6 @@ include("backend/conditions_accès_page_personnel_et_admin.php");
         <?php endif; ?>
 
     </table>
-
-
     
        
 </body>
