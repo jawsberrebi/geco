@@ -122,7 +122,7 @@ include("backend/conditions_accès_page_personnel_et_admin.php");
 
             if(!$isThereResult['infirmier']) {
 
-                //echo '<p>Aucun résultat.</p>';
+                echo '<p>Aucun résultat.</p>';
 
             }
 
@@ -143,7 +143,7 @@ include("backend/conditions_accès_page_personnel_et_admin.php");
             if(!$isThereResult['infirmier']) {
 
                 if (!$isThereResult['medecin']) {
-                    //echo '<p>Aucun résultat.</p>';
+                    echo '<p>Aucun résultat.</p>';
                 }
 
             }

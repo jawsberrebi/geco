@@ -21,7 +21,7 @@
 
 			<li><a href="#">Accueil</a></li>
 			<li><a href="#section1">GecoSensor</a></li>
-			<li><a href="#section2">Equipe</a></li>
+			<!--<li><a href="#section2">Equipe</a></li>-->
 			<li><a href="#section3">FAQ</a></li>
             <li><a href="#">Jeu ludique</a></li>
             <li><a href="#section4">Contacter</a></li>
@@ -73,7 +73,7 @@
 	
     
 
-	<section class="features" id="section2">
+	<!--<section class="features" id="section2">
 		<h3 class="title">Equipe</h3>
 		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id felis et ipsum bibendum ultrices. Morbi vitae pulvinar velit. Sed aliquam dictum sapien, id sagittis augue malesuada eu.</p>
 		<hr>
@@ -109,7 +109,7 @@
 			
 			</li>
         </ul>
-	</section>
+	</section>-->
 
 
 	<section class="reviews" id="section3">

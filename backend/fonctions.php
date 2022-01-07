@@ -52,10 +52,11 @@ function passwordGenerator(PDO $pdo, int $length) : string
 <?php ////// GÉNÉRATEUR DE DONNÉES POUR LES PROFILS DES PATIENT, MÉDECINS, ET INFIRMIERS ?>
 
 <?php function dataUserGenerator(array $user, string $type) : void {
-
+  
 ?>
 
 <meta charset="utf-8" />
+<script src="Javascript/confirme_suppression.js"></script>
 
 <div class="titre_profil">
     <h1>
@@ -65,7 +66,7 @@ function passwordGenerator(PDO $pdo, int $length) : string
     <?php if((isset($_SESSION['userPersonnel']) && ($_SESSION['userPersonnel']['type'] == 'admin')) || (isset($_SESSION['userPersonnel']) && ($_SESSION['userPersonnel']['type'] == 'medecin'))) : ?>
 
     <?php if($type == 'patient') : ?>
-    <a href="backend/suppression?id_patient=<?php echo $user['id_patient'] ?>" id="supprimer">Supprimer 🗑 </a>
+    <a href="backend/suppression?id_patient=<?php echo $user['id_patient'] ?>" id="supprimer" onclick="Javascript: return confirme_suppression()">Supprimer 🗑 </a>
 
     <?php endif; ?>
     <?php endif; ?>
@@ -74,7 +75,7 @@ function passwordGenerator(PDO $pdo, int $length) : string
 <?php if((isset($_SESSION['userPersonnel']) && ($_SESSION['userPersonnel']['type'] == 'admin')) || (isset($_SESSION['userPersonnel']) && ($_SESSION['userPersonnel']['type'] == 'medecin'))) : ?>
 
 <?php if($type == 'infirmier') : ?>
-<a href="backend/suppression?id_infirmier=<?php echo $user['id_personnel'] ?>" id="supprimer">Supprimer 🗑 </a>
+<a href="backend/suppression?id_infirmier=<?php echo $user['id_personnel'] ?>" id="supprimer" onclick="Javascript: return confirme_suppression()">Supprimer 🗑 </a>
 
 <?php endif; ?>
 <?php endif; ?>
@@ -82,7 +83,7 @@ function passwordGenerator(PDO $pdo, int $length) : string
 <?php if((isset($_SESSION['userPersonnel']) && ($_SESSION['userPersonnel']['type'] == 'admin'))) : ?>
 
 <?php if($type == 'medecin') : ?>
-<a href="backend/suppression?id_medecin=<?php echo $user['id_personnel'] ?>" id="supprimer">Supprimer 🗑 </a>
+<a href="backend/suppression?id_medecin=<?php echo $user['id_personnel'] ?>" id="supprimer" onclick="Javascript: return confirme_suppression()">Supprimer 🗑 </a>
 
 <?php endif; ?>
 <?php endif; ?>
@@ -519,6 +520,8 @@ function dataResultsResearchTableMember(PDO $pdo, string $userType, string $supe
 
                 if(!empty($searchResults)) {
                     $isThereResult['patient'] = true;
+                }elseif(empty($searchResults)){
+                    $isThereResult['patient'] = false;
                 }
 
             }
@@ -562,6 +565,8 @@ function dataResultsResearchTableMember(PDO $pdo, string $userType, string $supe
 
                 if(!empty($searchResults)) {
                     $isThereResult['infirmier'] = true;
+                }elseif(empty($searchResults)){
+                    $isThereResult['infirmier'] = false;
                 }
 
             }
@@ -615,6 +620,8 @@ function dataResultsResearchTableMember(PDO $pdo, string $userType, string $supe
 
                 if(!empty($searchResults)) {
                     $isThereResult['medecin'] = true;
+                }elseif(empty($searchResults)){
+                    $isThereResult['medecin'] = false;
                 }
 
             }

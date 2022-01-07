@@ -1,34 +1,63 @@
-<meta charset="utf-8" />
-<link rel="stylesheet" href="css/modal.css">
-<script src="http://code.jquery.com/jquery-latest.js"></script>
-<script src="Javascript/modale.js"></script>
+<?php 
+require_once "config.php"; 
+?>
 
-<?php if($_SESSION['userPersonnel']['type'] == 'admin' || $_SESSION['userPersonnel']['type'] == 'medecin') : ?>
+<?php
 
-<a href="ajout?type=patient" class="ajout" >Ajouter un nouveau patient</a> <br />
+if($_GET['type'] != 'patient' && $_GET['type'] != 'infirmier' && $_GET['type'] != 'medecin' && $_GET['type'] != 'admin') {
+    header('Location:tableau_de_bord_personnel?erreur=2.php');
+    exit();
+}
 
-<a href="ajout?type=infirmier" class="ajout">Ajouter un nouvel infirmier</a> <br />
+if(isset($_SESSION['userPersonnel']) ) {
+    if($_SESSION['userPersonnel']['type'] != 'medecin') {
 
-<?php if ($_SESSION['userPersonnel']['type'] == 'admin') : ?>
+        if($_SESSION['userPersonnel']['type'] != 'admin'){
+            header('Location:tableau_de_bord_personnel?erreur=1.php');
+            exit();
+        }
+    }
+}
 
-<a href="ajout?type=medecin" class="ajout">Ajouter un nouveau médecin</a> <br />
+?>
 
-<a href="ajout?type=admin" class="ajout">Ajouter un nouvel administrateur</a> <br />
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="css/style_ajout.css" />
+    <script src="Javascript/modale.js"></script>
 
-<?php endif; ?>
-<?php endif; ?>
+    <?php if($_GET['type'] == 'patient') : ?>
 
-<!--<div id="myModal">
-    <h3 id="title">Nouveau Patient</h3>
-    <div id="content">
-        
-    </div>
-</div>
-<script src="Javascript/modale.js"></script>-->
+    <title>Ajouter un patient</title>
 
-<!--<div id="myModal" class="modal">
+    <?php endif; ?>
 
-        <div class="modal-content" id="content">
+    <?php if($_GET['type'] == 'infirmier') : ?>
+
+    <title>Ajouter un infirmier</title>
+
+    <?php endif; ?>
+
+    <?php if($_GET['type']=='medecin') : ?>
+
+    <title>Ajouter un médecin</title>
+
+    <?php endif; ?>
+
+    <?php if($_GET['type']=='admin') : ?>
+
+    <title>Ajouter un administrateur</title>
+
+    <?php endif; ?>
+
+</head>
+<body>
+
+    <div id="box" class="modal">
+
+        <div class="modal-content">
 
             <form action="post_ajout.php" method="post">
 
@@ -134,4 +163,8 @@
                 <a href="#" class="modal-close">&times;</a>
             </form>
         </div>
-</div>-->
+    </div>
+
+    
+</body>
+</html>
