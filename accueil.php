@@ -151,6 +151,14 @@
 		</form>
 	</section>
 
+	<footer>
+		<p id="copyright_text">Copyright © 2021 Geco</p>
+		<ul>
+			<li><a href="CGU.html">CGU</a></li>
+		</ul>
+		
+	</footer>
+
 
 </body>
 

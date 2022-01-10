@@ -225,6 +225,173 @@ function passwordGenerator(PDO $pdo, int $length) : string
     </tr>
 </table>
 
+<div class="titre_profil_media">
+    <h1>
+        <?php echo $user['nom'] . ', ' . $user['prenom']; ?>
+    </h1>
+
+    <?php if((isset($_SESSION['userPersonnel']) && ($_SESSION['userPersonnel']['type'] == 'admin')) || (isset($_SESSION['userPersonnel']) && ($_SESSION['userPersonnel']['type'] == 'medecin'))) : ?>
+
+    <?php if($type == 'patient') : ?>
+    <a href="backend/suppression?id_patient=<?php echo $user['id_patient'] ?>" id="supprimer" onclick="Javascript: return confirme_suppression()">Supprimer 🗑 </a>
+
+    <?php endif; ?>
+    <?php endif; ?>
+</div>
+
+<?php if((isset($_SESSION['userPersonnel']) && ($_SESSION['userPersonnel']['type'] == 'admin')) || (isset($_SESSION['userPersonnel']) && ($_SESSION['userPersonnel']['type'] == 'medecin'))) : ?>
+
+<?php if($type == 'infirmier') : ?>
+<a href="backend/suppression?id_infirmier=<?php echo $user['id_personnel'] ?>" id="supprimer" onclick="Javascript: return confirme_suppression()">Supprimer 🗑 </a>
+
+<?php endif; ?>
+<?php endif; ?>
+
+<?php if((isset($_SESSION['userPersonnel']) && ($_SESSION['userPersonnel']['type'] == 'admin'))) : ?>
+
+<?php if($type == 'medecin') : ?>
+<a href="backend/suppression?id_medecin=<?php echo $user['id_personnel'] ?>" id="supprimer" onclick="Javascript: return confirme_suppression()">Supprimer 🗑 </a>
+
+<?php endif; ?>
+<?php endif; ?>
+
+<table class="donnees_utilisateur">
+    <thead class="titrage_donnees">
+        <tr>
+            <th>ID</th>
+            <th>EMAIL</th>
+            <?php if ($type == 'patient') : ?>
+            <th>DESCRIPTION</th>
+            <?php endif; ?>
+        </tr>
+    </thead>
+
+    <tr>
+        <?php if($type == 'patient') : ?>
+        <td>
+            <?php echo $user['id_patient']; ?>
+        </td>
+        <?php endif; ?>
+
+        <?php if(($type == 'infirmier') || ($type == 'medecin')) : ?>
+        <td>
+            <?php echo $user['id_personnel']; ?>
+        </td>
+        <?php endif; ?>
+
+        <td>
+            <?php if($user['mail'] == null) {
+                    if($_SESSION['userPersonnel']['type'] != 'infirmier'){
+                        if($type == 'infirmier'){
+                           echo '<a href="modification_profil?id_infirmier='. $user['id_personnel'] .'">AJOUTER</a>'; 
+                        }
+                        elseif($type == 'medecin'){
+                           echo '<a href="modification_profil?id_medecin='. $user['id_personnel'] .'">AJOUTER</a>';
+                        }
+                        else{
+                           echo '<a href="modification_profil?id_patient='. $user['id_patient'] .'">AJOUTER</a>'; 
+                        }
+                      
+                    }
+                    else{
+                      echo 'N/A'; 
+                    }
+                      
+                  }
+                  else {
+                      echo $user['mail'];
+                  }
+
+            ?>
+        </td>
+        <td>
+            <?php if ($type == 'patient') : ?>
+            <?php if($user['description'] == null) {
+                    if($_SESSION['userPersonnel']['type'] != 'infirmier'){
+                      echo '<a href="modification_profil?id_patient='. $user['id_patient'] .'">AJOUTER</a>';  
+                    }
+                    else{
+                        echo 'N/A';
+                    }
+                  }
+                  else {
+                      echo $user['description'];
+                  }
+
+            ?>
+            <?php endif; ?>
+        </td>
+    </tr>
+    <thead class="titrage_donnees">
+        <tr>
+            <th>TYPE D'UTILISATEUR</th>
+            <th>TÉLÉPHONE</th>
+
+            <?php if($type == 'patient') : ?>
+            <th>ADRESSE</th>
+            <?php endif; ?>
+
+        </tr>
+    </thead>
+    <tr>
+        <?php if($type == 'patient') : ?>
+        <td>Patient</td>
+        <?php endif; ?>
+
+        <?php if($type == 'infirmier') : ?>
+        <td>Infirmier</td>
+        <?php endif; ?>
+
+        <?php if($type == 'medecin') : ?>
+        <td>Médecin</td>
+        <?php endif; ?>
+
+        <td>
+            <?php if($user['tel'] == 0) {
+                    if($_SESSION['userPersonnel']['type'] != 'infirmier'){
+                      if($type == 'infirmier'){
+                          echo '<a href="modification_profil?id_infirmier='. $user['id_personnel'] .'">AJOUTER</a>'; 
+                      }
+                      elseif($type == 'medecin'){
+                          echo '<a href="modification_profil?id_medecin='. $user['id_personnel'] .'">AJOUTER</a>';
+                      }
+                      else{
+                          echo '<a href="modification_profil?id_patient='. $user['id_patient'] .'">AJOUTER</a>';
+                      }  
+                    }
+                    else{
+                        echo 'N/A';
+                    }
+                  }
+                  else {
+                      echo $user['tel'];
+                  }
+
+            ?>
+
+        </td>
+
+        <?php if($type == 'patient') : ?>
+        <td>
+            <?php if($user['adresse'] == null) {
+                    if($_SESSION['userPersonnel']['type'] != 'infirmier'){
+                      echo '<a href="modification_profil?id_patient='. $user['id_patient'] .'">AJOUTER</a>';  
+                    }
+                    else{
+                        echo 'N/A';
+                    }
+                  }
+                  else {
+                      echo $user['adresse'];
+                  }
+
+            ?>
+
+        </td>
+        <?php endif; ?>
+    </tr>
+</table>
+
 <?php
 
 }

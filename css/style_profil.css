@@ -266,8 +266,14 @@ th {
     text-align: left;
     white-space: pre;
 }
+
 .titre_profil{
     display: flex;
+}
+
+.titre_profil_media {
+    display: none;
+    visibility: hidden;
 }
 
 .valeurPHP{
@@ -293,4 +299,14 @@ th {
     background: none;
     font-weight: bolder;
     font-size: 0.5em;
+}
+
+@media screen and (max-width: 800px){
+    script{
+        display: none;
+    }
+
+    #table{
+        flex-direction: column;
+    }
 }

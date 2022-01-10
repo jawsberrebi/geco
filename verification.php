@@ -5,22 +5,6 @@ include_once("config.php");
 $usernameEmail = htmlspecialchars($_POST['email_pseudo']);
 $password = htmlspecialchars($_POST['password']);
 
-//$pdo->quote($usernameEmail);
-//$pdo->quote($password);
-
-//######VERIFICATION DE CONNEXION POUR L'ADMINISTRATEUR######\\
-
-//$sql = "SELECT * FROM admin WHERE nom_utilisateur='".$_POST['email_pseudo']."' AND mdp='".$_POST['password']."'";
-//$pre = $pdo->prepare($sql);
-//$pre->execute();
-//$user = current($pre->fetchAll(PDO::FETCH_ASSOC)); //current prend la première ligne du tableau
-//$_SESSION['userAdmin'] = $user; //on enregistre que l'utilisateur est connecté (on peut modif)
-
-//if ($_SESSION['userAdmin'] != 0) {
-//    header('Location:tableau_de_bord_personnel.php');
-//    exit();
-
-//}
 
 //######VERIFICATION DE CONNEXION POUR LE PERSONNEL######\\
 
