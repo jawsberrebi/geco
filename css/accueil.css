@@ -326,22 +326,25 @@ color: #3bc393
 }
 
 .contact form{
-    display: flex;
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
-
     max-width: 800px;
-    width: 80%;
+    width: 100%;
+    margin-left: 10%;
 }
 
-.contact form input{
-    padding: 15px;
-    flex: 1;
-    margin-right: 30px;
-    font-size: 18px;
-    color: #555;
-}
+    .contact form input, .contact form textarea {
+        padding: 15px;
+        flex: 1;
+        margin-right: 30px;
+        font-size: 18px;
+        color: #555;
+        border-radius: 10px;
+        outline: none;
+        background-color: #f7f7f7;
+        width: 50%;
+    }
 
 .contact form .btn{
     padding: 18px 42px;
@@ -356,7 +359,13 @@ color: #3bc393
 
 }
 
-
+#envoyer {
+    background: #3BC393;
+    border: none;
+    border-radius: 50px;
+    width: 50%;
+    color: white;
+}
 
 /*-------------
     Footer

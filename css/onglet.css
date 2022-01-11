@@ -1,6 +1,6 @@
 
 .container {
-    width: 50%;
+    width: 80%;
     height: 70%;
     background: #FAFAFA;
     margin-left: 10%;
@@ -9,7 +9,7 @@
 .container-onglets{
     padding-top: 1%;
     background: #FAFAFA;
-    width: 100%;
+    width: 70%;
     height: 30%;
     display: flex;
     /* border-bottom: 1px solid #333; */
@@ -30,11 +30,9 @@
 .contenu {
     height: 70%;
     width: 85%;
-    position: absolute;
     opacity: 0;
     background-color: #FAFAFA ;
     border-radius: 20px;
-    padding-bottom: 2%;
 }
 .contenu h3 {
     padding: 20px;
@@ -76,3 +74,4 @@
         opacity: 1;
     }
 }
+

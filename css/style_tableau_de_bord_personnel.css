@@ -41,6 +41,14 @@ h1 {
     padding-right: 2.85em;
 }
 
+.tab_personnel1 {
+    font-family: Urbanist, sans-serif;
+    font-weight: normal;
+    text-align: center;
+    white-space: pre;
+    padding-right: 2.85em;
+}
+
 .contenu_table {
     margin-bottom: 2%;
     border: 0.05px solid;
@@ -97,6 +105,8 @@ td {
     width: 15%;
     height: 15%;
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2), 0 0 10px 0 rgba(0, 0, 0, 0.2);
+    font-weight: bolder;
+    font-size: 2em;
 }
 
 #text {
@@ -133,6 +143,7 @@ input[type = range] {
     background: #8B8B8B;
     height: 2px;
     outline: none;
+    margin-top: 30%;
 }
 
 input[type = range]::-webkit-slider-thumb {
@@ -159,7 +170,6 @@ input[type = range]::-webkit-slider-thumb {
 
 #bouton_rouge {
     margin-left: 70%;
-    margin-top: -100%;
     width: 30%;
     border: none;
     background: #AC0002;
@@ -227,10 +237,9 @@ input[type = range]::-webkit-slider-thumb {
 
 /* Permet de fixer le bouton de la page */
 .dropdown {
-    position: relative;
     display: inline-block;
     position: relative;
-    left: 32.5%;
+    left: 32.75%;
 }
 
 /* Contenu du bouton dropdown */
@@ -266,6 +275,38 @@ th {
     white-space: pre;
     text-align: center;
 }
+
 .titre_profil{
     display: flex;
+}
+
+@media (min-width:781px) and (max-width: 1200px) {
+    .dropdown {
+        display: inline-block;
+        position: relative;
+        left: 42.5%;
+    }
+    .tab_personnel {
+        padding-right: 1em;
+    }
+
+}
+
+@media screen and (max-width: 780px) {
+    .dropdown {
+        left: 17%;
+    }
+    .tab_personnel1 {
+        display: none;
+    }
+    .affichage_valeur{
+        display: none;
+    }
+    #moteur_recherche {
+        width: 20%;
+        margin-left: 1%;
+    }
+    .tab_personnel {
+        padding-right: 6.25em;
+    }
 }

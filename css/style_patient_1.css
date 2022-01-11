@@ -1,3 +1,90 @@
+@import url('https://fonts.googleapis.com/css2?family=Urbanist&display=swap');
+
+* {
+    font-family: 'Urbanist', sans-serif;
+}
+
+nav {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #FAFAFA;
+    width: 100%;
+    height: 50px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+ul {
+    display: flex;
+}
+
+li {
+    list-style: none;
+}
+
+.active {
+    list-style-type: circle;
+}
+
+.activea {
+    list-style-type: circle;
+}
+
+.activeb {
+    list-style-type: circle;
+}
+
+.navbara {
+    padding: 10px;
+    list-style: none;
+}
+
+.navbarb {
+    padding: 10px;
+    list-style: none;
+}
+
+.navbarc {
+    padding: 10px;
+    list-style: none;
+}
+
+a {
+    color: black;
+    text-decoration: none;
+    display: block;
+    position: relative;
+    padding: 0.2em 0;
+    overflow: hidden;
+}
+
+    a::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 0.125em;
+        opacity: 1;
+        background-color: #3BC393;
+        transition: opacity 250ms, transform 250ms;
+        transform: translate3d(-100%, 0, 0);
+    }
+
+    a:hover::after,
+    a:focus::after {
+        transform: translate3d(0, 0, 0);
+    }
+
+.active {
+    color: #3BC393;
+}
+
+.nav-logo {
+    padding-left: 1em;
+}
+
 #modification_compte {
     font-family: Urbanist, sans-serif;
     color: #3BC393;
@@ -14,7 +101,11 @@ h1 {
     font-family: Urbanist, sans-serif;
     color: #3BC393;
     font-size: 2em;
-    padding-left: 10%;
+    padding-left: 15%;
+}
+
+#moteur_de_recherche:focus {
+    outline: none;
 }
 
 #moteur_recherche {
@@ -49,7 +140,7 @@ h1 {
 
 table {
     border-spacing: 10px;
-    margin-left: 10%;
+    margin-left: 15%;
 }
 
 #deconnexion {
@@ -58,14 +149,13 @@ table {
     color: red;
 }
 
-a:visited
-{
+a:visited {
     color: none;
 }
 
 td {
-    padding-top: 1.15%;
-    text-align: left;
+    padding: 1.15%;
+    /* text-align: center; */
 }
 
 .ajout {
@@ -77,202 +167,23 @@ td {
 
 .tableau_onglets {
     font-family: Urbanist, sans-serif;
-    margin-top: 1%;
 }
 
 #table {
     justify-content: center;
     display: flex;
-    height:100%;
 }
 
 .cadran {
-    margin-top: 3%;
-    margin-left:10%;
-    padding-top: 6.5%;
-    padding: 5%;
-    padding-bottom: 0.8%;
+    margin: 30px;
+    padding-top: 6%;
     border: 1px solid white;
     border-radius: 20px;
-    width: 20%;
-    height: 20%;
+    width: 12%;
+    height: 15%;
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2), 0 0 10px 0 rgba(0, 0, 0, 0.2);
-}
-
-#text {
-    text-align: center;
-}
-
-.donnees_utilisateur {
-    justify-content: left;
-    font-family: Urbanist, sans-serif;
-    width: 50%;
-}
-
-.titrage_donnees {
-    color: #9D9D9D;
-    justify-content: left;
-}
-
-#supprimer {
-    font-family: Urbanist, sans-serif;
-    color: red;
-    padding-top: 2%;
-    margin-left: 2%;
-}
-#supprimer::after{
-    display: none;
-}
-
-input[type = range] {
-    -webkit-appearance: none;
-    display: block;
-    margin-left: -30%;
-    margin-right: auto;
-    justify-content: center;
-    width: 80%;
-    background: #8B8B8B;
-    height: 2px;
-    outline: none;
-
-}
-
-input[type = range]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    width: 13px;
-    height: 13px;
-    background: white;
-    border-radius: 50%;
-}
-
-
-
-#curseur_rouge::-webkit-slider-thumb {
-    border: 1px solid #AC0002;
-}
-
-#curseur_bleu::-webkit-slider-thumb {
-    border: 1px solid #43CCDD;
-}
-
-#curseur_vert::-webkit-slider-thumb {
-    border: 1px solid #37C394;
-}
-
-#bouton_rouge {
-    margin-left: 60%;
-    margin-top: -100%;
-    width: 60%;
-    border: none;
-    background: #AC0002;
-    border-radius: 10px;
-    color: white;
-}
-
-#bouton_bleu {
-    margin-left: 70%;
-    margin-top: -100%;
-    width: 60%;
-    border: none;
-    background: #43CCDD;
-    border-radius: 10px;
-    color: white;
-}
-
-#bouton_vert {
-    margin-left: 70%;
-    margin-top: -100%;
-    width: 60%;
-    border: none;
-    background: #37C394;
-    border-radius: 10px;
-    color: white;
-}
-
-.connexion{
-    padding-left: 2%;
-}
-
-#recherche{
-    padding-left: 15%;
-    display: initial;
-}
-
-#btn_recherche{
-    height: 1.9em;
-}
-
-#identifiant{
-    padding-left: 0.8em;
-    font-family: Urbanist, sans-serif;
-    font-weight: normal;
-    text-align: center;
-    white-space: pre;
-    padding-right: 2em;
-}
-
-/* Bouton Dropdown */
-.dropbtn {
-    background-color: #3BC393;
-    color: white;
-    padding: 10px;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
-    border-radius: 10px;
-}
-
-/* Bouton Dropdown on hover & focus */
-.dropbtn:hover, .dropbtn:focus {
-    background-color: #3e8e41;
-}
-
-/* Permet de fixer le bouton de la page */
-.dropdown {
-    position: relative;
-    display: inline-block;
-    position: relative;
-    left: 32.5%;
-}
-
-/* Contenu du bouton dropdown */
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-}
-
-/* Liens Ã  l'intÃ©rieur du dropdown */
-.dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-}
-
-/* Change la couleur lors d'un passage sur l'Ã©lÃ©ment */
-.dropdown-content a:hover {background-color: #f1f1f1}
-
-/* Montre le bouton Dropdown */
-.show {
-    display:block;
-    border-radius: 10px;
-}
-
-th {
-    font-family: Urbanist, sans-serif;
-    font-weight: normal;
-    text-align: left;
-    white-space: pre;
-}
-.titre_profil{
-    display: flex;
-}
-
-.valeurPHP{
-    font-size: 1.5em;
+    font-weight: bolder;
+    font-size: 2em;
 }
 
 #bpm {
@@ -294,4 +205,169 @@ th {
     background: none;
     font-weight: bolder;
     font-size: 0.5em;
+}
+
+#text {
+    text-align: center;
+}
+
+.donnees_utilisateur {
+    justify-content: left;
+    font-family: Urbanist, sans-serif;
+}
+
+.titrage_donnees {
+    color: #9D9D9D;
+    justify-content: left;
+}
+
+#supprimer {
+    font-family: Urbanist, sans-serif;
+    color: red;
+}
+
+input[type = range] {
+    -webkit-appearance: none;
+    display: block;
+    margin-left: 0;
+    margin-right: auto;
+    justify-content: center;
+    width: 70%;
+    background: #8B8B8B;
+    height: 2px;
+    outline: none;
+}
+
+    input[type = range]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        width: 13px;
+        height: 13px;
+        background: white;
+        border-radius: 50%;
+    }
+
+
+
+#curseur_rouge::-webkit-slider-thumb {
+    border: 1px solid #AC0002;
+}
+
+#curseur_bleu::-webkit-slider-thumb {
+    border: 1px solid #43CCDD;
+}
+
+#curseur_vert::-webkit-slider-thumb {
+    border: 1px solid #37C394;
+}
+
+#bouton_rouge {
+    margin-left: 70%;
+    margin-top: -100%;
+    width: 30%;
+    border: none;
+    background: #AC0002;
+    border-radius: 10px;
+    color: white;
+}
+
+#bouton_bleu {
+    margin-left: 70%;
+    margin-top: -100%;
+    width: 30%;
+    border: none;
+    background: #43CCDD;
+    border-radius: 10px;
+    color: white;
+}
+
+#bouton_vert {
+    margin-left: 70%;
+    margin-top: -100%;
+    width: 30%;
+    border: none;
+    background: #37C394;
+    border-radius: 10px;
+    color: white;
+}
+
+.connexion {
+    padding-left: 2%;
+}
+
+#recherche {
+    padding-left: 15%;
+    display: initial;
+}
+
+#btn_recherche {
+    height: 1.9em;
+}
+
+#identifiant {
+    padding-left: 0.8em;
+    font-family: Urbanist, sans-serif;
+    font-weight: normal;
+    text-align: center;
+    white-space: pre;
+    padding-right: 2em;
+}
+
+/* Bouton Dropdown */
+.dropbtn {
+    background-color: #3BC393;
+    color: white;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+    /* Bouton Dropdown on hover & focus */
+    .dropbtn:hover, .dropbtn:focus {
+        background-color: #3e8e41;
+    }
+
+/* Permet de fixer le bouton de la page */
+.dropdown {
+    position: relative;
+    display: inline-block;
+    position: relative;
+    left: 32.5%;
+}
+
+/* Contenu du bouton dropdown */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+    /* Liens à l'intérieur du dropdown */
+    .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
+
+        /* Change la couleur lors d'un passage sur l'élément */
+        .dropdown-content a:hover {
+            background-color: #f1f1f1
+        }
+
+/* Montre le bouton Dropdown */
+.show {
+    display: block;
+    border-radius: 10px;
+}
+
+th {
+    font-family: Urbanist, sans-serif;
+    font-weight: normal;
+    text-align: center;
+    white-space: pre;
+    text-align: center;
 }

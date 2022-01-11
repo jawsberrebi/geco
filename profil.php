@@ -33,6 +33,7 @@ include('backend/conditions_id.php');
         <!--\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-->
 
         <?php if(isset($_GET['id_patient'])) : ?>
+        <?php include('backend/affichage_valeurs.php'); ?>
 
         <?php $sql = "SELECT * FROM patient WHERE id_patient='".$id."'";
               $pre = $pdo->prepare($sql);
@@ -61,8 +62,9 @@ include('backend/conditions_id.php');
         <?php echo dataUserGenerator($userPatientProfil, 'patient'); ?>
 
         <div class="tableau_onglets">
-
+            
             <div class="container">
+
 
                 <div class="container-onglets">
                     <div class="onglets active" data-anim="1">Vue d'ensemble</div>
@@ -70,13 +72,21 @@ include('backend/conditions_id.php');
                     <div class="onglets" data-anim="3">Niveau sonore</div>
                     <div class="onglets" data-anim="4">Concentration CO2</div>
                 </div>
-            
+
+
                 <div class="contenu activeContenu" data-anim="1">
                     <div id="table">
                         <div class="cadran">
-                            <p id="text">
-                                Test
-                            </p>
+                            <!-- <p id="text"> -->
+                                <?php 
+                                  if(!isset($finalValues[0]['valeur'])){
+                                      echo '<p></p>';
+                                  }
+                                  else{
+                                      echo '<p class="valeurPHP">' . $finalValues[0]['valeur'] . ' <mark id="bpm">bpm</mark></p>';  
+                                  }
+                                ?>
+                            <!-- </p> -->
 
                             <form method="post" action="backend/envoi_valeurs?id_patient=<?php echo $id ?>.php">
                                 <input name="type" value="cardiaque" type="hidden"/>
@@ -92,17 +102,22 @@ include('backend/conditions_id.php');
                             ?>
                         </div>
 
-                        
+                    <div class="cadran">
+                        <!-- <p id="text"> -->
+                            <?php 
+                                if(!isset($finalValues[1]['valeur'])){
+                                    echo '<p></p>';
+                                }
+                                else{
+                                    echo '<p class="valeurPHP">' . $finalValues[1]['valeur'] . ' <mark id="db">db</mark></p>';  
+                                }
+                            ?>
+                        <!-- </p> -->
 
-                        <div class="cadran">
-                            <p id="text">
-                                Test
-                            </p>
-
-                            <form method="post" action="backend/envoi_valeurs?id_patient=<?php echo $id ?>.php">
-                                <input name="type" value="son" type="hidden"/>
-                                <input type="range" min="0" max="100" id="curseur_bleu" name="valeur"/> <input type="submit" value="Envoyer" id="bouton_bleu"/>
-                            </form>
+                        <form method="post" action="backend/envoi_valeurs?id_patient=<?php echo $id ?>.php">
+                            <input name="type" value="son" type="hidden"/>
+                            <input type="range" min="0" max="100" id="curseur_bleu" name="valeur"/> <input type="submit" value="Envoyer" id="bouton_bleu"/>
+                        </form>
 
                             <?php 
                                 if(isset($_GET['confirmation'])){
@@ -110,13 +125,21 @@ include('backend/conditions_id.php');
                                         echo '<p>La valeur de la sensibilité pour ce capteur a bien été modifiée</p>';
                                     }
                                 }
+
                             ?>
                         </div>
 
                         <div class="cadran">
-                            <p id="text">
-                                Test
-                            </p>
+                            <!-- <p id="text"> -->
+                                <?php 
+                                  if(!isset($finalValues[2]['valeur'])){
+                                      echo '<p></p>';
+                                  }
+                                  else{
+                                      echo '<p class="valeurPHP">' . $finalValues[2]['valeur'] . ' <mark id="pourcentage">%</mark></p>';  
+                                  }
+                                ?>
+                            <!-- </p> -->
                             
                             <form method="post" action="backend/envoi_valeurs?id_patient=<?php echo $id ?>.php">
                                 <input name="type" value="gaz" type="hidden"/>
@@ -148,23 +171,6 @@ include('backend/conditions_id.php');
         
             </div>
             <script src="Javascript/onglets.js"></script>
-
-
-            <div class="contenu_actif" data-anim="1">
-                
-            </div>
-            
-            <div class="contenu_actif" data-anim="2">
-                
-            </div>
-
-            <div class="contenu_actif" data-anim="3">
-                
-            </div>
-
-            <div class="contenu_actif" data-anim="4">
-             
-            </div>
 
         </div>
 
