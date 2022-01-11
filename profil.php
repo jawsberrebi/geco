@@ -77,7 +77,11 @@ include('backend/conditions_id.php');
                 <div class="contenu activeContenu" data-anim="1">
                     <div id="table">
                         <div class="cadran">
-                            <p id="text">
+                                <div id="cadran_rouge">
+                                    <p>Rythme cardiaque</p>
+                                    <p>❤</p>
+                                </div>
+
                                 <?php 
                                   if(!isset($finalValues[0]['valeur'])){
                                       echo '<p></p>';
@@ -86,7 +90,6 @@ include('backend/conditions_id.php');
                                       echo '<p class="valeurPHP">' . $finalValues[0]['valeur'] . ' <mark id="bpm">bpm</mark></p>';  
                                   }
                                 ?>
-                            </p>
 
                             <form method="post" action="backend/envoi_valeurs?id_patient=<?php echo $id ?>.php">
                                 <input name="type" value="cardiaque" type="hidden"/>
@@ -103,7 +106,10 @@ include('backend/conditions_id.php');
                         </div>
 
                     <div class="cadran">
-                        <p id="text">
+                            <div id="cadran_bleu">
+                                <p>Niveau sonore</p>
+                                <img src="images/b2.png" width="50" height="50"/>
+                            </div>
                             <?php 
                                 if(!isset($finalValues[1]['valeur'])){
                                     echo '<p></p>';
@@ -112,7 +118,6 @@ include('backend/conditions_id.php');
                                     echo '<p class="valeurPHP">' . $finalValues[1]['valeur'] . ' <mark id="db">db</mark></p>';  
                                 }
                             ?>
-                        </p>
 
                         <form method="post" action="backend/envoi_valeurs?id_patient=<?php echo $id ?>.php">
                             <input name="type" value="son" type="hidden"/>
@@ -130,7 +135,10 @@ include('backend/conditions_id.php');
                         </div>
 
                         <div class="cadran">
-                            <p id="text">
+                                <div id="cadran_vert">
+                                    <p>Gaz (CO2)</p>
+                                    <img src="images/c2.png" width="50" height="50"/>
+                                </div>
                                 <?php 
                                   if(!isset($finalValues[2]['valeur'])){
                                       echo '<p></p>';
@@ -139,7 +147,6 @@ include('backend/conditions_id.php');
                                       echo '<p class="valeurPHP">' . $finalValues[2]['valeur'] . ' <mark id="pourcentage">%</mark></p>';  
                                   }
                                 ?>
-                            </p>
                             
                             <form method="post" action="backend/envoi_valeurs?id_patient=<?php echo $id ?>.php">
                                 <input name="type" value="gaz" type="hidden"/>

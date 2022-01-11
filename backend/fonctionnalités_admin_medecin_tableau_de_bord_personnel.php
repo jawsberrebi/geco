@@ -26,7 +26,7 @@
 </div>
 <script src="Javascript/modale.js"></script>-->
 
-<!--<div id="myModal" class="modal">
+<div id="myModal" class="modal">
 
         <div class="modal-content" id="content">
 
@@ -134,4 +134,6 @@
                 <a href="#" class="modal-close">&times;</a>
             </form>
         </div>
-</div>-->
+</div>
+
+<script src="Javascript/modale.js"></script>

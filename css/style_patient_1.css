@@ -36,7 +36,6 @@ li {
 }
 
 .navbara {
-    padding: 10px;
     list-style: none;
 }
 
@@ -101,7 +100,6 @@ h1 {
     font-family: Urbanist, sans-serif;
     color: #3BC393;
     font-size: 2em;
-    padding-left: 15%;
 }
 
 #moteur_de_recherche:focus {
@@ -176,7 +174,6 @@ td {
 
 .cadran {
     margin: 30px;
-    padding-top: 6%;
     border: 1px solid white;
     border-radius: 20px;
     width: 12%;
@@ -346,17 +343,17 @@ input[type = range] {
 }
 
     /* Liens à l'intérieur du dropdown */
-    .dropdown-content a {
-        color: black;
-        padding: 12px 16px;
-        text-decoration: none;
-        display: block;
-    }
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
 
         /* Change la couleur lors d'un passage sur l'élément */
-        .dropdown-content a:hover {
-            background-color: #f1f1f1
-        }
+.dropdown-content a:hover {
+    background-color: #f1f1f1
+}
 
 /* Montre le bouton Dropdown */
 .show {
@@ -370,4 +367,39 @@ th {
     text-align: center;
     white-space: pre;
     text-align: center;
+}
+
+#cadran_rouge {
+    color: #AC0002;
+    font-size: 20px;
+    padding-top: -100%;
+}
+
+#cadran_bleu {
+    color: #43CCDD;
+    font-size: 20px;
+    padding-top: -100%;
+}
+
+#cadran_bleu > img{
+    margin-top: 6%;
+    margin-left: 8%;
+}
+
+#cadran_vert {
+    color: #37C394;
+    font-size: 20px;
+    padding-top: -100%;
+}
+
+#cadran_vert > img {
+    margin-top: 6%;
+    margin-left: 8%;
+}
+
+@media screen and (max-width: 800px){
+    #table{
+        flex-direction: column;
+        margin-left: 100%;
+    }
 }

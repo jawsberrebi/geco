@@ -67,6 +67,10 @@ if(!isset($_SESSION['userPatient'])) {
                           <div class="contenu_actif" data-anim="1">
                             <div id="table">
                                 <div class="cadran">
+                                    <div id="cadran_rouge">
+                                        <p>Rythme cardiaque</p>
+                                        <p>❤</p>
+                                    </div>
 
                                     <?php 
                                         if(!isset($finalValues[0]['valeur'])){
@@ -79,6 +83,12 @@ if(!isset($_SESSION['userPatient'])) {
                                 </div>
             
                                 <div class="cadran">
+
+                                    <div id="cadran_bleu">
+                                        <p>Niveau sonore</p>
+                                        <img src="images/b.png" width="50" height="50"/>
+                                    </div>
+
                                     <?php 
                                         if(!isset($finalValues[1]['valeur'])){
                                             echo '<p></p>';
@@ -90,6 +100,12 @@ if(!isset($_SESSION['userPatient'])) {
                                 </div>
             
                                 <div class="cadran">
+
+                                    <div id="cadran_vert">
+                                        <p>Gaz (CO2)</p>
+                                        <img src="images/c.png" width="50" height="50"/>
+                                    </div>
+
                                     <?php 
                                         if(!isset($finalValues[2]['valeur'])){
                                             echo '<p></p>';
@@ -139,18 +155,9 @@ if(!isset($_SESSION['userPatient'])) {
                           <h3>uvcz</h3>
                       </div>
                     
-                      
-                     
-                  
                       </div>
                       <script src="Javascript/fenetre.js"></script>
-                  
-       
 
-           
-
-          
-            
             <div class="contenu_actif" data-anim="2">
                 
             </div>

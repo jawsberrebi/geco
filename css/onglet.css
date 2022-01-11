@@ -1,19 +1,20 @@
 
 .container {
-    width: 50%;
+    width: 80%;
     height: 70%;
     background: #FAFAFA;
     margin-left: 10%;
 }
 
-.container-onglets{
+.container-onglets {
     padding-top: 1%;
     background: #FAFAFA;
-    width: 100%;
+    width: 70%;
     height: 30%;
     display: flex;
     /* border-bottom: 1px solid #333; */
 }
+
 .onglets {
     width: 25%;
     display: flex;
@@ -31,23 +32,27 @@
     height: 70%;
     width: 85%;
     opacity: 0;
-    background-color: #FAFAFA ;
+    background-color: #FAFAFA;
     border-radius: 20px;
 }
-.contenu h3 {
-    padding: 20px;
-}
-.contenu hr {
-    width: 20%;
-    height: 2px;
-    margin-left: 20px;
-    background: #000;
-    border: none;
-}
-.contenu p {
-    padding-top: 3%;
-    margin-left:1%;
-}
+
+    .contenu h3 {
+        padding: 20px;
+    }
+
+    .contenu hr {
+        width: 20%;
+        height: 2px;
+        margin-left: 20px;
+        background: #000;
+        border: none;
+    }
+
+    .contenu p {
+        padding-top: 3%;
+        margin-left: 1%;
+    }
+
 #indication {
     margin-top: 15%;
     margin-bottom: -3%;
@@ -66,12 +71,13 @@
 .activeContenu {
     animation: fade 0.5s forwards;
 }
+
 @keyframes fade {
     from {
         opacity: 0;
     }
+
     to {
         opacity: 1;
     }
 }
-
