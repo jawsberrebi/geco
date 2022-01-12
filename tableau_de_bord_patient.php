@@ -44,6 +44,9 @@ if(!isset($_SESSION['userPatient'])) {
             
        
 
+            
+       
+
         <h1>Tableau de bord</h1>
         <div class="id">
 

@@ -5,12 +5,14 @@
 <html>
     <head>
         <meta charset="utf-8" />
+        <link rel="stylesheet" href="css/style_global.css">
         <link rel="stylesheet" href="css/style_connexion.css"/>
         <title>Connexion</title>
     </head>
     <body>
 
-        <img src="images/image-vitrine.jpg" alt="image de description" id="image_connexion" />
+        <img src="images/image-vitrine.jpg" alt="image de description" id="image_connexion"
+             style="width:50%; height:100vh; object-fit: cover;"/>
 
         <div id="box">
 
@@ -40,7 +42,7 @@
                             echo '<p id="message_erreur">Vous n\'êtes pas autorisé à accéder à ces informations.</p>';
                         }
                     }
-                     
+
                 ?>
 
                 <p id="indication">Si vous n'avez pas de compte, veuillez contacter votre médecin.</p>
