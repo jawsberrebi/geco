@@ -20,7 +20,6 @@ if(!isset($_GET['user'])){
 }
 
 $type = $_GET['type'];
-echo $type;
 
 if($_GET['type'] == 'patient.php'){
     $sql = "SELECT mdp_final FROM patient WHERE mdp=:mdp";
@@ -46,8 +45,6 @@ else{
     header('Location:connexion?erreur=5.php');
     exit();
 }
-
-var_dump($currentPassword);
 
 if(!empty($currentPassword[0]['mdp_final'])){
     header('Location:connexion?erreur=5.php');

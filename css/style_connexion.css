@@ -1,11 +1,13 @@
 ﻿body {
     background: #FFFFFF;
     margin: 0%;
+    overflow: hidden;
 }
 
 #image_connexion {
     width: 50%;
-    height: 100%;
+    height: 100vh;
+    object-fit: cover;
     
 }
 

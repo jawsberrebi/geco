@@ -197,7 +197,7 @@ function passwordGenerator(PDO $pdo, int $length) : string
                     }
                   }
                   else {
-                      echo $user['tel'];
+                      echo 0 . $user['tel'];
                   }
 
             ?>

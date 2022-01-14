@@ -32,7 +32,7 @@ if(!isset($_SESSION['userPatient'])) {
             <ul>
               <li class="navbara"><a id="chiant" href="#tableaudebord"><strong>Tableau de bord</strong></a></li>
               <li><a class="bactive" a style="color:#37C394", font-size:2em; href="modifier_mon_compte.php" ><strong> Modifier mon compte</strong></a></li>
-              <li><a href="deconnexion.php" id="deconnexion"> <strong></strong> Déconnexion</strong></a></li>
+              <li><a href="backend/deconnexion.php" id="deconnexion"> <strong></strong> Déconnexion</strong></a></li>
             </ul>
     
         </nav>

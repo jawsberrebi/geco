@@ -56,7 +56,7 @@ if(isset($_SESSION['userPersonnel']) ) {
 
     <div id="box">
 
-        <form action="post_ajout.php" method="post">
+        <form action="backend/post_ajout.php" method="post">
 
             <?php if($_GET['type'] == 'patient') : ?>
 

@@ -68,17 +68,17 @@ include('backend/fonctions.php');
 
 <?php 
 
-$sql = "SELECT * FROM personnel WHERE mail=:mail";
-$dataBinded = array( 
-    ':mail' => 'boy@boy.fr',
-    );
-$pre = $pdo->prepare($sql);
-$pre->execute($dataBinded);
-$user = $pre->fetchAll(PDO::FETCH_ASSOC); //current prend la première ligne du tableau
+//$sql = "SELECT * FROM personnel WHERE mail=:mail";
+//$dataBinded = array( 
+//    ':mail' => 'boy@boy.fr',
+//    );
+//$pre = $pdo->prepare($sql);
+//$pre->execute($dataBinded);
+//$user = $pre->fetchAll(PDO::FETCH_ASSOC); //current prend la première ligne du tableau
 
-if($user == true){
-    echo 'ok';
-}
+//if($user == true){
+//    echo 'ok';
+//}
 
 ?>
 
@@ -196,3 +196,50 @@ if($user == true){
 
     </body>
 </html>-->
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Mon premier dashboard</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="Javascript/mydashboard.js"></script>
+    <script src="https://d3js.org/d3.v3.min.js"></script>
+    <script src="https://cdn.rawgit.com/novus/nvd3/v1.8.1/build/nv.d3.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/wordcloud.js"></script>    
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/novus/nvd3/v1.8.1/build/nv.d3.css">
+  </head>
+
+  <body>
+  
+    <div class="content">
+      <header>
+        <div class="header-background"></div>
+        <div class="title">
+          <h1>
+            Mon dashboard
+          </h1>
+        </div>
+      </header>
+      
+      <main>
+        <div class="chartContainer">
+            
+          <div id="actu" class="chart">
+          </div>
+
+          <div id="meteo" class="chart">
+              <text class="chartTitle">Prévision de température</text>
+              <svg></svg>
+          </div>
+          
+        </div>
+      </main>
+    </div>
+    
+  </body>
+  
+</html>

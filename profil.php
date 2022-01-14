@@ -21,7 +21,7 @@ include('backend/conditions_id.php');
             <ul>
             <li><a class="active" href="tableau_de_bord_personnel.php">Tableau de bord</a></li>
             <li><a href="modifier_mon_compte.php" id="profil">Modifier mon compte</a></li>
-            <li><a href="deconnexion.php" id="deconnexion">Déconnexion</a></li>
+            <li><a href="backend/deconnexion.php" id="deconnexion">Déconnexion</a></li>
             </ul>
 
         </nav>  

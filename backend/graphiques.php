@@ -22,6 +22,119 @@ $pre->execute();
 $cardiacValuesPlot = $pre->fetchAll(PDO::FETCH_ASSOC);
 
 
+$patientId = 5;
+
+$sql = "SELECT id_capteur FROM capteur WHERE id_patient = '".$patientId."'";
+$pre = $pdo->prepare($sql);
+$pre->execute();
+$sensorId = $pre->fetchAll(PDO::FETCH_ASSOC);
+
+$sql = "SELECT * FROM mesure WHERE id_capteur = '".$sensorId[0]['id_capteur']."' AND date_heure LIKE '2021%' "; //METTRE date('Y') dedans
+$pre = $pdo->prepare($sql);
+$pre->execute();
+$cardiacValuesPlotYear = $pre->fetchAll(PDO::FETCH_ASSOC);
+
+//var_dump($cardiacValuesPlotYear);
+//$counting = 0;
+//$numberValJanuary = 0;
+//$totalJanuary= 0;
+
+//$m
+
+$numberValMonth = array_fill(1, 12, 0);
+$totalMonth = array_fill(1, 12, 0);
+foreach($cardiacValuesPlotYear as $cardiacValuesPlotYearScroll){
+    echo $cardiacValuesPlotYearScroll['date_heure'];
+    $mot = '2021-11';
+
+    foreach(range(1, 12) as $i){
+        $month = sprintf("%02d", $i);
+
+        if(strstr($cardiacValuesPlotYearScroll['date_heure'], '2021-'.$i.'-') == true){ //rempl par la fct date
+            $numberValMonth[$i]++;
+            $totalMonth[$i] = $cardiacValuesPlotYearScroll['valeur'] + $totalMonth;
+        }
+
+    }
+
+    //if(strstr($cardiacValuesPlotYearScroll['date_heure'], '2021-01-') == true){ //rempl par la fct date
+    //    $numberValJanuary++;
+    //    $totalJanuary = $cardiacValuesPlotYearScroll['valeur'] + $totalJanuary;
+    //}
+
+    //if(strstr($cardiacValuesPlotYearScroll['date_heure'], '2021-02-') == true){ //rempl par la fct date
+    //    $numberValFebruary++;
+    //    $totalFebruary = $cardiacValuesPlotYearScroll['valeur'] + $totalFebruary;
+    //}
+
+    //if(strstr($cardiacValuesPlotYearScroll['date_heure'], '2021-03-') == true){ //rempl par la fct date
+    //    $numberValMarch++;
+    //    $totalMarch = $cardiacValuesPlotYearScroll['valeur'] + $totalMarch;
+    //}
+
+    //if(strstr($cardiacValuesPlotYearScroll['date_heure'], '2021-04-') == true){ //rempl par la fct date
+    //    $numberValApril++;
+    //    $totalApril = $cardiacValuesPlotYearScroll['valeur'] + $totalApril;
+    //}
+
+    //if(strstr($cardiacValuesPlotYearScroll['date_heure'], '2021-05-') == true){ //rempl par la fct date
+    //    $numberValMay++;
+    //    $totalMay = $cardiacValuesPlotYearScroll['valeur'] + $totalMay;
+    //}
+
+    //if(strstr($cardiacValuesPlotYearScroll['date_heure'], '2021-06-') == true){ //rempl par la fct date
+    //    $numberValJune++;
+    //    $totalJune = $cardiacValuesPlotYearScroll['valeur'] + $totalJune;
+    //}
+
+    //if(strstr($cardiacValuesPlotYearScroll['date_heure'], '2021-07-') == true){ //rempl par la fct date
+    //    $numberValJuly++;
+    //    $totalJuly = $cardiacValuesPlotYearScroll['valeur'] + $totalJuly;
+    //}
+
+    //if(strstr($cardiacValuesPlotYearScroll['date_heure'], '2021-08-') == true){ //rempl par la fct date
+    //    $numberValAugust++;
+    //    $totalAugust = $cardiacValuesPlotYearScroll['valeur'] + $totalAugust;
+    //}
+
+    //if(strstr($cardiacValuesPlotYearScroll['date_heure'], '2021-09-') == true){ //rempl par la fct date
+    //    $numberValSeptember++;
+    //    $totalSeptember = $cardiacValuesPlotYearScroll['valeur'] + $totalSeptember;
+    //}
+
+    //if(strstr($cardiacValuesPlotYearScroll['date_heure'], '2021-10-') == true){ //rempl par la fct date
+    //    $numberValOctober++;
+    //    $totalOctober = $cardiacValuesPlotYearScroll['valeur'] + $totalOctober;
+    //}
+
+    //if(strstr($cardiacValuesPlotYearScroll['date_heure'], '2021-11-') == true){ //rempl par la fct date
+    //    $numberValNovember++;
+    //    $totalNovember = $cardiacValuesPlotYearScroll['valeur'] + $totalNovember;
+    //}
+
+    //if(strstr($cardiacValuesPlotYearScroll['date_heure'], '2021-12-') == true){ //rempl par la fct date
+    //    $numberValDecember++;
+    //    $totalDecember = $cardiacValuesPlotYearScroll['valeur'] + $totalDecember;
+    //}
+    
+}
+
+//$finalTotalJanuary = $totalJanuary/$numberValJanuary;
+//$finalTotalFebruary = $totalFebruary/$numberValFebruary;
+//$finalTotalMarch = $totalMarch/$numberValMarch;
+//$finalTotalFebruary = $totalFebruary/$numberValFebruary;
+
+
+//$months = array("Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre");
+//$yearDataToPlot = [
+//    "Janvier" => $finalTotalJanuary,
+//    "Février" = 
+//    ];
+
+
+
+
+
 
 // Algorythme de tri
 foreach($cardiacValuesPlot as $cardiacValuesPlotReach){
@@ -143,21 +256,21 @@ foreach($cardiacValuesPlot as $cardiacValuesPlotReach){
 
                 ////// TRI PAR JOUR ////
 
-                foreach($cardiacValuesPlot as $dataToPlot){
-                    //var_dump($row);
-                    //echo "['".$row['heure']."',".$row['battement']."],";
-                    $dataToPlotDateTime = date_parse($dataToPlot['date_heure']);
+                //foreach($cardiacValuesPlot as $dataToPlot){
+                //    //var_dump($row);
+                //    //echo "['".$row['heure']."',".$row['battement']."],";
+                //    $dataToPlotDateTime = date_parse($dataToPlot['date_heure']);
 
-                    if($dataToPlotDateTime['year'] == $maxYearCardiacValuesPlotFinal){
-                        if($dataToPlotDateTime['month'] == $maxMonthCardiacValuesPlotFinal){
-                            if($dataToPlotDateTime['day'] == $maxDayCardiacValuesPlotFinal){
-                                $dataToPlot['date_heure'] = date('H:i:s' ,strtotime($dataToPlot['date_heure']));
-                                echo "['".$dataToPlot['date_heure']."',".$dataToPlot['valeur']."],";
-                            }
-                        }
+                //    if($dataToPlotDateTime['year'] == $maxYearCardiacValuesPlotFinal){
+                //        if($dataToPlotDateTime['month'] == $maxMonthCardiacValuesPlotFinal){
+                //            if($dataToPlotDateTime['day'] == $maxDayCardiacValuesPlotFinal){
+                //                $dataToPlot['date_heure'] = date('H:i:s' ,strtotime($dataToPlot['date_heure']));
+                //                echo "['".$dataToPlot['date_heure']."',".$dataToPlot['valeur']."],";
+                //            }
+                //        }
         
-                    }
-                }
+                //    }
+                //}
 
                 ////// TRI PAR MOIS ////
 
@@ -177,18 +290,38 @@ foreach($cardiacValuesPlot as $cardiacValuesPlotReach){
 
                 ////// TRI PAR AN ////
 
-                //foreach($cardiacValuesPlot as $dataToPlot){
-                //    //var_dump($row);
-                //    //echo "['".$row['heure']."',".$row['battement']."],";
-                //    $dataToPlotDateTime = date_parse($dataToPlot['date_heure']);
+                $dataToPlotPauseDate = NULL;
+                $dataToPlotPauseValue = NULL;
+                $dataMean = NULL;
 
-                //    if($dataToPlotDateTime['year'] == $maxYearCardiacValuesPlotFinal){
-                //        $dataToPlot['date_heure'] = date('d/m' ,strtotime($dataToPlot['date_heure']));
-                //        echo "['".$dataToPlot['date_heure']."',".$dataToPlot['valeur']."],";
+                foreach($cardiacValuesPlot as $dataToPlot){
+                    //var_dump($row);
+                    //echo "['".$row['heure']."',".$row['battement']."],";
+                    $dataToPlotDateTime = date_parse($dataToPlot['date_heure']);
+
+                    if($dataToPlotDateTime['year'] == $maxYearCardiacValuesPlotFinal){
+                        $dataToPlot['date_heure'] = date('d/m' ,strtotime($dataToPlot['date_heure']));
+
+                        if($dataToPlotPauseDate == $dataToPlot['date_heure']){
+
+                            $dataToPlotPauseValue = ($dataToPlot['valeur'] + $dataToPlotPauseValue)/2;
+                            $dataMean = array('valeur' => ($dataToPlotPauseValue + $dataMean));
+                
+                        }
+
+                        echo "['".$dataToPlot['date_heure']."',".$dataToPlot['valeur']."],";
+
+                        
         
-                //    }
-                //}
+                    }
+
+
+                }
+
+                
             }
+
+
 
           ?> 
             
@@ -210,6 +343,7 @@ foreach($cardiacValuesPlot as $cardiacValuesPlotReach){
 
 <body>
 <div id="curve_chart" style="width: 900px; height: 500px"></div>
+
 </body>
 </html>
 

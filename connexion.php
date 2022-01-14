@@ -10,7 +10,7 @@
     </head>
     <body>
 
-        <img src="images/image-vitrine.jpg" alt="image de description" id="image_connexion" />
+        <img src="images/image-vitrine.jpg" alt="image de description" id="image_connexion"/>
 
         <div id="box">
 
