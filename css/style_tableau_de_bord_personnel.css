@@ -280,6 +280,10 @@ th {
     display: flex;
 }
 
+#message_suppression{
+    margin-left: 15%;
+}
+
 @media (min-width:781px) and (max-width: 1200px) {
     .dropdown {
         display: inline-block;

@@ -69,23 +69,24 @@ function passwordGenerator(PDO $pdo, int $length) : string
 
     <?php endif; ?>
     <?php endif; ?>
+    <?php if((isset($_SESSION['userPersonnel']) && ($_SESSION['userPersonnel']['type'] == 'admin')) || (isset($_SESSION['userPersonnel']) && ($_SESSION['userPersonnel']['type'] == 'medecin'))) : ?>
+
+    <?php if($type == 'infirmier') : ?>
+    <a href="backend/suppression?id_infirmier=<?php echo $user['id_personnel'] ?>" id="supprimer">Supprimer 🗑 </a>
+
+    <?php endif; ?>
+    <?php endif; ?>
+
+    <?php if((isset($_SESSION['userPersonnel']) && ($_SESSION['userPersonnel']['type'] == 'admin'))) : ?>
+
+    <?php if($type == 'medecin') : ?>
+    <a href="backend/suppression?id_medecin=<?php echo $user['id_personnel'] ?>" id="supprimer">Supprimer 🗑 </a>
+
+    <?php endif; ?>
+    <?php endif; ?>
 </div>
 
-<?php if((isset($_SESSION['userPersonnel']) && ($_SESSION['userPersonnel']['type'] == 'admin')) || (isset($_SESSION['userPersonnel']) && ($_SESSION['userPersonnel']['type'] == 'medecin'))) : ?>
 
-<?php if($type == 'infirmier') : ?>
-<a href="backend/suppression?id_infirmier=<?php echo $user['id_personnel'] ?>" id="supprimer">Supprimer 🗑 </a>
-
-<?php endif; ?>
-<?php endif; ?>
-
-<?php if((isset($_SESSION['userPersonnel']) && ($_SESSION['userPersonnel']['type'] == 'admin'))) : ?>
-
-<?php if($type == 'medecin') : ?>
-<a href="backend/suppression?id_medecin=<?php echo $user['id_personnel'] ?>" id="supprimer">Supprimer 🗑 </a>
-
-<?php endif; ?>
-<?php endif; ?>
 
 <table class="donnees_utilisateur">
     <thead class="titrage_donnees">
