@@ -159,20 +159,8 @@ function displayDefinitionModal() {
     document.getElementById("mot").innerText = answer;
     document.getElementById("definition").innerText = definition;
 
-    // add window event listener to close modal when user clicks outside of window
-/*
-    let windowClickHandler = function(event) {
-        // remove window event listener
-        this.removeEventListener('click', windowClickHandler);
-
-        closeDefinitionModal();
-    }
-
-    window.addEventListener('click', windowClickHandler);
-*/
-
     // show modal
-    document.getElementById("definition-modal").style.display = "block";
+    displayModal("definition-modal")
 }
 
 function closeDefinitionModal() {
@@ -183,8 +171,23 @@ function closeDefinitionModal() {
     levelUp();
 }
 
+function displayModal(modalId) {
+    document.getElementById(modalId).style.display = "block";
+}
+
+function closeModal(modalId) {
+    document.getElementById(modalId).style.display = "none";
+}
+
+function checkCookiesExist() {
+    if (document.cookie == null || document.cookie === "") {
+        displayModal("cookies-modal");
+    }
+}
+
 /* Main */
 function main() {
     updateLevelDisplay();
     getLevelDataJson();
+    checkCookiesExist();
 }
