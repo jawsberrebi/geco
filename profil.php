@@ -3,15 +3,17 @@ require_once("config.php");
 include('backend/conditions_accès_page_personnel_et_admin.php');
 include('backend/fonctions.php');
 include('backend/conditions_id.php');
+include('backend/graphique_donnees.php');
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="fr">
     <head>
         <meta charset="utf-8" />
         <link rel="stylesheet" href="css/style_profil.css" />
         <link rel="stylesheet" href="css/navbar_pro.css">
         <link rel="stylesheet" href="css/onglet.css">
+        <?php include("backend/graphiques.php"); ?>
         <title>Tableau de bord</title>
     </head>
     <header>
@@ -165,11 +167,18 @@ include('backend/conditions_id.php');
                 </div>
             
                 <div class="contenu" data-anim="2">
-                        <p>Insérez le graphique ici</p>
+                    <button class="choosebtn" onclick="drawChartYearCardiac()">Cette année</button>
+                    <button class="choosebtn" onclick="drawChartMonthCardiac()">Ce mois-ci</button>
+                    <button class="choosebtn" onclick="drawChartDayCardiac()">Aujourd'hui</button>
+                    <div id="curve_chart_cardiac"></div>
+                    
                 </div>
             
                 <div class="contenu" data-anim="3">
-                    <p>Insérez le graphique ici</p>
+                    <button class="choosebtn" onclick="drawChartYearSound()">Cette année</button>
+                    <button class="choosebtn" onclick="drawChartMonthSound()">Cette année</button>
+                    <button class="choosebtn" onclick="drawChartDaySound()">Cette année</button>
+                    <div id="curve_chart_sound"></div>
                 </div>
                 <div class="contenu" data-anim="4">
                     <p>Insérez le graphique ici</p>

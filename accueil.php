@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
     <link href='https://fonts.googleapis.com/css?family=Urbanist' rel='stylesheet'>
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
@@ -42,7 +42,7 @@
 		<br/>
         <div class="div-categoryContainer">
      
-            <img src="images/a.PNG" class="picture-right">
+            <img src="images/a.PNG" class="picture-right" alt="cadran bpm">
            
             <div class="paragraph-left">
               <h2>GecoSensor</h2>
@@ -51,7 +51,7 @@
               <p>Prenez en charge votre santé grâce à la technologie GecoSensor.<br><br>Grâce à la technologie GecoSensor, vous disposez d'un suivi continu de votre fréquence cardiaque vous permettant de visualiser les battements de votre cœur et d'être immédiatement pris en charge en cas d’alerte.</p>
             </div>
 
-			<img src="images/b3.PNG" class="picture-left">
+			<img src="images/b3.PNG" class="picture-left" alt="cadran son">
            
             <div class="paragraph-right">
 			  <br/>
@@ -59,7 +59,7 @@
               <p>Notre technologie tire profit de tous ses sens afin de déterminer le niveau sonore environnant. Lorsque le niveau de décibels atteint un stade où votre audition risque d’être affectée, vous en êtes alerté.   </p>
             </div>
 
-			<img src="images/c3.PNG" class="picture-right">
+			<img src="images/c3.PNG" class="picture-right" alt="cadran gaz">
            
             <div class="paragraph-left"></div>
 			  <br/>
