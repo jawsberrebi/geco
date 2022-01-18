@@ -12,7 +12,7 @@
     function drawChartYearCardiac() {
         
         var data = google.visualization.arrayToDataTable([
-          ['DurÈe', 'FrÈquence cardiaque'],
+          ['Dur√©e', 'Fr√©quence cardiaque'],
 
           <?php
             $sql = "SELECT * FROM mesure";
@@ -35,7 +35,7 @@
                     $dataToPlotDateTime = date_parse($dataToPlot['date_heure']);
 
                     if($dataToPlotDateTime['year'] == $maxYearCardiacValuesPlotFinal){
-                        $dataToPlot['date_heure'] = date('d/m' ,strtotime($dataToPlot['date_heure']));
+                        $dataToPlot['date_heure'] = date('d/m/y' ,strtotime($dataToPlot['date_heure']));
 
                         if($dataToPlotDateTime['year'] == $maxYearCardiacValuesPlotFinal){
                             $dataToPlot['date_heure'] = date('d/m' ,strtotime($dataToPlot['date_heure']));
@@ -60,7 +60,7 @@
         ]);
 
         var options = {
-          title: 'FrÈquence cardiaque',
+          title: 'Fr√©quence cardiaque cette ann√©e',
           //curveType: 'function',
           legend: { position: 'bottom' },
         };
@@ -73,7 +73,7 @@
     function drawChartYearSound() {
         
         var data = google.visualization.arrayToDataTable([
-          ['DurÈe', 'Niveau sonore'],
+          ['Dur√©e', 'Niveau sonore'],
 
           <?php
             $sql = "SELECT * FROM mesure";
@@ -81,7 +81,7 @@
             $pre->execute();
             $dataPlot = $pre->fetchAll(PDO::FETCH_ASSOC);
 
-            $rowNumber = count($cardiacValuesPlot);
+            $rowNumber = count($soundValuesPlot);
             if($rowNumber>0){ 
 
                 ////// TRI PAR AN ////
@@ -91,10 +91,10 @@
                     //echo "['".$row['heure']."',".$row['battement']."],";
                     $dataToPlotDateTime = date_parse($dataToPlot['date_heure']);
 
-                    if($dataToPlotDateTime['year'] == $maxYearCardiacValuesPlotFinal){
+                    if($dataToPlotDateTime['year'] == $maxYearSoundValuesPlotFinal){
                         $dataToPlot['date_heure'] = date('d/m' ,strtotime($dataToPlot['date_heure']));
 
-                        if($dataToPlotDateTime['year'] == $maxYearCardiacValuesPlotFinal){
+                        if($dataToPlotDateTime['year'] == $maxYearSoundValuesPlotFinal){
                             $dataToPlot['date_heure'] = date('d/m' ,strtotime($dataToPlot['date_heure']));
                             echo "['".$dataToPlot['date_heure']."',".$dataToPlot['valeur']."],";
         
@@ -117,7 +117,7 @@
         ]);
 
         var options = {
-          title: 'Niveau sonore',
+          title: 'Niveau sonore cette ann√©e',
           //curveType: 'function',
           legend: { position: 'bottom' },
         };
@@ -127,13 +127,71 @@
         chart.draw(data, options);
     }
 
-    function drawChartMonthCardiac() {
+
+    function drawChartYearGas() {
         
         var data = google.visualization.arrayToDataTable([
-          ['DurÈe', 'FrÈquence cardiaque'],
+          ['Dur√©e', 'Concentration en CO2'],
 
           <?php
             $sql = "SELECT * FROM mesure";
+            $pre = $pdo->prepare($sql);
+            $pre->execute();
+            $dataPlot = $pre->fetchAll(PDO::FETCH_ASSOC);
+
+            $rowNumber = count($gasValuesPlot);
+            if($rowNumber>0){ 
+
+                ////// TRI PAR AN ////
+
+                foreach($gasValuesPlot as $dataToPlot){
+                    //var_dump($row);
+                    //echo "['".$row['heure']."',".$row['battement']."],";
+                    $dataToPlotDateTime = date_parse($dataToPlot['date_heure']);
+
+                    if($dataToPlotDateTime['year'] == $maxYearGasValuesPlotFinal){
+                        $dataToPlot['date_heure'] = date('d/m/y' ,strtotime($dataToPlot['date_heure']));
+
+                        if($dataToPlotDateTime['year'] == $maxYearGasValuesPlotFinal){
+                            $dataToPlot['date_heure'] = date('d/m' ,strtotime($dataToPlot['date_heure']));
+                            echo "['".$dataToPlot['date_heure']."',".$dataToPlot['valeur']."],";
+        
+                        }
+
+                        
+        
+                    }
+
+
+                }
+
+                
+            }
+
+
+
+          ?> 
+            
+        ]);
+
+        var options = {
+          title: 'Concentration en CO2 cette ann√©e',
+          //curveType: 'function',
+          legend: { position: 'bottom' },
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('curve_chart_gas'));
+
+        chart.draw(data, options);
+    }
+
+    function drawChartMonthCardiac() {
+        
+        var data = google.visualization.arrayToDataTable([
+          ['Dur√©e', 'Fr√©quence cardiaque'],
+
+          <?php
+            $sql = "SELECT * FROM mesure WHERE date_heure LIKE '". date('Y-m') ."%' ";
             $pre = $pdo->prepare($sql);
             $pre->execute();
             $dataPlot = $pre->fetchAll(PDO::FETCH_ASSOC);
@@ -166,7 +224,7 @@
         ]);
 
         var options = {
-          title: 'FrÈquence cardiaque',
+          title: 'Fr√©quence cardiaque ce mois-ci',
           //curveType: 'function',
           legend: { position: 'bottom' },
         };
@@ -176,13 +234,113 @@
         chart.draw(data, options);
     }
 
+
+    function drawChartMonthSound() {
+        
+        var data = google.visualization.arrayToDataTable([
+          ['Dur√©e', 'Niveau sonore'],
+
+          <?php
+            $sql = "SELECT * FROM mesure WHERE date_heure LIKE '". date('Y-m') ."%' ";
+            $pre = $pdo->prepare($sql);
+            $pre->execute();
+            $dataPlot = $pre->fetchAll(PDO::FETCH_ASSOC);
+
+            $rowNumber = count($soundValuesPlot);
+            if($rowNumber>0){ 
+
+                ////// TRI PAR MOIS ////
+
+                foreach($soundValuesPlot as $dataToPlot){
+                    //var_dump($row);
+                    //echo "['".$row['heure']."',".$row['battement']."],";
+                    $dataToPlotDateTime = date_parse($dataToPlot['date_heure']);
+
+                    if($dataToPlotDateTime['year'] == $maxYearSoundValuesPlotFinal){
+                        if($dataToPlotDateTime['month'] == $maxMonthSoundValuesPlotFinal){
+                            $dataToPlot['date_heure'] = date('d, H:i:s' ,strtotime($dataToPlot['date_heure']));
+                            echo "['".$dataToPlot['date_heure']."',".$dataToPlot['valeur']."],";
+                        }
+        
+                    }
+                }
+                    
+            }
+
+
+
+          ?> 
+            
+        ]);
+
+        var options = {
+          title: 'Niveau sonore ce mois-ci',
+          //curveType: 'function',
+          legend: { position: 'bottom' },
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('curve_chart_sound'));
+
+        chart.draw(data, options);
+    }
+
+
+    function drawChartMonthGas() {
+        
+        var data = google.visualization.arrayToDataTable([
+          ['Dur√©e', 'Niveau sonore'],
+
+          <?php
+            $sql = "SELECT * FROM mesure WHERE date_heure LIKE '". date('Y-m') ."%' ";
+            $pre = $pdo->prepare($sql);
+            $pre->execute();
+            $dataPlot = $pre->fetchAll(PDO::FETCH_ASSOC);
+
+            $rowNumber = count($gasValuesPlot);
+            if($rowNumber>0){ 
+
+                ////// TRI PAR MOIS ////
+
+                foreach($gasValuesPlot as $dataToPlot){
+                    //var_dump($row);
+                    //echo "['".$row['heure']."',".$row['battement']."],";
+                    $dataToPlotDateTime = date_parse($dataToPlot['date_heure']);
+
+                    if($dataToPlotDateTime['year'] == $maxYearGasValuesPlotFinal){
+                        if($dataToPlotDateTime['month'] == $maxMonthGasValuesPlotFinal){
+                            $dataToPlot['date_heure'] = date('d, H:i:s' ,strtotime($dataToPlot['date_heure']));
+                            echo "['".$dataToPlot['date_heure']."',".$dataToPlot['valeur']."],";
+                        }
+        
+                    }
+                }
+                    
+            }
+
+
+
+          ?> 
+            
+        ]);
+
+        var options = {
+          title: 'Concentratoion en CO2 ce mois-ci',
+          //curveType: 'function',
+          legend: { position: 'bottom' },
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('curve_chart_gas'));
+
+        chart.draw(data, options);
+    }
+
     function drawChartDayCardiac() {
         
         var data = google.visualization.arrayToDataTable([
-          ['DurÈe', 'FrÈquence cardiaque'],
+          ['Dur√©e', 'Fr√©quence cardiaque'],
 
           <?php
-            $sql = "SELECT * FROM mesure";
+            $sql = "SELECT * FROM mesure WHERE date_heure LIKE '". date('Y-m-d') ."%' ";
             $pre = $pdo->prepare($sql);
             $pre->execute();
             $dataPlot = $pre->fetchAll(PDO::FETCH_ASSOC);
@@ -214,7 +372,7 @@
         ]);
 
         var options = {
-          title: 'FrÈquence cardiaque',
+          title: 'Fr√©quence cardiaque aujourd\'hui',
           //curveType: 'function',
           legend: { position: 'bottom' },
         };
@@ -225,5 +383,101 @@
     }
 
 
+    function drawChartDaySound() {
+        
+        var data = google.visualization.arrayToDataTable([
+          ['Dur√©e', 'Niveau sonore'],
+
+          <?php
+            $sql = "SELECT * FROM mesure WHERE date_heure LIKE '". date('Y-m-d') ."%' ";
+            $pre = $pdo->prepare($sql);
+            $pre->execute();
+            $dataPlot = $pre->fetchAll(PDO::FETCH_ASSOC);
+
+            $rowNumber = count($soundValuesPlot);
+            if($rowNumber>0){ 
+                ////// TRI PAR JOUR ////
+
+                foreach($soundValuesPlot as $dataToPlot){
+                    $dataToPlotDateTime = date_parse($dataToPlot['date_heure']);
+
+                    if($dataToPlotDateTime['year'] == $maxYearSoundValuesPlotFinal){
+                        if($dataToPlotDateTime['month'] == $maxMonthSoundValuesPlotFinal){
+                            if($dataToPlotDateTime['day'] == $maxDaySoundValuesPlotFinal){
+                                $dataToPlot['date_heure'] = date('H:i:s' ,strtotime($dataToPlot['date_heure']));
+                                echo "['".$dataToPlot['date_heure']."',".$dataToPlot['valeur']."],";
+                            }
+                        }
+        
+                    }
+                }
+                    
+            }
+
+
+
+          ?> 
+            
+        ]);
+
+        var options = {
+          title: 'Niveau sonore aujourd\'hui',
+          //curveType: 'function',
+          legend: { position: 'bottom' },
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('curve_chart_sound'));
+
+        chart.draw(data, options);
+    }
+
+
+    function drawChartDayGas() {
+        
+        var data = google.visualization.arrayToDataTable([
+          ['Dur√©e', 'Concentration en CO2'],
+
+          <?php
+            $sql = "SELECT * FROM mesure WHERE date_heure LIKE '". date('Y-m-d') ."%' ";
+            $pre = $pdo->prepare($sql);
+            $pre->execute();
+            $dataPlot = $pre->fetchAll(PDO::FETCH_ASSOC);
+
+            $rowNumber = count($gasValuesPlot);
+            if($rowNumber>0){ 
+                ////// TRI PAR JOUR ////
+
+                foreach($gasValuesPlot as $dataToPlot){
+                    $dataToPlotDateTime = date_parse($dataToPlot['date_heure']);
+
+                    if($dataToPlotDateTime['year'] == $maxYearGasValuesPlotFinal){
+                        if($dataToPlotDateTime['month'] == $maxMonthGasValuesPlotFinal){
+                            if($dataToPlotDateTime['day'] == $maxDayGasValuesPlotFinal){
+                                $dataToPlot['date_heure'] = date('H:i:s' ,strtotime($dataToPlot['date_heure']));
+                                echo "['".$dataToPlot['date_heure']."',".$dataToPlot['valeur']."],";
+                            }
+                        }
+        
+                    }
+                }
+                    
+            }
+
+
+
+          ?> 
+            
+        ]);
+
+        var options = {
+          title: 'Concentration en CO2 aujourd\'hui',
+          //curveType: 'function',
+          legend: { position: 'bottom' },
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('curve_chart_gas'));
+
+        chart.draw(data, options);
+    }
 
 </script>

@@ -1,40 +1,33 @@
 <?php 
 $patientId = $id;
+$year = date('Y');
+$yearMonth = date('Y-m');
+$yearMonthDay = date('Y-m-d');
 
 $sql = "SELECT id_capteur FROM capteur WHERE id_patient = '".$patientId."'";
 $pre = $pdo->prepare($sql);
 $pre->execute();
 $sensorId = $pre->fetchAll(PDO::FETCH_ASSOC);
 
-$sql = "SELECT * FROM mesure WHERE id_capteur = '".$sensorId[0]['id_capteur']."' ";
+$sql = "SELECT * FROM mesure WHERE id_capteur = '".$sensorId[0]['id_capteur']."' AND date_heure LIKE '" . $year . "%' ";
 $pre = $pdo->prepare($sql);
 $pre->execute();
 $cardiacValuesPlot = $pre->fetchAll(PDO::FETCH_ASSOC);
 
-$sql = "SELECT * FROM mesure WHERE id_capteur = '".$sensorId[1]['id_capteur']."' ";
+$sql = "SELECT * FROM mesure WHERE id_capteur = '".$sensorId[1]['id_capteur']."' AND date_heure LIKE '" . $yearMonth . "%' ";
 $pre = $pdo->prepare($sql);
 $pre->execute();
 $soundValuesPlot = $pre->fetchAll(PDO::FETCH_ASSOC);
 
-$sql = "SELECT * FROM mesure WHERE id_capteur = '".$sensorId[2]['id_capteur']."' ";
+$sql = "SELECT * FROM mesure WHERE id_capteur = '".$sensorId[2]['id_capteur']."' AND date_heure LIKE '" . $yearMonthDay . "%' ";
 $pre = $pdo->prepare($sql);
 $pre->execute();
 $gasValuesPlot = $pre->fetchAll(PDO::FETCH_ASSOC);
 
-//$patientId = $id;
-
-//$sql = "SELECT id_capteur FROM capteur WHERE id_patient = '".$patientId."'";
-//$pre = $pdo->prepare($sql);
-//$pre->execute();
-//$sensorId = $pre->fetchAll(PDO::FETCH_ASSOC);
-
-//$sql = "SELECT * FROM mesure WHERE id_capteur = '".$sensorId[0]['id_capteur']."' AND date_heure LIKE '2021%' "; //METTRE date('Y') dedans
-//$pre = $pdo->prepare($sql);
-//$pre->execute();
-//$cardiacValuesPlotYear = $pre->fetchAll(PDO::FETCH_ASSOC);
 
 
-// Algorythme de tri [À VÉRIFIER]
+
+// Algorythme de tri
 foreach($cardiacValuesPlot as $cardiacValuesPlotReach){
     $maxYearCardiacValuesPlotFinal = 0;
     $maxMonthCardiacValuesPlotFinal = 0;
@@ -72,6 +65,26 @@ foreach($soundValuesPlot as $soundValuesPlotReach){
     }
     if($maxDaySoundValuesPlot > $maxDaySoundValuesPlotFinal){
         $maxDaySoundValuesPlotFinal = $maxDaySoundValuesPlot;
+    }
+}
+
+foreach($gasValuesPlot as $gasValuesPlotReach){
+    $maxYearGasValuesPlotFinal = 0;
+    $maxMonthGasValuesPlotFinal = 0;
+    $maxDayGasValuesPlotFinal = 0;
+    $dateTimeGasValues = date_parse($gasValuesPlotReach['date_heure']);
+    $maxYearGasValuesPlot = $dateTimeGasValues['year'];
+    $maxMonthGasValuesPlot = $dateTimeGasValues['month'];
+    $maxDayGasValuesPlot = $dateTimeGasValues['day'];
+
+    if($maxYearGasValuesPlot > $maxYearGasValuesPlotFinal){
+        $maxYearGasValuesPlotFinal = $maxYearGasValuesPlot;
+    }
+    if($maxMonthGasValuesPlot > $maxMonthGasValuesPlotFinal){
+        $maxMonthGasValuesPlotFinal = $maxMonthGasValuesPlot;
+    }
+    if($maxDayGasValuesPlot > $maxDayGasValuesPlotFinal){
+        $maxDayGasValuesPlotFinal = $maxDayGasValuesPlot;
     }
 }
 

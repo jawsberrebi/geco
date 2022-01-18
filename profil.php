@@ -167,21 +167,36 @@ include('backend/graphique_donnees.php');
                 </div>
             
                 <div class="contenu" data-anim="2">
-                    <button class="choosebtn" onclick="drawChartYearCardiac()">Cette année</button>
-                    <button class="choosebtn" onclick="drawChartMonthCardiac()">Ce mois-ci</button>
-                    <button class="choosebtn" onclick="drawChartDayCardiac()">Aujourd'hui</button>
-                    <div id="curve_chart_cardiac"></div>
+                    <div class="bloc_graphiques">
+                        <div class="btngroup">
+                            <button class="choosebtn" onclick="drawChartYearCardiac()">Cette année</button>
+                            <button class="choosebtn" onclick="drawChartMonthCardiac()">Ce mois-ci</button>
+                            <button class="choosebtn" onclick="drawChartDayCardiac()">Aujourd'hui</button>
+                        </div>
+
+                        <div id="curve_chart_cardiac"></div>
+                    </div>
                     
                 </div>
             
                 <div class="contenu" data-anim="3">
-                    <button class="choosebtn" onclick="drawChartYearSound()">Cette année</button>
-                    <button class="choosebtn" onclick="drawChartMonthSound()">Cette année</button>
-                    <button class="choosebtn" onclick="drawChartDaySound()">Cette année</button>
-                    <div id="curve_chart_sound"></div>
+                    <div class="bloc_graphiques">
+                        <div class="btngroup">
+                            <button class="choosebtn" onclick="drawChartYearSound()">Cette année</button>
+                            <button class="choosebtn" onclick="drawChartMonthSound()">Ce mois-ci</button>
+                            <button class="choosebtn" onclick="drawChartDaySound()">Aujourd'hui</button>
+                        </div>
+                        <div id="curve_chart_sound"></div>
+                    </div>
                 </div>
+
                 <div class="contenu" data-anim="4">
-                    <p>Insérez le graphique ici</p>
+                    <div class="btngroup">
+                        <button class="choosebtn" onclick="drawChartYearGas()">Cette année</button>
+                        <button class="choosebtn" onclick="drawChartMonthGas()">Ce mois-ci</button>
+                        <button class="choosebtn" onclick="drawChartDayGas()">Aujourd'hui</button>
+                    </div>
+                    <div id="curve_chart_gas"></div>
                 </div>
             
         

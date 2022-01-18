@@ -291,3 +291,5 @@ include('backend/fonctions.php');
 
 </body>
 </html>
+
+<?php echo date('Y-m-d'); ?>
