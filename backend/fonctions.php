@@ -248,6 +248,7 @@ function dataTableMembersGenerator(PDO $pdo, string $userType, bool $querySearch
                 </td>
 
                 <td class="affichage_valeur">
+
                     <?php if(isset($finalValues[2]['valeur'])){
                             echo $finalValues[2]['valeur'];
                           }

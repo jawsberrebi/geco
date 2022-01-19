@@ -139,6 +139,7 @@ include('backend/conditions_id.php');
                                       echo '<p class="valeurPHP">' . $finalValues[2]['valeur'] . ' <mark id="pourcentage">%</mark></p>';  
                                   }
                                 ?>
+                          
                             <!-- </p> -->
                             
                             <form method="post" action="backend/envoi_valeurs?id_patient=<?php echo $id ?>.php">
