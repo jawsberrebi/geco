@@ -345,8 +345,27 @@ th {
     margin-top: -50%;
 }
 
+.btngroupone > .choosebtn {
+    background-color: #3BC393;
+    color: white;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+}
 
-.choosebtn {
+.btngroupthree > .choosebtn {
+    background-color: #3BC393;
+    color: white;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.btngrouptwo > .choosebtn {
     background-color: #3BC393;
     color: white;
     padding: 10px;
@@ -366,17 +385,13 @@ th {
     border-radius: 10px;
 }
 
-.btngroupone{
-    display: flex;
-    flex-direction: column;
+/*.btngroupone{
     width: 20%;
     
 }
 
 .btngrouptwo {
     margin-top: -28%;
-    display: flex;
-    flex-direction: column;
     width: 20%;
 
 }
@@ -386,6 +401,11 @@ th {
     display: flex;
     flex-direction: column;
     width: 20%;
+}*/
+
+.btngroupone > button, .btngrouptwo > button, .btngroupthree > button {
+
+    margin: 3%;
 }
 
 .btngroupone > button, .btngrouptwo > button, .btngroupthree > button {
