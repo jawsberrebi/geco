@@ -58,8 +58,7 @@ table {
     color: red;
 }
 
-a:visited
-{
+a:visited {
     color: none;
 }
 
@@ -83,11 +82,14 @@ td {
 #table {
     justify-content: center;
     display: flex;
-    height:100%;
+    height: 100%;
 }
 
 .cadran {
     margin-top: 3%;
+    /*margin-left: 10%;
+    padding-right: 5%;
+    padding-left: 5%; */
     margin-left:10%;
     padding-top: 6.5%;
     padding: 5%;
@@ -95,7 +97,6 @@ td {
     border: 1px solid white;
     border-radius: 20px;
     width: 20%;
-    height: 20%;
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2), 0 0 10px 0 rgba(0, 0, 0, 0.2);
 }
 
@@ -120,9 +121,10 @@ td {
     padding-top: 2%;
     margin-left: 2%;
 }
-#supprimer::after{
-    display: none;
-}
+
+    #supprimer::after {
+        display: none;
+    }
 
 input[type = range] {
     -webkit-appearance: none;
@@ -136,13 +138,13 @@ input[type = range] {
     outline: none;
 }
 
-input[type = range]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    width: 13px;
-    height: 13px;
-    background: white;
-    border-radius: 50%;
-}
+    input[type = range]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        width: 13px;
+        height: 13px;
+        background: white;
+        border-radius: 50%;
+    }
 
 
 
@@ -188,20 +190,20 @@ input[type = range]::-webkit-slider-thumb {
     color: white;
 }
 
-.connexion{
+.connexion {
     padding-left: 2%;
 }
 
-#recherche{
+#recherche {
     padding-left: 15%;
     display: initial;
 }
 
-#btn_recherche{
+#btn_recherche {
     height: 1.9em;
 }
 
-#identifiant{
+#identifiant {
     padding-left: 0.8em;
     font-family: Urbanist, sans-serif;
     font-weight: normal;
@@ -221,10 +223,10 @@ input[type = range]::-webkit-slider-thumb {
     border-radius: 10px;
 }
 
-/* Bouton Dropdown on hover & focus */
-.dropbtn:hover, .dropbtn:focus {
-    background-color: #3e8e41;
-}
+    /* Bouton Dropdown on hover & focus */
+    .dropbtn:hover, .dropbtn:focus {
+        background-color: #3e8e41;
+    }
 
 /* Permet de fixer le bouton de la page */
 .dropdown {
@@ -243,20 +245,22 @@ input[type = range]::-webkit-slider-thumb {
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
 }
 
-/* Liens à l'intérieur du dropdown */
-.dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-}
+    /* Liens à l'intérieur du dropdown */
+    .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
 
-/* Change la couleur lors d'un passage sur l'élément */
-.dropdown-content a:hover {background-color: #f1f1f1}
+        /* Change la couleur lors d'un passage sur l'élément */
+        .dropdown-content a:hover {
+            background-color: #f1f1f1
+        }
 
 /* Montre le bouton Dropdown */
 .show {
-    display:block;
+    display: block;
     border-radius: 10px;
 }
 
@@ -266,11 +270,12 @@ th {
     text-align: left;
     white-space: pre;
 }
-.titre_profil{
+
+.titre_profil {
     display: flex;
 }
 
-.valeurPHP{
+.valeurPHP {
     font-size: 1.5em;
 }
 
@@ -278,19 +283,139 @@ th {
     color: #AC0002;
     background: none;
     font-weight: bolder;
-    font-size: 0.5em;
+    font-size: 0.7em;
 }
 
 #db {
     color: #70D9E5;
     background: none;
     font-weight: bolder;
-    font-size: 0.5em;
+    font-size: 0.7em;
 }
 
 #pourcentage {
     color: #3CC496;
     background: none;
     font-weight: bolder;
-    font-size: 0.5em;
+    font-size: 0.7em;
+}
+
+#cadran_rouge {
+    color: #AC0002;
+    font-size: 20px;
+    padding-top: -100%;
+}
+
+#cadran_bleu {
+    color: #43CCDD;
+    font-size: 20px;
+    padding-top: -100%;
+}
+
+#cadran_bleu > img {
+    margin-top: 6%;
+    margin-left: 8%;
+}
+
+#cadran_vert {
+    color: #37C394;
+    font-size: 20px;
+    padding-top: -100%;
+}
+
+#cadran_vert > img {
+    margin-top: 6%;
+    margin-left: 8%;
+}
+#curve_chart_cardiac {
+    width: 900px;
+    height: 500px;
+    margin-left: 10%;
+    margin-top: -20%;
+}
+
+#curve_chart_sound {
+    width: 900px;
+    height: 500px;
+    margin-left: 10%;
+    margin-top: -50%;
+}
+
+#curve_chart_gas {
+    width: 900px;
+    height: 500px;
+    margin-left: 10%;
+    margin-top: -50%;
+}
+
+.btngroupone > .choosebtn {
+    background-color: #3BC393;
+    color: white;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.btngroupthree > .choosebtn {
+    background-color: #3BC393;
+    color: white;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.btngrouptwo > .choosebtn {
+    background-color: #3BC393;
+    color: white;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.choosebtn:hover {
+    background-color: white;
+    color: #3BC393;
+    padding: 10px;
+    font-size: 16px;
+    border: solid 1px #3BC393;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+/*.btngroupone{
+    width: 20%;
+    
+}
+
+.btngrouptwo {
+    margin-top: -28%;
+    width: 20%;
+
+}
+
+.btngroupthree {
+    margin-top: -28%;
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+}*/
+
+.btngroupone > button, .btngrouptwo > button, .btngroupthree > button {
+
+    margin: 3%;
+}
+
+.btngroupone > button, .btngrouptwo > button, .btngroupthree > button {
+
+    margin: 3%;
+}
+
+.bloc_graphiques{
+    display: flex;
 }

@@ -70,8 +70,7 @@ table {
     color: red;
 }
 
-a:visited
-{
+a:visited {
     color: none;
 }
 
@@ -129,9 +128,10 @@ td {
     margin-top: 2%;
     margin-left: 2%;
 }
-#supprimer::after{
-    display: none;
-}
+
+    #supprimer::after {
+        display: none;
+    }
 
 input[type = range] {
     -webkit-appearance: none;
@@ -146,13 +146,13 @@ input[type = range] {
     margin-top: 30%;
 }
 
-input[type = range]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    width: 13px;
-    height: 13px;
-    background: white;
-    border-radius: 50%;
-}
+    input[type = range]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        width: 13px;
+        height: 13px;
+        background: white;
+        border-radius: 50%;
+    }
 
 
 
@@ -197,20 +197,20 @@ input[type = range]::-webkit-slider-thumb {
     color: white;
 }
 
-.connexion{
+.connexion {
     padding-left: 2%;
 }
 
-#recherche{
+#recherche {
     padding-left: 15%;
     display: initial;
 }
 
-#btn_recherche{
+#btn_recherche {
     height: 1.9em;
 }
 
-#identifiant{
+#identifiant {
     padding-left: 0.8em;
     font-family: Urbanist, sans-serif;
     font-weight: normal;
@@ -230,10 +230,10 @@ input[type = range]::-webkit-slider-thumb {
     border-radius: 10px;
 }
 
-/* Bouton Dropdown on hover & focus */
-.dropbtn:hover, .dropbtn:focus {
-    background-color: #3e8e41;
-}
+    /* Bouton Dropdown on hover & focus */
+    .dropbtn:hover, .dropbtn:focus {
+        background-color: #3e8e41;
+    }
 
 /* Permet de fixer le bouton de la page */
 .dropdown {
@@ -251,20 +251,22 @@ input[type = range]::-webkit-slider-thumb {
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
 }
 
-/* Liens à l'intérieur du dropdown */
-.dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-}
+    /* Liens à l'intérieur du dropdown */
+    .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
 
-/* Change la couleur lors d'un passage sur l'élément */
-.dropdown-content a:hover {background-color: #f1f1f1}
+        /* Change la couleur lors d'un passage sur l'élément */
+        .dropdown-content a:hover {
+            background-color: #f1f1f1
+        }
 
 /* Montre le bouton Dropdown */
 .show {
-    display:block;
+    display: block;
     border-radius: 10px;
 }
 
@@ -276,9 +278,10 @@ th {
     text-align: center;
 }
 
-.titre_profil{
+.titre_profil {
     display: flex;
 }
+
 
 #message_suppression{
     margin-left: 15%;
@@ -290,6 +293,7 @@ th {
         position: relative;
         left: 42.5%;
     }
+  
     .tab_personnel {
         padding-right: 1em;
     }
@@ -300,16 +304,19 @@ th {
     .dropdown {
         left: 17%;
     }
+
     .tab_personnel1 {
         display: none;
     }
     .affichage_valeur{
         display: none;
     }
+
     #moteur_recherche {
         width: 20%;
         margin-left: 1%;
     }
+
     .tab_personnel {
         padding-right: 6.25em;
     }

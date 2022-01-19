@@ -12,6 +12,11 @@ if(!isset($_SESSION['userPatient'])) {
 
 }
 
+$id = $_SESSION['userPatient']['id_patient'];
+
+include('backend/graphique_donnees.php');
+include('backend/graphiques.php');
+
 ?>
 
 <!DOCTYPE html>
@@ -32,7 +37,7 @@ if(!isset($_SESSION['userPatient'])) {
             <ul>
               <li class="navbara"><a id="chiant" href="#tableaudebord"><strong>Tableau de bord</strong></a></li>
               <li><a class="bactive" a style="color:#37C394", font-size:2em; href="modifier_mon_compte.php" ><strong> Modifier mon compte</strong></a></li>
-              <li><a href="deconnexion.php" id="deconnexion"> <strong></strong> Déconnexion</strong></a></li>
+              <li><a href="backend/deconnexion.php" id="deconnexion"> <strong></strong> Déconnexion</strong></a></li>
             </ul>
     
         </nav>
@@ -67,6 +72,10 @@ if(!isset($_SESSION['userPatient'])) {
                           <div class="contenu_actif" data-anim="1">
                             <div id="table">
                                 <div class="cadran">
+                                    <div id="cadran_rouge">
+                                        <p>Rythme cardiaque</p>
+                                        <p>❤</p>
+                                    </div>
 
                                     <?php 
                                         if(!isset($finalValues[0]['valeur'])){
@@ -79,6 +88,12 @@ if(!isset($_SESSION['userPatient'])) {
                                 </div>
             
                                 <div class="cadran">
+
+                                    <div id="cadran_bleu">
+                                        <p>Niveau sonore</p>
+                                        <img src="images/b.png" width="50" height="50"/>
+                                    </div>
+
                                     <?php 
                                         if(!isset($finalValues[1]['valeur'])){
                                             echo '<p></p>';
@@ -90,6 +105,12 @@ if(!isset($_SESSION['userPatient'])) {
                                 </div>
             
                                 <div class="cadran">
+
+                                    <div id="cadran_vert">
+                                        <p>Gaz (CO2)</p>
+                                        <img src="images/c.png" width="50" height="50"/>
+                                    </div>
+
                                     <?php 
                                         if(!isset($finalValues[2]['valeur'])){
                                             echo '<p></p>';
@@ -100,34 +121,17 @@ if(!isset($_SESSION['userPatient'])) {
                                     ?>
                                 </div>
                             </div>
-                        <!--</div>
-                        
-                              <p ><div class="ra"><strong>Notification quand le rythme cardiaque excède 120 bpm </strong> 
-                                  <label id="tre"class="switch">
-                                  <input type="checkbox" checked>
-                                  <span class="slider round"></span>
-                                </label> 
-                              </div></p>
-                      
-                              <p><div class="ra"><strong> Notification quand le niveau sonore excède 70 dB</strong>
-                                      <label id="prems" class="switch">
-                                          <input type="checkbox" checked>
-                                          <span class="slider round"></span>
-                                        </label>
-                                      </div></p>
-                              <p > <div class="ra"><strong>Notification quand le taux de gaz excède 1,3 % </strong> 
-                                  <label id="sec" class="switch">
-                                      <input type="checkbox" checked>
-                                      <span class="slider round"></span>
-                                    </label>
-                                  </div> </p>
-                        
-                      </div>-->
                   
                       <div class="contenu" data-anim="2">
-                          <h3></h3>
-                          <hr>
-                          <p></p>
+                          <div class="bloc_graphiques">
+                            <div class="btngroupone">
+                                <button class="choosebtn" onclick="drawChartYearCardiac()">Cette année</button>
+                                <button class="choosebtn" onclick="drawChartMonthCardiac()">Ce mois-ci</button>
+                                <button class="choosebtn" onclick="drawChartDayCardiac()">Aujourd'hui</button>
+                            </div>
+
+                            <div id="curve_chart_cardiac"></div>
+                          </div>
                       </div>
                   
                       <div class="contenu" data-anim="3">
@@ -139,18 +143,9 @@ if(!isset($_SESSION['userPatient'])) {
                           <h3>uvcz</h3>
                       </div>
                     
-                      
-                     
-                  
                       </div>
                       <script src="Javascript/fenetre.js"></script>
-                  
-       
 
-           
-
-          
-            
             <div class="contenu_actif" data-anim="2">
                 
             </div>

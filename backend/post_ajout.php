@@ -1,9 +1,9 @@
 <?php
 include_once("config.php");
-include('backend/fonctions.php');
+include('fonctions.php');
 
 if (!isset($_POST['nom']) || !isset($_POST['prenom']) || !isset($_POST['email'])) {
-    header('Location:ajout?erreur=1.php');
+    header('Location:../ajout?erreur=1.php');
     exit();
 }
 
@@ -28,7 +28,7 @@ if (htmlspecialchars($_POST['type']) == 'patient') {
     $user = current($pre->fetchAll(PDO::FETCH_ASSOC));
     $result= $user;
     if($result != 0) {
-        header('Location:ajout?type=patient&erreur=2.php');
+        header('Location:../ajout?type=patient&erreur=2.php');
         exit();
     }
 
@@ -58,30 +58,30 @@ if (htmlspecialchars($_POST['type']) == 'patient') {
     $sql = 'INSERT INTO capteur(id_patient, type) VALUES (:id_patient, :type)';
     $pre = $pdo->prepare($sql);
     $pre->execute([
-        'id_patient' => $idPatient,
-        'type' => 'frequenceCardiaque',
+        ':id_patient' => $idPatient,
+        ':type' => 'frequenceCardiaque',
         ]);
 
     $sql = 'INSERT INTO capteur(type, id_patient) VALUES (:type, :id_patient)';
     $pre = $pdo->prepare($sql);
     $pre->execute([
-        'id_patient' => $idPatient,
-        'type' => 'niveauSonore'
+        ':id_patient' => $idPatient,
+        ':type' => 'niveauSonore'
         ]);
 
     $sql = 'INSERT INTO capteur(type, id_patient) VALUES (:type, :id_patient)';
     $pre = $pdo->prepare($sql);
     $pre->execute([
-        'id_patient' => $idPatient,
-        'type' => 'concentrationGaz'
+        ':id_patient' => $idPatient,
+        ':type' => 'concentrationGaz'
         ]);
 
     $champs = array();
 
-    array_push($champs, $mail, $userName, $password);
+    array_push($champs, $mail, $userName, $hashedPassword, $userName,'patient');
     sendingIdsMail('rd.berrebi@gmail.com', $champs);
 
-    header('Location:tableau_de_bord_personnel?confirmation=1.php');
+    header('Location:../tableau_de_bord_personnel?confirmation=1.php');
     exit();
 
 } elseif (htmlspecialchars($_POST['type']) == 'infirmier') {
@@ -92,7 +92,7 @@ if (htmlspecialchars($_POST['type']) == 'patient') {
     $user = current($pre->fetchAll(PDO::FETCH_ASSOC));
     $result= $user;
     if($result != 0) {
-        header('Location:ajout?type=infirmier&erreur=2.php');
+        header('Location:../ajout?type=infirmier&erreur=2.php');
         exit();
     }
 
@@ -111,11 +111,11 @@ if (htmlspecialchars($_POST['type']) == 'patient') {
 
     $champs = array();
 
-    array_push($champs, $mail, $userName, $password);
+    array_push($champs, $mail, $userName, $hashedPassword, $userName,'personnel');
 
     sendingIdsMail('rd.berrebi@gmail.com', $champs);
 
-    header('Location:tableau_de_bord_personnel?confirmation=2.php');
+    header('Location:../tableau_de_bord_personnel?confirmation=2.php');
     exit();
 
 } elseif (htmlspecialchars($_POST['type']) == 'medecin') {
@@ -126,7 +126,7 @@ if (htmlspecialchars($_POST['type']) == 'patient') {
     $user = current($pre->fetchAll(PDO::FETCH_ASSOC));
     $result= $user;
     if($result != 0) {
-        header('Location:ajout?type=medecin&erreur=2.php');
+        header('Location:../ajout?type=medecin&erreur=2.php');
         exit();
     }
 
@@ -145,15 +145,51 @@ if (htmlspecialchars($_POST['type']) == 'patient') {
 
     $champs = array();
 
-    array_push($champs, $mail, $userName, $password);
+    array_push($champs, $mail, $userName, $hashedPassword, $userName,'personnel');
 
     sendingIdsMail('rd.berrebi@gmail.com', $champs);
 
-    header('Location:tableau_de_bord_personnel?confirmation=3.php');
+    header('Location:../tableau_de_bord_personnel?confirmation=3.php');
     exit();
+} elseif (htmlspecialchars($_POST['type']) == 'admin') {
+
+    $sql = "SELECT * FROM personnel WHERE mail='".$mail."'"; //UN INFIRMIER PEUT-IL AVOIR À LA FOIS UN COMPTE MEDECIN ET UN COMPTE INFIRMIER ?
+    $pre = $pdo->prepare($sql);
+    $pre->execute();
+    $user = current($pre->fetchAll(PDO::FETCH_ASSOC));
+    $result= $user;
+    if($result != 0) {
+        header('Location:../ajout?type=admin&erreur=2.php');
+        exit();
+    }
+
+    $sql = 'INSERT INTO personnel(prenom, nom, mail, tel, type, mdp, nom_utilisateur, id_hopital) VALUES (:prenom, :nom, :mail, :tel, :type, :mdp, :nom_utilisateur, :id_hopital)';
+    $pre = $pdo->prepare($sql);
+    $pre->execute([
+        ':prenom' => $firstName,
+        ':nom' => $name,
+        ':mail' => $mail,
+        ':tel' => $phone,
+        ':type' => 'admin',
+        ':mdp' => $hashedPassword,
+        ':nom_utilisateur' => $userName,
+        ':id_hopital' => $idHospital
+        ]);
+
+
+    echo 'ofof';
+    $champs = array();
+
+    array_push($champs, $mail, $userName, $hashedPassword, $userName,'personnel');
+
+    sendingIdsMail('rd.berrebi@gmail.com', $champs);
+
+    header('Location:../tableau_de_bord_personnel?confirmation=6.php');
+    exit();
+    
 
 } else {
-    header('Location:tableau_de_bord_personnel?erreur=3.php');
+    header('Location:../tableau_de_bord_personnel?erreur=3.php');
     exit();
 }
 

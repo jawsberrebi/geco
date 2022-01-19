@@ -1,0 +1,19 @@
+body {
+    font-family: 'Urbanist';font-size: 20px;
+}
+h1
+{
+  font-size: 35px;
+  font-family: 'Urbanist';
+  color: #3bc393;
+  padding:16px;
+  text-align:center;
+}
+
+h3
+{
+  font-size: 22px;
+  font-family: urbanist;
+  color: #3bc393;
+  padding:16px;
+}

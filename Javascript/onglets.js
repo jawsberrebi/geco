@@ -2,6 +2,15 @@ const onglets = document.querySelectorAll('.onglets');
 const contenu = document.querySelectorAll('.contenu');
 let index = 0;
 
+//À tester :
+//if ($(window).width() > 480) { ecrit le code a exécuter }
+
+//else {
+//    ne rien faire
+//}
+
+
+
 onglets.forEach(onglet => {
 
     onglet.addEventListener('click', () => {

@@ -1,8 +1,8 @@
 <?php
 include_once("config.php");
 
-if (!isset($_POST['nom']) || !isset($_POST['prenom'])) {
-    header('Location:modifier_mon_compte?erreur=1.php');
+if (!isset($_POST['nom']) || !isset($_POST['prenom']) || !isset($_POST['email'])) {
+    header('Location:../modifier_mon_compte?erreur=1.php');
     exit();
 }
 
@@ -26,7 +26,7 @@ if(isset($_SESSION['userPersonnel'])){
         $user = current($pre->fetchAll(PDO::FETCH_ASSOC));
         $result= $user;
         if($result != 0) {
-            header('Location:modifier_mon_compte?erreur=2.php');
+            header('Location:../modifier_mon_compte?erreur=2.php');
             exit();
         }
 
@@ -44,7 +44,7 @@ if(isset($_SESSION['userPersonnel'])){
         $_SESSION['userPersonnel']['mail'] = $mail;
         $_SESSION['userPersonnel']['tel'] = $phone;
 
-        header('Location:tableau_de_bord_personnel?confirmation=4.php');
+        header('Location:../tableau_de_bord_personnel?confirmation=4.php');
         exit();
 
 
@@ -62,7 +62,7 @@ if(isset($_SESSION['userPersonnel'])){
         $user = current($pre->fetchAll(PDO::FETCH_ASSOC));
         $result= $user;
         if($result != 0) {
-            header('Location:modifier_mon_compte?erreur=2.php');
+            header('Location:../modifier_mon_compte?erreur=2.php');
             exit();
         }
 
@@ -82,7 +82,7 @@ if(isset($_SESSION['userPersonnel'])){
         $_SESSION['userPersonnel']['tel'] = $phone;
         $_SESSION['userPersonnel']['nom_utilisateur'] = $userName;
 
-        header('Location:tableau_de_bord_personnel?confirmation=4.php');
+        header('../Location:tableau_de_bord_personnel?confirmation=4.php');
         exit();
 
         /////////////                                                                      \\\\\\\\\\\\\\\\\\\\\\\\\\\\\
@@ -103,7 +103,7 @@ elseif(isset($_SESSION['userPatient'])){
         $user = current($pre->fetchAll(PDO::FETCH_ASSOC));
         $result= $user;
         if($result != 0) {
-            header('Location:modifier_mon_compte?erreur=2.php');
+            header('../Location:modifier_mon_compte?erreur=2.php');
             exit();
         }
 
@@ -125,17 +125,14 @@ elseif(isset($_SESSION['userPatient'])){
         $_SESSION['userPatient']['adresse'] = $adresse;
         $_SESSION['userPatient']['nom_utilisateur'] = $userName;
 
-        header('Location:tableau_de_bord_patient.php');
+        header('../Location:tableau_de_bord_patient.php');
         exit();
-
-
-    
 
     }
 }
 else {
     ////////////////// OU SINON REDIRECTION SI LE COMPTE N'EST PAS CONNECTÉ \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-    header('Location:tableau_de_bord_personnel?erreur=3.php');
+    header('Location:../tableau_de_bord_personnel?erreur=3.php');
     exit();
 }
 

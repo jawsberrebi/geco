@@ -3,15 +3,17 @@ require_once("config.php");
 include('backend/conditions_accès_page_personnel_et_admin.php');
 include('backend/fonctions.php');
 include('backend/conditions_id.php');
+include('backend/graphique_donnees.php');
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="fr">
     <head>
         <meta charset="utf-8" />
         <link rel="stylesheet" href="css/style_profil.css" />
         <link rel="stylesheet" href="css/navbar_pro.css">
         <link rel="stylesheet" href="css/onglet.css">
+        <?php include("backend/graphiques.php"); ?>
         <title>Tableau de bord</title>
     </head>
     <header>
@@ -21,7 +23,7 @@ include('backend/conditions_id.php');
             <ul>
             <li><a class="active" href="tableau_de_bord_personnel.php">Tableau de bord</a></li>
             <li><a href="modifier_mon_compte.php" id="profil">Modifier mon compte</a></li>
-            <li><a href="deconnexion.php" id="deconnexion">Déconnexion</a></li>
+            <li><a href="backend/deconnexion.php" id="deconnexion">Déconnexion</a></li>
             </ul>
 
         </nav>  
@@ -77,6 +79,11 @@ include('backend/conditions_id.php');
                 <div class="contenu activeContenu" data-anim="1">
                     <div id="table">
                         <div class="cadran">
+                                <div id="cadran_rouge">
+                                    <p>Rythme cardiaque</p>
+                                    <p>❤</p>
+                                </div>
+
                             <!-- <p id="text"> -->
                                 <?php 
                                   if(!isset($finalValues[0]['valeur'])){
@@ -86,6 +93,7 @@ include('backend/conditions_id.php');
                                       echo '<p class="valeurPHP">' . $finalValues[0]['valeur'] . ' <mark id="bpm">bpm</mark></p>';  
                                   }
                                 ?>
+
                             <!-- </p> -->
 
                             <form method="post" action="backend/envoi_valeurs?id_patient=<?php echo $id ?>.php">
@@ -103,6 +111,10 @@ include('backend/conditions_id.php');
                         </div>
 
                     <div class="cadran">
+                            <div id="cadran_bleu">
+                                <p>Niveau sonore</p>
+                                <img src="images/b2.png" width="50" height="50"/>
+                            </div>
                         <!-- <p id="text"> -->
                             <?php 
                                 if(!isset($finalValues[1]['valeur'])){
@@ -112,6 +124,7 @@ include('backend/conditions_id.php');
                                     echo '<p class="valeurPHP">' . $finalValues[1]['valeur'] . ' <mark id="db">db</mark></p>';  
                                 }
                             ?>
+
                         <!-- </p> -->
 
                         <form method="post" action="backend/envoi_valeurs?id_patient=<?php echo $id ?>.php">
@@ -130,6 +143,10 @@ include('backend/conditions_id.php');
                         </div>
 
                         <div class="cadran">
+                                <div id="cadran_vert">
+                                    <p>Gaz (CO2)</p>
+                                    <img src="images/c2.png" width="50" height="50"/>
+                                </div>
                             <!-- <p id="text"> -->
                                 <?php 
                                   if(!isset($finalValues[2]['valeur'])){
@@ -159,14 +176,38 @@ include('backend/conditions_id.php');
                 </div>
             
                 <div class="contenu" data-anim="2">
-                        <p>Insérez le graphique ici</p>
+                    <div class="bloc_graphiques">
+                        <div class="btngroupone">
+                            <button class="choosebtn" onclick="drawChartYearCardiac()">Cette année</button>
+                            <button class="choosebtn" onclick="drawChartMonthCardiac()">Ce mois-ci</button>
+                            <button class="choosebtn" onclick="drawChartDayCardiac()">Aujourd'hui</button>
+                        </div>
+
+                        <div id="curve_chart_cardiac"></div>
+                    </div>
+                    
                 </div>
             
                 <div class="contenu" data-anim="3">
-                    <p>Insérez le graphique ici</p>
+                    <div class="bloc_graphiques">
+                        <div class="btngrouptwo">
+                            <button class="choosebtn" onclick="drawChartYearSound()">Cette année</button>
+                            <button class="choosebtn" onclick="drawChartMonthSound()">Ce mois-ci</button>
+                            <button class="choosebtn" onclick="drawChartDaySound()">Aujourd'hui</button>
+                        </div>
+                        <div id="curve_chart_sound"></div>
+                    </div>
                 </div>
+
                 <div class="contenu" data-anim="4">
-                    <p>Insérez le graphique ici</p>
+                    <div class="bloc_graphiques">
+                        <div class="btngroupthree">
+                            <button class="choosebtn" onclick="drawChartYearGas()">Cette année</button>
+                            <button class="choosebtn" onclick="drawChartMonthGas()">Ce mois-ci</button>
+                            <button class="choosebtn" onclick="drawChartDayGas()">Aujourd'hui</button>
+                        </div>
+                        <div id="curve_chart_gas"></div>
+                    </div>
                 </div>
             
         

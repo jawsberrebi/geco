@@ -68,10 +68,17 @@ include('backend/fonctions.php');
 
 <?php 
 
-$test = "yes";
+//$sql = "SELECT * FROM personnel WHERE mail=:mail";
+//$dataBinded = array( 
+//    ':mail' => 'boy@boy.fr',
+//    );
+//$pre = $pdo->prepare($sql);
+//$pre->execute($dataBinded);
+//$user = $pre->fetchAll(PDO::FETCH_ASSOC); //current prend la première ligne du tableau
 
-$pdo->quote($test);
-echo $test;
+//if($user == true){
+//    echo 'ok';
+//}
 
 ?>
 
@@ -106,7 +113,7 @@ echo $test;
 //if ($server_output == "OK") { ... } else { ... }
 ?>
 
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8" />
@@ -188,4 +195,101 @@ echo $test;
         </div>
 
     </body>
+</html>-->
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Mon premier dashboard</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="Javascript/mydashboard.js"></script>
+    <script src="https://d3js.org/d3.v3.min.js"></script>
+    <script src="https://cdn.rawgit.com/novus/nvd3/v1.8.1/build/nv.d3.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/wordcloud.js"></script>    
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/novus/nvd3/v1.8.1/build/nv.d3.css">
+  </head>
+
+  <body>
+  
+    <div class="content">
+      <header>
+        <div class="header-background"></div>
+        <div class="title">
+          <h1>
+            Mon dashboard
+          </h1>
+        </div>
+      </header>
+      
+      <main>
+        <div class="chartContainer">
+            
+          <div id="actu" class="chart">
+          </div>
+
+          <div id="meteo" class="chart">
+              <text class="chartTitle">Prévision de température</text>
+              <svg></svg>
+          </div>
+          
+        </div>
+      </main>
+    </div>
+    
+  </body>
+  
 </html>
+
+
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>The XMLHttpRequest Object</h1>
+
+<button type="button" onclick="getData()">Request data</button>
+
+<p id="demo"></p>
+
+
+<script>
+    $(document).ready(function getData() {
+        var xhttp = new XMLHttpRequest();
+        //xhttp.onreadystatechange = function() {
+        //  if (this.readyState == 4 && this.status == 200) {
+        //    document.getElementById("demo").innerHTML = this.responseText;
+        //  }
+        //  };
+        //  
+        //xhttp.open("GET", "http://projets-tomcat.isep.fr:8080/appService/?ACTION=GETLOG&TEAM=G5A4", false);
+        //xhttp.send();
+
+        xmlhttp.open("GET","http://projets-tomcat.isep.fr:8080/appService/?ACTION=GETLOG&TEAM=G5A4",true);
+        xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+        xmlhttp.send("fname=Henry&lname=Ford");
+
+        var settings = {
+            "url": "http://projets-tomcat.isep.fr:8080/appService/?ACTION=GETLOG&TEAM=G5A4",
+            "method": "GET",
+            "timeout": 0,
+        };
+
+
+        $.ajax(settings).done(function (response) {
+            alert("Hello");
+            alert(response);
+        });
+
+
+
+    });
+</script>
+
+</body>
+</html>
+
+<?php echo date('Y-m-d'); ?>

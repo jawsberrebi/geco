@@ -323,6 +323,7 @@ color: #3bc393
 
 .contact{
     background-color: #f7f7f7;
+    padding-bottom: 5%;
 }
 
 .contact form{
@@ -371,43 +372,20 @@ color: #3bc393
     Footer
 -------------*/
 
-footer{
+footer {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: space-around;
     align-items: center;
     text-align: center;
-    color: #fff;
-    background-color: #414a4f;
-    padding: 60px 0;
+    color: black;
+    background-color: white;
+    padding-bottom: 3%;
+    padding-top: 3%;
 }
 
-footer ul{
-    display: flex;
-    margin-bottom: 25px;
-    font-size: 32px;
-}
-
-footer ul li{
-    margin: 0 8px;  
-}
-
-footer ul li:first-child{
-    margin-left: 0; 
-}
-
-footer ul li:last-child{
-    margin-right: 0;    
-}
-
-footer p{
-    text-transform: uppercase;
-    font-size: 14px;
-    color: rgba(255,255,255,0.6);
-    margin-bottom: 10px;
-}
-
-footer p a{
-    color: #fff;
+footer > ul > li > a{
+    color: #3bc393;
 }
 
 @media (max-width: 700px){

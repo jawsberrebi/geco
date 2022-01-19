@@ -14,7 +14,7 @@
 
         <div id="box">
 
-            <form action="post_mot_de_passe_oublie.php" method="post">
+            <form action="backend/post_mot_de_passe_oublie.php" method="post">
                 <h1 id="title_form">Mot de passe oublié</h1>
 
                 <input type="email" placeholder="Email" name="email" class="input_mail" required />
