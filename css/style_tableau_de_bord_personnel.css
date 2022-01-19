@@ -41,6 +41,14 @@ h1 {
     padding-right: 2.85em;
 }
 
+.tab_personnel1 {
+    font-family: Urbanist, sans-serif;
+    font-weight: normal;
+    text-align: center;
+    white-space: pre;
+    padding-right: 2.85em;
+}
+
 .contenu_table {
     margin-bottom: 2%;
     border: 0.05px solid;
@@ -229,10 +237,9 @@ input[type = range]::-webkit-slider-thumb {
 
 /* Permet de fixer le bouton de la page */
 .dropdown {
-    position: relative;
     display: inline-block;
     position: relative;
-    left: 32.5%;
+    left: 32.75%;
 }
 
 /* Contenu du bouton dropdown */
@@ -271,4 +278,39 @@ th {
 
 .titre_profil{
     display: flex;
+}
+
+#message_suppression{
+    margin-left: 15%;
+}
+
+@media (min-width:781px) and (max-width: 1200px) {
+    .dropdown {
+        display: inline-block;
+        position: relative;
+        left: 42.5%;
+    }
+    .tab_personnel {
+        padding-right: 1em;
+    }
+
+}
+
+@media screen and (max-width: 780px) {
+    .dropdown {
+        left: 17%;
+    }
+    .tab_personnel1 {
+        display: none;
+    }
+    .affichage_valeur{
+        display: none;
+    }
+    #moteur_recherche {
+        width: 20%;
+        margin-left: 1%;
+    }
+    .tab_personnel {
+        padding-right: 6.25em;
+    }
 }

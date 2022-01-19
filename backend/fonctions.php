@@ -69,23 +69,24 @@ function passwordGenerator(PDO $pdo, int $length) : string
 
     <?php endif; ?>
     <?php endif; ?>
+    <?php if((isset($_SESSION['userPersonnel']) && ($_SESSION['userPersonnel']['type'] == 'admin')) || (isset($_SESSION['userPersonnel']) && ($_SESSION['userPersonnel']['type'] == 'medecin'))) : ?>
+
+    <?php if($type == 'infirmier') : ?>
+    <a href="backend/suppression?id_infirmier=<?php echo $user['id_personnel'] ?>" id="supprimer">Supprimer 🗑 </a>
+
+    <?php endif; ?>
+    <?php endif; ?>
+
+    <?php if((isset($_SESSION['userPersonnel']) && ($_SESSION['userPersonnel']['type'] == 'admin'))) : ?>
+
+    <?php if($type == 'medecin') : ?>
+    <a href="backend/suppression?id_medecin=<?php echo $user['id_personnel'] ?>" id="supprimer">Supprimer 🗑 </a>
+
+    <?php endif; ?>
+    <?php endif; ?>
 </div>
 
-<?php if((isset($_SESSION['userPersonnel']) && ($_SESSION['userPersonnel']['type'] == 'admin')) || (isset($_SESSION['userPersonnel']) && ($_SESSION['userPersonnel']['type'] == 'medecin'))) : ?>
 
-<?php if($type == 'infirmier') : ?>
-<a href="backend/suppression?id_infirmier=<?php echo $user['id_personnel'] ?>" id="supprimer">Supprimer 🗑 </a>
-
-<?php endif; ?>
-<?php endif; ?>
-
-<?php if((isset($_SESSION['userPersonnel']) && ($_SESSION['userPersonnel']['type'] == 'admin'))) : ?>
-
-<?php if($type == 'medecin') : ?>
-<a href="backend/suppression?id_medecin=<?php echo $user['id_personnel'] ?>" id="supprimer">Supprimer 🗑 </a>
-
-<?php endif; ?>
-<?php endif; ?>
 
 <table class="donnees_utilisateur">
     <thead class="titrage_donnees">
@@ -226,7 +227,7 @@ function dataTableMembersGenerator(PDO $pdo, string $userType, bool $querySearch
                     <?php echo 'Patient' ?>
                 </td>
 
-                <td>
+                <td class="affichage_valeur">
                     <?php if(isset($finalValues[0]['valeur'])){
                             echo $finalValues[0]['valeur'];
                           }
@@ -236,7 +237,7 @@ function dataTableMembersGenerator(PDO $pdo, string $userType, bool $querySearch
                     ?>
                 </td>
 
-                <td>
+                <td class="affichage_valeur">
                     <?php if(isset($finalValues[1]['valeur'])){
                             echo $finalValues[1]['valeur'];
                           }
@@ -246,7 +247,8 @@ function dataTableMembersGenerator(PDO $pdo, string $userType, bool $querySearch
                     ?>
                 </td>
 
-                <td>
+                <td class="affichage_valeur">
+
                     <?php if(isset($finalValues[2]['valeur'])){
                             echo $finalValues[2]['valeur'];
                           }
@@ -330,15 +332,15 @@ function dataTableMembersGenerator(PDO $pdo, string $userType, bool $querySearch
                     <?php echo 'Infirmier' ?>
                 </td>
 
-                <td>
+                <td class="affichage_valeur">
                     <?php echo 'N/A' ?>
                 </td>
 
-                <td>
+                <td class="affichage_valeur">
                     <?php echo 'N/A' ?>
                 </td>
 
-                <td>
+                <td class="affichage_valeur">
                     <?php echo 'N/A' ?>
                 </td>
 
@@ -382,15 +384,15 @@ function dataTableMembersGenerator(PDO $pdo, string $userType, bool $querySearch
                     <?php echo 'Infirmier' ?>
                 </td>
 
-                <td>
+                <td class="affichage_valeur">
                     <?php echo 'N/A' ?>
                 </td>
 
-                <td>
+                <td class="affichage_valeur">
                     <?php echo 'N/A' ?>
                 </td>
 
-                <td>
+                <td class="affichage_valeur">
                     <?php echo 'N/A' ?>
                 </td>
 
@@ -427,15 +429,15 @@ function dataTableMembersGenerator(PDO $pdo, string $userType, bool $querySearch
                     <?php echo 'Médecin' ?>
                 </td>
 
-                <td>
+                <td class="affichage_valeur">
                     <?php echo 'N/A' ?>
                 </td>
 
-                <td>
+                <td class="affichage_valeur">
                     <?php echo 'N/A' ?>
                 </td>
 
-                <td>
+                <td class="affichage_valeur">
                     <?php echo 'N/A' ?>
                 </td>
 
