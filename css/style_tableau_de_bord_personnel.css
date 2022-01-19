@@ -282,16 +282,22 @@ th {
     display: flex;
 }
 
+
+#message_suppression{
+    margin-left: 15%;
+}
+
 @media (min-width:781px) and (max-width: 1200px) {
     .dropdown {
         display: inline-block;
         position: relative;
         left: 42.5%;
     }
-
+  
     .tab_personnel {
         padding-right: 1em;
     }
+
 }
 
 @media screen and (max-width: 780px) {
@@ -302,8 +308,7 @@ th {
     .tab_personnel1 {
         display: none;
     }
-
-    .affichage_valeur {
+    .affichage_valeur{
         display: none;
     }
 

@@ -18,7 +18,7 @@ if($_SESSION['userPersonnel']['type'] == 'admin' || $_SESSION['userPersonnel']['
             echo '<p>Un nouveau médecin a bien été ajouté à la liste.</p>';
         }
         elseif($confirmation==5) {
-            echo '<p>Le profil a correctement été supprimé.</p>';
+            echo '<p id="message_suppression">Le profil a correctement été supprimé.</p>';
         }
         elseif($confirmation==6) {
             echo '<p>Un nouvel administrateur a bien été ajouté à la liste.</p>';

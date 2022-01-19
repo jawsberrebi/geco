@@ -1,0 +1,7 @@
+/* import fonts */
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro&family=Urbanist:wght@300;400;700;900&display=swap');
+
+/* global styles */
+* {
+    font-family: 'Urbanist', sans-serif;
+}

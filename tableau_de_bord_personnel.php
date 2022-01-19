@@ -69,9 +69,9 @@ include("backend/conditions_accès_page_personnel_et_admin.php");
                 <th id="identifiant">Id</th>
                 <th class="tab_personnel">Nom du membre</th>
                 <th class="tab_personnel">Type de membre</th>
-                <th class="tab_personnel">Rythme cardiaque</th>
-                <th class="tab_personnel">Niveau sonore</th>
-                <th class="tab_personnel">Concentration en CO2</th>
+                <th class="tab_personnel1">Rythme cardiaque</th>
+                <th class="tab_personnel1">Niveau sonore</th>
+                <th class="tab_personnel1">Concentration en CO2</th>
             </tr>
         </thead>
 

@@ -87,9 +87,12 @@ td {
 
 .cadran {
     margin-top: 3%;
-    margin-left: 10%;
+    /*margin-left: 10%;
     padding-right: 5%;
-    padding-left: 5%;
+    padding-left: 5%; */
+    margin-left:10%;
+    padding-top: 6.5%;
+    padding: 5%;
     padding-bottom: 0.8%;
     border: 1px solid white;
     border-radius: 20px;

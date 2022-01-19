@@ -6,9 +6,8 @@
 
 #image_connexion {
     width: 50%;
-    height: 100vh;
-    object-fit: cover;
-    
+    height: 1vh;
+    background-size: cover;
 }
 
 #title_form {
@@ -21,7 +20,7 @@
 }
 
 #box {
-    width: 400px;
+    width: 350px;
     margin: 0 auto;
     justify-content: right;
     margin-left: 10%;
@@ -31,13 +30,13 @@
 }
 
 form {
-    
+
     width: 100%;
     padding: 30px;
     border: 1px solid #f1f1f1;
-    border-radius: 25px;
+    border-radius: 10px;
     background: #fff;
-    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+    box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.2);
 }
 
 input:focus {
@@ -75,7 +74,7 @@ input[type=submit]:hover {
         color: white;
 }
 
-#password_lost 
+#password_lost
 {
     font-family: Urbanist, sans-serif;
     color: #3BC393;
