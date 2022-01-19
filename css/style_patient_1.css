@@ -60,7 +60,7 @@ a {
 
     a::after {
         content: '';
-/*        position: absolute;*/
+        position: absolute;
         bottom: 0;
         left: 0;
         width: 100%;

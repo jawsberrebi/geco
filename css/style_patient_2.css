@@ -25,7 +25,7 @@ h1 {
     }
 
 .slider {
-/*    position: absolute;*/
+    position: absolute;
     cursor: pointer;
     top: 0;
     left: 0;
@@ -37,7 +37,7 @@ h1 {
 }
 
     .slider:before {
-/*        position: absolute;*/
+        position: absolute;
         content: "";
         height: 26px;
         width: 26px;
@@ -142,7 +142,7 @@ body {
 .contenu {
     height: 100%;
     width: 100%;
-/*    position: absolute;*/
+    position: absolute;
     opacity: 0;
 }
 
