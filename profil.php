@@ -168,7 +168,7 @@ include('backend/graphique_donnees.php');
             
                 <div class="contenu" data-anim="2">
                     <div class="bloc_graphiques">
-                        <div class="btngroup">
+                        <div class="btngroupone">
                             <button class="choosebtn" onclick="drawChartYearCardiac()">Cette année</button>
                             <button class="choosebtn" onclick="drawChartMonthCardiac()">Ce mois-ci</button>
                             <button class="choosebtn" onclick="drawChartDayCardiac()">Aujourd'hui</button>
@@ -181,7 +181,7 @@ include('backend/graphique_donnees.php');
             
                 <div class="contenu" data-anim="3">
                     <div class="bloc_graphiques">
-                        <div class="btngroup">
+                        <div class="btngrouptwo">
                             <button class="choosebtn" onclick="drawChartYearSound()">Cette année</button>
                             <button class="choosebtn" onclick="drawChartMonthSound()">Ce mois-ci</button>
                             <button class="choosebtn" onclick="drawChartDaySound()">Aujourd'hui</button>
@@ -191,12 +191,14 @@ include('backend/graphique_donnees.php');
                 </div>
 
                 <div class="contenu" data-anim="4">
-                    <div class="btngroup">
-                        <button class="choosebtn" onclick="drawChartYearGas()">Cette année</button>
-                        <button class="choosebtn" onclick="drawChartMonthGas()">Ce mois-ci</button>
-                        <button class="choosebtn" onclick="drawChartDayGas()">Aujourd'hui</button>
+                    <div class="bloc_graphiques">
+                        <div class="btngroupthree">
+                            <button class="choosebtn" onclick="drawChartYearGas()">Cette année</button>
+                            <button class="choosebtn" onclick="drawChartMonthGas()">Ce mois-ci</button>
+                            <button class="choosebtn" onclick="drawChartDayGas()">Aujourd'hui</button>
+                        </div>
+                        <div id="curve_chart_gas"></div>
                     </div>
-                    <div id="curve_chart_gas"></div>
                 </div>
             
         

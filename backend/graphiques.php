@@ -196,12 +196,12 @@
             $pre->execute();
             $dataPlot = $pre->fetchAll(PDO::FETCH_ASSOC);
 
-            $rowNumber = count($cardiacValuesPlot);
+            $rowNumber = count($cardiacValuesPlotMonth);
             if($rowNumber>0){ 
 
                 ////// TRI PAR MOIS ////
 
-                foreach($cardiacValuesPlot as $dataToPlot){
+                foreach($cardiacValuesPlotMonth as $dataToPlot){
                     //var_dump($row);
                     //echo "['".$row['heure']."',".$row['battement']."],";
                     $dataToPlotDateTime = date_parse($dataToPlot['date_heure']);
@@ -246,12 +246,12 @@
             $pre->execute();
             $dataPlot = $pre->fetchAll(PDO::FETCH_ASSOC);
 
-            $rowNumber = count($soundValuesPlot);
+            $rowNumber = count($soundValuesPlotMonth);
             if($rowNumber>0){ 
 
                 ////// TRI PAR MOIS ////
 
-                foreach($soundValuesPlot as $dataToPlot){
+                foreach($soundValuesPlotMonth as $dataToPlot){
                     //var_dump($row);
                     //echo "['".$row['heure']."',".$row['battement']."],";
                     $dataToPlotDateTime = date_parse($dataToPlot['date_heure']);
@@ -296,12 +296,12 @@
             $pre->execute();
             $dataPlot = $pre->fetchAll(PDO::FETCH_ASSOC);
 
-            $rowNumber = count($gasValuesPlot);
+            $rowNumber = count($gasValuesPlotMonth);
             if($rowNumber>0){ 
 
                 ////// TRI PAR MOIS ////
 
-                foreach($gasValuesPlot as $dataToPlot){
+                foreach($gasValuesPlotMonth as $dataToPlot){
                     //var_dump($row);
                     //echo "['".$row['heure']."',".$row['battement']."],";
                     $dataToPlotDateTime = date_parse($dataToPlot['date_heure']);
@@ -345,11 +345,11 @@
             $pre->execute();
             $dataPlot = $pre->fetchAll(PDO::FETCH_ASSOC);
 
-            $rowNumber = count($cardiacValuesPlot);
+            $rowNumber = count($cardiacValuesPlotDay);
             if($rowNumber>0){ 
                 ////// TRI PAR JOUR ////
 
-                foreach($cardiacValuesPlot as $dataToPlot){
+                foreach($cardiacValuesPlotDay as $dataToPlot){
                     $dataToPlotDateTime = date_parse($dataToPlot['date_heure']);
 
                     if($dataToPlotDateTime['year'] == $maxYearCardiacValuesPlotFinal){
@@ -394,11 +394,11 @@
             $pre->execute();
             $dataPlot = $pre->fetchAll(PDO::FETCH_ASSOC);
 
-            $rowNumber = count($soundValuesPlot);
+            $rowNumber = count($soundValuesPlotDay);
             if($rowNumber>0){ 
                 ////// TRI PAR JOUR ////
 
-                foreach($soundValuesPlot as $dataToPlot){
+                foreach($soundValuesPlotDay as $dataToPlot){
                     $dataToPlotDateTime = date_parse($dataToPlot['date_heure']);
 
                     if($dataToPlotDateTime['year'] == $maxYearSoundValuesPlotFinal){
@@ -443,11 +443,11 @@
             $pre->execute();
             $dataPlot = $pre->fetchAll(PDO::FETCH_ASSOC);
 
-            $rowNumber = count($gasValuesPlot);
+            $rowNumber = count($gasValuesPlotDay);
             if($rowNumber>0){ 
                 ////// TRI PAR JOUR ////
 
-                foreach($gasValuesPlot as $dataToPlot){
+                foreach($gasValuesPlotDay as $dataToPlot){
                     $dataToPlotDateTime = date_parse($dataToPlot['date_heure']);
 
                     if($dataToPlotDateTime['year'] == $maxYearGasValuesPlotFinal){

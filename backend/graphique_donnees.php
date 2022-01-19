@@ -14,15 +14,47 @@ $pre = $pdo->prepare($sql);
 $pre->execute();
 $cardiacValuesPlot = $pre->fetchAll(PDO::FETCH_ASSOC);
 
-$sql = "SELECT * FROM mesure WHERE id_capteur = '".$sensorId[1]['id_capteur']."' AND date_heure LIKE '" . $yearMonth . "%' ";
+$sql = "SELECT * FROM mesure WHERE id_capteur = '".$sensorId[0]['id_capteur']."' AND date_heure LIKE '" . $yearMonth . "%' ";
+$pre = $pdo->prepare($sql);
+$pre->execute();
+$cardiacValuesPlotMonth = $pre->fetchAll(PDO::FETCH_ASSOC);
+
+$sql = "SELECT * FROM mesure WHERE id_capteur = '".$sensorId[0]['id_capteur']."' AND date_heure LIKE '" . $yearMonthDay . "%' ";
+$pre = $pdo->prepare($sql);
+$pre->execute();
+$cardiacValuesPlotDay = $pre->fetchAll(PDO::FETCH_ASSOC);
+
+
+$sql = "SELECT * FROM mesure WHERE id_capteur = '".$sensorId[1]['id_capteur']."' AND date_heure LIKE '" . $year . "%' ";
 $pre = $pdo->prepare($sql);
 $pre->execute();
 $soundValuesPlot = $pre->fetchAll(PDO::FETCH_ASSOC);
 
-$sql = "SELECT * FROM mesure WHERE id_capteur = '".$sensorId[2]['id_capteur']."' AND date_heure LIKE '" . $yearMonthDay . "%' ";
+$sql = "SELECT * FROM mesure WHERE id_capteur = '".$sensorId[1]['id_capteur']."' AND date_heure LIKE '" . $yearMonth . "%' ";
+$pre = $pdo->prepare($sql);
+$pre->execute();
+$soundValuesPlotMonth = $pre->fetchAll(PDO::FETCH_ASSOC);
+
+$sql = "SELECT * FROM mesure WHERE id_capteur = '".$sensorId[1]['id_capteur']."' AND date_heure LIKE '" . $yearMonthDay . "%' ";
+$pre = $pdo->prepare($sql);
+$pre->execute();
+$soundValuesPlotDay = $pre->fetchAll(PDO::FETCH_ASSOC);
+
+
+$sql = "SELECT * FROM mesure WHERE id_capteur = '".$sensorId[2]['id_capteur']."' AND date_heure LIKE '" . $year . "%' ";
 $pre = $pdo->prepare($sql);
 $pre->execute();
 $gasValuesPlot = $pre->fetchAll(PDO::FETCH_ASSOC);
+
+$sql = "SELECT * FROM mesure WHERE id_capteur = '".$sensorId[2]['id_capteur']."' AND date_heure LIKE '" . $yearMonth . "%' ";
+$pre = $pdo->prepare($sql);
+$pre->execute();
+$gasValuesPlotMonth = $pre->fetchAll(PDO::FETCH_ASSOC);
+
+$sql = "SELECT * FROM mesure WHERE id_capteur = '".$sensorId[2]['id_capteur']."' AND date_heure LIKE '" . $yearMonthDay . "%' ";
+$pre = $pdo->prepare($sql);
+$pre->execute();
+$gasValuesPlotDay = $pre->fetchAll(PDO::FETCH_ASSOC);
 
 
 

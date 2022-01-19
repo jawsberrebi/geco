@@ -324,11 +324,25 @@ th {
     margin-top: 6%;
     margin-left: 8%;
 }
-#curve_chart_cardiac, #curve_chart_sound, #curve_chart_gas {
+#curve_chart_cardiac {
     width: 900px;
     height: 500px;
     margin-left: 10%;
     margin-top: -20%;
+}
+
+#curve_chart_sound {
+    width: 900px;
+    height: 500px;
+    margin-left: 10%;
+    margin-top: -50%;
+}
+
+#curve_chart_gas {
+    width: 900px;
+    height: 500px;
+    margin-left: 10%;
+    margin-top: -50%;
 }
 
 
@@ -352,14 +366,30 @@ th {
     border-radius: 10px;
 }
 
-.btngroup{
+.btngroupone{
     display: flex;
     flex-direction: column;
     width: 20%;
     
 }
 
-.btngroup > button {
+.btngrouptwo {
+    margin-top: -28%;
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+
+}
+
+.btngroupthree {
+    margin-top: -28%;
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+}
+
+.btngroupone > button, .btngrouptwo > button, .btngroupthree > button {
+
     margin: 3%;
 }
 

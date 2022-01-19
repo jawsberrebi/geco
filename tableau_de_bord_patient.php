@@ -12,6 +12,11 @@ if(!isset($_SESSION['userPatient'])) {
 
 }
 
+$id = $_SESSION['userPatient']['id_patient'];
+
+include('backend/graphique_donnees.php');
+include('backend/graphiques.php');
+
 ?>
 
 <!DOCTYPE html>
@@ -116,34 +121,17 @@ if(!isset($_SESSION['userPatient'])) {
                                     ?>
                                 </div>
                             </div>
-                        <!--</div>
-                        
-                              <p ><div class="ra"><strong>Notification quand le rythme cardiaque excède 120 bpm </strong> 
-                                  <label id="tre"class="switch">
-                                  <input type="checkbox" checked>
-                                  <span class="slider round"></span>
-                                </label> 
-                              </div></p>
-                      
-                              <p><div class="ra"><strong> Notification quand le niveau sonore excède 70 dB</strong>
-                                      <label id="prems" class="switch">
-                                          <input type="checkbox" checked>
-                                          <span class="slider round"></span>
-                                        </label>
-                                      </div></p>
-                              <p > <div class="ra"><strong>Notification quand le taux de gaz excède 1,3 % </strong> 
-                                  <label id="sec" class="switch">
-                                      <input type="checkbox" checked>
-                                      <span class="slider round"></span>
-                                    </label>
-                                  </div> </p>
-                        
-                      </div>-->
                   
                       <div class="contenu" data-anim="2">
-                          <h3></h3>
-                          <hr>
-                          <p></p>
+                          <div class="bloc_graphiques">
+                            <div class="btngroupone">
+                                <button class="choosebtn" onclick="drawChartYearCardiac()">Cette année</button>
+                                <button class="choosebtn" onclick="drawChartMonthCardiac()">Ce mois-ci</button>
+                                <button class="choosebtn" onclick="drawChartDayCardiac()">Aujourd'hui</button>
+                            </div>
+
+                            <div id="curve_chart_cardiac"></div>
+                          </div>
                       </div>
                   
                       <div class="contenu" data-anim="3">
