@@ -1,17 +1,20 @@
 <?php
 
-//require_once("config.php");
-//include('backend/recuperation_valeurs.php'); //Module de récupération de valeur
-//include('backend/affichage_valeurs.php');
-//
-//if(!isset($_SESSION['userPatient'])) {
-//
-//    session_destroy();
-//    header('Location:connexion?erreur=4.php');
-//    exit();
-//
-//}
+require_once("config.php");
+include('backend/recuperation_valeurs.php'); //Module de récupération de valeur
+include('backend/affichage_valeurs.php');
 
+if(!isset($_SESSION['userPatient'])) {
+
+    session_destroy();
+    header('Location:connexion?erreur=4.php');
+    exit();
+
+}
+
+$id = $_SESSION['userPatient']['id_patient'];
+include("backend/graphique_donnees.php");
+include("backend/graphiques.php");
 ?>
 
 <!DOCTYPE html>
@@ -106,12 +109,34 @@
     </div>
     <div id="rythme-cardiaque" class="tab-view" style="display: none">
         <h1>Rythme cardiaque</h1>
+        <div class="bloc_graphiques">
+             <div class="btngroupone">
+                <button class="choosebtn" onclick="drawChartYearCardiac()">Cette année</button>
+                <button class="choosebtn" onclick="drawChartMonthCardiac()">Ce mois-ci</button>
+                <button class="choosebtn" onclick="drawChartDayCardiac()">Aujourd'hui</button>
+            </div>
+            <div id="curve_chart_cardiac"></div>
+        </div>
     </div>
     <div id="niveau-sonore" class="tab-view" style="display: none">
         <h1>Niveau sonore</h1>
+        <div class="bloc_graphiques">
+             <div class="btngroupone">
+                <button class="choosebtn" onclick="drawChartYearSound()">Cette année</button>
+                <button class="choosebtn" onclick="drawChartMonthSound()">Ce mois-ci</button>
+                <button class="choosebtn" onclick="drawChartDaySound()">Aujourd'hui</button>
+            </div>
+            <div id="curve_chart_sound"></div>
+        </div>
     </div>
     <div id="gaz" class="tab-view" style="display: none">
         <h1>Gaz</h1>
+        <div class="btngroupone">
+                <button class="choosebtn" onclick="drawChartYearGas()">Cette année</button>
+                <button class="choosebtn" onclick="drawChartMonthGas()">Ce mois-ci</button>
+                <button class="choosebtn" onclick="drawChartDayGas()">Aujourd'hui</button>
+        </div>
+        <div id="curve_chart_gas"></div>
     </div>
 </div>
 </body>
