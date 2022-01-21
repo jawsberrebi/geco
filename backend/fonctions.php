@@ -789,7 +789,7 @@ function getFrameValue($url) : string
 ?>
 
 <?php 
-//Envoi de mails
+//Envoi de mails d'alertes
 function sendingMailAlert($mail, $typeSensor, $value, $patientName) : void
 {
     $to = $mail;
@@ -837,6 +837,50 @@ function sendingMailAlert($mail, $typeSensor, $value, $patientName) : void
 
 
           mail($to, $subject, $message);
+}
+
+
+?>
+
+<?php 
+//Envoi de mails page d'acceuil 
+function sendingMail($mail, $donnees) : void
+{
+          $to = $mail;
+
+          $subject = 'Nouvelle entrée dans le formulaire GecoSensor';
+
+
+
+          $message = '
+
+          <html>
+
+           <head>
+
+           </head>
+
+           <body>
+
+               <p>' . $donnees[0] . ' (' . $donnees[1] .') vous a envoyé un message.</p><br />
+
+               <p>'. $donnees[2] .'</p></br>
+
+           </body>
+
+          </html>
+
+          ';
+
+
+          //implode("\r\n", $headers)
+
+          $headers[] = 'MIME-Version: 1.0';
+
+          $headers[] = 'Content-type: text/html; charset=iso-8859-1';
+
+          mail($to, $subject, $message, implode("\r\n", $headers));
+
 }
 
 

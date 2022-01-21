@@ -1,4 +1,4 @@
-<?php  require_once "config.php";
+<?php  require_once "backend/config.php";
 ?>
 
 <!DOCTYPE html>
@@ -11,8 +11,9 @@
     </head>
     <body>
 
+        <!-- Ici, nous avons inséré des propriétés de style car un bug se produisait en CSS pour le dimensionnement de l'image, d'ordinaire nous aurons placé ces propriétés dans le fichier CSS correspondant -->
         <img src="images/image-vitrine.jpg" alt="image de description" id="image_connexion"
-             style="width:50%; height:100vh; object-fit: cover;"/>
+             style="width:50%; height:100vh; object-fit: cover;"/> 
 
         <div id="box">
 

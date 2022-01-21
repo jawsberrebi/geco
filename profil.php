@@ -3,7 +3,7 @@ require_once("config.php");
 include('backend/conditions_accès_page_personnel_et_admin.php');
 include('backend/fonctions.php');
 include('backend/conditions_id.php');
-include('backend/graphique_donnees.php');
+
 ?>
 
 <!DOCTYPE html>
@@ -13,7 +13,7 @@ include('backend/graphique_donnees.php');
         <link rel="stylesheet" href="css/style_profil.css" />
         <link rel="stylesheet" href="css/navbar_pro.css">
         <link rel="stylesheet" href="css/onglet.css">
-        <?php include("backend/graphiques.php"); ?>
+        <?php  ?>
         <title>Tableau de bord</title>
     </head>
     <header>
@@ -35,7 +35,11 @@ include('backend/graphique_donnees.php');
         <!--\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-->
 
         <?php if(isset($_GET['id_patient'])) : ?>
-        <?php include('backend/affichage_valeurs.php'); ?>
+        <?php include('backend/affichage_valeurs.php');
+              include('backend/graphique_donnees.php');
+              include("backend/graphiques.php");
+        
+        ?>
 
         <?php $sql = "SELECT * FROM patient WHERE id_patient='".$id."'";
               $pre = $pdo->prepare($sql);

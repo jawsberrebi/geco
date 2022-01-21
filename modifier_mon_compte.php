@@ -1,4 +1,4 @@
-<?php include_once("config.php");
+<?php include_once("backend/config.php");
 
 if (!isset($_SESSION['userPatient']) && !isset($_SESSION['userPersonnel'])) {
     header('Location:connexion?erreur=3.php');

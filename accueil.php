@@ -138,9 +138,6 @@
 			<label for="nom">Nom :</label><br />
 			<input type="text" name="nom" id="nom" placeholder="Nom" /><br />
 
-			<label for="sujet">Sujet : </label><br />
-			<input type="text" name="sujet" id="sujet" placeholder="Sujet" /><br />
-
 			<label for="message">Message :</label><br />
 			<textarea name="message" id="message"></textarea><br />
 

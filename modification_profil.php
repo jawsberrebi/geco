@@ -1,5 +1,5 @@
 <?php
-require_once "config.php";
+require_once "backend/config.php";
 include("backend/conditions_accès_page_personnel_et_admin.php");
 include('backend/conditions_id.php');
 

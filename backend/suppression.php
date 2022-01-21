@@ -1,5 +1,5 @@
 <?php
-include_once("../config.php");
+include_once("config.php");
 include("conditions_accès_page_personnel_et_admin.php");
 
 if(isset($_SESSION['userPersonnel'])) {
