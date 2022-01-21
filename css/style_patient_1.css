@@ -471,7 +471,32 @@ th {
 .bloc_graphiques {
     display: flex;
     flex-direction: row;
+    width: 100%;
+    gap: 10px;
+    margin-top: 50px;
 }
+
+#curve_chart_cardiac {
+    width: 800px;
+    height: 400px;
+    margin-left: 10%;
+
+}
+
+#curve_chart_sound {
+    width: 800px;
+    height: 400px;
+    margin-left: 10%;
+
+}
+
+#curve_chart_gas {
+    width: 800px;
+    height: 400px;
+    margin-left: 10%;
+
+}
+
 
 @media screen and (max-width: 800px){
     #table{

@@ -131,12 +131,14 @@ include("backend/graphiques.php");
     </div>
     <div id="gaz" class="tab-view" style="display: none">
         <h1>Gaz</h1>
+        <div class="bloc_graphiques">
         <div class="filter-col">
                 <button class="choosebtn btn-primary" onclick="drawChartYearGas()">Cette année</button>
                 <button class="choosebtn btn-primary" onclick="drawChartMonthGas()">Ce mois-ci</button>
                 <button class="choosebtn btn-primary" onclick="drawChartDayGas()">Aujourd'hui</button>
         </div>
         <div id="curve_chart_gas"></div>
+        </div>
     </div>
 </div>
 </body>
