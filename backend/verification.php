@@ -32,7 +32,7 @@ $_SESSION['userPersonnel'] = $user; //on enregistre que l'utilisateur est connec
 //}
 
 if ($_SESSION['userPersonnel'] != 0) {
-    header('Location:tableau_de_bord_personnel.php');
+    header('Location:../tableau_de_bord_personnel.php');
     exit();
 
 }
@@ -54,17 +54,17 @@ foreach($user as $users){
 
         $_SESSION['userPatient'] = $users;
         unset($_SESSION['userPersonnel']);
-        header('Location:tableau_de_bord_patient.php'); //MODIF LA PAGE
+        header('Location:../tableau_de_bord_patient.php'); //MODIF LA PAGE
         exit();
     }
     else{
-        header('Location:connexion?erreur=1.php');
+        header('Location:../connexion?erreur=1.php');
         exit();
     }
 }
 
 if(!isset($_SESSION['userPatient']) && !isset($_SESSION['userPatient'])){
-    header('Location:connexion?erreur=1.php');
+    header('Location:../connexion?erreur=1.php');
     exit();
 }
 

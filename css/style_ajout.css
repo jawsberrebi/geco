@@ -93,3 +93,9 @@ input[type=submit]:hover {
     color: red;
     font-family: Urbanist, sans-serif;
 }
+
+@media screen and (max-width: 780px) {
+    #box {
+        margin-left: 20%;
+    }
+}

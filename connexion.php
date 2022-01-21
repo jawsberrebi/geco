@@ -1,4 +1,4 @@
-<?php  require_once "config.php";
+<?php  require_once "backend/config.php";
 ?>
 
 <!DOCTYPE html>
@@ -11,12 +11,13 @@
     </head>
     <body>
 
+        <!-- Ici, nous avons inséré des propriétés de style car un bug se produisait en CSS pour le dimensionnement de l'image, d'ordinaire nous aurons placé ces propriétés dans le fichier CSS correspondant -->
         <img src="images/image-vitrine.jpg" alt="image de description" id="image_connexion"
-             style="width:50%; height:100vh; object-fit: cover;"/>
+             style="width:50%; height:100vh; object-fit: cover;"/> 
 
         <div id="box">
 
-            <form action="verification.php" method="post">
+            <form action="backend/verification.php" method="post">
                 <h1 id="title_form">Connexion</h1>
 
                 <input type="text" placeholder="Email ou nom d'utilisateur" name="email_pseudo" class="input_mail" required />
@@ -40,6 +41,19 @@
                         }
                         if($erreur==4){
                             echo '<p id="message_erreur">Vous n\'êtes pas autorisé à accéder à ces informations.</p>';
+                        }
+                        if($erreur==5){
+                            echo '<p id="message_erreur">Page inexistante. Veuillez réessayer</p>';
+                        }
+                    }
+
+                    if(isset($_GET['confirmation'])){
+                        $confirmation = $_GET['confirmation'];
+                        if($confirmation==1) {
+                            echo '<p id="indication">Votre mot de passe a bien été modifié. Vous pouvez dès à présent vous connecter.</p>';
+                        }
+                        if($confirmation==2){
+                            echo '<p id="indication">Vous allez recevoir un mail contenant un lien qui vous permettra de réinitialiser votre mot de passe.</p>';
                         }
                     }
 

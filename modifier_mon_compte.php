@@ -1,4 +1,4 @@
-<?php include_once("config.php");
+<?php include_once("backend/config.php");
 
 if (!isset($_SESSION['userPatient']) && !isset($_SESSION['userPersonnel'])) {
     header('Location:connexion?erreur=3.php');
@@ -18,7 +18,7 @@ if (!isset($_SESSION['userPatient']) && !isset($_SESSION['userPersonnel'])) {
 
     <div id="box">
 
-        <form action="post_modifier_mon_compte.php" method="post">
+        <form action="backend/post_modifier_mon_compte.php" method="post">
 
             <h1 id="title_form">Modifier mon compte</h1>
 

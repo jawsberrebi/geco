@@ -1,4 +1,4 @@
-<?php  require_once "config.php";
+<?php  require_once "backend/config.php";
 ?>
 
 <!DOCTYPE html>
@@ -9,12 +9,12 @@
         <title>Connexion</title>
     </head>
     <body>
-
-        <img src="images/image-vitrine.jpg" alt="image de description" id="image_connexion" />
+        <!-- Ici, nous avons inséré des propriétés de style car un bug se produisait en CSS pour le dimensionnement de l'image, d'ordinaire nous aurons placé ces propriétés dans le fichier CSS correspondant -->
+        <img src="images/image-vitrine.jpg" alt="image de description" id="image_connexion" style="width:50%; height:100vh; object-fit: cover;"/>
 
         <div id="box">
 
-            <form action="post_mot_de_passe_oublie.php" method="post">
+            <form action="backend/post_mot_de_passe_oublie.php" method="post">
                 <h1 id="title_form">Mot de passe oublié</h1>
 
                 <input type="email" placeholder="Email" name="email" class="input_mail" required />

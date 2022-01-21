@@ -52,10 +52,11 @@ function passwordGenerator(PDO $pdo, int $length) : string
 <?php ////// GÉNÉRATEUR DE DONNÉES POUR LES PROFILS DES PATIENT, MÉDECINS, ET INFIRMIERS ?>
 
 <?php function dataUserGenerator(array $user, string $type) : void {
-
+  
 ?>
 
 <meta charset="utf-8" />
+<script src="Javascript/confirme_suppression.js"></script>
 
 <div class="titre_profil">
     <h1>
@@ -65,7 +66,7 @@ function passwordGenerator(PDO $pdo, int $length) : string
     <?php if((isset($_SESSION['userPersonnel']) && ($_SESSION['userPersonnel']['type'] == 'admin')) || (isset($_SESSION['userPersonnel']) && ($_SESSION['userPersonnel']['type'] == 'medecin'))) : ?>
 
     <?php if($type == 'patient') : ?>
-    <a href="backend/suppression?id_patient=<?php echo $user['id_patient'] ?>" id="supprimer">Supprimer 🗑 </a>
+    <a href="backend/suppression?id_patient=<?php echo $user['id_patient'] ?>" id="supprimer" onclick="Javascript: return confirme_suppression()">Supprimer 🗑 </a>
 
     <?php endif; ?>
     <?php endif; ?>
@@ -74,7 +75,7 @@ function passwordGenerator(PDO $pdo, int $length) : string
 <?php if((isset($_SESSION['userPersonnel']) && ($_SESSION['userPersonnel']['type'] == 'admin')) || (isset($_SESSION['userPersonnel']) && ($_SESSION['userPersonnel']['type'] == 'medecin'))) : ?>
 
 <?php if($type == 'infirmier') : ?>
-<a href="backend/suppression?id_infirmier=<?php echo $user['id_personnel'] ?>" id="supprimer">Supprimer 🗑 </a>
+<a href="backend/suppression?id_infirmier=<?php echo $user['id_personnel'] ?>" id="supprimer" onclick="Javascript: return confirme_suppression()">Supprimer 🗑 </a>
 
 <?php endif; ?>
 <?php endif; ?>
@@ -82,7 +83,7 @@ function passwordGenerator(PDO $pdo, int $length) : string
 <?php if((isset($_SESSION['userPersonnel']) && ($_SESSION['userPersonnel']['type'] == 'admin'))) : ?>
 
 <?php if($type == 'medecin') : ?>
-<a href="backend/suppression?id_medecin=<?php echo $user['id_personnel'] ?>" id="supprimer">Supprimer 🗑 </a>
+<a href="backend/suppression?id_medecin=<?php echo $user['id_personnel'] ?>" id="supprimer" onclick="Javascript: return confirme_suppression()">Supprimer 🗑 </a>
 
 <?php endif; ?>
 <?php endif; ?>
@@ -113,7 +114,22 @@ function passwordGenerator(PDO $pdo, int $length) : string
 
         <td>
             <?php if($user['mail'] == null) {
-                      echo '<a>AJOUTER</a>';
+                    if($_SESSION['userPersonnel']['type'] != 'infirmier'){
+                        if($type == 'infirmier'){
+                           echo '<a href="modification_profil?id_infirmier='. $user['id_personnel'] .'">AJOUTER</a>'; 
+                        }
+                        elseif($type == 'medecin'){
+                           echo '<a href="modification_profil?id_medecin='. $user['id_personnel'] .'">AJOUTER</a>';
+                        }
+                        else{
+                           echo '<a href="modification_profil?id_patient='. $user['id_patient'] .'">AJOUTER</a>'; 
+                        }
+                      
+                    }
+                    else{
+                      echo 'N/A'; 
+                    }
+                      
                   }
                   else {
                       echo $user['mail'];
@@ -124,7 +140,12 @@ function passwordGenerator(PDO $pdo, int $length) : string
         <td>
             <?php if ($type == 'patient') : ?>
             <?php if($user['description'] == null) {
-                      echo '<a href="">AJOUTER</a>';
+                    if($_SESSION['userPersonnel']['type'] != 'infirmier'){
+                      echo '<a href="modification_profil?id_patient='. $user['id_patient'] .'">AJOUTER</a>';  
+                    }
+                    else{
+                        echo 'N/A';
+                    }
                   }
                   else {
                       echo $user['description'];
@@ -159,11 +180,24 @@ function passwordGenerator(PDO $pdo, int $length) : string
         <?php endif; ?>
 
         <td>
-            <?php if($user['tel'] == null) {
-                      echo '<a href="">AJOUTER</a>';
+            <?php if($user['tel'] == 0) {
+                    if($_SESSION['userPersonnel']['type'] != 'infirmier'){
+                      if($type == 'infirmier'){
+                          echo '<a href="modification_profil?id_infirmier='. $user['id_personnel'] .'">AJOUTER</a>'; 
+                      }
+                      elseif($type == 'medecin'){
+                          echo '<a href="modification_profil?id_medecin='. $user['id_personnel'] .'">AJOUTER</a>';
+                      }
+                      else{
+                          echo '<a href="modification_profil?id_patient='. $user['id_patient'] .'">AJOUTER</a>';
+                      }  
+                    }
+                    else{
+                        echo 'N/A';
+                    }
                   }
                   else {
-                      echo $user['tel'];
+                      echo 0 . $user['tel'];
                   }
 
             ?>
@@ -173,7 +207,12 @@ function passwordGenerator(PDO $pdo, int $length) : string
         <?php if($type == 'patient') : ?>
         <td>
             <?php if($user['adresse'] == null) {
-                      echo '<a href="">AJOUTER</a>';
+                    if($_SESSION['userPersonnel']['type'] != 'infirmier'){
+                      echo '<a href="modification_profil?id_patient='. $user['id_patient'] .'">AJOUTER</a>';  
+                    }
+                    else{
+                        echo 'N/A';
+                    }
                   }
                   else {
                       echo $user['adresse'];
@@ -481,6 +520,8 @@ function dataResultsResearchTableMember(PDO $pdo, string $userType, string $supe
 
                 if(!empty($searchResults)) {
                     $isThereResult['patient'] = true;
+                }elseif(empty($searchResults)){
+                    $isThereResult['patient'] = false;
                 }
 
             }
@@ -524,6 +565,8 @@ function dataResultsResearchTableMember(PDO $pdo, string $userType, string $supe
 
                 if(!empty($searchResults)) {
                     $isThereResult['infirmier'] = true;
+                }elseif(empty($searchResults)){
+                    $isThereResult['infirmier'] = false;
                 }
 
             }
@@ -577,6 +620,8 @@ function dataResultsResearchTableMember(PDO $pdo, string $userType, string $supe
 
                 if(!empty($searchResults)) {
                     $isThereResult['medecin'] = true;
+                }elseif(empty($searchResults)){
+                    $isThereResult['medecin'] = false;
                 }
 
             }
@@ -631,14 +676,9 @@ function dataResultsResearchTableMember(PDO $pdo, string $userType, string $supe
 //Envoi d'indentifiants par mail
 function sendingIdsMail($mail, $donnees) : void 
 {
-
           $to = $mail;
 
-
-
           $subject = 'Vos identifiants GecoSensor';
-
-
 
           $message = '
 
@@ -660,9 +700,9 @@ function sendingIdsMail($mail, $donnees) : void
 
                     <li>Nom d\'utilisateur : '.$donnees[1].'</li>
 
-                    <li>Mot de passe : '.$donnees[2].'</li>
-
                </ul></br>
+
+                <p>Pour créer votre mot de passe, veuillez cliquer sur <a href="http://localhost:8081/geco/modification_mot_de_passe?char=' . $donnees[2] . '&user=' . $donnees[3] . '&type=' . $donnees[4] . '.php">ce lien</a> </p> 
                 
                <p>Merci de les conserver précieusement et de ne les divulguer à personne</p>
 
@@ -672,17 +712,49 @@ function sendingIdsMail($mail, $donnees) : void
 
           ';
 
+          $headers[] = 'MIME-Version: 1.0';
 
+          $headers[] = 'Content-type: text/html; charset=iso-8859-1';
+
+          mail($to, $subject, $message, implode("\r\n", $headers));
+
+     }
+
+?>
+
+<?php
+
+//Envoi d'indentifiants par mail
+function sendingLinkPassword($mail, $donnees) : void 
+{
+          $to = $mail;
+
+          $subject = 'Lien de réinitialisation pour le mot de passe de votre compte GecoSensor';
+
+          $message = '
+
+          <html>
+
+           <head>
+
+           </head>
+
+           <body>
+
+               <p>Vous avez demandé à réinitialiser le mot de passe de votre compte GecoSensor.</p>
+
+                <p>Pour réinitialiser votre mot de passe, veuillez cliquer sur <a href="http://localhost:8081/geco/modification_mot_de_passe?char=' . $donnees[0] . '&user=' . $donnees[1] . '&type=' . $donnees[2] . '.php">ce lien</a> </p> 
+           </body>
+
+          </html>
+
+          ';
 
           $headers[] = 'MIME-Version: 1.0';
 
           $headers[] = 'Content-type: text/html; charset=iso-8859-1';
 
-
-
           mail($to, $subject, $message, implode("\r\n", $headers));
-
-
 
      }
 
@@ -717,7 +789,7 @@ function getFrameValue($url) : string
 ?>
 
 <?php 
-//Envoi de mails
+//Envoi de mails d'alertes
 function sendingMailAlert($mail, $typeSensor, $value, $patientName) : void
 {
     $to = $mail;
@@ -765,6 +837,50 @@ function sendingMailAlert($mail, $typeSensor, $value, $patientName) : void
 
 
           mail($to, $subject, $message);
+}
+
+
+?>
+
+<?php 
+//Envoi de mails page d'acceuil 
+function sendingMail($mail, $donnees) : void
+{
+          $to = $mail;
+
+          $subject = 'Nouvelle entrée dans le formulaire GecoSensor';
+
+
+
+          $message = '
+
+          <html>
+
+           <head>
+
+           </head>
+
+           <body>
+
+               <p>' . $donnees[0] . ' (' . $donnees[1] .') vous a envoyé un message.</p><br />
+
+               <p>'. $donnees[2] .'</p></br>
+
+           </body>
+
+          </html>
+
+          ';
+
+
+          //implode("\r\n", $headers)
+
+          $headers[] = 'MIME-Version: 1.0';
+
+          $headers[] = 'Content-type: text/html; charset=iso-8859-1';
+
+          mail($to, $subject, $message, implode("\r\n", $headers));
+
 }
 
 

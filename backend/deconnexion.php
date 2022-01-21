@@ -1,5 +1,5 @@
 <?php
 include_once("config.php");
 session_destroy();
-header('Location:connexion.php');
+header('Location:../connexion.php');
 ?>
