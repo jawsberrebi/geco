@@ -442,20 +442,21 @@ th {
 }
 
 .filter-col {
-    width: 100px;
-    height: 100px;
+    width: 150px;
+    height: 150px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
 
 .btn-primary {
-    padding: 5px 10px 5px 10px;
+    padding: 10px 15px 10px 15px;
     color: white;
     background-color: #3BC393;
     border-radius: 5px;
     border: none;
     transition: 0.2s;
+    font-size: 15px;
 }
 
 .btn-primary:hover {
