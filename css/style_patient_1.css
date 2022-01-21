@@ -437,6 +437,21 @@ th {
     transition: 0.2s;
 }
 
+.filter-col {
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.btn-primary {
+
+    padding: 5px;
+    color: white;
+    background-color: #3BC393;
+    border: none;
+}
+
 @media screen and (max-width: 800px){
     #table{
         flex-direction: column;
