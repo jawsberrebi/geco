@@ -418,6 +418,10 @@ th {
 
 }
 
+.tab-view {
+    padding: 20px;
+}
+
 .tab {
     height: 50px;
     width: 220px;
@@ -438,18 +442,35 @@ th {
 }
 
 .filter-col {
-    height: 200px;
+    width: 100px;
+    height: 100px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
 
 .btn-primary {
-
-    padding: 5px;
+    padding: 5px 10px 5px 10px;
     color: white;
     background-color: #3BC393;
+    border-radius: 5px;
     border: none;
+    transition: 0.2s;
+}
+
+.btn-primary:hover {
+    background-color: #298a68;
+    transition: 0.2s;
+}
+
+.btn-primary:active {
+    background-color: #3CC496;
+    transition: 0.2s;
+}
+
+.bloc_graphiques {
+    display: flex;
+    flex-direction: row;
 }
 
 @media screen and (max-width: 800px){
