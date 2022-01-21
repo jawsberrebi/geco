@@ -128,8 +128,7 @@
 		<p>Pour plus d'informations concernant le fonctionnement du produit ou pour toute autre question, n'hésitez pas à nous contacter.</p>
 		<hr>
 
-		<form>
-
+		<form action="backend/post_email.php" method="POST">
 			<label for="email">Adresse email :</label><br />
 			<input type="email" name="email" id="email" placeholder="Email"><br />
 			

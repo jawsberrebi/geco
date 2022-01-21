@@ -16,7 +16,7 @@
 
         <div id="box">
 
-            <form action="verification.php" method="post">
+            <form action="backend/verification.php" method="post">
                 <h1 id="title_form">Connexion</h1>
 
                 <input type="text" placeholder="Email ou nom d'utilisateur" name="email_pseudo" class="input_mail" required />
