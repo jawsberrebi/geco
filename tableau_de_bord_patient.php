@@ -1,16 +1,16 @@
 <?php
 
-require_once("config.php");
-include('backend/recuperation_valeurs.php'); //Module de récupération de valeur
-include('backend/affichage_valeurs.php');
-
-if(!isset($_SESSION['userPatient'])) {
-
-    session_destroy();
-    header('Location:connexion?erreur=4.php');
-    exit();
-
-}
+//require_once("config.php");
+//include('backend/recuperation_valeurs.php'); //Module de récupération de valeur
+//include('backend/affichage_valeurs.php');
+//
+//if(!isset($_SESSION['userPatient'])) {
+//
+//    session_destroy();
+//    header('Location:connexion?erreur=4.php');
+//    exit();
+//
+//}
 
 ?>
 
@@ -46,7 +46,7 @@ if(!isset($_SESSION['userPatient'])) {
 <h1>Tableau de bord</h1>
 <div class="container">
     <div class="tab-bar">
-        <button id="0" class="tab" onclick="changeTab(0, 'vue-densemble')">Vue d'ensemble</button>
+        <button id="0" class="tab active" onclick="changeTab(0, 'vue-densemble')">Vue d'ensemble</button>
         <button id="1" class="tab" onclick="changeTab(1, 'rythme-cardiaque')">Rythme cardiaque</button>
         <button id="2" class="tab" onclick="changeTab(2, 'niveau-sonore')">Niveau sonore</button>
         <button id="3" class="tab" onclick="changeTab(3, 'gaz')">Gaz</button>
