@@ -82,7 +82,7 @@ if(isset($_SESSION['userPersonnel'])){
         $_SESSION['userPersonnel']['tel'] = $phone;
         $_SESSION['userPersonnel']['nom_utilisateur'] = $userName;
 
-        header('../Location:tableau_de_bord_personnel?confirmation=4.php');
+        header('Location:../tableau_de_bord_personnel?confirmation=4.php');
         exit();
 
         /////////////                                                                      \\\\\\\\\\\\\\\\\\\\\\\\\\\\\
@@ -125,7 +125,7 @@ elseif(isset($_SESSION['userPatient'])){
         $_SESSION['userPatient']['adresse'] = $adresse;
         $_SESSION['userPatient']['nom_utilisateur'] = $userName;
 
-        header('../Location:tableau_de_bord_patient.php');
+        header('Location:../tableau_de_bord_patient.php');
         exit();
 
     }
