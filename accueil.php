@@ -19,9 +19,8 @@
 
 			<li><a href="#">Accueil</a></li>
 			<li><a href="#section1">GecoSensor</a></li>
-			<!--<li><a href="#section2">Equipe</a></li>-->
 			<li><a href="#section3">FAQ</a></li>
-            <li><a href="#">Jeu ludique</a></li>
+            <li><a href="jeu_ludique.html">Jeu ludique</a></li>
             <li><a href="#section4">Contacter</a></li>
             <li><a href="connexion.php">Connexion</a></li>
 		</nav>
