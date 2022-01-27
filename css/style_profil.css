@@ -327,28 +327,12 @@ th {
     margin-top: 6%;
     margin-left: 8%;
 }
-#curve_chart_cardiac {
+#curve_chart_cardiac, #curve_chart_sound, #curve_chart_gas {
     width: 900px;
     height: 500px;
-    margin-left: 10%;
-    margin-top: -20%;
 }
 
-#curve_chart_sound {
-    width: 900px;
-    height: 500px;
-    margin-left: 10%;
-    margin-top: -50%;
-}
-
-#curve_chart_gas {
-    width: 900px;
-    height: 500px;
-    margin-left: 10%;
-    margin-top: -50%;
-}
-
-.btngroupone > .choosebtn {
+/*.btngroupone > .choosebtn {
     background-color: #3BC393;
     color: white;
     padding: 10px;
@@ -378,44 +362,82 @@ th {
     border-radius: 10px;
 }
 
-.choosebtn:hover {
-    background-color: white;
-    color: #3BC393;
-    padding: 10px;
-    font-size: 16px;
-    border: solid 1px #3BC393;
-    cursor: pointer;
-    border-radius: 10px;
+.btngroupone > button, .btngrouptwo > button, .btngroupthree > button {
+
+    margin: 3%;
 }
 
-/*.btngroupone{
-    width: 20%;
-    
-}
+.btngroupone > button, .btngrouptwo > button, .btngroupthree > button {
 
-.btngrouptwo {
-    margin-top: -28%;
-    width: 20%;
-
-}
-
-.btngroupthree {
-    margin-top: -28%;
-    display: flex;
-    flex-direction: column;
-    width: 20%;
+    margin: 3%;
 }*/
-
-.btngroupone > button, .btngrouptwo > button, .btngroupthree > button {
-
-    margin: 3%;
-}
-
-.btngroupone > button, .btngrouptwo > button, .btngroupthree > button {
-
-    margin: 3%;
-}
 
 .bloc_graphiques{
     display: flex;
+}
+
+.btn-primary {
+    padding: 10px 15px 10px 15px;
+    color: white;
+    background-color: #3BC393;
+    border-radius: 5px;
+    border: none;
+    transition: 0.2s;
+    font-size: 15px;
+}
+
+.btn-primary:hover {
+    background-color: #298a68;
+    transition: 0.2s;
+}
+
+.btn-primary:active {
+    background-color: #3CC496;
+    transition: 0.2s;
+}
+
+.bloc_graphiques {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    gap: 10px;
+    margin-top: 50px;
+}
+
+.filter-col {
+    width: 150px;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.tab-bar {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.tab-view {
+    padding: 20px;
+}
+
+.tab {
+    height: 50px;
+    width: 220px;
+    font-size: 22px;
+    font-weight: 700;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    border-radius: 4px;
+    transition: 0.2s;
+    background-color: #FAFAFA;
+}
+
+.tab:hover {
+    color: white;
+    background-color: #3BC393;
+    transition: 0.2s;
 }

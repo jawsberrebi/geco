@@ -16,6 +16,8 @@ if($_SESSION['userPersonnel']['type'] == 'admin' || $_SESSION['userPersonnel']['
         }
         elseif($confirmation==3) {
             echo '<p>Un nouveau médecin a bien été ajouté à la liste.</p>';
+        }elseif($confirmation==4){
+            echo '<p>Vos informations ont bien été modifiées.</p>';
         }
         elseif($confirmation==5) {
             echo '<p id="message_suppression">Le profil a correctement été supprimé.</p>';
@@ -26,13 +28,6 @@ if($_SESSION['userPersonnel']['type'] == 'admin' || $_SESSION['userPersonnel']['
     }
 }
 
-if(isset($_GET['confirmation'])){
-    $confirmation = $_GET['confirmation'];
-
-    if($confirmation==4) {
-        echo '<p>Vos informations ont bien été modifiées.</p>';
-    }
-}
 
 //// MESSAGES D'ERREUR
 if(isset($_GET['erreur'])){

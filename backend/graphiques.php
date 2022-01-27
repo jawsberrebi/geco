@@ -86,7 +86,7 @@
 
                 ////// TRI PAR AN ////
 
-                foreach($cardiacValuesPlot as $dataToPlot){
+                foreach($soundValuesPlot as $dataToPlot){
                     //var_dump($row);
                     //echo "['".$row['heure']."',".$row['battement']."],";
                     $dataToPlotDateTime = date_parse($dataToPlot['date_heure']);
