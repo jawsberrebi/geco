@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : Dim 23 jan. 2022 à 14:39
+-- Généré le : jeu. 27 jan. 2022 à 18:07
 -- Version du serveur :  8.0.21
 -- Version de PHP : 7.4.9
 
@@ -34,16 +34,13 @@ CREATE TABLE IF NOT EXISTS `capteur` (
   `id_patient` int NOT NULL,
   PRIMARY KEY (`id_capteur`),
   KEY `patient_capteur` (`id_patient`)
-) ENGINE=InnoDB AUTO_INCREMENT=145 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=154 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `capteur`
 --
 
 INSERT INTO `capteur` (`id_capteur`, `type`, `id_patient`) VALUES
-(46, 'frequenceCardiaque', 5),
-(47, 'niveauSonore', 5),
-(48, 'concentrationGaz', 5),
 (52, 'frequenceCardiaque', 7),
 (53, 'niveauSonore', 7),
 (54, 'concentrationGaz', 7),
@@ -62,24 +59,12 @@ INSERT INTO `capteur` (`id_capteur`, `type`, `id_patient`) VALUES
 (97, 'frequenceCardiaque', 22),
 (98, 'niveauSonore', 22),
 (99, 'concentrationGaz', 22),
-(118, 'frequenceCardiaque', 29),
-(119, 'niveauSonore', 29),
-(120, 'concentrationGaz', 29),
-(121, 'frequenceCardiaque', 30),
-(122, 'niveauSonore', 30),
-(123, 'concentrationGaz', 30),
-(124, 'frequenceCardiaque', 31),
-(125, 'niveauSonore', 31),
-(126, 'concentrationGaz', 31),
-(127, 'frequenceCardiaque', 32),
-(128, 'niveauSonore', 32),
-(129, 'concentrationGaz', 32),
 (136, 'frequenceCardiaque', 35),
 (137, 'niveauSonore', 35),
 (138, 'concentrationGaz', 35),
-(142, 'frequenceCardiaque', 37),
-(143, 'niveauSonore', 37),
-(144, 'concentrationGaz', 37);
+(145, 'frequenceCardiaque', 38),
+(146, 'niveauSonore', 38),
+(147, 'concentrationGaz', 38);
 
 -- --------------------------------------------------------
 
@@ -95,7 +80,7 @@ CREATE TABLE IF NOT EXISTS `gere` (
   PRIMARY KEY (`id_gere`),
   KEY `personnel_capteur` (`id_personnel`),
   KEY `capteur_personnel` (`id_capteur`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -134,26 +119,13 @@ CREATE TABLE IF NOT EXISTS `mesure` (
   `id_capteur` int NOT NULL,
   PRIMARY KEY (`id_mesure`),
   KEY `capteur_mesure` (`id_capteur`)
-) ENGINE=InnoDB AUTO_INCREMENT=74 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=74 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `mesure`
 --
 
 INSERT INTO `mesure` (`id_mesure`, `valeur`, `date_heure`, `id_capteur`) VALUES
-(9, 3, '0000-00-00 00:00:00', 46),
-(10, 3, '0000-00-00 00:00:00', 46),
-(11, 3, '2021-11-15 15:01:34', 46),
-(12, 89, '2021-11-19 15:06:25', 46),
-(13, 6, '2021-11-19 15:08:33', 46),
-(14, 3, '2021-11-15 15:01:34', 46),
-(15, 3, '2021-11-15 15:01:34', 46),
-(16, 3, '2021-11-15 15:01:34', 46),
-(17, 3, '2021-11-15 15:01:34', 46),
-(18, 3, '2021-11-15 15:01:34', 46),
-(19, 3, '2021-11-15 15:01:34', 46),
-(20, 1, '2021-11-19 15:58:13', 46),
-(21, 12, '2021-11-19 15:58:59', 46),
 (40, 130, '2021-12-03 16:37:54', 52),
 (41, 13, '2021-12-07 17:22:00', 52),
 (42, 8, '2021-12-07 17:22:21', 53),
@@ -175,13 +147,7 @@ INSERT INTO `mesure` (`id_mesure`, `valeur`, `date_heure`, `id_capteur`) VALUES
 (64, 30, '2022-01-18 18:36:52', 137),
 (65, 1, '2022-01-18 18:37:36', 138),
 (66, 50, '2022-01-21 14:27:15', 137),
-(67, 0, '2022-01-21 16:04:48', 138),
-(68, 90, '2022-01-21 17:22:24', 142),
-(69, 40, '2022-01-21 17:22:51', 143),
-(70, 0, '2022-01-21 17:23:17', 144),
-(71, 80, '2022-01-21 17:23:32', 142),
-(72, 60, '2022-01-21 17:24:02', 143),
-(73, 1, '2022-01-21 17:24:52', 144);
+(67, 0, '2022-01-21 16:04:48', 138);
 
 -- --------------------------------------------------------
 
@@ -204,26 +170,21 @@ CREATE TABLE IF NOT EXISTS `patient` (
   `id_hopital` int NOT NULL,
   PRIMARY KEY (`id_patient`),
   KEY `id_hopital` (`id_hopital`)
-) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `patient`
 --
 
 INSERT INTO `patient` (`id_patient`, `prenom`, `nom`, `mail`, `tel`, `adresse`, `description`, `mdp`, `mdp_final`, `nom_utilisateur`, `id_hopital`) VALUES
-(5, 'Quentin', 'Dupieux', 'q@dupieux.fr', 0, '', '', '$2y$10$xaC2aNDL8Upeu4bgeCclj.VRW1UV3nmJV6Q2LCd2M1xINBDYRI10m', '', 'qdupieux', 2),
 (7, 'Johnny', 'Patient', 'rd.berrebi@gmail.com', 0, '', '', '$2y$10$YsyEnX4iGbR36.sRTehn9eS8Pus5FFPW2jDoVyreLnYSTXyCcH0/S', '$2y$10$jaTtl3pHgKRcHaWw9a/F9eXgqOo9MjW.4K9ZTKfZKiLz3VoDlgyK6', 'jpatient', 2),
 (9, 'Jérémy', 'Hérault', 'jer@her.co', 60606060, '10 rue de Vanves', 'Test de description.', '$2y$10$OtW4nupJNJ10RN91tv0RL.lq5OUKWE0vnaohd17q6MhqWWalSpYnC', '', 'jhérault', 2),
-(14, 'Delta', 'Freeman', 'delta@freeman.com', 666, '10 rue des rosiers', '', '$2y$10$0z772OhTdgCEQBzOW8znJeibKgYRaiVWFOfYKz.a/zgE/aOLsCktq', '', 'dfreeman', 2),
-(15, 'Tom', 'Jerry', 'tom@jerry.fr', 666625960, '24 rue des Abondances', '', '$2y$10$JCt0.w1cSyb8etzaS5r1MezPxdZB/yQxRCwOIZRck7gzF8J.ZKpZG', '', 'tjerry', 2),
+(14, 'Delta', 'Freeman', 'delta@freeman.com', 666, '10 rue des rosiers', 'Une description\r\n', '$2y$10$0z772OhTdgCEQBzOW8znJeibKgYRaiVWFOfYKz.a/zgE/aOLsCktq', '', 'dfreeman', 2),
+(15, 'Tom', 'Jerry', 'tom@jerry.fr', 666625960, '', 'Une description.', '$2y$10$JCt0.w1cSyb8etzaS5r1MezPxdZB/yQxRCwOIZRck7gzF8J.ZKpZG', '', 'tjerry', 2),
 (19, 'Antoine', 'Hérault', 'antoine@herault.com', 0, '11 rue de Vanves', 'Aucune description.', '$2y$10$LiuBQc6KF5Uegb/IHCJSGeiwsvcJbZorbyhn7xZgPiu6v9oib1Scq', '', 'ahérault', 2),
 (22, 'Thomas', 'Dubois', 't@dubois.com', 666625960, '24 rue des Abondances', '', '$2y$10$CZzFMIJia/0IlN.kan40/.IzcKZKgQKxNQKIK4RIlfuLKVAlTBk6i', '', 'tdubois', 2),
-(29, 'Back', 'Lying', 'in@inf.fr', 0, '', '', '$2y$10$SBABckmEXibu9ZCYVlJcDeeYYoWxZu3T2fa0oO3JY6WqR4d4NNneq', 'a', 'blying', 2),
-(30, 'On', 'Carry', 'oa@kd.fr', 0, '', '', '$2y$10$r4p9Av3M1QVw4rDnwCxAZuuJAgt5As4YirBX3lWAIoxFv0BWzutnS', 'au', 'ocarry', 2),
-(31, 'likeme', 'boy', 'boy@boy.fr', 666625960, '', '', '$2y$10$pDBbkmnUAhMdTB1D/jcIQu/nZ6FX5ljKYzxQd9bNWSLK0mgHI8QgK', '$2y$10$yEsOB2Oe2/kGsVOKJskXr.vKTXiu6PFIjv/u.mNS46yMU15xlekzW', 'lboy', 2),
-(32, 'DeUn', 'Test', 'dkd@dkdkdkd.fr', 0, '', '', '$2y$10$DqBWobmyI8L6Bz6ZZihzPumEMggI2eOFuqAmjrK1VWYcN64OE/WT.', '$2y$10$r4Ld/GHtdFSpa/lWHclBaubhoU41I2dvWE9f8g4tcMLbolB4mz0ey', 'dtest', 2),
-(35, 'Connu', 'Patient', 'dodkkd@dkdld.fr', 0, '', '', '$2y$10$cEmnlSIf61s61PS/cxdrnOpFWmAn90XaDaeWWUGsrUSiNNbEO.ihi', '$2y$10$HS.1myQdHpjDgS1Np211KOJiX3fpthlrjC60SPTKSJiHEq7inMFaS', 'cpatient', 2),
-(37, 'Rouge', 'Allumette', 'al@black.fr', 0, '', '', '$2y$10$TPTQd0Jtu6/OxjGqFRMHr.CUe8/5EIaGJEY2exX0xBymU7LdrZQ8G', '$2y$10$FXHe3nR5JxVWBEeYoGBnmu1hmp7n7hiEM7jZ363wRwVzO68BChLLu', 'rallumette', 2);
+(35, 'Connu', 'Patient', 'dodkkd@dkdld.fr', 0, '', 'Rien à signaler\r\n', '$2y$10$cEmnlSIf61s61PS/cxdrnOpFWmAn90XaDaeWWUGsrUSiNNbEO.ihi', '$2y$10$HS.1myQdHpjDgS1Np211KOJiX3fpthlrjC60SPTKSJiHEq7inMFaS', 'cpatient', 2),
+(38, 'Patient', 'Nouveau', 'nouveau@patient.fr', 0, '11 rue des rosiers', 'Une description.', '$2y$10$a2CC8M3QQqnkiN2pCjlJwuJIZa7GGpIGqdqbxA/Doru0fQMfmK7fS', '$2y$10$1nv5tk4wlKccZ0KPK9qRMu1ItrXTnhyZeZhYMLFZ0he9X4bay6ODy', 'pnouveau', 2);
 
 -- --------------------------------------------------------
 
@@ -245,7 +206,7 @@ CREATE TABLE IF NOT EXISTS `personnel` (
   `id_hopital` int NOT NULL,
   PRIMARY KEY (`id_personnel`),
   KEY `hopital_personnel` (`id_hopital`)
-) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `personnel`
@@ -254,25 +215,19 @@ CREATE TABLE IF NOT EXISTS `personnel` (
 INSERT INTO `personnel` (`id_personnel`, `prenom`, `nom`, `mail`, `tel`, `type`, `mdp`, `mdp_final`, `nom_utilisateur`, `id_hopital`) VALUES
 (3, 'John', 'Docteur', 'ffkfkgkg@ffk.com', 0, 'medecin', 'root', '', 'jdocteur', 2),
 (4, 'Tom', 'Drake', 'doru@fjfj.fr', 0, 'admin', 'root', 'root', 'admin', 2),
-(8, 'admi', '', '', 0, 'infirmier', 'papa', '', 'athenes', 3),
-(10, '', '', '', 0, 'admin', 'root', '', 'admindeux', 3),
-(11, '', '', '', 0, 'medecin', 'meux', '', 'docdeux', 3),
+(8, 'admi', '', '', 0, 'infirmier', '$2y$10$WDiSxt6UcTOkEZU.0qWf9uhx7/JlU7Tx6yR5rV6QL4hv9GoPDZnj6', '', 'athenes', 3),
+(11, '', '', '', 0, 'medecin', '$2y$10$WDiSxt6UcTOkEZU.0qWf9uhx7/JlU7Tx6yR5rV6QL4hv9GoPDZnj6', '', 'docdeux', 3),
 (12, 'Inf', 'Un', 'j@j.fr', 0, 'infirmier', '$2y$10$j/i0TIK25nSnKNONzYnsNu8HHwTv1WbyGUah5wX2HW.bXsojx1AOW', '', 'iun', 3),
 (13, 'at', 'Sold', 'sol@dd.fr', 0, 'medecin', '$2y$10$S2wowCH.eaGMOBAmomEH.e21mSDHcC30rhW0ym4eU30FWfOKR35v6', '', 'asold', 3),
 (14, 'Tristan', 'Brankovic', 'tristan@brankovic.com', 0, 'infirmier', 'mdp', '', 'tbrankovic', 2),
-(22, 'Okay', 'Jerem', 'okay@jerem.fr', 0, 'medecin', '$2y$10$dVNzvABzHF6y9ipgzJgHB.SAyCC4EN0SG1xgXQPT.jbyoPAkU3jkC', 'root', 'ojerem', 2),
-(23, 'Jer', 'Berrebi', 'jer@ber.com', 0, 'medecin', '$2y$10$OyabB2cqmBhq5LbdcTSiTeSGHwdfVIs1CDRIXxIlCyopuwQbZDeY2', '', 'jberrebi', 2),
 (24, 'Marc', 'Dubois', 'marc@dubois.com', 0, 'infirmier', '$2y$10$7SX3di48LuBl4MiEUsEnjeTymYAeo8qeBGiY2DCG/D7MOR4czZky2', 'root', 'mdubois', 2),
-(28, 'cachée', 'Vie', 'sa@su.fr', 0, 'medecin', '$2y$10$n8rs2SPH3xKVrhNOecuxMuy2HQKAGDUqFGcR0z8LB7GWFH7z2t9Ju', 'root', 'cvie', 2),
-(32, 'jjd', 'ssj', 'j@dkd.fr', 0, 'admin', '$2y$10$tzE0Ot37AOfGpYQN794bNugqjxKUPhKL1LRSq5hv3mv/ip7cYd.e.', '', 'jssj', 2),
-(33, 'mae', 'aluae', 'ma@alue.fr', 0, 'admin', '$2y$10$VSalzuFu61j9bZ1T6WGhP.dic4TdKTc.bla4FRpP1h1mlIJIpJ1Sy', '$2y$10$bFTzAy8xc95v1Dt/N0MP8OmLb8mdzo2cozwYKMU5JMBhmXgiX5gaO', 'maluae', 2),
-(34, 'Nouveau', 'Un', 'hero@har.fr', 666625960, 'admin', '$2y$10$FBUsU/mKPI3qNbXBXTfegu8fG7zgG5pUHkY7QL.z68MgjIdhkFud.', '', 'nun', 2),
-(35, 'ddhdjdj', 'Mrh', 'jd@ddkf.fr', 666625960, 'admin', '$2y$10$MO1wwQiqKe9aS1MmPicBN.t1WvEc4LPM.dQsuGQ4C4lHbZDqy1RFa', '$2y$10$r9QGId/WfnSAZ/vG2ItrQ.Oo7OcRhQfkpF9wprYZvSa1OPBNm5XZ.', 'dmrh', 2),
-(37, 'Lantier', 'Gaëlle', 'gaelle@lant.com', 0, 'infirmier', '$2y$10$6VmM38w.6kKgUNNj7sWEsuGLO1teIeiHF36lhy4WmLwDI75YlHUiW', '$2y$10$qLlRXxaH67aIiyH.7kaBX./JfEaTElGN7AAyBCBcp6vIG.EBtiqNK', 'lgaëlle', 2),
-(38, 'fdkofdko', 'One', 'jidzodjiozd@fkofr.fr', 0, 'infirmier', '$2y$10$oWCo5yIqjdnvmiUd4lGCy.KSHtUYGc.FdkZIvJb7vp.9ibMRgkfnO', '$2y$10$jHjORTbBJcGoZ308gEWZXONm4RQc4szLHCTUelp8Y1Sba4ofaC.nK', 'fone', 2),
+(37, 'Lantier', 'Gaëlle', 'gaelle@lant.com', 63899, 'infirmier', '$2y$10$6VmM38w.6kKgUNNj7sWEsuGLO1teIeiHF36lhy4WmLwDI75YlHUiW', '$2y$10$qLlRXxaH67aIiyH.7kaBX./JfEaTElGN7AAyBCBcp6vIG.EBtiqNK', 'lgaëlle', 2),
 (39, 'Primordial', 'Admin', 'admin@primordial.fr', 0, 'admin', '$2y$10$O6/M93JIe5fMr8EsJ76io.GRFmr3a2TmxvVegLkZiQdw04qKQ/Mtm', '$2y$10$u4ji4Yr9E4ixvTXBn.WEYOx/vGTJ3Sbh8wiqh7f2KRozwbq20dwSq', 'padmin', 2),
 (40, 'Fictif', 'Infirmier', 'prim@inf.fr', 0, 'infirmier', '$2y$10$ROzrYBf4Bb8ZKtkyBA25eO1e8Kr5LHYx/QIS2WGy.nmeeZKHCwOqO', '$2y$10$PcoNnt2LHWE5hHuvuy4jTOWInz2T76omu57TOfo0SVvFvA8bCYd/O', 'finfirmier', 2),
-(41, 'Primordial', 'Medecin', 'medecin@primo.fr', 0, 'medecin', '$2y$10$7h4d9rbmrw5E.40nYcb/JuRtUY8o4oG7nFdoiZAJuoHwy1GdZFJWK', '$2y$10$2X5cIzX1uQB4wm2UxDRMR./d50L7reJGNEDh0Pm81LSce3RpcgJn.', 'pmedecin', 2);
+(45, 'Infirmier', 'Nouvel', 'nouvel@infirmier.fr', 0, 'infirmier', '$2y$10$5eLyak73G4gVP1ycGQWhvOsLkVUcNO9b2bIx5gEiB5fv81AbJV.Oi', '$2y$10$xzTbazH./1kQGqKuupldtOYgcbQFTeK4Uj4Hny/KhZDRZuC8RjZ7m', 'inouvel', 2),
+(46, 'Médecin', 'Nouveau', 'nouveau@medecin.fr', 6606, 'medecin', '$2y$10$oUgz4MX5agHHaNoSYt6hneh/Rm7UtGV4J9uoFhPv5jfhO4mmlTJai', '$2y$10$BJ9YcDQULSk4osZQSCX8u.0b8XJ1sApJX98ex0ZIYd.kiivJVuMGa', 'mnouveau', 2),
+(47, 'Administrateur', 'Nouvel', 'nouvel@administrateur.fr', 0, 'admin', '$2y$10$YkY74KM.Z9t8NKZL4jZ69uLLkY8IhbdJGl1zeWFV8lyPOOwtP51/W', '$2y$10$UjELGfKV1KRdgGay2LuRj.XJ7TR07Csk0dqIsfglAFs8WaD4hJi6i', 'anouvel', 2),
+(49, 'mdp', 'test', 'test@mdp.fr', 0, 'infirmier', '$2y$10$K9ySBgnTKyGrr3wm8NCeaOZo5zjWhT9aIRGMoDLZaHEJzF4WeXdRy', '$2y$10$U4jyFGfXbKGSTjTCW1McM.dmKLjkj49L3tHzcO/nz4ZfrmXGDJFla', 'mtest', 2);
 
 -- --------------------------------------------------------
 
@@ -288,7 +243,7 @@ CREATE TABLE IF NOT EXISTS `travaille_pour` (
   PRIMARY KEY (`id_travaille_pour`),
   KEY `patient_personnel` (`id_patient`),
   KEY `personnel_patient` (`id_personnel`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Contraintes pour les tables déchargées

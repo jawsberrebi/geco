@@ -23,11 +23,6 @@
             $rowNumber = count($cardiacValuesPlot);
             if($rowNumber>0){ 
 
-                ////// TRI PAR AN ////
-
-                $dataToPlotPauseDate = NULL;
-                $dataToPlotPauseValue = NULL;
-                $dataMean = NULL;
 
                 foreach($cardiacValuesPlot as $dataToPlot){
                     //var_dump($row);
@@ -340,30 +335,32 @@
           ['Durée', 'Fréquence cardiaque'],
 
           <?php
-            $sql = "SELECT * FROM mesure WHERE date_heure LIKE '". date('Y-m-d') ."%' ";
-            $pre = $pdo->prepare($sql);
-            $pre->execute();
-            $dataPlot = $pre->fetchAll(PDO::FETCH_ASSOC);
 
             $rowNumber = count($cardiacValuesPlotDay);
+
             if($rowNumber>0){ 
                 ////// TRI PAR JOUR ////
+                    foreach($cardiacValuesPlotDay as $dataToPlot){
+                        $dataToPlotDateTime = date_parse($dataToPlot['date_heure']);
 
-                foreach($cardiacValuesPlotDay as $dataToPlot){
-                    $dataToPlotDateTime = date_parse($dataToPlot['date_heure']);
-
-                    if($dataToPlotDateTime['year'] == $maxYearCardiacValuesPlotFinal){
-                        if($dataToPlotDateTime['month'] == $maxMonthCardiacValuesPlotFinal){
-                            if($dataToPlotDateTime['day'] == $maxDayCardiacValuesPlotFinal){
-                                $dataToPlot['date_heure'] = date('H:i:s' ,strtotime($dataToPlot['date_heure']));
-                                echo "['".$dataToPlot['date_heure']."',".$dataToPlot['valeur']."],";
+                        if($dataToPlotDateTime['year'] == $maxYearCardiacValuesPlotFinal){
+                            if($dataToPlotDateTime['month'] == $maxMonthCardiacValuesPlotFinal){
+                                if($dataToPlotDateTime['day'] == $maxDayCardiacValuesPlotFinal){
+                                    $dataToPlot['date_heure'] = date('H:i:s' ,strtotime($dataToPlot['date_heure']));
+                                    echo "['".$dataToPlot['date_heure']."',".$dataToPlot['valeur']."],";
+                                }
                             }
-                        }
         
+                        }
                     }
-                }
+                    
                     
             }
+
+
+
+
+            
 
 
 

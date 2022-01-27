@@ -56,9 +56,6 @@ $pre = $pdo->prepare($sql);
 $pre->execute();
 $gasValuesPlotDay = $pre->fetchAll(PDO::FETCH_ASSOC);
 
-
-
-
 // Algorythme de tri
 foreach($cardiacValuesPlot as $cardiacValuesPlotReach){
     $maxYearCardiacValuesPlotFinal = 0;

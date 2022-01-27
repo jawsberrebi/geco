@@ -9,9 +9,9 @@ if (!isset($_POST['nom']) || !isset($_POST['prenom']) || !isset($_POST['email'])
 
 $name = htmlspecialchars($_POST['nom']);
 $firstName = htmlspecialchars($_POST['prenom']);
-$password = passwordGenerator($pdo, 8); //Générateur de mot de passe aléatoire
+$password = passwordGenerator($pdo, 8); //Générateur de clé aléatoire
 $userName = mb_strtolower(mb_substr($firstName, 0 , 1) . $name); //Générateur de nom d'utilisateur : 1ère lettre du prénom + nom. Remplacer $email par la variable contenant le prénom et $password par la variable contenant le nom.
-$hashedPassword = password_hash($password, PASSWORD_DEFAULT); //Hash du mot de passe
+$hashedPassword = password_hash($password, PASSWORD_DEFAULT); //Hash de la clé
 $mail = htmlspecialchars($_POST['email']);
 $phone = htmlspecialchars($_POST['telephone']);
 $mailAdmin = "rd.berrebi@gmail.com";
@@ -113,14 +113,17 @@ if (htmlspecialchars($_POST['type']) == 'patient') {
 
     array_push($champs, $mail, $userName, $hashedPassword, $userName,'personnel');
 
-    sendingIdsMail('rd.berrebi@gmail.com', $champs);
+    //Ici, j'ai inséré mon adresse email pour recevoir toutes les notifications mail.
+    //D'ordinaire, pour un déployement final, il faudrait remplacer le premier argument par la variable $mail
+                                                     
+    sendingIdsMail('rd.berrebi@gmail.com', $champs); 
 
     header('Location:../tableau_de_bord_personnel?confirmation=2.php');
     exit();
 
 } elseif (htmlspecialchars($_POST['type']) == 'medecin') {
 
-    $sql = "SELECT * FROM personnel WHERE mail='".$mail."'"; //UN INFIRMIER PEUT-IL AVOIR À LA FOIS UN COMPTE MEDECIN ET UN COMPTE INFIRMIER ?
+    $sql = "SELECT * FROM personnel WHERE mail='".$mail."'"; 
     $pre = $pdo->prepare($sql);
     $pre->execute();
     $user = current($pre->fetchAll(PDO::FETCH_ASSOC));
@@ -147,13 +150,16 @@ if (htmlspecialchars($_POST['type']) == 'patient') {
 
     array_push($champs, $mail, $userName, $hashedPassword, $userName,'personnel');
 
+    //Ici, j'ai inséré mon adresse email pour recevoir toutes les notifications mail.
+    //D'ordinaire, pour un déployement final, il faudrait remplacer le premier argument par la variable $mail
+
     sendingIdsMail('rd.berrebi@gmail.com', $champs);
 
     header('Location:../tableau_de_bord_personnel?confirmation=3.php');
     exit();
 } elseif (htmlspecialchars($_POST['type']) == 'admin') {
 
-    $sql = "SELECT * FROM personnel WHERE mail='".$mail."'"; //UN INFIRMIER PEUT-IL AVOIR À LA FOIS UN COMPTE MEDECIN ET UN COMPTE INFIRMIER ?
+    $sql = "SELECT * FROM personnel WHERE mail='".$mail."'"; 
     $pre = $pdo->prepare($sql);
     $pre->execute();
     $user = current($pre->fetchAll(PDO::FETCH_ASSOC));
@@ -177,10 +183,12 @@ if (htmlspecialchars($_POST['type']) == 'patient') {
         ]);
 
 
-    echo 'ofof';
     $champs = array();
 
     array_push($champs, $mail, $userName, $hashedPassword, $userName,'personnel');
+
+    //Ici, j'ai inséré mon adresse email pour recevoir toutes les notifications mail.
+    //D'ordinaire, pour un déployement final, il faudrait remplacer le premier argument par la variable $mail
 
     sendingIdsMail('rd.berrebi@gmail.com', $champs);
 

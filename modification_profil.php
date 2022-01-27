@@ -95,7 +95,7 @@ if($user['id_hopital'] != $_SESSION['userPersonnel']['id_hopital']){
 
             <input type="text" placeholder="Adresse" name="adresse" value="<?php echo $user['adresse'] ?>" />
 
-            <textarea placeholder="Description" name="description" value="<?php echo $user['description'] ?>"></textarea>
+            <textarea placeholder="Description" name="description"><?php echo $user['description'] ?></textarea>
 
             <?php endif; ?>
 

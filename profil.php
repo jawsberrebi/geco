@@ -15,7 +15,6 @@ include('backend/conditions_id.php');
         <link rel="stylesheet" href="css/onglet.css">
 
         <script src="Javascript/tabController.js"></script>
-        <?php  ?>
         <title>Tableau de bord</title>
     </head>
     <header>

@@ -72,6 +72,9 @@ if ($user == true) {
 
     array_push($champs, $hashedNewPassword, $userName,'patient');
 
+    //Ici, j'ai inséré mon adresse email pour recevoir toutes les notifications mail.
+    //D'ordinaire, pour un déployement final, il faudrait remplacer le premier argument par la variable $email
+
     sendingLinkPassword('rd.berrebi@gmail.com', $champs);
 
     header('Location:../connexion?confirmation=2.php');

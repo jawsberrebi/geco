@@ -14,7 +14,7 @@
 <body>
 
 	<header>
-		<h2><a href="#">Website Logo</a></h2>
+		<img src="images/logo.png" alt="Logo Geco" width="150px"/>
 		<nav>
 
 			<li><a href="#">Accueil</a></li>

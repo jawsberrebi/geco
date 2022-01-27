@@ -12,6 +12,9 @@ $champs = array();
 
 array_push($champs, $finalName, $email, $text);
 
+//Ici, j'ai inséré mon adresse email pour recevoir toutes les notifications mail.
+//D'ordinaire, pour un déployement final, il faudrait remplacer le premier argument par la variable $email
+
 sendingMail('rd.berrebi@gmail.com', $champs);
 
 header('Location:../accueil.php');

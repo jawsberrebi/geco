@@ -45,11 +45,9 @@ $finalTime = $hour . ':' . $min . ':' . $sec;
 
 $finalDateTime = $finalDate . ' ' . $finalTime;
 
-//var_dump($finalDateTime);
 
-//TESTER ID PATIENT !!!!!!!!!!!!!!!!!!!!!!
 
-if($idPatient == $numbSensor){ //Si l'ID du patient correspond bien avec l'ID de l'appareil du patient, pour l'instant ne marche pas, mettre 00
+if($idPatient == $numbSensor){ 
     // Valeurs du simulateur, $typeSensor renvoie le type de capteur
     // 7 ---> fréquence cardiaque
     // A ---> son
@@ -75,7 +73,6 @@ if($idPatient == $numbSensor){ //Si l'ID du patient correspond bien avec l'ID de
         $lastValueDataBase = $pre->fetchAll(PDO::FETCH_ASSOC);
         $lastValueDataBase = $lastValueDataBase[0]['valeur'];
 
-        //var_dump($lastValueDataBase);
 
         if($value != $lastValueDataBase){ //SUPPRIMER le [0]['valeur']
             $sql = 'INSERT INTO mesure(valeur, date_heure, id_capteur) VALUES (:valeur, :date_heure, :id_capteur)';
