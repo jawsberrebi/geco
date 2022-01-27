@@ -1,5 +1,4 @@
 <?php
-
 require_once("config.php");
 include('backend/recuperation_valeurs.php'); //Module de récupération de valeur
 include('backend/affichage_valeurs.php');

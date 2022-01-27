@@ -13,7 +13,6 @@ include('backend/conditions_id.php');
         <link rel="stylesheet" href="css/style_profil.css" />
         <link rel="stylesheet" href="css/navbar_pro.css">
         <link rel="stylesheet" href="css/onglet.css">
-        <?php  ?>
         <title>Tableau de bord</title>
     </head>
     <header>

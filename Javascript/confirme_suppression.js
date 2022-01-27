@@ -5,7 +5,6 @@ function confirme_suppression(){
         return true;
     }
     else {
-        alert("Suppression annulée.");
         return false;
     }
 }
